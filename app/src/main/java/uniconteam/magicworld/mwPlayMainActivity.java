@@ -12,8 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class mwPlayMainActivity extends AppCompatActivity
- {
+public class mwPlayMainActivity extends AppCompatActivity {
     private ImageView mwLogoImg;
 	private Button mwPlayButton;
 	private ObjectAnimator mwLogoObjAnimationScaleX = new ObjectAnimator();

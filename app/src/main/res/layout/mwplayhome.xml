@@ -73,11 +73,12 @@
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
+		android:orientation="vertical"
 		android:gravity="center_horizontal|center_vertical"
 		android:layout_weight="1">
 	<LinearLayout
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
+		android:layout_height="wrap_content"
 		android:gravity="center_horizontal|center_vertical">
 		<ImageView
             android:clickable="true"
@@ -120,6 +121,143 @@
 			android:src="@drawable/magicworld_block_grass"
 			android:background="@drawable/magicworld_block_grass"/>
 	</LinearLayout>
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center_horizontal|center_vertical">
+			<ImageView
+				android:clickable="true"
+				android:foreground="?android:attr/selectableItemBackgroundBorderless"
+				android:id="@+id/mwBlockTab6"
+				android:layout_width="55dp"
+				android:layout_height="55dp"
+				android:src="@drawable/magicworld_block_grass"
+				android:background="@drawable/magicworld_block_grass"/>
+			<ImageView
+				android:clickable="true"
+				android:foreground="?android:attr/selectableItemBackgroundBorderless"
+				android:id="@+id/mwBlockTab7"
+				android:layout_width="55dp"
+				android:layout_height="55dp"
+				android:src="@drawable/magicworld_block_grass"
+				android:background="@drawable/magicworld_block_grass"/>
+			<ImageView
+				android:clickable="true"
+				android:foreground="?android:attr/selectableItemBackgroundBorderless"
+				android:id="@+id/mwBlockTab8"
+				android:layout_width="55dp"
+				android:layout_height="55dp"
+				android:src="@drawable/magicworld_block_grass"
+				android:background="@drawable/magicworld_block_grass"/>
+			<ImageView
+				android:clickable="true"
+				android:foreground="?android:attr/selectableItemBackgroundBorderless"
+				android:id="@+id/mwBlockTab9"
+				android:layout_width="55dp"
+				android:layout_height="55dp"
+				android:src="@drawable/magicworld_block_grass"
+				android:background="@drawable/magicworld_block_grass"/>
+			<ImageView
+				android:clickable="true"
+				android:foreground="?android:attr/selectableItemBackgroundBorderless"
+				android:id="@+id/mwBlockTab10"
+				android:layout_width="55dp"
+				android:layout_height="55dp"
+				android:src="@drawable/magicworld_block_grass"
+				android:background="@drawable/magicworld_block_grass"/>
+		</LinearLayout>
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:alpha="0.7"
+			android:gravity="center_horizontal|center_vertical">
+			<ImageView
+				android:clickable="true"
+				android:foreground="?android:attr/selectableItemBackgroundBorderless"
+				android:id="@+id/mwBlockTab11"
+				android:layout_width="55dp"
+				android:layout_height="55dp"
+				android:src="@drawable/magicworld_block_grass"
+				android:background="@drawable/magicworld_block_grass"/>
+			<ImageView
+				android:clickable="true"
+				android:foreground="?android:attr/selectableItemBackgroundBorderless"
+				android:id="@+id/mwBlockTab12"
+				android:layout_width="55dp"
+				android:layout_height="55dp"
+				android:src="@drawable/magicworld_block_grass"
+				android:background="@drawable/magicworld_block_grass"/>
+			<ImageView
+				android:clickable="true"
+				android:foreground="?android:attr/selectableItemBackgroundBorderless"
+				android:id="@+id/mwBlockTab13"
+				android:layout_width="55dp"
+				android:layout_height="55dp"
+				android:src="@drawable/magicworld_block_grass"
+				android:background="@drawable/magicworld_block_grass"/>
+			<ImageView
+				android:clickable="true"
+				android:foreground="?android:attr/selectableItemBackgroundBorderless"
+				android:id="@+id/mwBlockTab14"
+				android:layout_width="55dp"
+				android:layout_height="55dp"
+				android:src="@drawable/magicworld_block_grass"
+				android:background="@drawable/magicworld_block_grass"/>
+			<ImageView
+				android:clickable="true"
+				android:foreground="?android:attr/selectableItemBackgroundBorderless"
+				android:id="@+id/mwBlockTab15"
+				android:layout_width="55dp"
+				android:layout_height="55dp"
+				android:src="@drawable/magicworld_block_grass"
+				android:background="@drawable/magicworld_block_grass"/>
+		</LinearLayout>
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:alpha="0.7"
+			android:gravity="center_horizontal|center_vertical">
+			<ImageView
+				android:clickable="true"
+				android:foreground="?android:attr/selectableItemBackgroundBorderless"
+				android:id="@+id/mwBlockTab16"
+				android:layout_width="55dp"
+				android:layout_height="55dp"
+				android:src="@drawable/magicworld_block_grass"
+				android:background="@drawable/magicworld_block_grass"/>
+			<ImageView
+				android:clickable="true"
+				android:foreground="?android:attr/selectableItemBackgroundBorderless"
+				android:id="@+id/mwBlockTab17"
+				android:layout_width="55dp"
+				android:layout_height="55dp"
+				android:src="@drawable/magicworld_block_grass"
+				android:background="@drawable/magicworld_block_grass"/>
+			<ImageView
+				android:clickable="true"
+				android:foreground="?android:attr/selectableItemBackgroundBorderless"
+				android:id="@+id/mwBlockTab18"
+				android:layout_width="55dp"
+				android:layout_height="55dp"
+				android:src="@drawable/magicworld_block_grass"
+				android:background="@drawable/magicworld_block_grass"/>
+			<ImageView
+				android:clickable="true"
+				android:foreground="?android:attr/selectableItemBackgroundBorderless"
+				android:id="@+id/mwBlockTab19"
+				android:layout_width="55dp"
+				android:layout_height="55dp"
+				android:src="@drawable/magicworld_block_grass"
+				android:background="@drawable/magicworld_block_grass"/>
+			<ImageView
+				android:clickable="true"
+				android:foreground="?android:attr/selectableItemBackgroundBorderless"
+				android:id="@+id/mwBlockTab20"
+				android:layout_width="55dp"
+				android:layout_height="55dp"
+				android:src="@drawable/magicworld_block_grass"
+				android:background="@drawable/magicworld_block_grass"/>
+		</LinearLayout>
 	</LinearLayout>
 	<LinearLayout
 		android:id="@+id/mwItemBoxLinear"
