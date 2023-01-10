@@ -1,0 +1,27 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 29
+
+    defaultConfig {
+        applicationId "uniconteam.magicworld"
+        minSdkVersion 14
+        targetSdkVersion 29
+        versionCode 1
+        versionName "@string/app_version"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+	implementation fileTree(dir: 'libs', include: ['*.jar'])
+   	implementation 'androidx.appcompat:appcompat:1.0.0'
+   	implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+   	implementation 'com.google.android.material:material:1.0.0-rc01'
+    implementation 'androidx.cardview:cardview:1.0.0'
+}
