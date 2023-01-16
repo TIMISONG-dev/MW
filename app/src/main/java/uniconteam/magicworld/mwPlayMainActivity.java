@@ -10,11 +10,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.Timer;
-import java.util.TimerTask;
+import java.util.TimerTask;import com.itsaky.androidide.logsender.LogSender;
 
-public class mwPlayMainActivity extends AppCompatActivity {
+public class MwPlayMainActivity extends AppCompatActivity {
     private ImageView mwLogoImg;
 	private Button mwPlayButton;
+	private Button mwBattleFieldButton;
 	private ObjectAnimator mwLogoObjAnimationScaleX = new ObjectAnimator();
 	private ObjectAnimator mwLogoObjAnimationScaleY = new ObjectAnimator();
 	private ObjectAnimator mwPlayButtonObjAnimationScaleX = new ObjectAnimator();
@@ -25,6 +26,7 @@ public class mwPlayMainActivity extends AppCompatActivity {
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        LogSender.startLogging(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mwplaymain);
 		initialize(savedInstanceState);
@@ -34,6 +36,7 @@ public class mwPlayMainActivity extends AppCompatActivity {
 		if (Build.VERSION.SDK_INT >= 21) { getWindow().setNavigationBarColor(Color.parseColor("#5C8368"));}
 		mwLogoImg = findViewById(R.id.mwLogoImg);
 		mwPlayButton = findViewById(R.id.mwPlayButton);
+		mwBattleFieldButton = findViewById(R.id.mwBattleFieldButton);
 		mwLogoImg.setScaleX((float)(5.0d));
 		mwLogoImg.setScaleY((float)(5.0d));
 	}
@@ -159,7 +162,7 @@ public class mwPlayMainActivity extends AppCompatActivity {
 																						runOnUiThread(new Runnable(){
 																							@Override
 																							public void run(){
-																								mwIntent.setClass(getApplicationContext(),mwPlayHomeActivity.class);
+																								mwIntent.setClass(getApplicationContext(), MwPlayHomeActivity.class);
 																								startActivity(mwIntent);
 																							}
 																						});
@@ -181,6 +184,13 @@ public class mwPlayMainActivity extends AppCompatActivity {
 						}
 					};
 					_mwTimerTask.schedule(mwTimerTask, 0);
+				}
+			});
+			mwBattleFieldButton.setOnClickListener(new View.OnClickListener(){
+				@Override
+				public void onClick(View view){
+					mwIntent.setClass(getApplicationContext(), MwBFMapActivity.class);
+					startActivity(mwIntent);
 				}
 			});
    }

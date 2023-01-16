@@ -1,6 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MW</string>
-	<string name="app_full_name">Magic World</string>
-    <string name="app_version">1.0.0a (3)</string>
 </resources>

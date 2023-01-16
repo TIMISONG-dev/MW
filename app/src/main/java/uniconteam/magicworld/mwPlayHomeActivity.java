@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class mwPlayHomeActivity extends AppCompatActivity {
+public class MwPlayHomeActivity extends AppCompatActivity {
 		
 	private LinearLayout mwDataBoxLinear;
 	private TextView mwDataBoxCoinCount;
