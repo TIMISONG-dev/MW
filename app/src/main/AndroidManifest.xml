@@ -22,7 +22,5 @@
             android:name=".MwPlayHomeActivity"/>
     <activity
         android:name=".MwBattleFieldActivity"/>
-<activity
-   android:name=".MwBFMapActivity"/>
     </application>
 </manifest>

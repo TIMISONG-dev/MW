@@ -189,7 +189,7 @@ public class MwPlayMainActivity extends AppCompatActivity {
 			mwBattleFieldButton.setOnClickListener(new View.OnClickListener(){
 				@Override
 				public void onClick(View view){
-					mwIntent.setClass(getApplicationContext(), MwBFMapActivity.class);
+					mwIntent.setClass(getApplicationContext(), MwBattleFieldActivity.class);
 					startActivity(mwIntent);
 				}
 			});
