@@ -271,7 +271,6 @@
 		android:id="@+id/mwItemTab1"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:background="@drawable/mw_selectedbox_layout"
 		android:layout_margin="8dp"
 		android:padding="3dp">
 		<ImageView
@@ -284,7 +283,6 @@
 		android:id="@+id/mwItemTab2"
 		android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-		android:background="@drawable/mw_anybox_layout"
 		android:layout_margin="8dp"
 		android:padding="3dp">
 		<ImageView
@@ -297,7 +295,6 @@
 			android:id="@+id/mwItemTab3"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:background="@drawable/mw_anybox_layout"
 			android:layout_margin="8dp"
 			android:padding="3dp">
 			<ImageView

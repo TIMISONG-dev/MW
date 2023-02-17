@@ -1,3 +1,3 @@
-/\\\\/\\\ \\\\/\\\\/
+/\\/\ \\/\\/
 
-My RPG+Clicker game. Let's go 
+MW — RPG+Clicker game. Let's go
