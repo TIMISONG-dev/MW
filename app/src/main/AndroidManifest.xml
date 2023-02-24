@@ -12,16 +12,18 @@
         android:enableOnBackInvokedCallback="true">
         <activity
             android:name=".MwPlayMainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                    <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
-            android:name=".MwPlayHomeActivity"/>
+            android:name=".MwPlayHomeActivity"
+            android:screenOrientation="portrait"/>
     <activity
-        android:name=".MwBattleFieldActivity"/>
+        android:name=".MwBattleFieldActivity"
+        android:screenOrientation="portrait"/>
     </application>
 </manifest>
