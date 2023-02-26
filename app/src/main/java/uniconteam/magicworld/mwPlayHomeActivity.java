@@ -34,7 +34,7 @@ public class MwPlayHomeActivity extends AppCompatActivity {
     public ImageView mwBlockTab3;
     public ImageView mwBlockTab4;
     public ImageView mwBlockTab5;
-	public ImageView mwBlockTab6; // comments about this objects in «// all objects id»
+	public ImageView mwBlockTab6; // Comments about this objects in «// All objects id»
     public ImageView mwBlockTab7;
     public ImageView mwBlockTab8;
     public ImageView mwBlockTab9;
@@ -156,7 +156,7 @@ public class MwPlayHomeActivity extends AppCompatActivity {
         }
     
 	public void initialize (Bundle savedInstanceState) {
-        // all objects id
+        // All objects id
 		mwDataBoxLinear = findViewById(R.id.mwDataBoxLinear); // LinearLayout with coins and levels
 		mwDataBoxCoinCount = findViewById(R.id.mwDataBoxCoinCount); // TextView coin count
 		mwDataBoxLevelCount = findViewById(R.id.mwDataBoxLevelCount); // TextView level count
@@ -187,7 +187,7 @@ public class MwPlayHomeActivity extends AppCompatActivity {
         mwBlockTab19 = findViewById(R.id.mwBlockTab19);
         mwBlockTab20 = findViewById(R.id.mwBlockTab20);
         
-        // design
+        // Design
 		if (Build.VERSION.SDK_INT >= 21) { getWindow().setNavigationBarColor(Color.parseColor("#FF61CBFF"));}
 		if(Build.VERSION.SDK_INT >= 21) { getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -202,7 +202,7 @@ public class MwPlayHomeActivity extends AppCompatActivity {
 		mwDataBoxLevelCount.setTypeface(Typeface.createFromAsset(getAssets(),"mwFonts/magicworld_google_sans_regular.tmp"), Typeface.NORMAL);
 		mwWinBoxCupCount.setTypeface(Typeface.createFromAsset(getAssets(),"mwFonts/magicworld_google_sans_regular.tmp"), Typeface.NORMAL);
         
-        // onclick  functions
+        // Onclick  functions
         mwDataBoxLinear.setOnClickListener(new View.OnClickListener() {
             @Override
                 public void onClick(View viww){
@@ -527,7 +527,7 @@ public class MwPlayHomeActivity extends AppCompatActivity {
    }
     
    public void MwClickXY(){
-        // animations ScaleX, ScaleY
+        // Animations ScaleX, ScaleY
             mwAnimRule = false;
         mwTimerTask = new TimerTask(){
       public void run(){
@@ -602,7 +602,7 @@ public class MwPlayHomeActivity extends AppCompatActivity {
      _mwTimerTask.schedule(mwTimerTask, 0);
    };
     public void MwClickCircles(){
-      // animations img
+      // Animations img
       mwTimerTask = new TimerTask(){
       public void run(){
        runOnUiThread(new Runnable(){

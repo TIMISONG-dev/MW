@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ThreadLocalRandom;
 import uniconteam.magicworld.MwBattleFieldActivity;
 import androidx.appcompat.app.AppCompatActivity;
 import uniconteam.magicworld.MwPlayMainActivity;
@@ -33,10 +34,10 @@ public class MwBattleFieldActivity extends AppCompatActivity {
     }
 }
 class MwBattleFieldMap extends View{
-	// all objects
+	// All objects
 	private String mwEG = "v0.1a";
-    private Bitmap mwJohnBitmap; // John hero image
-    private Bitmap mwSlimeBitmap; // Slime image
+    public Bitmap mwJohnBitmap; // John hero image
+    public Bitmap mwSlimeBitmap; // Slime image
     private Bitmap mwButtonUp; // Buttons 1-4 \/
     private Bitmap mwButtonDown;
     private Bitmap mwButtonLeft;
@@ -58,18 +59,26 @@ class MwBattleFieldMap extends View{
     private String mwBiome = "landscape"; // Which background color #2C6E3C
     private Timer mwTimer = new Timer();
     private TimerTask mwTimerTask;
-    int currentFrame = 0;
-    int fps = 9;
-    int mwHeroX = 100;
-    int mwHeroY = 1100;
-    int mwHeroZ = 200;
-    int mwHeroW = 1200;
-    int mwSlimeX = 100;
-    int mwSlimeY = 110;
-    int mwSlimeZ = 200;
-    int mwSlimeW = 210;
-    int mwHeroHp = 6;
-    int mwMobHp = 6;
+    public int currentFrame = 0;
+    public int fps = 9;
+    public int mwHeroX = 100;
+    public int mwHeroY = 1100;
+    public int mwHeroZ = 200;
+    public int mwHeroW = 1200;
+    public int mwSlimeX = 100;
+    public int mwSlimeY = 110;
+    public int mwSlimeZ = 200;
+    public int mwSlimeW = 210;
+    public int mwHeroHp = 6;
+    public int mwMobHp = 6;
+    
+    // Random for IA slime (where will the mob go)
+    
+    // 1 - Up, 2 - Down, 3 - Right, 4 - Left
+    public int mwSlimeWay = ThreadLocalRandom.current().nextInt(1, 4 + 1);
+    
+    // Duration of way
+    public int mwSlimeDur = ThreadLocalRandom.current().nextInt(1, 6 + 1);
     
     // Array animation john and slime
     Bitmap[] mwJohnBitmaps = new Bitmap[]{ BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_1), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_2), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_3),};
@@ -77,7 +86,7 @@ class MwBattleFieldMap extends View{
     
 	public MwBattleFieldMap (Context context){
 		super(context);
-        // draw objects
+        // Draw objects
         mwButtonUp = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_button_up);
         mwButtonDown = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_button_down);
         mwButtonRight = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_button_right);
@@ -196,7 +205,7 @@ class MwBattleFieldMap extends View{
     @Override
 public boolean onTouchEvent(MotionEvent event)
 {
-    // detect click using x y z
+    // Detect click using x y z
     float xControll = event.getX();
     float yControll = event.getY();
     switch(event.getAction())
@@ -207,6 +216,7 @@ public boolean onTouchEvent(MotionEvent event)
         {
                 mwHeroY -= 40;
                 mwHeroW -= 40;
+                mwSlime();
         }
         if(xControll > 300f && xControll < 440f && yControll > 2000f && yControll < 2140f)
         {
@@ -230,8 +240,8 @@ public boolean onTouchEvent(MotionEvent event)
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
-        // actions on click x y z
-        // canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.magicworld_block_grass),0,0,null);
+        // Actions on click x y z
+        // Canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.magicworld_block_grass),0,0,null);
         if (mwBiome.equals("landscape")){
             canvas.drawColor(Color.parseColor("#2C6E3C"));
         }
@@ -250,7 +260,7 @@ public boolean onTouchEvent(MotionEvent event)
         canvas.drawPaint(paint); 
         paint.setColor(Color.BLACK); 
         paint.setTextSize(60); 
-        canvas.drawText(String.valueOf(fps), 10, 55, paint);
+        canvas.drawText(String.valueOf(mwSlimeWay), 10, 55, paint);
         canvas.drawBitmap(mwButtonUp, null, new RectF(300f, 1600f, 440f, 1740f), null);
         canvas.drawBitmap(mwButtonDown, null, new RectF(300f, 2000f, 440f, 2140f), null);
         canvas.drawBitmap(mwButtonLeft, null, new RectF(100f, 1800f, 240f, 1940f), null);
@@ -347,4 +357,39 @@ public boolean onTouchEvent(MotionEvent event)
         }
         invalidate();
         }
+    public void mwSlimeR(){
+        mwSlimeWay = ThreadLocalRandom.current().nextInt(1, 4 + 1);
+        mwSlimeDur = ThreadLocalRandom.current().nextInt(1, 6 + 1);
+    }
+    
+    public void mwSlime(){
+      if (mwSlimeWay == 1){
+        for (int i = 0; i < mwSlimeDur; i++){
+            mwSlimeY += 10;
+            mwSlimeW += 10;
+        }
+        mwSlimeR();
+      }
+      if (mwSlimeWay == 2){
+        for (int i = 0; i < mwSlimeDur; i++){
+            mwSlimeY -= 10;
+            mwSlimeW -= 10;
+        }
+        mwSlimeR();
+      }
+      if (mwSlimeWay == 3){
+        for (int i = 0; i < mwSlimeDur; i++){
+            mwSlimeX += 10;
+            mwSlimeZ += 100;
+        }
+        mwSlimeR();
+      }  
+      if (mwSlimeWay == 4){
+        for (int i = 0; i < mwSlimeDur; i++){
+            mwSlimeX -= 10;
+            mwSlimeZ -= 10;
+        }
+        mwSlimeR();
+      }  
+   }
 }

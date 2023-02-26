@@ -16,7 +16,7 @@ import com.itsaky.androidide.logsender.LogSender;
 import uniconteam.magicworld.MwBattleFieldActivity;
 
 public class MwPlayMainActivity extends AppCompatActivity {
-    // all objects
+    // All objects
     private ImageView mwLogoImg; // Image logo magic world
 	private Button mwPlayButton; // Play button
 	private Button mwBattleFieldButton; // Battlefield button
@@ -47,7 +47,7 @@ public class MwPlayMainActivity extends AppCompatActivity {
 		initializeLogic();
     }
 	private void initialize(Bundle savedInstanceState) {
-        // design, detect objects id, set Logo image ScaleX, ScaleY
+        // Design, detect objects id, set Logo image ScaleX, ScaleY
 		if (Build.VERSION.SDK_INT >= 21) { getWindow().setNavigationBarColor(Color.parseColor("#5C8368"));}
         mwAnimRule = true;
         if (mwAnimRule){
@@ -59,7 +59,7 @@ public class MwPlayMainActivity extends AppCompatActivity {
        }
 	}
 	private void initializeLogic(){
-        // onclick functions
+        // Onclick functions
         mwTimerTask = new TimerTask(){
                         @Override
             public void run(){
@@ -137,7 +137,7 @@ public class MwPlayMainActivity extends AppCompatActivity {
 			});
    }
     public void mwClick(){
-        // animation ScaleX, ScaleY
+        // Animation ScaleX, ScaleY
         mwAnimRule = false;
        mwTimerTask = new TimerTask(){
 						@Override
