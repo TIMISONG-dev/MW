@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Timer;
 import java.util.TimerTask;
 import uniconteam.magicworld.MwPlayHomeActivity;
+import uniconteam.magicworld.MwPlayMainActivity;
 
 public class MwPlayHomeActivity extends AppCompatActivity {
     // all objects
@@ -49,8 +50,8 @@ public class MwPlayHomeActivity extends AppCompatActivity {
     public ImageView mwBlockTab18;
     public ImageView mwBlockTab19;
     public ImageView mwBlockTab20;
-    private TimerTask mwTimerTask;
-    private Timer _mwTimerTask = new Timer();
+    public static TimerTask mwTimerTask;
+    public static Timer _mwTimerTask = new Timer();
 	private ObjectAnimator mwBlock1ObjAnimationScaleX = new ObjectAnimator(); // Animator Block Tab 1-20 \/
 	private ObjectAnimator mwBlock1ObjAnimationScaleY = new ObjectAnimator();
 	private ObjectAnimator mwBlock2ObjAnimationScaleX = new ObjectAnimator();
@@ -101,13 +102,37 @@ public class MwPlayHomeActivity extends AppCompatActivity {
 	private ObjectAnimator mwDataBoxAnimationScaleY = new ObjectAnimator();
     private ObjectAnimator mwWinBoxAnimationScaleX = new ObjectAnimator();
 	private ObjectAnimator mwWinBoxAnimationScaleY = new ObjectAnimator();
-    public View mwAnimObjData;
-    public String mwItemSelected;
-    public ImageView mwAnimImageData;
-    public Boolean mwAnimRule = true;
-    public Boolean mwAnimCirclesRule = true;
-    public ObjectAnimator mwAnimDataX = new ObjectAnimator();
-    public ObjectAnimator mwAnimDataY = new ObjectAnimator();
+    public static String mwItemSelected;
+    
+    public static TimerTask mwTimerTaskThr1;
+	public static Timer _mwTimerTaskThr1  = new Timer();
+    public static View mwAnimObjDataThr1; // View for mwClick
+    public static float mwAnimFloats1Thr1; // Floats for mwClick 1-3 \/
+    public static float mwAnimFloats2Thr1;
+    public static float mwAnimFloats3Thr1;
+    public static ObjectAnimator mwAnimDataXThr1 = new ObjectAnimator(); // Animator for mwClick ScaleX, ScaleY
+    public static ObjectAnimator mwAnimDataYThr1 = new ObjectAnimator();
+    public static Boolean mwAnimRuleThr1 = true; // Bool for allowing or denying mwClick
+    
+    public static TimerTask mwTimerTaskThr2;
+	public static Timer _mwTimerTaskThr2  = new Timer();
+    public static View mwAnimObjDataThr2; // View for mwClick
+    public static float mwAnimFloats1Thr2; // Floats for mwClick 1-3 \/
+    public static float mwAnimFloats2Thr2;
+    public static float mwAnimFloats3Thr2;
+    public static ObjectAnimator mwAnimDataXThr2 = new ObjectAnimator(); // Animator for mwClick ScaleX, ScaleY
+    public static ObjectAnimator mwAnimDataYThr2 = new ObjectAnimator();
+    public static Boolean mwAnimRuleThr2 = true; // Bool for allowing or denying mwClick
+    
+    public static TimerTask mwTimerTaskThr3;
+	public static Timer _mwTimerTaskThr3  = new Timer();
+    public static View mwAnimObjDataThr3; // View for mwClick
+    public static float mwAnimFloats1Thr3; // Floats for mwClick 1-3 \/
+    public static float mwAnimFloats2Thr3;
+    public static float mwAnimFloats3Thr3;
+    public static ObjectAnimator mwAnimDataXThr3 = new ObjectAnimator(); // Animator for mwClick ScaleX, ScaleY
+    public static ObjectAnimator mwAnimDataYThr3 = new ObjectAnimator();
+    public static Boolean mwAnimRuleThr3 = true; // Bool for allowing or denying mwClick
     
 		@Override
 		protected void onCreate(Bundle savedInstanceState) {
@@ -205,504 +230,941 @@ public class MwPlayHomeActivity extends AppCompatActivity {
         // Onclick  functions
         mwDataBoxLinear.setOnClickListener(new View.OnClickListener() {
             @Override
-                public void onClick(View viww){
-                    if (mwAnimRule){
-                    mwAnimObjData = mwDataBoxLinear;
-                    mwAnimDataX = mwDataBoxAnimationScaleX;
-                    mwAnimDataY = mwDataBoxAnimationScaleY;
-                    MwClickXY();
+                public void onClick(View view){
+                    if (mwAnimRuleThr1){
+                    mwAnimObjDataThr1 = mwDataBoxLinear;
+                    mwAnimDataXThr1 = mwDataBoxAnimationScaleX;
+                    mwAnimDataYThr1 = mwDataBoxAnimationScaleY;
+                    mwAnimFloats1Thr1 = 1.1f;
+                    mwAnimFloats2Thr1 = 0.9f;
+                    mwAnimFloats3Thr1 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr2){
+                    mwAnimObjDataThr2 = mwDataBoxLinear;
+                    mwAnimDataXThr2 = mwDataBoxAnimationScaleX;
+                    mwAnimDataYThr2 = mwDataBoxAnimationScaleY;
+                    mwAnimFloats1Thr2 = 1.1f;
+                    mwAnimFloats2Thr2 = 0.9f;
+                    mwAnimFloats3Thr2 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr3){
+                    mwAnimObjDataThr3 = mwDataBoxLinear;
+                    mwAnimDataXThr3 = mwDataBoxAnimationScaleX;
+                    mwAnimDataYThr3 = mwDataBoxAnimationScaleY;
+                    mwAnimFloats1Thr3 = 1.1f;
+                    mwAnimFloats2Thr3 = 0.9f;
+                    mwAnimFloats3Thr3 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                      }
+                    }
                   }
                 }
         });
         mwWinBoxLinear.setOnClickListener(new View.OnClickListener() {
             @Override
                 public void onClick(View viww){
-                    if (mwAnimRule){
-                    mwAnimObjData = mwWinBoxLinear;
-                    mwAnimDataX = mwWinBoxAnimationScaleX;
-                    mwAnimDataY = mwWinBoxAnimationScaleY;
-                    MwClickXY();
+                    if (mwAnimRuleThr1){
+                    mwAnimObjDataThr1 = mwWinBoxLinear;
+                    mwAnimDataXThr1 = mwWinBoxAnimationScaleX;
+                    mwAnimDataYThr1 = mwWinBoxAnimationScaleY;
+                    mwAnimFloats1Thr1 = 1.1f;
+                    mwAnimFloats2Thr1 = 0.9f;
+                    mwAnimFloats3Thr1 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr2){
+                    mwAnimObjDataThr2 = mwWinBoxLinear;
+                    mwAnimDataXThr2 = mwWinBoxAnimationScaleX;
+                    mwAnimDataYThr2 = mwWinBoxAnimationScaleY;
+                    mwAnimFloats1Thr2 = 1.1f;
+                    mwAnimFloats2Thr2 = 0.9f;
+                    mwAnimFloats3Thr2 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr3){
+                    mwAnimObjDataThr3 = mwWinBoxLinear;
+                    mwAnimDataXThr3 = mwWinBoxAnimationScaleX;
+                    mwAnimDataYThr3 = mwWinBoxAnimationScaleY;
+                    mwAnimFloats1Thr3 = 1.1f;
+                    mwAnimFloats2Thr3 = 0.9f;
+                    mwAnimFloats3Thr3 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                      }
+                    }
                   }
                 }
         });
         mwBlockTab1.setOnClickListener(new View.OnClickListener() { 
                 @Override
                 public void onClick(View view) {
-                    if (mwAnimRule){
-                    mwAnimObjData = mwBlockTab1;
-                    mwAnimImageData = mwBlockTab1;   
-                    mwAnimDataX = mwBlock1ObjAnimationScaleX;
-                    mwAnimDataY = mwBlock1ObjAnimationScaleY;
-                    MwClickXY();
-                    MwClickCircles();
+                    if (mwAnimRuleThr1){
+                    mwAnimObjDataThr1 = mwBlockTab1;
+                    mwAnimDataXThr1 = mwBlock1ObjAnimationScaleX;
+                    mwAnimDataYThr1 = mwBlock1ObjAnimationScaleY;
+                    mwAnimFloats1Thr1 = 1.1f;
+                    mwAnimFloats2Thr1 = 0.9f;
+                    mwAnimFloats3Thr1 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr2){
+                    mwAnimObjDataThr2 = mwBlockTab1;
+                    mwAnimDataXThr2 = mwBlock1ObjAnimationScaleX;
+                    mwAnimDataYThr2 = mwBlock1ObjAnimationScaleY;
+                    mwAnimFloats1Thr2 = 1.1f;
+                    mwAnimFloats2Thr2 = 0.9f;
+                    mwAnimFloats3Thr2 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr3){
+                    mwAnimObjDataThr3 = mwBlockTab1;
+                    mwAnimDataXThr3 = mwBlock1ObjAnimationScaleX;
+                    mwAnimDataYThr3 = mwBlock1ObjAnimationScaleY;
+                    mwAnimFloats1Thr3 = 1.1f;
+                    mwAnimFloats2Thr3 = 0.9f;
+                    mwAnimFloats3Thr3 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                      }
+                    }
                   }
                 }
        });
         mwBlockTab2.setOnClickListener(new View.OnClickListener() { 
                 @Override
                 public void onClick(View view) {
-                    if (mwAnimRule){
-                    mwAnimObjData = mwBlockTab2;
-                    mwAnimImageData = mwBlockTab2;   
-                    mwAnimDataX = mwBlock2ObjAnimationScaleX;
-                    mwAnimDataY = mwBlock2ObjAnimationScaleY;
-                    MwClickXY();
-                    MwClickCircles();
-                   }
+                    if (mwAnimRuleThr1){
+                    mwAnimObjDataThr1 = mwBlockTab2;
+                    mwAnimDataXThr1 = mwBlock2ObjAnimationScaleX;
+                    mwAnimDataYThr1 = mwBlock2ObjAnimationScaleY;
+                    mwAnimFloats1Thr1 = 1.1f;
+                    mwAnimFloats2Thr1 = 0.9f;
+                    mwAnimFloats3Thr1 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr2){
+                    mwAnimObjDataThr2 = mwBlockTab2;
+                    mwAnimDataXThr2 = mwBlock2ObjAnimationScaleX;
+                    mwAnimDataYThr2 = mwBlock2ObjAnimationScaleY;
+                    mwAnimFloats1Thr2 = 1.1f;
+                    mwAnimFloats2Thr2 = 0.9f;
+                    mwAnimFloats3Thr2 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr3){
+                    mwAnimObjDataThr3 = mwBlockTab2;
+                    mwAnimDataXThr3 = mwBlock2ObjAnimationScaleX;
+                    mwAnimDataYThr3 = mwBlock2ObjAnimationScaleY;
+                    mwAnimFloats1Thr3 = 1.1f;
+                    mwAnimFloats2Thr3 = 0.9f;
+                    mwAnimFloats3Thr3 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                      }
+                    }
+                  }
                 }
       });
         mwBlockTab3.setOnClickListener(new View.OnClickListener() { 
                 @Override
                 public void onClick(View view) {
-                    if (mwAnimRule){
-                    mwAnimObjData = mwBlockTab3;
-                    mwAnimImageData = mwBlockTab3;
-                    mwAnimDataX = mwBlock3ObjAnimationScaleX;
-                    mwAnimDataY = mwBlock3ObjAnimationScaleY;
-                    MwClickXY();
-                    MwClickCircles();
-                   }
+                    if (mwAnimRuleThr1){
+                    mwAnimObjDataThr1 = mwBlockTab3;
+                    mwAnimDataXThr1 = mwBlock3ObjAnimationScaleX;
+                    mwAnimDataYThr1 = mwBlock3ObjAnimationScaleY;
+                    mwAnimFloats1Thr1 = 1.1f;
+                    mwAnimFloats2Thr1 = 0.9f;
+                    mwAnimFloats3Thr1 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr2){
+                    mwAnimObjDataThr2 = mwBlockTab3;
+                    mwAnimDataXThr2 = mwBlock3ObjAnimationScaleX;
+                    mwAnimDataYThr2 = mwBlock3ObjAnimationScaleY;
+                    mwAnimFloats1Thr2 = 1.1f;
+                    mwAnimFloats2Thr2 = 0.9f;
+                    mwAnimFloats3Thr2 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr3){
+                    mwAnimObjDataThr3 = mwBlockTab3;
+                    mwAnimDataXThr3 = mwBlock3ObjAnimationScaleX;
+                    mwAnimDataYThr3 = mwBlock3ObjAnimationScaleY;
+                    mwAnimFloats1Thr3 = 1.1f;
+                    mwAnimFloats2Thr3 = 0.9f;
+                    mwAnimFloats3Thr3 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                      }
+                    }
+                  }
        }
     });
         mwBlockTab4.setOnClickListener(new View.OnClickListener() { 
                 @Override
                 public void onClick(View view) {
-                    if (mwAnimRule){
-                    mwAnimObjData = mwBlockTab4;
-                    mwAnimImageData = mwBlockTab4;
-                    mwAnimDataX = mwBlock4ObjAnimationScaleX;
-                    mwAnimDataY = mwBlock4ObjAnimationScaleY;
-                    MwClickXY();
-                    MwClickCircles();
-                   }
+                    if (mwAnimRuleThr1){
+                    mwAnimObjDataThr1 = mwBlockTab4;
+                    mwAnimDataXThr1 = mwBlock4ObjAnimationScaleX;
+                    mwAnimDataYThr1 = mwBlock4ObjAnimationScaleY;
+                    mwAnimFloats1Thr1 = 1.1f;
+                    mwAnimFloats2Thr1 = 0.9f;
+                    mwAnimFloats3Thr1 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr2){
+                    mwAnimObjDataThr2 = mwBlockTab4;
+                    mwAnimDataXThr2 = mwBlock4ObjAnimationScaleX;
+                    mwAnimDataYThr2 = mwBlock4ObjAnimationScaleY;
+                    mwAnimFloats1Thr2 = 1.1f;
+                    mwAnimFloats2Thr2 = 0.9f;
+                    mwAnimFloats3Thr2 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr3){
+                    mwAnimObjDataThr3 = mwBlockTab4;
+                    mwAnimDataXThr3 = mwBlock4ObjAnimationScaleX;
+                    mwAnimDataYThr3 = mwBlock4ObjAnimationScaleY;
+                    mwAnimFloats1Thr3 = 1.1f;
+                    mwAnimFloats2Thr3 = 0.9f;
+                    mwAnimFloats3Thr3 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                      }
+                    }
+                  }
        }
     });
         mwBlockTab5.setOnClickListener(new View.OnClickListener() { 
                 @Override
                 public void onClick(View view) {
-                    if (mwAnimRule){
-                    mwAnimObjData = mwBlockTab5;
-                    mwAnimImageData = mwBlockTab5;
-                    mwAnimDataX = mwBlock5ObjAnimationScaleX;
-                    mwAnimDataY = mwBlock5ObjAnimationScaleY;
-                    MwClickXY();
-                    MwClickCircles();
-                   }
+                    if (mwAnimRuleThr1){
+                    mwAnimObjDataThr1 = mwBlockTab5;
+                    mwAnimDataXThr1 = mwBlock5ObjAnimationScaleX;
+                    mwAnimDataYThr1 = mwBlock5ObjAnimationScaleY;
+                    mwAnimFloats1Thr1 = 1.1f;
+                    mwAnimFloats2Thr1 = 0.9f;
+                    mwAnimFloats3Thr1 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr2){
+                    mwAnimObjDataThr2 = mwBlockTab5;
+                    mwAnimDataXThr2 = mwBlock5ObjAnimationScaleX;
+                    mwAnimDataYThr2 = mwBlock5ObjAnimationScaleY;
+                    mwAnimFloats1Thr2 = 1.1f;
+                    mwAnimFloats2Thr2 = 0.9f;
+                    mwAnimFloats3Thr2 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr3){
+                    mwAnimObjDataThr3 = mwBlockTab5;
+                    mwAnimDataXThr3 = mwBlock5ObjAnimationScaleX;
+                    mwAnimDataYThr3 = mwBlock5ObjAnimationScaleY;
+                    mwAnimFloats1Thr3 = 1.1f;
+                    mwAnimFloats2Thr3 = 0.9f;
+                    mwAnimFloats3Thr3 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                      }
+                    }
+                  }
        }
     });
         mwBlockTab6.setOnClickListener(new View.OnClickListener() { 
                 @Override
                 public void onClick(View view) {
-                    if (mwAnimRule){
-                    mwAnimObjData = mwBlockTab6;
-                    mwAnimImageData = mwBlockTab6;
-                    mwAnimDataX = mwBlock6ObjAnimationScaleX;
-                    mwAnimDataY = mwBlock6ObjAnimationScaleY;
-                    MwClickXY();
-                    MwClickCircles();
-                   }
+                    if (mwAnimRuleThr1){
+                    mwAnimObjDataThr1 = mwBlockTab6;
+                    mwAnimDataXThr1 = mwBlock6ObjAnimationScaleX;
+                    mwAnimDataYThr1 = mwBlock6ObjAnimationScaleY;
+                    mwAnimFloats1Thr1 = 1.1f;
+                    mwAnimFloats2Thr1 = 0.9f;
+                    mwAnimFloats3Thr1 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr2){
+                    mwAnimObjDataThr2 = mwBlockTab6;
+                    mwAnimDataXThr2 = mwBlock6ObjAnimationScaleX;
+                    mwAnimDataYThr2 = mwBlock6ObjAnimationScaleY;
+                    mwAnimFloats1Thr2 = 1.1f;
+                    mwAnimFloats2Thr2 = 0.9f;
+                    mwAnimFloats3Thr2 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr3){
+                    mwAnimObjDataThr3 = mwBlockTab6;
+                    mwAnimDataXThr3 = mwBlock6ObjAnimationScaleX;
+                    mwAnimDataYThr3 = mwBlock6ObjAnimationScaleY;
+                    mwAnimFloats1Thr3 = 1.1f;
+                    mwAnimFloats2Thr3 = 0.9f;
+                    mwAnimFloats3Thr3 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                      }
+                    }
+                  }
        }
     });
        mwBlockTab7.setOnClickListener(new View.OnClickListener() { 
                 @Override
                 public void onClick(View view) {
-                    if (mwAnimRule){
-                    mwAnimObjData = mwBlockTab7;
-                    mwAnimImageData = mwBlockTab7;
-                    mwAnimDataX = mwBlock7ObjAnimationScaleX;
-                    mwAnimDataY = mwBlock7ObjAnimationScaleY;
-                    MwClickXY();
-                    MwClickCircles();
-                   }
+                    if (mwAnimRuleThr1){
+                    mwAnimObjDataThr1 = mwBlockTab7;
+                    mwAnimDataXThr1 = mwBlock7ObjAnimationScaleX;
+                    mwAnimDataYThr1 = mwBlock7ObjAnimationScaleY;
+                    mwAnimFloats1Thr1 = 1.1f;
+                    mwAnimFloats2Thr1 = 0.9f;
+                    mwAnimFloats3Thr1 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr2){
+                    mwAnimObjDataThr2 = mwBlockTab7;
+                    mwAnimDataXThr2 = mwBlock7ObjAnimationScaleX;
+                    mwAnimDataYThr2 = mwBlock7ObjAnimationScaleY;
+                    mwAnimFloats1Thr2 = 1.1f;
+                    mwAnimFloats2Thr2 = 0.9f;
+                    mwAnimFloats3Thr2 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr3){
+                    mwAnimObjDataThr3 = mwBlockTab7;
+                    mwAnimDataXThr3 = mwBlock7ObjAnimationScaleX;
+                    mwAnimDataYThr3 = mwBlock7ObjAnimationScaleY;
+                    mwAnimFloats1Thr3 = 1.1f;
+                    mwAnimFloats2Thr3 = 0.9f;
+                    mwAnimFloats3Thr3 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                      }
+                    }
+                  }
        }
     });
        mwBlockTab8.setOnClickListener(new View.OnClickListener() { 
                 @Override
                 public void onClick(View view) {
-                    if (mwAnimRule){
-                    mwAnimObjData = mwBlockTab8;
-                    mwAnimImageData = mwBlockTab8;
-                    mwAnimDataX = mwBlock8ObjAnimationScaleX;
-                    mwAnimDataY = mwBlock8ObjAnimationScaleY;
-                    MwClickXY();
-                    MwClickCircles();
-                   }
+                    if (mwAnimRuleThr1){
+                    mwAnimObjDataThr1 = mwBlockTab8;
+                    mwAnimDataXThr1 = mwBlock8ObjAnimationScaleX;
+                    mwAnimDataYThr1 = mwBlock8ObjAnimationScaleY;
+                    mwAnimFloats1Thr1 = 1.1f;
+                    mwAnimFloats2Thr1 = 0.9f;
+                    mwAnimFloats3Thr1 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr2){
+                    mwAnimObjDataThr2 = mwBlockTab8;
+                    mwAnimDataXThr2 = mwBlock8ObjAnimationScaleX;
+                    mwAnimDataYThr2 = mwBlock8ObjAnimationScaleY;
+                    mwAnimFloats1Thr2 = 1.1f;
+                    mwAnimFloats2Thr2 = 0.9f;
+                    mwAnimFloats3Thr2 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr3){
+                    mwAnimObjDataThr3 = mwBlockTab8;
+                    mwAnimDataXThr3 = mwBlock8ObjAnimationScaleX;
+                    mwAnimDataYThr3 = mwBlock8ObjAnimationScaleY;
+                    mwAnimFloats1Thr3 = 1.1f;
+                    mwAnimFloats2Thr3 = 0.9f;
+                    mwAnimFloats3Thr3 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                      }
+                    }
+                  }
        }
     });
        mwBlockTab9.setOnClickListener(new View.OnClickListener() { 
                 @Override
                 public void onClick(View view) {
-                    if (mwAnimRule){
-                    mwAnimObjData = mwBlockTab9;
-                    mwAnimImageData = mwBlockTab9;
-                    mwAnimDataX = mwBlock9ObjAnimationScaleX;
-                    mwAnimDataY = mwBlock9ObjAnimationScaleY;
-                    MwClickXY();
-                    MwClickCircles();
-                   }
+                    if (mwAnimRuleThr1){
+                    mwAnimObjDataThr1 = mwBlockTab9;
+                    mwAnimDataXThr1 = mwBlock9ObjAnimationScaleX;
+                    mwAnimDataYThr1 = mwBlock9ObjAnimationScaleY;
+                    mwAnimFloats1Thr1 = 1.1f;
+                    mwAnimFloats2Thr1 = 0.9f;
+                    mwAnimFloats3Thr1 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr2){
+                    mwAnimObjDataThr2 = mwBlockTab9;
+                    mwAnimDataXThr2 = mwBlock9ObjAnimationScaleX;
+                    mwAnimDataYThr2 = mwBlock9ObjAnimationScaleY;
+                    mwAnimFloats1Thr2 = 1.1f;
+                    mwAnimFloats2Thr2 = 0.9f;
+                    mwAnimFloats3Thr2 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr3){
+                    mwAnimObjDataThr3 = mwBlockTab9;
+                    mwAnimDataXThr3 = mwBlock9ObjAnimationScaleX;
+                    mwAnimDataYThr3 = mwBlock9ObjAnimationScaleY;
+                    mwAnimFloats1Thr3 = 1.1f;
+                    mwAnimFloats2Thr3 = 0.9f;
+                    mwAnimFloats3Thr3 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                      }
+                    }
+                  }
        }
     });
        mwBlockTab10.setOnClickListener(new View.OnClickListener() { 
                 @Override
                 public void onClick(View view) {
-                    if (mwAnimRule){
-                    mwAnimObjData = mwBlockTab10;
-                    mwAnimImageData = mwBlockTab10;
-                    mwAnimDataX = mwBlock10ObjAnimationScaleX;
-                    mwAnimDataY = mwBlock10ObjAnimationScaleY;
-                    MwClickXY();
-                    MwClickCircles();
-                   }
+                    if (mwAnimRuleThr1){
+                    mwAnimObjDataThr1 = mwBlockTab10;
+                    mwAnimDataXThr1 = mwBlock10ObjAnimationScaleX;
+                    mwAnimDataYThr1 = mwBlock10ObjAnimationScaleY;
+                    mwAnimFloats1Thr1 = 1.1f;
+                    mwAnimFloats2Thr1 = 0.9f;
+                    mwAnimFloats3Thr1 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr2){
+                    mwAnimObjDataThr2 = mwBlockTab10;
+                    mwAnimDataXThr2 = mwBlock10ObjAnimationScaleX;
+                    mwAnimDataYThr2 = mwBlock10ObjAnimationScaleY;
+                    mwAnimFloats1Thr2 = 1.1f;
+                    mwAnimFloats2Thr2 = 0.9f;
+                    mwAnimFloats3Thr2 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr3){
+                    mwAnimObjDataThr3 = mwBlockTab10;
+                    mwAnimDataXThr3 = mwBlock10ObjAnimationScaleX;
+                    mwAnimDataYThr3 = mwBlock10ObjAnimationScaleY;
+                    mwAnimFloats1Thr3 = 1.1f;
+                    mwAnimFloats2Thr3 = 0.9f;
+                    mwAnimFloats3Thr3 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                      }
+                    }
+                  }
        }
     });
         mwBlockTab11.setOnClickListener(new View.OnClickListener() { 
                 @Override
                 public void onClick(View view) {
-                    if (mwAnimRule){
-                    mwAnimObjData = mwBlockTab11;
-                    mwAnimImageData = mwBlockTab11;
-                    mwAnimDataX = mwBlock11ObjAnimationScaleX;
-                    mwAnimDataY = mwBlock11ObjAnimationScaleY;
-                    MwClickXY();
-                    MwClickCircles();
-                   }
+                    if (mwAnimRuleThr1){
+                    mwAnimObjDataThr1 = mwBlockTab11;
+                    mwAnimDataXThr1 = mwBlock11ObjAnimationScaleX;
+                    mwAnimDataYThr1 = mwBlock11ObjAnimationScaleY;
+                    mwAnimFloats1Thr1 = 1.1f;
+                    mwAnimFloats2Thr1 = 0.9f;
+                    mwAnimFloats3Thr1 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr2){
+                    mwAnimObjDataThr2 = mwBlockTab11;
+                    mwAnimDataXThr2 = mwBlock11ObjAnimationScaleX;
+                    mwAnimDataYThr2 = mwBlock11ObjAnimationScaleY;
+                    mwAnimFloats1Thr2 = 1.1f;
+                    mwAnimFloats2Thr2 = 0.9f;
+                    mwAnimFloats3Thr2 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr3){
+                    mwAnimObjDataThr3 = mwBlockTab11;
+                    mwAnimDataXThr3 = mwBlock11ObjAnimationScaleX;
+                    mwAnimDataYThr3 = mwBlock11ObjAnimationScaleY;
+                    mwAnimFloats1Thr3 = 1.1f;
+                    mwAnimFloats2Thr3 = 0.9f;
+                    mwAnimFloats3Thr3 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                      }
+                    }
+                  }
        }
     });
         mwBlockTab12.setOnClickListener(new View.OnClickListener() { 
                 @Override
                 public void onClick(View view) {
-                    if (mwAnimRule){
-                    mwAnimObjData = mwBlockTab12;
-                    mwAnimImageData = mwBlockTab12;
-                    mwAnimDataX = mwBlock12ObjAnimationScaleX;
-                    mwAnimDataY = mwBlock12ObjAnimationScaleY;
-                    MwClickXY();
-                    MwClickCircles();
-                   }
+                    if (mwAnimRuleThr1){
+                    mwAnimObjDataThr1 = mwBlockTab12;
+                    mwAnimDataXThr1 = mwBlock12ObjAnimationScaleX;
+                    mwAnimDataYThr1 = mwBlock12ObjAnimationScaleY;
+                    mwAnimFloats1Thr1 = 1.1f;
+                    mwAnimFloats2Thr1 = 0.9f;
+                    mwAnimFloats3Thr1 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr2){
+                    mwAnimObjDataThr2 = mwBlockTab12;
+                    mwAnimDataXThr2 = mwBlock12ObjAnimationScaleX;
+                    mwAnimDataYThr2 = mwBlock12ObjAnimationScaleY;
+                    mwAnimFloats1Thr2 = 1.1f;
+                    mwAnimFloats2Thr2 = 0.9f;
+                    mwAnimFloats3Thr2 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr3){
+                    mwAnimObjDataThr3 = mwBlockTab12;
+                    mwAnimDataXThr3 = mwBlock12ObjAnimationScaleX;
+                    mwAnimDataYThr3 = mwBlock12ObjAnimationScaleY;
+                    mwAnimFloats1Thr3 = 1.1f;
+                    mwAnimFloats2Thr3 = 0.9f;
+                    mwAnimFloats3Thr3 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                      }
+                    }
+                  }
        }
     });
        mwBlockTab13.setOnClickListener(new View.OnClickListener() { 
                 @Override
                 public void onClick(View view) {
-                    if (mwAnimRule){
-                    mwAnimObjData = mwBlockTab13;
-                    mwAnimImageData = mwBlockTab13;
-                    mwAnimDataX = mwBlock13ObjAnimationScaleX;
-                    mwAnimDataY = mwBlock13ObjAnimationScaleY;
-                    MwClickXY();
-                    MwClickCircles();
-                   }
+                    if (mwAnimRuleThr1){
+                    mwAnimObjDataThr1 = mwBlockTab13;
+                    mwAnimDataXThr1 = mwBlock13ObjAnimationScaleX;
+                    mwAnimDataYThr1 = mwBlock13ObjAnimationScaleY;
+                    mwAnimFloats1Thr1 = 1.1f;
+                    mwAnimFloats2Thr1 = 0.9f;
+                    mwAnimFloats3Thr1 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr2){
+                    mwAnimObjDataThr2 = mwBlockTab13;
+                    mwAnimDataXThr2 = mwBlock13ObjAnimationScaleX;
+                    mwAnimDataYThr2 = mwBlock13ObjAnimationScaleY;
+                    mwAnimFloats1Thr2 = 1.1f;
+                    mwAnimFloats2Thr2 = 0.9f;
+                    mwAnimFloats3Thr2 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr3){
+                    mwAnimObjDataThr3 = mwBlockTab13;
+                    mwAnimDataXThr3 = mwBlock13ObjAnimationScaleX;
+                    mwAnimDataYThr3 = mwBlock13ObjAnimationScaleY;
+                    mwAnimFloats1Thr3 = 1.1f;
+                    mwAnimFloats2Thr3 = 0.9f;
+                    mwAnimFloats3Thr3 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                      }
+                    }
+                  }
        }
     });
        mwBlockTab14.setOnClickListener(new View.OnClickListener() { 
                 @Override
                 public void onClick(View view) {
-                    if (mwAnimRule){
-                    mwAnimObjData = mwBlockTab14;
-                    mwAnimImageData = mwBlockTab14;
-                    mwAnimDataX = mwBlock14ObjAnimationScaleX;
-                    mwAnimDataY = mwBlock14ObjAnimationScaleY;
-                    MwClickXY();
-                    MwClickCircles();
-                   }
+                    if (mwAnimRuleThr1){
+                    mwAnimObjDataThr1 = mwBlockTab14;
+                    mwAnimDataXThr1 = mwBlock14ObjAnimationScaleX;
+                    mwAnimDataYThr1 = mwBlock14ObjAnimationScaleY;
+                    mwAnimFloats1Thr1 = 1.1f;
+                    mwAnimFloats2Thr1 = 0.9f;
+                    mwAnimFloats3Thr1 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr2){
+                    mwAnimObjDataThr2 = mwBlockTab14;
+                    mwAnimDataXThr2 = mwBlock14ObjAnimationScaleX;
+                    mwAnimDataYThr2 = mwBlock14ObjAnimationScaleY;
+                    mwAnimFloats1Thr2 = 1.1f;
+                    mwAnimFloats2Thr2 = 0.9f;
+                    mwAnimFloats3Thr2 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr3){
+                    mwAnimObjDataThr3 = mwBlockTab14;
+                    mwAnimDataXThr3 = mwBlock14ObjAnimationScaleX;
+                    mwAnimDataYThr3 = mwBlock14ObjAnimationScaleY;
+                    mwAnimFloats1Thr3 = 1.1f;
+                    mwAnimFloats2Thr3 = 0.9f;
+                    mwAnimFloats3Thr3 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                      }
+                    }
+                  }
        }
     });
        mwBlockTab15.setOnClickListener(new View.OnClickListener() { 
                 @Override
                 public void onClick(View view) {
-                    if (mwAnimRule){
-                    mwAnimObjData = mwBlockTab15;
-                    mwAnimImageData = mwBlockTab15;
-                    mwAnimDataX = mwBlock15ObjAnimationScaleX;
-                    mwAnimDataY = mwBlock15ObjAnimationScaleY;
-                    MwClickXY();
-                    MwClickCircles();
-                   }
+                    if (mwAnimRuleThr1){
+                    mwAnimObjDataThr1 = mwBlockTab15;
+                    mwAnimDataXThr1 = mwBlock15ObjAnimationScaleX;
+                    mwAnimDataYThr1 = mwBlock15ObjAnimationScaleY;
+                    mwAnimFloats1Thr1 = 1.1f;
+                    mwAnimFloats2Thr1 = 0.9f;
+                    mwAnimFloats3Thr1 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr2){
+                    mwAnimObjDataThr2 = mwBlockTab15;
+                    mwAnimDataXThr2 = mwBlock15ObjAnimationScaleX;
+                    mwAnimDataYThr2 = mwBlock15ObjAnimationScaleY;
+                    mwAnimFloats1Thr2 = 1.1f;
+                    mwAnimFloats2Thr2 = 0.9f;
+                    mwAnimFloats3Thr2 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr3){
+                    mwAnimObjDataThr3 = mwBlockTab15;
+                    mwAnimDataXThr3 = mwBlock15ObjAnimationScaleX;
+                    mwAnimDataYThr3 = mwBlock15ObjAnimationScaleY;
+                    mwAnimFloats1Thr3 = 1.1f;
+                    mwAnimFloats2Thr3 = 0.9f;
+                    mwAnimFloats3Thr3 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                      }
+                    }
+                  }
        }
     });
         mwBlockTab16.setOnClickListener(new View.OnClickListener() { 
                 @Override
                 public void onClick(View view) {
-                    if (mwAnimRule){
-                    mwAnimObjData = mwBlockTab16;
-                    mwAnimImageData = mwBlockTab16;
-                    mwAnimDataX = mwBlock16ObjAnimationScaleX;
-                    mwAnimDataY = mwBlock16ObjAnimationScaleY;
-                    MwClickXY();
-                    MwClickCircles();
-                   }
+                    if (mwAnimRuleThr1){
+                    mwAnimObjDataThr1 = mwBlockTab16;
+                    mwAnimDataXThr1 = mwBlock16ObjAnimationScaleX;
+                    mwAnimDataYThr1 = mwBlock16ObjAnimationScaleY;
+                    mwAnimFloats1Thr1 = 1.1f;
+                    mwAnimFloats2Thr1 = 0.9f;
+                    mwAnimFloats3Thr1 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr2){
+                    mwAnimObjDataThr2 = mwBlockTab16;
+                    mwAnimDataXThr2 = mwBlock16ObjAnimationScaleX;
+                    mwAnimDataYThr2 = mwBlock16ObjAnimationScaleY;
+                    mwAnimFloats1Thr2 = 1.1f;
+                    mwAnimFloats2Thr2 = 0.9f;
+                    mwAnimFloats3Thr2 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr3){
+                    mwAnimObjDataThr3 = mwBlockTab16;
+                    mwAnimDataXThr3 = mwBlock16ObjAnimationScaleX;
+                    mwAnimDataYThr3 = mwBlock16ObjAnimationScaleY;
+                    mwAnimFloats1Thr3 = 1.1f;
+                    mwAnimFloats2Thr3 = 0.9f;
+                    mwAnimFloats3Thr3 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                      }
+                    }
+                  }
        }
     });
         mwBlockTab17.setOnClickListener(new View.OnClickListener() { 
                 @Override
                 public void onClick(View view) {
-                    if (mwAnimRule){
-                    mwAnimObjData = mwBlockTab17;
-                    mwAnimImageData = mwBlockTab17;
-                    mwAnimDataX = mwBlock17ObjAnimationScaleX;
-                    mwAnimDataY = mwBlock17ObjAnimationScaleY;
-                    MwClickXY();
-                    MwClickCircles();
-                   }
+                    if (mwAnimRuleThr1){
+                    mwAnimObjDataThr1 = mwBlockTab17;
+                    mwAnimDataXThr1 = mwBlock17ObjAnimationScaleX;
+                    mwAnimDataYThr1 = mwBlock17ObjAnimationScaleY;
+                    mwAnimFloats1Thr1 = 1.1f;
+                    mwAnimFloats2Thr1 = 0.9f;
+                    mwAnimFloats3Thr1 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr2){
+                    mwAnimObjDataThr2 = mwBlockTab17;
+                    mwAnimDataXThr2 = mwBlock17ObjAnimationScaleX;
+                    mwAnimDataYThr2 = mwBlock17ObjAnimationScaleY;
+                    mwAnimFloats1Thr2 = 1.1f;
+                    mwAnimFloats2Thr2 = 0.9f;
+                    mwAnimFloats3Thr2 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr3){
+                    mwAnimObjDataThr3 = mwBlockTab17;
+                    mwAnimDataXThr3 = mwBlock17ObjAnimationScaleX;
+                    mwAnimDataYThr3 = mwBlock17ObjAnimationScaleY;
+                    mwAnimFloats1Thr3 = 1.1f;
+                    mwAnimFloats2Thr3 = 0.9f;
+                    mwAnimFloats3Thr3 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                      }
+                    }
+                  }
        }
     });
-        mwBlockTab18.setOnClickListener(new View.OnClickListener() { 
-                @Override
-                public void onClick(View view) {
-                    if (mwAnimRule){
-                    mwAnimObjData = mwBlockTab18;
-                    mwAnimImageData = mwBlockTab18;
-                    mwAnimDataX = mwBlock18ObjAnimationScaleX;
-                    mwAnimDataY = mwBlock18ObjAnimationScaleY;
-                    MwClickXY();
-                    MwClickCircles();
-                   }
-       }
-    });
+        mwBlockTab18.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (mwAnimRuleThr1) {
+                            mwAnimObjDataThr1 = mwBlockTab18;
+                            mwAnimDataXThr1 = mwBlock18ObjAnimationScaleX;
+                            mwAnimDataYThr1 = mwBlock18ObjAnimationScaleY;
+                            mwAnimFloats1Thr1 = 1.1f;
+                            mwAnimFloats2Thr1 = 0.9f;
+                            mwAnimFloats3Thr1 = 1.0f;
+                            MwConsortium mwConsortium = new MwConsortium();
+                            mwConsortium.mwClick();
+                        } else {
+                            if (mwAnimRuleThr2) {
+                                mwAnimObjDataThr2 = mwBlockTab18;
+                                mwAnimDataXThr2 = mwBlock18ObjAnimationScaleX;
+                                mwAnimDataYThr2 = mwBlock18ObjAnimationScaleY;
+                                mwAnimFloats1Thr2 = 1.1f;
+                                mwAnimFloats2Thr2 = 0.9f;
+                                mwAnimFloats3Thr2 = 1.0f;
+                                MwConsortium mwConsortium = new MwConsortium();
+                                mwConsortium.mwClick();
+                            } else {
+                                if (mwAnimRuleThr3) {
+                                    mwAnimObjDataThr3 = mwBlockTab18;
+                                    mwAnimDataXThr3 = mwBlock18ObjAnimationScaleX;
+                                    mwAnimDataYThr3 = mwBlock18ObjAnimationScaleY;
+                                    mwAnimFloats1Thr3 = 1.1f;
+                                    mwAnimFloats2Thr3 = 0.9f;
+                                    mwAnimFloats3Thr3 = 1.0f;
+                                    MwConsortium mwConsortium = new MwConsortium();
+                                    mwConsortium.mwClick();
+                                }
+                            }
+                        }
+                    }
+                });
        mwBlockTab19.setOnClickListener(new View.OnClickListener() { 
                 @Override
                 public void onClick(View view) {
-                    if (mwAnimRule){
-                    mwAnimObjData = mwBlockTab19;
-                    mwAnimImageData = mwBlockTab19;
-                    mwAnimDataX = mwBlock19ObjAnimationScaleX;
-                    mwAnimDataY = mwBlock19ObjAnimationScaleY;
-                    MwClickXY();
-                    MwClickCircles();
-                   }
+                    if (mwAnimRuleThr1){
+                    mwAnimObjDataThr1 = mwBlockTab19;
+                    mwAnimDataXThr1 = mwBlock19ObjAnimationScaleX;
+                    mwAnimDataYThr1 = mwBlock19ObjAnimationScaleY;
+                    mwAnimFloats1Thr1 = 1.1f;
+                    mwAnimFloats2Thr1 = 0.9f;
+                    mwAnimFloats3Thr1 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr2){
+                    mwAnimObjDataThr2 = mwBlockTab19;
+                    mwAnimDataXThr2 = mwBlock19ObjAnimationScaleX;
+                    mwAnimDataYThr2 = mwBlock19ObjAnimationScaleY;
+                    mwAnimFloats1Thr2 = 1.1f;
+                    mwAnimFloats2Thr2 = 0.9f;
+                    mwAnimFloats3Thr2 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr3){
+                    mwAnimObjDataThr3 = mwBlockTab19;
+                    mwAnimDataXThr3 = mwBlock19ObjAnimationScaleX;
+                    mwAnimDataYThr3 = mwBlock19ObjAnimationScaleY;
+                    mwAnimFloats1Thr3 = 1.1f;
+                    mwAnimFloats2Thr3 = 0.9f;
+                    mwAnimFloats3Thr3 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                      }
+                    }
+                  }
        }
     });
        mwBlockTab20.setOnClickListener(new View.OnClickListener() { 
                 @Override
                 public void onClick(View view) {
-                    if (mwAnimRule){
-                    mwAnimObjData = mwBlockTab20;
-                    mwAnimImageData = mwBlockTab20;
-                    mwAnimDataX = mwBlock20ObjAnimationScaleX;
-                    mwAnimDataY = mwBlock20ObjAnimationScaleY;
-                    MwClickXY();
-                    MwClickCircles();
-                   }
+                    if (mwAnimRuleThr1){
+                    mwAnimObjDataThr1 = mwBlockTab20;
+                    mwAnimDataXThr1 = mwBlock20ObjAnimationScaleX;
+                    mwAnimDataYThr1 = mwBlock20ObjAnimationScaleY;
+                    mwAnimFloats1Thr1 = 1.1f;
+                    mwAnimFloats2Thr1 = 0.9f;
+                    mwAnimFloats3Thr1 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr2){
+                    mwAnimObjDataThr2 = mwBlockTab20;
+                    mwAnimDataXThr2 = mwBlock20ObjAnimationScaleX;
+                    mwAnimDataYThr2 = mwBlock20ObjAnimationScaleY;
+                    mwAnimFloats1Thr2 = 1.1f;
+                    mwAnimFloats2Thr2 = 0.9f;
+                    mwAnimFloats3Thr2 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr3){
+                    mwAnimObjDataThr3 = mwBlockTab20;
+                    mwAnimDataXThr3 = mwBlock20ObjAnimationScaleX;
+                    mwAnimDataYThr3 = mwBlock20ObjAnimationScaleY;
+                    mwAnimFloats1Thr3 = 1.1f;
+                    mwAnimFloats2Thr3 = 0.9f;
+                    mwAnimFloats3Thr3 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                      }
+                    }
+                  }
        }
     });
        mwItemTab1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                   if(mwAnimRule) {
-                mwItemTab2.setBackgroundResource(R.drawable.mw_anybox_layout);
+                    mwItemTab2.setBackgroundResource(R.drawable.mw_anybox_layout);
                 mwItemTab1.setBackgroundResource(R.drawable.mw_selectedbox_layout);
                 mwItemTab3.setBackgroundResource(R.drawable.mw_anybox_layout);
-                mwAnimObjData = mwItemTab1;
                 mwItemSelected = "1";       
-                MwClickXY();
-              }
+                   if (mwAnimRuleThr1){
+                    mwAnimObjDataThr1 = mwItemTab1;
+                    mwAnimDataXThr1 = mwItemTab1AnimationScaleX;
+                    mwAnimDataYThr1 = mwItemTab1AnimationScaleY;
+                    mwAnimFloats1Thr1 = 1.1f;
+                    mwAnimFloats2Thr1 = 0.9f;
+                    mwAnimFloats3Thr1 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr2){
+                    mwAnimObjDataThr2 = mwItemTab1;
+                    mwAnimDataXThr2 = mwItemTab1AnimationScaleX;
+                    mwAnimDataYThr2 = mwItemTab1AnimationScaleY;
+                    mwAnimFloats1Thr2 = 1.1f;
+                    mwAnimFloats2Thr2 = 0.9f;
+                    mwAnimFloats3Thr2 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr3){
+                    mwAnimObjDataThr3 = mwItemTab1;
+                    mwAnimDataXThr3 = mwItemTab1AnimationScaleX;
+                    mwAnimDataYThr3 = mwItemTab1AnimationScaleY;
+                    mwAnimFloats1Thr3 = 1.1f;
+                    mwAnimFloats2Thr3 = 0.9f;
+                    mwAnimFloats3Thr3 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                      }
+                    }
+                  }
         }
      });
         mwItemTab2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(mwAnimRule){
-                mwItemTab1.setBackgroundResource(R.drawable.mw_anybox_layout);
-                mwItemTab2.setBackgroundResource(R.drawable.mw_selectedbox_layout);
-                mwItemTab3.setBackgroundResource(R.drawable.mw_anybox_layout);
-                mwAnimObjData = mwItemTab2;
-                mwItemSelected = "2";
-                MwClickXY();
-               }
+                  mwItemTab1.setBackgroundResource(R.drawable.mw_anybox_layout);
+                  mwItemTab2.setBackgroundResource(R.drawable.mw_selectedbox_layout);
+                  mwItemTab3.setBackgroundResource(R.drawable.mw_anybox_layout);
+                  mwItemSelected = "2";
+                    if (mwAnimRuleThr1){
+                    mwAnimObjDataThr1 = mwItemTab2;
+                    mwAnimDataXThr1 = mwItemTab2AnimationScaleX;
+                    mwAnimDataYThr1 = mwItemTab2AnimationScaleY;
+                    mwAnimFloats1Thr1 = 1.1f;
+                    mwAnimFloats2Thr1 = 0.9f;
+                    mwAnimFloats3Thr1 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr2){
+                    mwAnimObjDataThr2 = mwItemTab2;
+                    mwAnimDataXThr2 = mwItemTab2AnimationScaleX;
+                    mwAnimDataYThr2 = mwItemTab2AnimationScaleY;
+                    mwAnimFloats1Thr2 = 1.1f;
+                    mwAnimFloats2Thr2 = 0.9f;
+                    mwAnimFloats3Thr2 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr3){
+                    mwAnimObjDataThr3 = mwItemTab2;
+                    mwAnimDataXThr3 = mwItemTab2AnimationScaleX;
+                    mwAnimDataYThr3 = mwItemTab2AnimationScaleY;
+                    mwAnimFloats1Thr3 = 1.1f;
+                    mwAnimFloats2Thr3 = 0.9f;
+                    mwAnimFloats3Thr3 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                      }
+                    }
+                  }
         }
      });
        mwItemTab3.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(mwAnimRule){
-                mwItemTab1.setBackgroundResource(R.drawable.mw_anybox_layout);
-                mwItemTab3.setBackgroundResource(R.drawable.mw_selectedbox_layout);
-                mwItemTab2.setBackgroundResource(R.drawable.mw_anybox_layout);
-                mwAnimObjData = mwItemTab3;
-                mwItemSelected = "3";      
-                MwClickXY();
-               }
+                    mwItemTab1.setBackgroundResource(R.drawable.mw_anybox_layout);
+                    mwItemTab3.setBackgroundResource(R.drawable.mw_selectedbox_layout);
+                    mwItemTab2.setBackgroundResource(R.drawable.mw_anybox_layout);
+                    mwItemSelected = "3";      
+                    if (mwAnimRuleThr1){
+                    mwAnimObjDataThr1 = mwItemTab3;
+                    mwAnimDataXThr1 = mwItemTab3AnimationScaleX;
+                    mwAnimDataYThr1 = mwItemTab3AnimationScaleY;
+                    mwAnimFloats1Thr1 = 1.1f;
+                    mwAnimFloats2Thr1 = 0.9f;
+                    mwAnimFloats3Thr1 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr2){
+                    mwAnimObjDataThr2 = mwItemTab3;
+                    mwAnimDataXThr2 = mwItemTab3AnimationScaleX;
+                    mwAnimDataYThr2 = mwItemTab3AnimationScaleY;
+                    mwAnimFloats1Thr2 = 1.1f;
+                    mwAnimFloats2Thr2 = 0.9f;
+                    mwAnimFloats3Thr2 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr3){
+                    mwAnimObjDataThr3 = mwItemTab3;
+                    mwAnimDataXThr3 = mwItemTab3AnimationScaleX;
+                    mwAnimDataYThr3 = mwItemTab3AnimationScaleY;
+                    mwAnimFloats1Thr3 = 1.1f;
+                    mwAnimFloats2Thr3 = 0.9f;
+                    mwAnimFloats3Thr3 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                      }
+                    }
+                  }
         }
      });
-   }
-    
-   public void MwClickXY(){
-        // Animations ScaleX, ScaleY
-            mwAnimRule = false;
-        mwTimerTask = new TimerTask(){
-      public void run(){
-       runOnUiThread(new Runnable(){
-         @Override
-         public void run(){
-          mwAnimDataX.setTarget(mwAnimObjData);
-          mwAnimDataX.setPropertyName("scaleX");
-          mwAnimDataX.setFloatValues(1.1f);
-          mwAnimDataX.setDuration(100);
-          mwAnimDataX.start();
-          mwAnimDataY.setTarget(mwAnimObjData);
-          mwAnimDataY.setPropertyName("scaleY");
-          mwAnimDataY.setFloatValues(1.1f);
-          mwAnimDataY.setDuration(100);
-          mwAnimDataY.start();
-          mwTimerTask = new TimerTask(){
-           public void run(){
-            runOnUiThread(new Runnable(){
-              @Override
-              public void run(){
-               mwAnimDataX.setTarget(mwAnimObjData);
-               mwAnimDataX.setPropertyName("scaleX");
-               mwAnimDataX.setFloatValues(0.9f);
-               mwAnimDataX.setDuration(200);
-               mwAnimDataX.start();
-               mwAnimDataY.setTarget(mwAnimObjData);
-               mwAnimDataY.setPropertyName("scaleY");
-               mwAnimDataY.setFloatValues(0.9f);
-               mwAnimDataY.setDuration(200);
-               mwAnimDataY.start();
-               mwTimerTask = new TimerTask(){
-                public void run(){
-                 runOnUiThread(new Runnable(){
-                   @Override
-                   public void run(){
-                    mwAnimDataX.setTarget(mwAnimObjData);
-                    mwAnimDataX.setPropertyName("scaleX");
-                    mwAnimDataX.setFloatValues(1.0f);
-                    mwAnimDataX.setDuration(250);
-                    mwAnimDataX.start();
-                    mwAnimDataY.setTarget(mwAnimObjData);
-                    mwAnimDataY.setPropertyName("scaleY");
-                    mwAnimDataY.setFloatValues(1.0f);
-                    mwAnimDataY.setDuration(250);
-                    mwAnimDataY.start();
-                    mwTimerTask = new TimerTask(){
-                    public void run(){
-                    runOnUiThread(new Runnable(){
-                    @Override
-                    public void run(){
-                    mwAnimRule = true;
-                   }
-                  });
-                }
-               };
-               _mwTimerTask.schedule(mwTimerTask, 250);                                                
-                   }
-                  });
-                }
-               };
-               _mwTimerTask.schedule(mwTimerTask, 200);
-              }
-             });
-           }
-          };
-          _mwTimerTask.schedule(mwTimerTask, 100);
-         }
-        });
-      }
-     };
-     _mwTimerTask.schedule(mwTimerTask, 0);
-   };
-    public void MwClickCircles(){
-      // Animations img
-      mwTimerTask = new TimerTask(){
-      public void run(){
-       runOnUiThread(new Runnable(){
-         @Override
-         public void run(){
-          mwAnimImageData.setImageDrawable(getDrawable(R.drawable.magicworld_animation_click_1));
-          mwTimerTask = new TimerTask(){
-           public void run(){
-            runOnUiThread(new Runnable(){
-              public void run(){
-               mwAnimImageData.setImageDrawable(getDrawable(R.drawable.magicworld_animation_click_2));
-               mwTimerTask = new TimerTask(){
-                public void run(){
-                 runOnUiThread(new Runnable(){
-                   public void run(){
-                    mwAnimImageData.setImageDrawable(getDrawable(R.drawable.magicworld_animation_click_3));
-                    mwTimerTask = new TimerTask(){
-                     public void run(){
-                      runOnUiThread(new Runnable(){
-                        public void run(){
-                         mwAnimImageData.setImageDrawable(getDrawable(R.drawable.magicworld_animation_click_4));
-                         mwTimerTask = new TimerTask(){
-                          public void run(){
-                           runOnUiThread(new Runnable(){
-                             public void run(){
-                              mwAnimImageData.setImageDrawable(getDrawable(R.drawable.magicworld_animation_click_5));
-                              mwTimerTask = new TimerTask(){
-                               public void run(){
-                                runOnUiThread(new Runnable(){
-                                  public void run(){
-                                   mwAnimImageData.setImageDrawable(getDrawable(R.drawable.magicworld_animation_click_4));
-                                   mwTimerTask = new TimerTask(){
-                                    public void run(){
-                                     runOnUiThread(new Runnable(){
-                                       public void run(){
-                                        mwAnimImageData.setImageDrawable(getDrawable(R.drawable.magicworld_animation_click_3));
-                                        mwTimerTask = new TimerTask(){
-                                         public void run(){
-                                          runOnUiThread(new Runnable(){
-                                            public void run(){
-                                             mwAnimImageData.setImageDrawable(getDrawable(R.drawable.magicworld_animation_click_2));
-                                             mwTimerTask = new TimerTask(){
-                                              public void run(){
-                                               runOnUiThread(new Runnable(){
-                                                 public void run(){
-                                                  mwAnimImageData.setImageDrawable(getDrawable(R.drawable.magicworld_animation_click_1));
-                                                  mwTimerTask = new TimerTask(){
-                                                   public void run(){
-                                                    runOnUiThread(new Runnable(){
-                                                      public void run(){
-                                                       mwAnimImageData.setImageDrawable(getDrawable(R.drawable.magicworld_block_grass));
-                                                      }
-                                                     });
-                                                   }
-                                                  };
-                                                  _mwTimerTask.schedule(mwTimerTask, 30);
-                                                 }
-                                                });
-                                              }
-                                             };
-                                             _mwTimerTask.schedule(mwTimerTask, 30);
-                                            }
-                                           });
-                                         }
-                                        };
-                                        _mwTimerTask.schedule(mwTimerTask, 30);
-                                       }
-                                      });
-                                    }
-                                   };
-                                   _mwTimerTask.schedule(mwTimerTask, 30);
-                                  }
-                                 });
-                               }
-                              };
-                              _mwTimerTask.schedule(mwTimerTask, 30);
-                             }
-                            });
-                          }
-                         };
-                         _mwTimerTask.schedule(mwTimerTask, 30);
-                        }
-                       });
-                     }
-                    };
-                    _mwTimerTask.schedule(mwTimerTask, 30);
-                   }
-                  });
-                }
-               };
-               _mwTimerTask.schedule(mwTimerTask, 30);
-              }
-             });
-           }
-          };
-          _mwTimerTask.schedule(mwTimerTask, 30);
-         }
-        });
-      }
-     };
-     _mwTimerTask.schedule(mwTimerTask, 30);
    }
 }

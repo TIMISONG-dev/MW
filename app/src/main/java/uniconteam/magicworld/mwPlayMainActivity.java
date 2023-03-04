@@ -9,35 +9,62 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.Timer;
 import java.util.TimerTask;
 import com.itsaky.androidide.logsender.LogSender;
 import uniconteam.magicworld.MwBattleFieldActivity;
+import uniconteam.magicworld.MwConsortium;
+import uniconteam.magicworld.MwPlayHomeActivity;
+import uniconteam.magicworld.MwPlayMainActivity;
 
 public class MwPlayMainActivity extends AppCompatActivity {
     // All objects
-    private ImageView mwLogoImg; // Image logo magic world
-	private Button mwPlayButton; // Play button
-	private Button mwBattleFieldButton; // Battlefield button
-	private ObjectAnimator mwLogoObjAnimationScaleX = new ObjectAnimator(); // Logo animation ScaleX, ScaleY
-	private ObjectAnimator mwLogoObjAnimationScaleY = new ObjectAnimator();
-	private ObjectAnimator mwPlayButtonObjAnimationScaleX = new ObjectAnimator(); // Play button animation ScaleX, ScaleY
-	private ObjectAnimator mwPlayButtonObjAnimationScaleY = new ObjectAnimator();
-    private ObjectAnimator mwBattleFieldButtonObjAnimationScaleX = new ObjectAnimator(); // Battlefield button animation ScaleX, ScaleY
-    private ObjectAnimator mwBattleFieldButtonObjAnimationScaleY = new ObjectAnimator();
-	private TimerTask mwTimerTask;
-	private Timer _mwTimerTask  = new Timer();
-	private Intent mwIntent = new Intent(); // Intent for launching new activity
+    public ImageView mwLogoImg; // Image logo magic world
+	public Button mwPlayButton; // Play button
+	public Button mwBattleFieldButton; // Battlefield button
+	public static ObjectAnimator mwLogoObjAnimationScaleX = new ObjectAnimator(); // Logo animation ScaleX, ScaleY
+	public static ObjectAnimator mwLogoObjAnimationScaleY = new ObjectAnimator();
+	public static ObjectAnimator mwPlayButtonObjAnimationScaleX = new ObjectAnimator(); // Play button animation ScaleX, ScaleY
+	public static ObjectAnimator mwPlayButtonObjAnimationScaleY = new ObjectAnimator();
+    public static ObjectAnimator mwBattleFieldButtonObjAnimationScaleX = new ObjectAnimator(); // Battlefield button animation ScaleX, ScaleY
+    public static ObjectAnimator mwBattleFieldButtonObjAnimationScaleY = new ObjectAnimator();
+    private Intent mwIntent = new Intent(); // Intent for launching new activity
+    public static TimerTask mwTimerTask;
+	public static Timer _mwTimerTask  = new Timer();
     
-    public View mwAnimObjData; // View for mwClick
-    public float mwAnimFloats1; // Floats for mwClick 1-3 \/
-    public float mwAnimFloats2;
-    public float mwAnimFloats3;
-    public ObjectAnimator mwAnimDataX = new ObjectAnimator(); // Animator for mwClick ScaleX, ScaleY
-    public ObjectAnimator mwAnimDataY = new ObjectAnimator();
-    public Boolean mwAnimRule; // Bool for allowing or denying mwClick
-	
+	public static TimerTask mwTimerTaskThr1;
+	public static Timer _mwTimerTaskThr1  = new Timer();
+    public static View mwAnimObjDataThr1; // View for mwClick
+    public static float mwAnimFloats1Thr1; // Floats for mwClick 1-3 \/
+    public static float mwAnimFloats2Thr1;
+    public static float mwAnimFloats3Thr1;
+    public static ObjectAnimator mwAnimDataXThr1 = new ObjectAnimator(); // Animator for mwClick ScaleX, ScaleY
+    public static ObjectAnimator mwAnimDataYThr1 = new ObjectAnimator();
+    public static Boolean mwAnimRuleThr1 = true; // Bool for allowing or denying mwClick
+    
+    public static TimerTask mwTimerTaskThr2;
+	public static Timer _mwTimerTaskThr2  = new Timer();
+    public static View mwAnimObjDataThr2; // View for mwClick
+    public static float mwAnimFloats1Thr2; // Floats for mwClick 1-3 \/
+    public static float mwAnimFloats2Thr2;
+    public static float mwAnimFloats3Thr2;
+    public static ObjectAnimator mwAnimDataXThr2 = new ObjectAnimator(); // Animator for mwClick ScaleX, ScaleY
+    public static ObjectAnimator mwAnimDataYThr2 = new ObjectAnimator();
+    public static Boolean mwAnimRuleThr2 = true; // Bool for allowing or denying mwClick
+    
+    public static TimerTask mwTimerTaskThr3;
+	public static Timer _mwTimerTaskThr3  = new Timer();
+    public static View mwAnimObjDataThr3; // View for mwClick
+    public static float mwAnimFloats1Thr3; // Floats for mwClick 1-3 \/
+    public static float mwAnimFloats2Thr3;
+    public static float mwAnimFloats3Thr3;
+    public static ObjectAnimator mwAnimDataXThr3 = new ObjectAnimator(); // Animator for mwClick ScaleX, ScaleY
+    public static ObjectAnimator mwAnimDataYThr3 = new ObjectAnimator();
+    public static Boolean mwAnimRuleThr3 = true; // Bool for allowing or denying mwClick
+    public static String mwActivity = "mwMain";
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         LogSender.startLogging(this);
@@ -45,18 +72,17 @@ public class MwPlayMainActivity extends AppCompatActivity {
         setContentView(R.layout.mwplaymain);
 		initialize(savedInstanceState);
 		initializeLogic();
+        
     }
 	private void initialize(Bundle savedInstanceState) {
         // Design, detect objects id, set Logo image ScaleX, ScaleY
 		if (Build.VERSION.SDK_INT >= 21) { getWindow().setNavigationBarColor(Color.parseColor("#5C8368"));}
-        mwAnimRule = true;
-        if (mwAnimRule){
 		mwLogoImg = findViewById(R.id.mwLogoImg);
 		mwPlayButton = findViewById(R.id.mwPlayButton);
 		mwBattleFieldButton = findViewById(R.id.mwBattleFieldButton);
 		mwLogoImg.setScaleX((float)(5.0d));
 		mwLogoImg.setScaleY((float)(5.0d));
-       }
+       
 	}
 	private void initializeLogic(){
         // Onclick functions
@@ -66,14 +92,37 @@ public class MwPlayMainActivity extends AppCompatActivity {
                             runOnUiThread(new Runnable(){
                                 @Override
                                 public void run(){
-                            if (mwAnimRule){
-                                mwAnimObjData = mwLogoImg;
-                                mwAnimFloats1 = 0.9f;
-                                mwAnimFloats2 = 1.1f;
-                                mwAnimFloats3 = 1.0f;
-                                mwAnimDataX = mwLogoObjAnimationScaleX;
-                                mwAnimDataY = mwLogoObjAnimationScaleY;
-                                mwClick();
+                                if(mwAnimRuleThr1){
+                                mwAnimObjDataThr1 = mwLogoImg;
+                                mwAnimFloats1Thr1 = 0.9f;
+                                mwAnimFloats2Thr1 = 1.1f;
+                                mwAnimFloats3Thr1 = 1.0f;
+                                mwAnimDataXThr1 = mwLogoObjAnimationScaleX;
+                                mwAnimDataYThr1 = mwLogoObjAnimationScaleY;
+                                MwConsortium mwConsortium = new MwConsortium();
+                                mwConsortium.mwClick();
+                                } else {
+                                     if(mwAnimRuleThr2){
+                                mwAnimObjDataThr2 = mwLogoImg;
+                                mwAnimFloats1Thr2 = 0.9f;
+                                mwAnimFloats2Thr2 = 1.1f;
+                                mwAnimFloats3Thr2 = 1.0f;
+                                mwAnimDataXThr2 = mwLogoObjAnimationScaleX;
+                                mwAnimDataYThr2 = mwLogoObjAnimationScaleY;
+                                MwConsortium mwConsortium = new MwConsortium();
+                                mwConsortium.mwClick();
+                                } else {
+                                     if(mwAnimRuleThr3){
+                                mwAnimObjDataThr3 = mwLogoImg;
+                                mwAnimFloats1Thr3 = 0.9f;
+                                mwAnimFloats2Thr3 = 1.1f;
+                                mwAnimFloats3Thr3 = 1.0f;
+                                mwAnimDataXThr3 = mwLogoObjAnimationScaleX;
+                                mwAnimDataYThr3 = mwLogoObjAnimationScaleY;
+                                MwConsortium mwConsortium = new MwConsortium();
+                                mwConsortium.mwClick();
+                                    }
+                                  }
                                 }
                             }
                          });
@@ -84,14 +133,15 @@ public class MwPlayMainActivity extends AppCompatActivity {
 		mwPlayButton.setOnClickListener(new View.OnClickListener(){
 				@Override
 				public void onClick(View view){
-                    if (mwAnimRule){
-                   mwAnimObjData = mwPlayButton;
-                   mwAnimDataX = mwPlayButtonObjAnimationScaleX;
-                   mwAnimDataY = mwPlayButtonObjAnimationScaleY;
-                   mwAnimFloats1 = 1.1f;
-                   mwAnimFloats2 = 0.9f;
-                   mwAnimFloats3 = 1.0f; 
-                    mwClick();
+                   if(mwAnimRuleThr1){
+                   mwAnimObjDataThr1 = mwPlayButton;
+                   mwAnimDataXThr1 = mwPlayButtonObjAnimationScaleX;
+                   mwAnimDataYThr1 = mwPlayButtonObjAnimationScaleY;
+                   mwAnimFloats1Thr1 = 1.1f;
+                   mwAnimFloats2Thr1 = 0.9f;
+                   mwAnimFloats3Thr1 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
                     mwTimerTask = new TimerTask(){
                         @Override
             public void run(){
@@ -100,25 +150,77 @@ public class MwPlayMainActivity extends AppCompatActivity {
                                 public void run(){
                                 mwIntent.setClass(getApplicationContext(), MwPlayHomeActivity.class);
 								startActivity(mwIntent);
+                                mwActivity = "mwHome";           
                             }
                          });
                        }
                     };
                     _mwTimerTask.schedule(mwTimerTask, 250);
+                        } else {
+                            if(mwAnimRuleThr2){
+                   mwAnimObjDataThr2 = mwPlayButton;
+                   mwAnimDataXThr2 = mwPlayButtonObjAnimationScaleX;
+                   mwAnimDataYThr2 = mwPlayButtonObjAnimationScaleY;
+                   mwAnimFloats1Thr2 = 1.1f;
+                   mwAnimFloats2Thr2 = 0.9f;
+                   mwAnimFloats3Thr2 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                    mwTimerTask = new TimerTask(){
+                        @Override
+            public void run(){
+                            runOnUiThread(new Runnable(){
+                                @Override
+                                public void run(){
+                                mwIntent.setClass(getApplicationContext(), MwPlayHomeActivity.class);
+								startActivity(mwIntent);
+                                mwActivity = "mwHome";                
+                            }
+                         });
+                       }
+                    };
+                    _mwTimerTask.schedule(mwTimerTask, 250);
+                        } else {
+                            if(mwAnimRuleThr3){
+                   mwAnimObjDataThr3 = mwPlayButton;
+                   mwAnimDataXThr3 = mwPlayButtonObjAnimationScaleX;
+                   mwAnimDataYThr3 = mwPlayButtonObjAnimationScaleY;
+                   mwAnimFloats1Thr3 = 1.1f;
+                   mwAnimFloats2Thr3 = 0.9f;
+                   mwAnimFloats3Thr3 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                    mwTimerTask = new TimerTask(){
+                        @Override
+            public void run(){
+                            runOnUiThread(new Runnable(){
+                                @Override
+                                public void run(){
+                                mwIntent.setClass(getApplicationContext(), MwPlayHomeActivity.class);
+								startActivity(mwIntent);
+                                mwActivity = "mwHome";                   
+                            }
+                         });
+                       }
+                    };
+                    _mwTimerTask.schedule(mwTimerTask, 250);
+                             }
+                           }
                         }
-			    }
+                    }
 			});
 			mwBattleFieldButton.setOnClickListener(new View.OnClickListener(){
 				@Override
 				public void onClick(View view){
-                    if (mwAnimRule){
-				   mwAnimObjData = mwBattleFieldButton;
-                   mwAnimDataX = mwBattleFieldButtonObjAnimationScaleX;
-                   mwAnimDataY = mwBattleFieldButtonObjAnimationScaleY;
-                   mwAnimFloats1 = 1.1f;
-                   mwAnimFloats2 = 0.9f;
-                   mwAnimFloats3 = 1.0f; 
-                    mwClick();
+                   if(mwAnimRuleThr1){
+				   mwAnimObjDataThr1 = mwBattleFieldButton;
+                   mwAnimDataXThr1 = mwBattleFieldButtonObjAnimationScaleX;
+                   mwAnimDataYThr1 = mwBattleFieldButtonObjAnimationScaleY;
+                   mwAnimFloats1Thr1 = 1.1f;
+                   mwAnimFloats2Thr1 = 0.9f;
+                   mwAnimFloats3Thr1 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
                     mwTimerTask = new TimerTask(){
                         @Override
             public void run(){
@@ -132,76 +234,56 @@ public class MwPlayMainActivity extends AppCompatActivity {
                        }
                     };
                     _mwTimerTask.schedule(mwTimerTask, 250);
-                        }
-				}
+				} else {
+                    if(mwAnimRuleThr2){
+				   mwAnimObjDataThr2 = mwBattleFieldButton;
+                   mwAnimDataXThr2 = mwBattleFieldButtonObjAnimationScaleX;
+                   mwAnimDataYThr2 = mwBattleFieldButtonObjAnimationScaleY;
+                   mwAnimFloats1Thr2 = 1.1f;
+                   mwAnimFloats2Thr2 = 0.9f;
+                   mwAnimFloats3Thr2 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                    mwTimerTask = new TimerTask(){
+                        @Override
+            public void run(){
+                            runOnUiThread(new Runnable(){
+                                @Override
+                                public void run(){
+                                mwIntent.setClass(getApplicationContext(), MwBattleFieldActivity.class);
+								startActivity(mwIntent);
+                            }
+                         });
+                       }
+                    };
+                    _mwTimerTask.schedule(mwTimerTask, 250);
+				} else {
+                    if(mwAnimRuleThr3){
+				   mwAnimObjDataThr3 = mwBattleFieldButton;
+                   mwAnimDataXThr3 = mwBattleFieldButtonObjAnimationScaleX;
+                   mwAnimDataYThr3 = mwBattleFieldButtonObjAnimationScaleY;
+                   mwAnimFloats1Thr3 = 1.1f;
+                   mwAnimFloats2Thr3 = 0.9f;
+                   mwAnimFloats3Thr3 = 1.0f; 
+                    MwConsortium mwConsortium = new MwConsortium();
+                    mwConsortium.mwClick();
+                    mwTimerTask = new TimerTask(){
+                        @Override
+            public void run(){
+                            runOnUiThread(new Runnable(){
+                                @Override
+                                public void run(){
+                                mwIntent.setClass(getApplicationContext(), MwBattleFieldActivity.class);
+								startActivity(mwIntent);
+                            }
+                         });
+                       }
+                    };
+                    _mwTimerTask.schedule(mwTimerTask, 250);
+				     }
+                   }
+                }
+                    }
 			});
    }
-    public void mwClick(){
-        // Animation ScaleX, ScaleY
-        mwAnimRule = false;
-       mwTimerTask = new TimerTask(){
-						@Override
-						public void run(){
-							runOnUiThread(new Runnable(){
-									@Override
-									public void run(){
-										mwAnimDataX.setTarget(mwAnimObjData);
-										mwAnimDataX.setPropertyName("scaleX");
-										mwAnimDataX.setFloatValues(mwAnimFloats1);
-										mwAnimDataX.setDuration(100);
-										mwAnimDataX.start();
-										mwAnimDataY.setTarget(mwAnimObjData);
-										mwAnimDataY.setPropertyName("scaleY");
-										mwAnimDataY.setFloatValues(mwAnimFloats1);
-										mwAnimDataY.setDuration(100);
-										mwAnimDataY.start();
-										mwTimerTask = new TimerTask(){
-											@Override
-											public void run(){
-												runOnUiThread(new Runnable(){
-														@Override
-														public void run(){
-															mwAnimDataX.setTarget(mwAnimObjData);
-															mwAnimDataX.setPropertyName("scaleX");
-															mwAnimDataX.setFloatValues(mwAnimFloats2);
-															mwAnimDataX.setDuration(200);
-															mwAnimDataX.start();
-															mwAnimDataY.setTarget(mwAnimObjData);
-															mwAnimDataY.setPropertyName("scaleY");
-															mwAnimDataY.setFloatValues(mwAnimFloats2);
-															mwAnimDataY.setDuration(200);
-															mwAnimDataY.start();
-															mwTimerTask = new TimerTask(){
-																@Override
-																public void run(){
-																	runOnUiThread(new Runnable(){
-																			@Override
-																			public void run(){
-																				mwAnimDataX.setTarget(mwAnimObjData);
-																				mwAnimDataX.setPropertyName("scaleX");
-																				mwAnimDataX.setFloatValues(mwAnimFloats3);
-																				mwAnimDataX.setDuration(250);
-																				mwAnimDataX.start();
-																				mwAnimDataY.setTarget(mwAnimObjData);
-																				mwAnimDataY.setPropertyName("scaleY");
-																				mwAnimDataY.setFloatValues(mwAnimFloats3);
-																				mwAnimDataY.setDuration(250);
-																				mwAnimDataY.start();
-                                                                                mwAnimRule = true;
-																			}
-																		});
-																}
-															};
-															_mwTimerTask.schedule(mwTimerTask, 200);
-														}
-													});
-											}
-										};
-										_mwTimerTask.schedule(mwTimerTask, 100);
-									}
-								});
-						}
-					};
-					_mwTimerTask.schedule(mwTimerTask, 0);
-				}
 }
