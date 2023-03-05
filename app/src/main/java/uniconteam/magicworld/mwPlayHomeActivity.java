@@ -113,6 +113,7 @@ public class MwPlayHomeActivity extends AppCompatActivity {
     public static ObjectAnimator mwAnimDataXThr1 = new ObjectAnimator(); // Animator for mwClick ScaleX, ScaleY
     public static ObjectAnimator mwAnimDataYThr1 = new ObjectAnimator();
     public static Boolean mwAnimRuleThr1 = true; // Bool for allowing or denying mwClick
+    public static ImageView mwAnimImageDataThr1;
     
     public static TimerTask mwTimerTaskThr2;
 	public static Timer _mwTimerTaskThr2  = new Timer();
@@ -123,6 +124,7 @@ public class MwPlayHomeActivity extends AppCompatActivity {
     public static ObjectAnimator mwAnimDataXThr2 = new ObjectAnimator(); // Animator for mwClick ScaleX, ScaleY
     public static ObjectAnimator mwAnimDataYThr2 = new ObjectAnimator();
     public static Boolean mwAnimRuleThr2 = true; // Bool for allowing or denying mwClick
+    public static ImageView mwAnimImageDataThr2;
     
     public static TimerTask mwTimerTaskThr3;
 	public static Timer _mwTimerTaskThr3  = new Timer();
@@ -133,6 +135,7 @@ public class MwPlayHomeActivity extends AppCompatActivity {
     public static ObjectAnimator mwAnimDataXThr3 = new ObjectAnimator(); // Animator for mwClick ScaleX, ScaleY
     public static ObjectAnimator mwAnimDataYThr3 = new ObjectAnimator();
     public static Boolean mwAnimRuleThr3 = true; // Bool for allowing or denying mwClick
+    public static ImageView mwAnimImageDataThr3;
     
 		@Override
 		protected void onCreate(Bundle savedInstanceState) {

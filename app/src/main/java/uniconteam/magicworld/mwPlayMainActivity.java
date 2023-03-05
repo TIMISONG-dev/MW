@@ -63,7 +63,7 @@ public class MwPlayMainActivity extends AppCompatActivity {
     public static ObjectAnimator mwAnimDataXThr3 = new ObjectAnimator(); // Animator for mwClick ScaleX, ScaleY
     public static ObjectAnimator mwAnimDataYThr3 = new ObjectAnimator();
     public static Boolean mwAnimRuleThr3 = true; // Bool for allowing or denying mwClick
-    public static String mwActivity = "mwMain";
+    public static String mwActivity;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +73,16 @@ public class MwPlayMainActivity extends AppCompatActivity {
 		initialize(savedInstanceState);
 		initializeLogic();
         
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        mwActivity = "mwMain";
+    }
+    @Override
+    protected void onPause(){
+        super.onPause();
+        mwActivity = "mwHome";
     }
 	private void initialize(Bundle savedInstanceState) {
         // Design, detect objects id, set Logo image ScaleX, ScaleY
@@ -150,7 +160,6 @@ public class MwPlayMainActivity extends AppCompatActivity {
                                 public void run(){
                                 mwIntent.setClass(getApplicationContext(), MwPlayHomeActivity.class);
 								startActivity(mwIntent);
-                                mwActivity = "mwHome";           
                             }
                          });
                        }
@@ -174,7 +183,6 @@ public class MwPlayMainActivity extends AppCompatActivity {
                                 public void run(){
                                 mwIntent.setClass(getApplicationContext(), MwPlayHomeActivity.class);
 								startActivity(mwIntent);
-                                mwActivity = "mwHome";                
                             }
                          });
                        }
@@ -198,7 +206,6 @@ public class MwPlayMainActivity extends AppCompatActivity {
                                 public void run(){
                                 mwIntent.setClass(getApplicationContext(), MwPlayHomeActivity.class);
 								startActivity(mwIntent);
-                                mwActivity = "mwHome";                   
                             }
                          });
                        }
