@@ -314,7 +314,7 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimDataYThr1 = mwBlock1ObjAnimationScaleY;
                     mwAnimFloats1Thr1 = 1.1f;
                     mwAnimFloats2Thr1 = 0.9f;
-                    mwAnimFloats3Thr1 = 1.0f; 
+                    mwAnimFloats3Thr1 = 1.0f;
                     MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {

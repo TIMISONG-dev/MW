@@ -380,7 +380,7 @@ public boolean onTouchEvent(MotionEvent event)
       if (mwSlimeWay == 3){
         for (int i = 0; i < mwSlimeDur; i++){
             mwSlimeX += 10;
-            mwSlimeZ += 100;
+            mwSlimeZ += 10;
         }
         mwSlimeR();
       }  

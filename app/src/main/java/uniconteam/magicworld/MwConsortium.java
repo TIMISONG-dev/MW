@@ -295,7 +295,7 @@ public class MwConsortium extends AppCompatActivity{
         });
       }
      };
-     MwPlayHomeActivity._mwTimerTaskThr1.schedule(MwPlayHomeActivity.mwTimerTaskThr1, 10);
+     MwPlayHomeActivity._mwTimerTaskThr1.schedule(MwPlayHomeActivity.mwTimerTaskThr1, 0);
        } else {
             
         // Thread 2
@@ -364,7 +364,7 @@ public class MwConsortium extends AppCompatActivity{
         });
       }
      };
-     MwPlayHomeActivity._mwTimerTaskThr2.schedule(MwPlayHomeActivity.mwTimerTaskThr2, 10);
+     MwPlayHomeActivity._mwTimerTaskThr2.schedule(MwPlayHomeActivity.mwTimerTaskThr2, 0);
        } else {
            if(MwPlayHomeActivity.mwAnimRuleThr3){
        MwPlayHomeActivity.mwTimerTaskThr3 = new TimerTask(){
@@ -431,7 +431,7 @@ public class MwConsortium extends AppCompatActivity{
         });
       }
      };
-       MwPlayHomeActivity._mwTimerTaskThr3.schedule(MwPlayHomeActivity.mwTimerTaskThr3, 10);          
+       MwPlayHomeActivity._mwTimerTaskThr3.schedule(MwPlayHomeActivity.mwTimerTaskThr3, 0);          
                }
              }
            }
