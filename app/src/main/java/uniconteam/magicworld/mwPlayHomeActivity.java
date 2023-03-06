@@ -215,6 +215,9 @@ public class MwPlayHomeActivity extends AppCompatActivity {
         mwBlockTab19 = findViewById(R.id.mwBlockTab19);
         mwBlockTab20 = findViewById(R.id.mwBlockTab20);
         
+        MwConsortium mwConsortium = new MwConsortium();
+        MwPlayMainActivity.mwActivity = "mwHome";
+        
         // Design
 		if (Build.VERSION.SDK_INT >= 21) { getWindow().setNavigationBarColor(Color.parseColor("#FF61CBFF"));}
 		if(Build.VERSION.SDK_INT >= 21) { getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -241,7 +244,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr1 = 1.1f;
                     mwAnimFloats2Thr1 = 0.9f;
                     mwAnimFloats3Thr1 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr2){
@@ -251,7 +253,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr2 = 1.1f;
                     mwAnimFloats2Thr2 = 0.9f;
                     mwAnimFloats3Thr2 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr3){
@@ -261,7 +262,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr3 = 1.1f;
                     mwAnimFloats2Thr3 = 0.9f;
                     mwAnimFloats3Thr3 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                       }
                     }
@@ -278,7 +278,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr1 = 1.1f;
                     mwAnimFloats2Thr1 = 0.9f;
                     mwAnimFloats3Thr1 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr2){
@@ -288,7 +287,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr2 = 1.1f;
                     mwAnimFloats2Thr2 = 0.9f;
                     mwAnimFloats3Thr2 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr3){
@@ -298,7 +296,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr3 = 1.1f;
                     mwAnimFloats2Thr3 = 0.9f;
                     mwAnimFloats3Thr3 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                       }
                     }
@@ -315,7 +312,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr1 = 1.1f;
                     mwAnimFloats2Thr1 = 0.9f;
                     mwAnimFloats3Thr1 = 1.0f;
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr2){
@@ -325,7 +321,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr2 = 1.1f;
                     mwAnimFloats2Thr2 = 0.9f;
                     mwAnimFloats3Thr2 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr3){
@@ -335,7 +330,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr3 = 1.1f;
                     mwAnimFloats2Thr3 = 0.9f;
                     mwAnimFloats3Thr3 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                       }
                     }
@@ -352,7 +346,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr1 = 1.1f;
                     mwAnimFloats2Thr1 = 0.9f;
                     mwAnimFloats3Thr1 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr2){
@@ -362,7 +355,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr2 = 1.1f;
                     mwAnimFloats2Thr2 = 0.9f;
                     mwAnimFloats3Thr2 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr3){
@@ -372,7 +364,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr3 = 1.1f;
                     mwAnimFloats2Thr3 = 0.9f;
                     mwAnimFloats3Thr3 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                       }
                     }
@@ -389,7 +380,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr1 = 1.1f;
                     mwAnimFloats2Thr1 = 0.9f;
                     mwAnimFloats3Thr1 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr2){
@@ -399,7 +389,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr2 = 1.1f;
                     mwAnimFloats2Thr2 = 0.9f;
                     mwAnimFloats3Thr2 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr3){
@@ -409,7 +398,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr3 = 1.1f;
                     mwAnimFloats2Thr3 = 0.9f;
                     mwAnimFloats3Thr3 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                       }
                     }
@@ -426,7 +414,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr1 = 1.1f;
                     mwAnimFloats2Thr1 = 0.9f;
                     mwAnimFloats3Thr1 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr2){
@@ -436,7 +423,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr2 = 1.1f;
                     mwAnimFloats2Thr2 = 0.9f;
                     mwAnimFloats3Thr2 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr3){
@@ -446,7 +432,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr3 = 1.1f;
                     mwAnimFloats2Thr3 = 0.9f;
                     mwAnimFloats3Thr3 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                       }
                     }
@@ -463,7 +448,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr1 = 1.1f;
                     mwAnimFloats2Thr1 = 0.9f;
                     mwAnimFloats3Thr1 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr2){
@@ -473,7 +457,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr2 = 1.1f;
                     mwAnimFloats2Thr2 = 0.9f;
                     mwAnimFloats3Thr2 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr3){
@@ -483,7 +466,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr3 = 1.1f;
                     mwAnimFloats2Thr3 = 0.9f;
                     mwAnimFloats3Thr3 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                       }
                     }
@@ -500,7 +482,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr1 = 1.1f;
                     mwAnimFloats2Thr1 = 0.9f;
                     mwAnimFloats3Thr1 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr2){
@@ -510,7 +491,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr2 = 1.1f;
                     mwAnimFloats2Thr2 = 0.9f;
                     mwAnimFloats3Thr2 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr3){
@@ -520,7 +500,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr3 = 1.1f;
                     mwAnimFloats2Thr3 = 0.9f;
                     mwAnimFloats3Thr3 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                       }
                     }
@@ -537,7 +516,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr1 = 1.1f;
                     mwAnimFloats2Thr1 = 0.9f;
                     mwAnimFloats3Thr1 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr2){
@@ -547,7 +525,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr2 = 1.1f;
                     mwAnimFloats2Thr2 = 0.9f;
                     mwAnimFloats3Thr2 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr3){
@@ -557,7 +534,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr3 = 1.1f;
                     mwAnimFloats2Thr3 = 0.9f;
                     mwAnimFloats3Thr3 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                       }
                     }
@@ -574,7 +550,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr1 = 1.1f;
                     mwAnimFloats2Thr1 = 0.9f;
                     mwAnimFloats3Thr1 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr2){
@@ -584,7 +559,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr2 = 1.1f;
                     mwAnimFloats2Thr2 = 0.9f;
                     mwAnimFloats3Thr2 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr3){
@@ -594,7 +568,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr3 = 1.1f;
                     mwAnimFloats2Thr3 = 0.9f;
                     mwAnimFloats3Thr3 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                       }
                     }
@@ -611,7 +584,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr1 = 1.1f;
                     mwAnimFloats2Thr1 = 0.9f;
                     mwAnimFloats3Thr1 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr2){
@@ -621,7 +593,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr2 = 1.1f;
                     mwAnimFloats2Thr2 = 0.9f;
                     mwAnimFloats3Thr2 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr3){
@@ -631,7 +602,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr3 = 1.1f;
                     mwAnimFloats2Thr3 = 0.9f;
                     mwAnimFloats3Thr3 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                       }
                     }
@@ -648,7 +618,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr1 = 1.1f;
                     mwAnimFloats2Thr1 = 0.9f;
                     mwAnimFloats3Thr1 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr2){
@@ -658,7 +627,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr2 = 1.1f;
                     mwAnimFloats2Thr2 = 0.9f;
                     mwAnimFloats3Thr2 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr3){
@@ -668,7 +636,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr3 = 1.1f;
                     mwAnimFloats2Thr3 = 0.9f;
                     mwAnimFloats3Thr3 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                       }
                     }
@@ -685,7 +652,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr1 = 1.1f;
                     mwAnimFloats2Thr1 = 0.9f;
                     mwAnimFloats3Thr1 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr2){
@@ -695,7 +661,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr2 = 1.1f;
                     mwAnimFloats2Thr2 = 0.9f;
                     mwAnimFloats3Thr2 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr3){
@@ -705,7 +670,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr3 = 1.1f;
                     mwAnimFloats2Thr3 = 0.9f;
                     mwAnimFloats3Thr3 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                       }
                     }
@@ -722,7 +686,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr1 = 1.1f;
                     mwAnimFloats2Thr1 = 0.9f;
                     mwAnimFloats3Thr1 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr2){
@@ -732,7 +695,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr2 = 1.1f;
                     mwAnimFloats2Thr2 = 0.9f;
                     mwAnimFloats3Thr2 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr3){
@@ -742,7 +704,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr3 = 1.1f;
                     mwAnimFloats2Thr3 = 0.9f;
                     mwAnimFloats3Thr3 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                       }
                     }
@@ -759,7 +720,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr1 = 1.1f;
                     mwAnimFloats2Thr1 = 0.9f;
                     mwAnimFloats3Thr1 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr2){
@@ -769,7 +729,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr2 = 1.1f;
                     mwAnimFloats2Thr2 = 0.9f;
                     mwAnimFloats3Thr2 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr3){
@@ -778,8 +737,7 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimDataYThr3 = mwBlock13ObjAnimationScaleY;
                     mwAnimFloats1Thr3 = 1.1f;
                     mwAnimFloats2Thr3 = 0.9f;
-                    mwAnimFloats3Thr3 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
+                    mwAnimFloats3Thr3 = 1.0f;
                     mwConsortium.mwClick();
                       }
                     }
@@ -796,7 +754,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr1 = 1.1f;
                     mwAnimFloats2Thr1 = 0.9f;
                     mwAnimFloats3Thr1 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr2){
@@ -806,7 +763,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr2 = 1.1f;
                     mwAnimFloats2Thr2 = 0.9f;
                     mwAnimFloats3Thr2 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr3){
@@ -816,7 +772,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr3 = 1.1f;
                     mwAnimFloats2Thr3 = 0.9f;
                     mwAnimFloats3Thr3 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                       }
                     }
@@ -833,7 +788,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr1 = 1.1f;
                     mwAnimFloats2Thr1 = 0.9f;
                     mwAnimFloats3Thr1 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr2){
@@ -843,7 +797,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr2 = 1.1f;
                     mwAnimFloats2Thr2 = 0.9f;
                     mwAnimFloats3Thr2 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr3){
@@ -853,7 +806,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr3 = 1.1f;
                     mwAnimFloats2Thr3 = 0.9f;
                     mwAnimFloats3Thr3 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                       }
                     }
@@ -870,7 +822,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr1 = 1.1f;
                     mwAnimFloats2Thr1 = 0.9f;
                     mwAnimFloats3Thr1 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr2){
@@ -880,7 +831,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr2 = 1.1f;
                     mwAnimFloats2Thr2 = 0.9f;
                     mwAnimFloats3Thr2 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr3){
@@ -890,7 +840,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr3 = 1.1f;
                     mwAnimFloats2Thr3 = 0.9f;
                     mwAnimFloats3Thr3 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                       }
                     }
@@ -907,7 +856,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr1 = 1.1f;
                     mwAnimFloats2Thr1 = 0.9f;
                     mwAnimFloats3Thr1 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr2){
@@ -917,7 +865,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr2 = 1.1f;
                     mwAnimFloats2Thr2 = 0.9f;
                     mwAnimFloats3Thr2 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr3){
@@ -927,7 +874,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr3 = 1.1f;
                     mwAnimFloats2Thr3 = 0.9f;
                     mwAnimFloats3Thr3 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                       }
                     }
@@ -945,7 +891,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                             mwAnimFloats1Thr1 = 1.1f;
                             mwAnimFloats2Thr1 = 0.9f;
                             mwAnimFloats3Thr1 = 1.0f;
-                            MwConsortium mwConsortium = new MwConsortium();
                             mwConsortium.mwClick();
                         } else {
                             if (mwAnimRuleThr2) {
@@ -955,7 +900,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                                 mwAnimFloats1Thr2 = 1.1f;
                                 mwAnimFloats2Thr2 = 0.9f;
                                 mwAnimFloats3Thr2 = 1.0f;
-                                MwConsortium mwConsortium = new MwConsortium();
                                 mwConsortium.mwClick();
                             } else {
                                 if (mwAnimRuleThr3) {
@@ -965,7 +909,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                                     mwAnimFloats1Thr3 = 1.1f;
                                     mwAnimFloats2Thr3 = 0.9f;
                                     mwAnimFloats3Thr3 = 1.0f;
-                                    MwConsortium mwConsortium = new MwConsortium();
                                     mwConsortium.mwClick();
                                 }
                             }
@@ -982,7 +925,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr1 = 1.1f;
                     mwAnimFloats2Thr1 = 0.9f;
                     mwAnimFloats3Thr1 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr2){
@@ -992,7 +934,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr2 = 1.1f;
                     mwAnimFloats2Thr2 = 0.9f;
                     mwAnimFloats3Thr2 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr3){
@@ -1002,7 +943,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr3 = 1.1f;
                     mwAnimFloats2Thr3 = 0.9f;
                     mwAnimFloats3Thr3 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                       }
                     }
@@ -1019,7 +959,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr1 = 1.1f;
                     mwAnimFloats2Thr1 = 0.9f;
                     mwAnimFloats3Thr1 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr2){
@@ -1029,7 +968,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr2 = 1.1f;
                     mwAnimFloats2Thr2 = 0.9f;
                     mwAnimFloats3Thr2 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr3){
@@ -1039,7 +977,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr3 = 1.1f;
                     mwAnimFloats2Thr3 = 0.9f;
                     mwAnimFloats3Thr3 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                       }
                     }
@@ -1060,7 +997,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr1 = 1.1f;
                     mwAnimFloats2Thr1 = 0.9f;
                     mwAnimFloats3Thr1 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr2){
@@ -1070,7 +1006,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr2 = 1.1f;
                     mwAnimFloats2Thr2 = 0.9f;
                     mwAnimFloats3Thr2 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr3){
@@ -1080,7 +1015,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr3 = 1.1f;
                     mwAnimFloats2Thr3 = 0.9f;
                     mwAnimFloats3Thr3 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                       }
                     }
@@ -1101,7 +1035,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr1 = 1.1f;
                     mwAnimFloats2Thr1 = 0.9f;
                     mwAnimFloats3Thr1 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr2){
@@ -1111,7 +1044,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr2 = 1.1f;
                     mwAnimFloats2Thr2 = 0.9f;
                     mwAnimFloats3Thr2 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr3){
@@ -1121,7 +1053,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr3 = 1.1f;
                     mwAnimFloats2Thr3 = 0.9f;
                     mwAnimFloats3Thr3 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                       }
                     }
@@ -1142,7 +1073,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr1 = 1.1f;
                     mwAnimFloats2Thr1 = 0.9f;
                     mwAnimFloats3Thr1 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr2){
@@ -1152,7 +1082,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr2 = 1.1f;
                     mwAnimFloats2Thr2 = 0.9f;
                     mwAnimFloats3Thr2 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr3){
@@ -1162,11 +1091,10 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     mwAnimFloats1Thr3 = 1.1f;
                     mwAnimFloats2Thr3 = 0.9f;
                     mwAnimFloats3Thr3 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
-                      }
-                    }
                   }
+              }
+           }
         }
      });
    }

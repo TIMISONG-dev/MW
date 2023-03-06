@@ -72,17 +72,11 @@ public class MwPlayMainActivity extends AppCompatActivity {
         setContentView(R.layout.mwplaymain);
 		initialize(savedInstanceState);
 		initializeLogic();
-        
     }
     @Override
     protected void onResume(){
         super.onResume();
         mwActivity = "mwMain";
-    }
-    @Override
-    protected void onPause(){
-        super.onPause();
-        mwActivity = "mwHome";
     }
 	private void initialize(Bundle savedInstanceState) {
         // Design, detect objects id, set Logo image ScaleX, ScaleY
@@ -92,9 +86,10 @@ public class MwPlayMainActivity extends AppCompatActivity {
 		mwBattleFieldButton = findViewById(R.id.mwBattleFieldButton);
 		mwLogoImg.setScaleX((float)(5.0d));
 		mwLogoImg.setScaleY((float)(5.0d));
-       
 	}
 	private void initializeLogic(){
+        
+        MwConsortium mwConsortium = new MwConsortium();
         // Onclick functions
         mwTimerTask = new TimerTask(){
                         @Override
@@ -109,7 +104,6 @@ public class MwPlayMainActivity extends AppCompatActivity {
                                 mwAnimFloats3Thr1 = 1.0f;
                                 mwAnimDataXThr1 = mwLogoObjAnimationScaleX;
                                 mwAnimDataYThr1 = mwLogoObjAnimationScaleY;
-                                MwConsortium mwConsortium = new MwConsortium();
                                 mwConsortium.mwClick();
                                 } else {
                                      if(mwAnimRuleThr2){
@@ -119,7 +113,6 @@ public class MwPlayMainActivity extends AppCompatActivity {
                                 mwAnimFloats3Thr2 = 1.0f;
                                 mwAnimDataXThr2 = mwLogoObjAnimationScaleX;
                                 mwAnimDataYThr2 = mwLogoObjAnimationScaleY;
-                                MwConsortium mwConsortium = new MwConsortium();
                                 mwConsortium.mwClick();
                                 } else {
                                      if(mwAnimRuleThr3){
@@ -129,7 +122,6 @@ public class MwPlayMainActivity extends AppCompatActivity {
                                 mwAnimFloats3Thr3 = 1.0f;
                                 mwAnimDataXThr3 = mwLogoObjAnimationScaleX;
                                 mwAnimDataYThr3 = mwLogoObjAnimationScaleY;
-                                MwConsortium mwConsortium = new MwConsortium();
                                 mwConsortium.mwClick();
                                     }
                                   }
@@ -150,7 +142,6 @@ public class MwPlayMainActivity extends AppCompatActivity {
                    mwAnimFloats1Thr1 = 1.1f;
                    mwAnimFloats2Thr1 = 0.9f;
                    mwAnimFloats3Thr1 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                     mwTimerTask = new TimerTask(){
                         @Override
@@ -173,7 +164,6 @@ public class MwPlayMainActivity extends AppCompatActivity {
                    mwAnimFloats1Thr2 = 1.1f;
                    mwAnimFloats2Thr2 = 0.9f;
                    mwAnimFloats3Thr2 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                     mwTimerTask = new TimerTask(){
                         @Override
@@ -196,7 +186,6 @@ public class MwPlayMainActivity extends AppCompatActivity {
                    mwAnimFloats1Thr3 = 1.1f;
                    mwAnimFloats2Thr3 = 0.9f;
                    mwAnimFloats3Thr3 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                     mwTimerTask = new TimerTask(){
                         @Override
@@ -226,7 +215,6 @@ public class MwPlayMainActivity extends AppCompatActivity {
                    mwAnimFloats1Thr1 = 1.1f;
                    mwAnimFloats2Thr1 = 0.9f;
                    mwAnimFloats3Thr1 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                     mwTimerTask = new TimerTask(){
                         @Override
@@ -249,7 +237,6 @@ public class MwPlayMainActivity extends AppCompatActivity {
                    mwAnimFloats1Thr2 = 1.1f;
                    mwAnimFloats2Thr2 = 0.9f;
                    mwAnimFloats3Thr2 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                     mwTimerTask = new TimerTask(){
                         @Override
@@ -272,11 +259,10 @@ public class MwPlayMainActivity extends AppCompatActivity {
                    mwAnimFloats1Thr3 = 1.1f;
                    mwAnimFloats2Thr3 = 0.9f;
                    mwAnimFloats3Thr3 = 1.0f; 
-                    MwConsortium mwConsortium = new MwConsortium();
                     mwConsortium.mwClick();
                     mwTimerTask = new TimerTask(){
                         @Override
-            public void run(){
+                  public void run(){
                             runOnUiThread(new Runnable(){
                                 @Override
                                 public void run(){
@@ -290,7 +276,7 @@ public class MwPlayMainActivity extends AppCompatActivity {
 				     }
                    }
                 }
-                    }
-			});
+              }
+    	});
    }
 }
