@@ -156,6 +156,8 @@ public class MwConsortium extends AppCompatActivity{
      };
      MwPlayMainActivity._mwTimerTaskThr2.schedule(MwPlayMainActivity.mwTimerTaskThr2, 0);
        } else {
+                    
+        // Thread 3            
            if(MwPlayMainActivity.mwAnimRuleThr3){
        MwPlayMainActivity.mwTimerTaskThr3 = new TimerTask(){
       @Override
@@ -366,6 +368,8 @@ public class MwConsortium extends AppCompatActivity{
      };
      MwPlayHomeActivity._mwTimerTaskThr2.schedule(MwPlayHomeActivity.mwTimerTaskThr2, 0);
        } else {
+                    
+          // Thread 3          
            if(MwPlayHomeActivity.mwAnimRuleThr3){
        MwPlayHomeActivity.mwTimerTaskThr3 = new TimerTask(){
       @Override
@@ -438,6 +442,7 @@ public class MwConsortium extends AppCompatActivity{
         }
      }
     
+    // Useless now
     // Animation cirles
     public void MwClickCircles(){
       // Animations img

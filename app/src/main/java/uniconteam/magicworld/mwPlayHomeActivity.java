@@ -18,12 +18,13 @@ import java.util.Timer;
 import java.util.TimerTask;
 import uniconteam.magicworld.MwPlayHomeActivity;
 import uniconteam.magicworld.MwPlayMainActivity;
+import uniconteam.magicworld.MwTutorial;
 
 public class MwPlayHomeActivity extends AppCompatActivity {
     // all objects
-	public LinearLayout mwDataBoxLinear;
-	public TextView mwDataBoxCoinCount;
-	public TextView mwDataBoxLevelCount;
+	public LinearLayout mwJewelryBoxLinear;
+	public TextView mwJewelryBoxCoinCount;
+	public TextView mwJewelryBoxLevelCount;
 	public LinearLayout mwWinBoxLinear;
 	public TextView mwWinBoxCupCount;
 	public LinearLayout mwItemBoxLinear;
@@ -50,6 +51,9 @@ public class MwPlayHomeActivity extends AppCompatActivity {
     public ImageView mwBlockTab18;
     public ImageView mwBlockTab19;
     public ImageView mwBlockTab20;
+    public static TextView mwTutorialBoxText;
+    public LinearLayout mwTutorialBoxLinear;
+    public ImageView mwTutorialBoxIcon;
     public static TimerTask mwTimerTask;
     public static Timer _mwTimerTask = new Timer();
 	private ObjectAnimator mwBlock1ObjAnimationScaleX = new ObjectAnimator(); // Animator Block Tab 1-20 \/
@@ -98,11 +102,14 @@ public class MwPlayHomeActivity extends AppCompatActivity {
 	private ObjectAnimator mwItemTab2AnimationScaleY = new ObjectAnimator();
 	private ObjectAnimator mwItemTab3AnimationScaleX = new ObjectAnimator();
 	private ObjectAnimator mwItemTab3AnimationScaleY = new ObjectAnimator();
-    private ObjectAnimator mwDataBoxAnimationScaleX = new ObjectAnimator();
-	private ObjectAnimator mwDataBoxAnimationScaleY = new ObjectAnimator();
+    private ObjectAnimator mwJewelryBoxAnimationScaleX = new ObjectAnimator();
+	private ObjectAnimator mwJewelryBoxAnimationScaleY = new ObjectAnimator();
     private ObjectAnimator mwWinBoxAnimationScaleX = new ObjectAnimator();
 	private ObjectAnimator mwWinBoxAnimationScaleY = new ObjectAnimator();
+    private ObjectAnimator mwTutorialBoxAnimationScaleX = new ObjectAnimator();
+	private ObjectAnimator mwTutorialBoxAnimationScaleY = new ObjectAnimator();
     public static String mwItemSelected;
+    public static String mwTutorialLevel;
     
     public static TimerTask mwTimerTaskThr1;
 	public static Timer _mwTimerTaskThr1  = new Timer();
@@ -137,6 +144,8 @@ public class MwPlayHomeActivity extends AppCompatActivity {
     public static Boolean mwAnimRuleThr3 = true; // Bool for allowing or denying mwClick
     public static ImageView mwAnimImageDataThr3;
     
+    MwTutorial mwTutorial = new MwTutorial();
+    
 		@Override
 		protected void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
@@ -147,6 +156,7 @@ public class MwPlayHomeActivity extends AppCompatActivity {
         protected void onResume(){
             super.onResume();
             SharedPreferences mwPlayData = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        
             mwItemSelected = mwPlayData.getString("mwItemSelected","");
             if (mwItemSelected.equals("1")){
             mwItemTab3.setBackgroundResource(R.drawable.mw_anybox_layout);
@@ -173,6 +183,15 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                 }
             }
           }
+           
+          mwTutorialLevel = mwPlayData.getString("mwTutorialLevel","");
+            if (mwTutorialLevel.equals("")){
+            mwTutorialLevel = "1";
+            mwTutorial.mwTutorial();
+            } 
+            else {
+            mwTutorial.mwTutorial();
+          }
         }
         @Override
         protected void onPause(){
@@ -180,14 +199,15 @@ public class MwPlayHomeActivity extends AppCompatActivity {
             SharedPreferences mwPlayData = getSharedPreferences("MySharedPref", MODE_PRIVATE);
             SharedPreferences.Editor mwEditData = mwPlayData.edit();
             mwEditData.putString("mwItemSelected", mwItemSelected.toString());
+            mwEditData.putString("mwTutorialLevel", mwTutorialLevel.toString());
             mwEditData.apply();
         }
     
 	public void initialize (Bundle savedInstanceState) {
         // All objects id
-		mwDataBoxLinear = findViewById(R.id.mwDataBoxLinear); // LinearLayout with coins and levels
-		mwDataBoxCoinCount = findViewById(R.id.mwDataBoxCoinCount); // TextView coin count
-		mwDataBoxLevelCount = findViewById(R.id.mwDataBoxLevelCount); // TextView level count
+		mwJewelryBoxLinear = findViewById(R.id.mwJewelryBoxLinear); // LinearLayout with coins and levels
+		mwJewelryBoxCoinCount = findViewById(R.id.mwJewelryBoxCoinCount); // TextView coin count
+		mwJewelryBoxLevelCount = findViewById(R.id.mwJewelryBoxLevelCount); // TextView level count
 		mwWinBoxCupCount = findViewById(R.id.mwWinBoxCupCount); // TextView cup count
 		mwWinBoxLinear = findViewById(R.id.mwWinBoxLinear); // LinearLayout with cups
 		mwItemBoxLinear = findViewById(R.id.mwItemBoxLinear); // LinearLayout with item tabs
@@ -214,6 +234,9 @@ public class MwPlayHomeActivity extends AppCompatActivity {
         mwBlockTab18 = findViewById(R.id.mwBlockTab18);
         mwBlockTab19 = findViewById(R.id.mwBlockTab19);
         mwBlockTab20 = findViewById(R.id.mwBlockTab20);
+        mwTutorialBoxLinear = findViewById(R.id.mwTutorialBoxLinear); // Tutorial Box
+        mwTutorialBoxText = findViewById(R.id.mwTutorialBoxText); // Tutorial Text
+        mwTutorialBoxIcon = findViewById(R.id.mwTutorialBoxIcon); // Tutorial Icon
         
         MwConsortium mwConsortium = new MwConsortium();
         MwPlayMainActivity.mwActivity = "mwHome";
@@ -223,42 +246,43 @@ public class MwPlayHomeActivity extends AppCompatActivity {
 		if(Build.VERSION.SDK_INT >= 21) { getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 		getWindow().setStatusBarColor(Color.parseColor("#FF3DBFFF"));}
-		if(Build.VERSION.SDK_INT >= 21) { mwDataBoxLinear.setElevation(10f); }
+		if(Build.VERSION.SDK_INT >= 21) { mwJewelryBoxLinear.setElevation(10f); }
+        if(Build.VERSION.SDK_INT >= 21) { mwTutorialBoxLinear.setElevation(10f); }
 		if(Build.VERSION.SDK_INT >= 21) { mwWinBoxLinear.setElevation(10f); }
 		if(Build.VERSION.SDK_INT >= 21) { mwItemBoxLinear.setElevation(10f); }
 		if(Build.VERSION.SDK_INT >= 21) { mwItemTab1.setElevation(10f); }
 		if(Build.VERSION.SDK_INT >= 21) { mwItemTab2.setElevation(10f); }
 		if(Build.VERSION.SDK_INT >= 21) { mwItemTab3.setElevation(10f); }
-		mwDataBoxCoinCount.setTypeface(Typeface.createFromAsset(getAssets(),"mwFonts/magicworld_google_sans_regular.tmp"), Typeface.NORMAL);
-		mwDataBoxLevelCount.setTypeface(Typeface.createFromAsset(getAssets(),"mwFonts/magicworld_google_sans_regular.tmp"), Typeface.NORMAL);
+		mwJewelryBoxCoinCount.setTypeface(Typeface.createFromAsset(getAssets(),"mwFonts/magicworld_google_sans_regular.tmp"), Typeface.NORMAL);
+		mwJewelryBoxLevelCount.setTypeface(Typeface.createFromAsset(getAssets(),"mwFonts/magicworld_google_sans_regular.tmp"), Typeface.NORMAL);
 		mwWinBoxCupCount.setTypeface(Typeface.createFromAsset(getAssets(),"mwFonts/magicworld_google_sans_regular.tmp"), Typeface.NORMAL);
-        
+        mwTutorialBoxText.setTypeface(Typeface.createFromAsset(getAssets(),"mwFonts/magicworld_google_sans_regular.tmp"), Typeface.NORMAL);
         // Onclick  functions
-        mwDataBoxLinear.setOnClickListener(new View.OnClickListener() {
+        mwJewelryBoxLinear.setOnClickListener(new View.OnClickListener() {
             @Override
                 public void onClick(View view){
                     if (mwAnimRuleThr1){
-                    mwAnimObjDataThr1 = mwDataBoxLinear;
-                    mwAnimDataXThr1 = mwDataBoxAnimationScaleX;
-                    mwAnimDataYThr1 = mwDataBoxAnimationScaleY;
+                    mwAnimObjDataThr1 = mwJewelryBoxLinear;
+                    mwAnimDataXThr1 = mwJewelryBoxAnimationScaleX;
+                    mwAnimDataYThr1 = mwJewelryBoxAnimationScaleY;
                     mwAnimFloats1Thr1 = 1.1f;
                     mwAnimFloats2Thr1 = 0.9f;
                     mwAnimFloats3Thr1 = 1.0f; 
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr2){
-                    mwAnimObjDataThr2 = mwDataBoxLinear;
-                    mwAnimDataXThr2 = mwDataBoxAnimationScaleX;
-                    mwAnimDataYThr2 = mwDataBoxAnimationScaleY;
+                    mwAnimObjDataThr2 = mwJewelryBoxLinear;
+                    mwAnimDataXThr2 = mwJewelryBoxAnimationScaleX;
+                    mwAnimDataYThr2 = mwJewelryBoxAnimationScaleY;
                     mwAnimFloats1Thr2 = 1.1f;
                     mwAnimFloats2Thr2 = 0.9f;
                     mwAnimFloats3Thr2 = 1.0f; 
                     mwConsortium.mwClick();
                   } else {
                       if (mwAnimRuleThr3){
-                    mwAnimObjDataThr3 = mwDataBoxLinear;
-                    mwAnimDataXThr3 = mwDataBoxAnimationScaleX;
-                    mwAnimDataYThr3 = mwDataBoxAnimationScaleY;
+                    mwAnimObjDataThr3 = mwJewelryBoxLinear;
+                    mwAnimDataXThr3 = mwJewelryBoxAnimationScaleX;
+                    mwAnimDataYThr3 = mwJewelryBoxAnimationScaleY;
                     mwAnimFloats1Thr3 = 1.1f;
                     mwAnimFloats2Thr3 = 0.9f;
                     mwAnimFloats3Thr3 = 1.0f; 
@@ -301,6 +325,40 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     }
                   }
                 }
+        });
+        mwTutorialBoxLinear.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                if (mwAnimRuleThr1){
+                    mwAnimObjDataThr1 = mwTutorialBoxLinear;
+                    mwAnimDataXThr1 = mwTutorialBoxAnimationScaleX;
+                    mwAnimDataYThr1 = mwTutorialBoxAnimationScaleY;
+                    mwAnimFloats1Thr1 = 1.1f;
+                    mwAnimFloats2Thr1 = 0.9f;
+                    mwAnimFloats3Thr1 = 1.0f;
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr2){
+                    mwAnimObjDataThr2 = mwTutorialBoxLinear;
+                    mwAnimDataXThr2 = mwTutorialBoxAnimationScaleX;
+                    mwAnimDataYThr2 = mwTutorialBoxAnimationScaleY;
+                    mwAnimFloats1Thr2 = 1.1f;
+                    mwAnimFloats2Thr2 = 0.9f;
+                    mwAnimFloats3Thr2 = 1.0f; 
+                    mwConsortium.mwClick();
+                  } else {
+                      if (mwAnimRuleThr3){
+                    mwAnimObjDataThr3 = mwTutorialBoxLinear;
+                    mwAnimDataXThr3 = mwTutorialBoxAnimationScaleX;
+                    mwAnimDataYThr3 = mwTutorialBoxAnimationScaleY;
+                    mwAnimFloats1Thr3 = 1.1f;
+                    mwAnimFloats2Thr3 = 0.9f;
+                    mwAnimFloats3Thr3 = 1.0f; 
+                    mwConsortium.mwClick();
+                      }
+                    }
+                  }
+            }
         });
         mwBlockTab1.setOnClickListener(new View.OnClickListener() { 
                 @Override

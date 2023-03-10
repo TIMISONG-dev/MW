@@ -35,7 +35,7 @@
 			android:text="100"/>
 	</LinearLayout>
 	<LinearLayout
-		android:id="@+id/mwDataBoxLinear"
+		android:id="@+id/mwJewelryBoxLinear"
 		android:layout_height="wrap_content"
 		android:layout_width="wrap_content"
 		android:padding="8dp"
@@ -43,12 +43,12 @@
 		android:gravity="center_vertical|center_horizontal"
 		android:background="@drawable/mw_anybox_layout">
 		<ImageView
-			android:id="@+id/mwDataBoxLevel"
+			android:id="@+id/mwJewelryBoxLevel"
 			android:layout_width="28dp"
 			android:layout_height="28dp"
 			android:src="@drawable/magicworld_icon_level"/>
 		<TextView
-			android:id="@+id/mwDataBoxLevelCount"
+			android:id="@+id/mwJewelryBoxLevelCount"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textColor="#000000"
@@ -56,23 +56,48 @@
 		    android:padding="3dp"
 			android:text="100"/>
 		<ImageView
-			android:id="@+id/mwDataBoxCoin"
+			android:id="@+id/mwJewelryBoxCoin"
 			android:layout_width="28dp"
 			android:layout_height="28dp"
 			android:src="@drawable/magicworld_icon_coin"/>
 		<TextView
-			android:id="@+id/mwDataBoxCoinCount"
+			android:id="@+id/mwJewelryBoxCoinCount"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:textColor="#000000"
 			android:textSize="14sp"
 			android:padding="3dp"
 			android:text="100"/>
+    	</LinearLayout>
 	</LinearLayout>
-	</LinearLayout>
+    <LinearLayout
+        android:id="@+id/mwTutorialBoxLinear"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_margin="24dp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center_vertical"
+        android:background="@drawable/mw_anybox_layout"
+        android:padding="8dp">
+        <ImageView
+            android:id="@+id/mwTutorialBoxIcon"
+            android:layout_height="55dp"
+            android:layout_width="55dp"
+            android:src="@drawable/magicworld_house_coinhouse"
+            android:padding="8dp"
+            android:layout_margin="8dp"/>
+        <TextView
+            android:id="@+id/mwTutorialBoxText"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:gravity="center_horizontal|left"
+            android:text="Tutorial text. Develop type me!1!"
+            android:textSize="16sp"
+            android:textColor="#000000"/>
+    </LinearLayout>
 	<LinearLayout
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
+		android:layout_height="wrap_content"
 		android:orientation="vertical"
 		android:gravity="center_horizontal|center_vertical"
 		android:layout_weight="1">
