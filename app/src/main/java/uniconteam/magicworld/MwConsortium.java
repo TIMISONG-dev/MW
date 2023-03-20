@@ -12,13 +12,14 @@ import uniconteam.magicworld.MwPlayHomeActivity;
 import uniconteam.magicworld.MwPlayMainActivity;
 
 // MwConsortium - engine for Magic World
-// MwConsortium v0.2b
+// MwConsortium v0.3b
 
 public class MwConsortium extends AppCompatActivity{
     
     public void mwClick(){
         
         if (MwPlayMainActivity.mwActivity.equals("mwMain")){
+            
         // Thread 1
         if(MwPlayMainActivity.mwAnimRuleThr1){
        MwPlayMainActivity.mwTimerTaskThr1 = new TimerTask(){
@@ -229,8 +230,8 @@ public class MwConsortium extends AppCompatActivity{
           }
         }
         
-        
         if (MwPlayMainActivity.mwActivity.equals("mwHome")){
+            
            // Thread 1
         if(MwPlayHomeActivity.mwAnimRuleThr1){
        MwPlayHomeActivity.mwTimerTaskThr1 = new TimerTask(){
@@ -441,113 +442,4 @@ public class MwConsortium extends AppCompatActivity{
            }
         }
      }
-    
-    // Useless now
-    // Animation cirles
-    public void MwClickCircles(){
-      // Animations img
-        if(MwPlayHomeActivity.mwAnimRuleThr1){
-      MwPlayHomeActivity.mwTimerTaskThr1 = new TimerTask(){
-      public void run(){
-       runOnUiThread(new Runnable(){
-         @Override
-         public void run(){
-          MwPlayHomeActivity.mwAnimImageDataThr1.setImageDrawable(getDrawable(R.drawable.magicworld_animation_click_1));
-          MwPlayHomeActivity.mwTimerTaskThr1 = new TimerTask(){
-           public void run(){
-            runOnUiThread(new Runnable(){
-              public void run(){
-               MwPlayHomeActivity.mwAnimImageDataThr1.setImageDrawable(getDrawable(R.drawable.magicworld_animation_click_2));
-               MwPlayHomeActivity.mwTimerTaskThr1 = new TimerTask(){
-                public void run(){
-                 runOnUiThread(new Runnable(){
-                   public void run(){
-                    MwPlayHomeActivity.mwAnimImageDataThr1.setImageDrawable(getDrawable(R.drawable.magicworld_animation_click_3));
-                    MwPlayHomeActivity.mwTimerTaskThr1 = new TimerTask(){
-                     public void run(){
-                      runOnUiThread(new Runnable(){
-                        public void run(){
-                         MwPlayHomeActivity.mwAnimImageDataThr1.setImageDrawable(getDrawable(R.drawable.magicworld_animation_click_4));
-                         MwPlayHomeActivity.mwTimerTaskThr1 = new TimerTask(){
-                          public void run(){
-                           runOnUiThread(new Runnable(){
-                             public void run(){
-                              MwPlayHomeActivity.mwAnimImageDataThr1.setImageDrawable(getDrawable(R.drawable.magicworld_animation_click_5));
-                              MwPlayHomeActivity.mwTimerTaskThr1 = new TimerTask(){
-                               public void run(){
-                                runOnUiThread(new Runnable(){
-                                  public void run(){
-                                   MwPlayHomeActivity.mwAnimImageDataThr1.setImageDrawable(getDrawable(R.drawable.magicworld_animation_click_4));
-                                   MwPlayHomeActivity.mwTimerTaskThr1 = new TimerTask(){
-                                    public void run(){
-                                     runOnUiThread(new Runnable(){
-                                       public void run(){
-                                        MwPlayHomeActivity.mwAnimImageDataThr1.setImageDrawable(getDrawable(R.drawable.magicworld_animation_click_3));
-                                        MwPlayHomeActivity.mwTimerTaskThr1 = new TimerTask(){
-                                         public void run(){
-                                          runOnUiThread(new Runnable(){
-                                            public void run(){
-                                             MwPlayHomeActivity.mwAnimImageDataThr1.setImageDrawable(getDrawable(R.drawable.magicworld_animation_click_2));
-                                             MwPlayHomeActivity.mwTimerTaskThr1 = new TimerTask(){
-                                              public void run(){
-                                               runOnUiThread(new Runnable(){
-                                                 public void run(){
-                                                  MwPlayHomeActivity.mwAnimImageDataThr1.setImageDrawable(getDrawable(R.drawable.magicworld_animation_click_1));
-                                                  MwPlayHomeActivity.mwTimerTaskThr1 = new TimerTask(){
-                                                   public void run(){
-                                                    runOnUiThread(new Runnable(){
-                                                      public void run(){
-                                                       MwPlayHomeActivity.mwAnimImageDataThr1.setImageDrawable(getDrawable(R.drawable.magicworld_block_grass));
-                                                      }
-                                                     });
-                                                   }
-                                                  };
-                                                  MwPlayHomeActivity._mwTimerTaskThr1.schedule(MwPlayHomeActivity.mwTimerTaskThr1, 30);
-                                                 }
-                                                });
-                                              }
-                                             };
-                                             MwPlayHomeActivity._mwTimerTaskThr1.schedule(MwPlayHomeActivity.mwTimerTaskThr1, 30);
-                                            }
-                                           });
-                                         }
-                                        };
-                                        MwPlayHomeActivity._mwTimerTaskThr1.schedule(MwPlayHomeActivity.mwTimerTaskThr1, 30);
-                                       }
-                                      });
-                                    }
-                                   };
-                                   MwPlayHomeActivity._mwTimerTaskThr1.schedule(MwPlayHomeActivity.mwTimerTaskThr1, 30);
-                                  }
-                                 });
-                               }
-                              };
-                              MwPlayHomeActivity._mwTimerTaskThr1.schedule(MwPlayHomeActivity.mwTimerTaskThr1, 30);
-                             }
-                            });
-                          }
-                         };
-                         MwPlayHomeActivity._mwTimerTaskThr1.schedule(MwPlayHomeActivity.mwTimerTaskThr1, 30);
-                        }
-                       });
-                     }
-                    };
-                    MwPlayHomeActivity._mwTimerTaskThr1.schedule(MwPlayHomeActivity.mwTimerTaskThr1, 30);
-                   }
-                  });
-                }
-               };
-               MwPlayHomeActivity._mwTimerTaskThr1.schedule(MwPlayHomeActivity.mwTimerTaskThr1, 30);
-              }
-             });
-           }
-          };
-          MwPlayHomeActivity._mwTimerTaskThr1.schedule(MwPlayHomeActivity.mwTimerTaskThr1, 30);
-         }
-        });
-      }
-     };
-     MwPlayHomeActivity._mwTimerTaskThr1.schedule(MwPlayHomeActivity.mwTimerTaskThr1, 30);
-    }
-   }
 }

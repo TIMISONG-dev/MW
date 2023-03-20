@@ -109,7 +109,7 @@ public class MwPlayHomeActivity extends AppCompatActivity {
     private ObjectAnimator mwTutorialBoxAnimationScaleX = new ObjectAnimator();
 	private ObjectAnimator mwTutorialBoxAnimationScaleY = new ObjectAnimator();
     public static String mwItemSelected;
-    public static String mwTutorialLevel;
+    public static int mwTutorialLevel;
     
     public static TimerTask mwTimerTaskThr1;
 	public static Timer _mwTimerTaskThr1  = new Timer();
@@ -184,13 +184,13 @@ public class MwPlayHomeActivity extends AppCompatActivity {
             }
           }
            
-          mwTutorialLevel = mwPlayData.getString("mwTutorialLevel","");
-            if (mwTutorialLevel.equals("")){
-            mwTutorialLevel = "1";
-            mwTutorial.mwTutorial();
+          mwTutorialLevel = mwPlayData.getInt("mwTutorialLevel", 0);
+            if (mwTutorialLevel == 0){
+            mwTutorialLevel = 1;
+            mwTutorial.mwTutorialData();
             } 
             else {
-            mwTutorial.mwTutorial();
+            mwTutorial.mwTutorialData();
           }
         }
         @Override
@@ -199,7 +199,7 @@ public class MwPlayHomeActivity extends AppCompatActivity {
             SharedPreferences mwPlayData = getSharedPreferences("MySharedPref", MODE_PRIVATE);
             SharedPreferences.Editor mwEditData = mwPlayData.edit();
             mwEditData.putString("mwItemSelected", mwItemSelected.toString());
-            mwEditData.putString("mwTutorialLevel", mwTutorialLevel.toString());
+            mwEditData.putInt("mwTutorialLevel", mwTutorialLevel);
             mwEditData.apply();
         }
     
@@ -253,10 +253,10 @@ public class MwPlayHomeActivity extends AppCompatActivity {
 		if(Build.VERSION.SDK_INT >= 21) { mwItemTab1.setElevation(10f); }
 		if(Build.VERSION.SDK_INT >= 21) { mwItemTab2.setElevation(10f); }
 		if(Build.VERSION.SDK_INT >= 21) { mwItemTab3.setElevation(10f); }
-		mwJewelryBoxCoinCount.setTypeface(Typeface.createFromAsset(getAssets(),"mwFonts/magicworld_google_sans_regular.tmp"), Typeface.NORMAL);
-		mwJewelryBoxLevelCount.setTypeface(Typeface.createFromAsset(getAssets(),"mwFonts/magicworld_google_sans_regular.tmp"), Typeface.NORMAL);
-		mwWinBoxCupCount.setTypeface(Typeface.createFromAsset(getAssets(),"mwFonts/magicworld_google_sans_regular.tmp"), Typeface.NORMAL);
-        mwTutorialBoxText.setTypeface(Typeface.createFromAsset(getAssets(),"mwFonts/magicworld_google_sans_regular.tmp"), Typeface.NORMAL);
+		mwJewelryBoxCoinCount.setTypeface(Typeface.createFromAsset(getAssets(),"mwFonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
+		mwJewelryBoxLevelCount.setTypeface(Typeface.createFromAsset(getAssets(),"mwFonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
+		mwWinBoxCupCount.setTypeface(Typeface.createFromAsset(getAssets(),"mwFonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
+        mwTutorialBoxText.setTypeface(Typeface.createFromAsset(getAssets(),"mwFonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
         // Onclick  functions
         mwJewelryBoxLinear.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -329,6 +329,8 @@ public class MwPlayHomeActivity extends AppCompatActivity {
         mwTutorialBoxLinear.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                    mwTutorialLevel += 1;
+                    mwTutorial.mwTutorialData();
                 if (mwAnimRuleThr1){
                     mwAnimObjDataThr1 = mwTutorialBoxLinear;
                     mwAnimDataXThr1 = mwTutorialBoxAnimationScaleX;

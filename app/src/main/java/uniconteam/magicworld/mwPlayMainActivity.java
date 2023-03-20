@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.graphics.Typeface;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -86,6 +87,8 @@ public class MwPlayMainActivity extends AppCompatActivity {
 		mwBattleFieldButton = findViewById(R.id.mwBattleFieldButton);
 		mwLogoImg.setScaleX((float)(5.0d));
 		mwLogoImg.setScaleY((float)(5.0d));
+        mwPlayButton.setTypeface(Typeface.createFromAsset(getAssets(),"mwFonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
+		mwBattleFieldButton.setTypeface(Typeface.createFromAsset(getAssets(),"mwFonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
 	}
 	private void initializeLogic(){
         
