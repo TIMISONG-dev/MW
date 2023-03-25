@@ -1,6 +1,7 @@
 package uniconteam.magicworld;
 
 import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -365,6 +366,10 @@ public class MwPlayHomeActivity extends AppCompatActivity {
         mwBlockTab1.setOnClickListener(new View.OnClickListener() { 
                 @Override
                 public void onClick(View view) {
+                    
+                    MwHouseMenu alert = new MwHouseMenu();
+                    alert.showDialog(MwPlayHomeActivity.this, "9");
+                    
                     if (mwAnimRuleThr1){
                     mwAnimObjDataThr1 = mwBlockTab1;
                     mwAnimDataXThr1 = mwBlock1ObjAnimationScaleX;

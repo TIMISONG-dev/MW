@@ -40,7 +40,6 @@ public class MwBattleFieldActivity extends AppCompatActivity {
 }
 class MwBattleFieldMap extends View{
 	// All objects
-	private String mwEG = "v0.1a";
     public Bitmap mwJohn; // John hero image
     public Bitmap mwSlime; // Slime image
     public Bitmap mwTikvach; // Tikvach image
@@ -68,6 +67,9 @@ class MwBattleFieldMap extends View{
     public int currentFrame = 0;
     public int fps = 9;
     private int mwTouchTime = 0;
+    public int mwCanvasX;
+    public int mwCanvasY;
+    public int mwMobTimer = 0;
     
     
     MwHero mwHero = new MwHero();
@@ -230,8 +232,18 @@ Runnable mLongPressed = new Runnable() {
 	protected void onDraw(Canvas canvas) {
         
 		super.onDraw(canvas);
-        // Actions on click x y z
-        // Canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.magicworld_block_grass),0,0,null);
+        
+        
+        
+        if(mwMobTimer == 200){
+            mwMob.mwSlimeRand();
+            mwMobTimer += 1;
+        } else {
+            if(mwMobTimer < 200){ 
+            mwMobTimer += 1;
+            }
+        }    
+        
         if (mwBiome.equals("landscape")){
             canvas.drawColor(Color.parseColor("#2C6E3C"));
         }
@@ -247,19 +259,21 @@ Runnable mLongPressed = new Runnable() {
             mwMob.mwSlimeW += 50;
           }
         }
-        mwTouchTime += 1;
         
-       /* paint.setColor(Color.WHITE); 
+        mwCanvasX = canvas.getWidth();
+        mwCanvasY = canvas.getHeight();
+        paint.setColor(Color.WHITE); 
         canvas.drawPaint(paint); 
         paint.setColor(Color.BLACK); 
         paint.setTextSize(60); 
-        canvas.drawText(String.valueOf(mwMob.mwSlimeWay), 10, 55, paint); */
+        canvas.drawText(String.valueOf(mwHero.mwHeroX), 10, 55, paint);
+        /*
         Paint rect_paint = new Paint();
         rect_paint.setStyle(Paint.Style.FILL);
         rect_paint.setColor(Color.rgb(0, 0, 0));
         rect_paint.setAlpha(0x80); // optional
         canvas.drawRect(0, 0, 100, 100, rect_paint);
-        
+        */
         BitmapFactory.Options opt = new BitmapFactory.Options();
         opt.inMutable = true;
         Bitmap brightBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_animation_chest_1, opt); 
@@ -269,6 +283,34 @@ Runnable mLongPressed = new Runnable() {
         
         // Tikvach
         canvas.drawBitmap(mwTikvach, null, new RectF(850f, 1900f, 990f, 2040f), null);
+        
+        if(mwHero.mwHeroX > mwCanvasX || mwHero.mwHeroX < -80){
+            mwBiome = "desert";
+        }
+        if(mwHero.mwHeroY > mwCanvasY || mwHero.mwHeroY < -80){
+            mwBiome = "landscape";
+        }
+        
+        if(mwMob.mwSlimeX > mwCanvasX-300){
+            MwMob.mwMobXUpAcept = false;
+        } else {
+            MwMob.mwMobXUpAcept = true;
+        }
+        if(mwMob.mwSlimeY > mwCanvasY-300){
+            MwMob.mwMobYUpAcept = false;
+        } else {
+            MwMob.mwMobYUpAcept = true;
+        }
+        if(mwMob.mwSlimeX < -50){
+            MwMob.mwMobXDownAcept = false;
+        } else {
+            MwMob.mwMobXDownAcept = true;
+        }
+        if(mwMob.mwSlimeY < -50){
+            MwMob.mwMobYDownAcept = false;
+        } else {
+            MwMob.mwMobYDownAcept = true;
+        }
         
         // Hp for hero
         if(mwHero.mwHeroHp == 6){
@@ -280,7 +322,6 @@ Runnable mLongPressed = new Runnable() {
         canvas.drawBitmap(mwHeroHp6, null, new RectF(750f, 1600f, 890f, 1740f), null);
            } else {
             if(mwHero.mwHeroHp == 5){
-               canvas.drawBitmap(mwJohn, null, new RectF(mwHero.mwHeroX, mwHero.mwHeroY, mwHero.mwHeroZ, mwHero.mwHeroW), null); 
                canvas.drawBitmap(mwHeroHp1, null, new RectF(500f, 1600f, 640f, 1740f), null);
                canvas.drawBitmap(mwHeroHp2, null, new RectF(550f, 1600f, 690f, 1740f), null);
                canvas.drawBitmap(mwHeroHp3, null, new RectF(600f, 1600f, 740f, 1740f), null);
@@ -288,28 +329,27 @@ Runnable mLongPressed = new Runnable() {
                canvas.drawBitmap(mwHeroHp5, null, new RectF(700f, 1600f, 840f, 1740f), null);
                 } else {
                     if(mwHero.mwHeroHp == 4){
-                   canvas.drawBitmap(mwJohn, null, new RectF(mwHero.mwHeroX, mwHero.mwHeroY, mwHero.mwHeroZ, mwHero.mwHeroW), null);
                    canvas.drawBitmap(mwHeroHp1, null, new RectF(500f, 1600f, 640f, 1740f), null);
                    canvas.drawBitmap(mwHeroHp2, null, new RectF(550f, 1600f, 690f, 1740f), null);
                    canvas.drawBitmap(mwHeroHp3, null, new RectF(600f, 1600f, 740f, 1740f), null);
                    canvas.drawBitmap(mwHeroHp4, null, new RectF(650f, 1600f, 790f, 1740f), null);
                    } else {
                        if(mwHero.mwHeroHp == 3){
-                     canvas.drawBitmap(mwJohn, null, new RectF(mwHero.mwHeroX, mwHero.mwHeroY, mwHero.mwHeroZ, mwHero.mwHeroW), null);   
                      canvas.drawBitmap(mwHeroHp1, null, new RectF(500f, 1600f, 640f, 1740f), null);
                      canvas.drawBitmap(mwHeroHp2, null, new RectF(550f, 1600f, 690f, 1740f), null);
                      canvas.drawBitmap(mwHeroHp3, null, new RectF(600f, 1600f, 740f, 1740f), null);
                      } else {
                           if(mwHero.mwHeroHp == 2){
-                            canvas.drawBitmap(mwJohn, null, new RectF(mwHero.mwHeroX, mwHero.mwHeroY, mwHero.mwHeroZ, mwHero.mwHeroW), null);
                             canvas.drawBitmap(mwHeroHp1, null, new RectF(500f, 1600f, 640f, 1740f), null);
                             canvas.drawBitmap(mwHeroHp2, null, new RectF(550f, 1600f, 690f, 1740f), null);
                          } else {
                              if(mwHero.mwHeroHp == 1){
-                             canvas.drawBitmap(mwJohn, null, new RectF(mwHero.mwHeroX, mwHero.mwHeroY, mwHero.mwHeroZ, mwHero.mwHeroW), null);   
                              canvas.drawBitmap(mwHeroHp1, null, new RectF(500f, 1600f, 640f, 1740f), null);
                              } else {
-                                 canvas.drawBitmap(mwJohn, null, new RectF(mwHero.mwDeath, mwHero.mwDeath, mwHero.mwDeath, mwHero.mwDeath), null);
+                                 mwHero.mwHeroX = 10000;
+                                 mwHero.mwHeroZ = 10000;
+                                 mwHero.mwHeroY = 10000;
+                                 mwHero.mwHeroW = 10000;
                              }
                          }
                      }
