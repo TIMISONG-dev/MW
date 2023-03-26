@@ -106,9 +106,10 @@ class MwBattleFieldMap extends View{
         mwMobHp5 = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_mob_hp);
         mwMobHp6 = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_mob_hp);
         
-        new Thread( new Runnable() { 
+        new Thread(new Runnable() { 
         @Override
                 public void run() {
+                    Thread.currentThread().setName("mwHeroThr");
             while(true) {
                 for(int i = 0; i < mwJohnBitmaps.length; i++) {
                     currentFrame = i;
@@ -121,6 +122,7 @@ class MwBattleFieldMap extends View{
                 }
             }
         } } ).start();
+        
         new Thread(new Runnable(){
             @Override
             public void run(){
@@ -136,6 +138,7 @@ class MwBattleFieldMap extends View{
                 }
             }
         } } ).start();
+        
         new Thread(new Runnable(){
             @Override
             public void run(){

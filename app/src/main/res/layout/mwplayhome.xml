@@ -10,21 +10,40 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="#FF3DBFFF"
-		android:padding="8dp"
-		android:gravity="center_horizontal|right">
+		android:padding="8dp">
+    <LinearLayout
+        android:id="@+id/mwCloseBoxLinear"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:padding="8dp"
+        android:layout_margin="16dp"
+        android:layout_gravity="center_horizontal|center_vertical"    
+        android:gravity="center_horizontal|center_vertical"
+        android:background="@drawable/mw_anybox_layout">
+        <ImageView
+            android:id="@+id/mwCloseBox"
+            android:src="@drawable/magicworld_icon_close"
+            android:layout_width="28dp"
+            android:layout_height="28dp"/> 
+    </LinearLayout> 
+    <LinearLayout
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>    
     <LinearLayout
         android:id="@+id/mwWinBoxLinear"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:padding="8dp"
-        android:layout_margin="8dp"
+        android:layout_gravity="center_horizontal|center_vertical"    
+        android:layout_margin="16dp"
         android:gravity="center_vertical|center_horizontal"
         android:background="@drawable/mw_anybox_layout">
         <ImageView
             android:id="@+id/mwWinBox"
             android:src="@drawable/magicworld_icon_additional_ability"
             android:layout_width="28dp"
-            android:layout_height="28dp" />
+            android:layout_height="28dp"/>
         <TextView
             android:id="@+id/mwWinBoxCupCount"
             android:layout_width="wrap_content"
@@ -32,14 +51,15 @@
             android:textColor="#000000"
             android:textSize="14sp"
             android:padding="3dp"
-            android:text="100" />
+            android:text="100"/>
     </LinearLayout>
 	<LinearLayout
 		android:id="@+id/mwJewelryBoxLinear"
 		android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"    
 		android:layout_width="wrap_content"
 		android:padding="8dp"
-		android:layout_margin="8dp"
+		android:layout_margin="16dp"
 		android:gravity="center_vertical|center_horizontal"
 		android:background="@drawable/mw_anybox_layout">
 		<ImageView
