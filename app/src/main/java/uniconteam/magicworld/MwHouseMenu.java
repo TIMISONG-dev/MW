@@ -7,6 +7,7 @@ import android.os.Build;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,6 +18,8 @@ public class MwHouseMenu {
     
     private LinearLayout mwHouseTab1;
     private LinearLayout mwHouseTab2;
+    private LinearLayout mwHouseTab3;
+    private HorizontalScrollView mwScrollTabs;
     private ImageView mwCloseIcon;
         
 
@@ -34,10 +37,14 @@ public class MwHouseMenu {
         
         mwHouseTab1 = dialog.findViewById(R.id.mwHouseTab1);
         mwHouseTab2 = dialog.findViewById(R.id.mwHouseTab2);
+        mwHouseTab3 = dialog.findViewById(R.id.mwHouseTab3);
         mwCloseIcon = dialog.findViewById(R.id.mwCloseIcon);
+        mwScrollTabs = dialog.findViewById(R.id.mwScrollTabs);
         
         if(Build.VERSION.SDK_INT >= 21) { mwHouseTab1.setElevation(8f); }
         if(Build.VERSION.SDK_INT >= 21) { mwHouseTab2.setElevation(8f); }
+        if(Build.VERSION.SDK_INT >= 21) { mwHouseTab3.setElevation(8f); }
+        mwScrollTabs.setHorizontalScrollBarEnabled(false);
         
         mwCloseIcon.setOnClickListener(new View.OnClickListener(){
             @Override

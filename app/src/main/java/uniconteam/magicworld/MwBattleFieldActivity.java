@@ -65,7 +65,7 @@ class MwBattleFieldMap extends View{
     private Timer mwTimer = new Timer();
     private TimerTask mwTimerTask;
     public int currentFrame = 0;
-    public int fps = 9;
+    public int fps = 60;
     private int mwTouchTime = 0;
     public int mwCanvasX;
     public int mwCanvasY;

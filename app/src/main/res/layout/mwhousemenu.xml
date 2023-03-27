@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
      xmlns:android="http://schemas.android.com/apk/res/android"
-     android:layout_height="300dp"
+     android:layout_height="wrap_content"
      android:layout_width="350dp"
      android:background="@drawable/mw_anybox_layout"
      android:orientation="vertical"
@@ -34,11 +34,14 @@
                 android:layout_weight="1"
                 android:textStyle="bold"/>
         </LinearLayout>
+        <HorizontalScrollView
+             android:id="@+id/mwScrollTabs"
+             android:layout_height="wrap_content"
+             android:layout_width="match_parent">
         <LinearLayout
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_gravity="center">
+            android:orientation="horizontal">
             <LinearLayout
                 android:layout_margin="24dp"
                 android:id="@+id/mwHouseTab1"
@@ -81,5 +84,27 @@
                     android:textColor="#000000"
                     android:textSize="16sp"/>
             </LinearLayout>
+            <LinearLayout
+                android:layout_margin="24dp"
+                android:id="@+id/mwHouseTab3"
+                android:layout_height="124dp"
+                android:layout_width="124dp"
+                android:background="@drawable/mw_anybox_layout"
+                android:orientation="vertical"
+                android:gravity="center_horizontal|center_vertical">
+                <ImageView
+                    android:layout_margin="8dp"
+                    android:layout_height="55dp"
+                    android:layout_width="55dp"
+                    android:src="@drawable/magicworld_animation_coinhouse_destroy" />
+                <TextView
+                    android:layout_margin="8dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="Get upgrade"
+                    android:textColor="#000000"
+                    android:textSize="16sp"/>
+            </LinearLayout>
         </LinearLayout>
+    </HorizontalScrollView>
 </LinearLayout>
