@@ -1,4 +1,5 @@
 package uniconteam.magicworld;
+
 import uniconteam.magicworld.MwPlayHomeActivity;
 
 public class MwTutorial {

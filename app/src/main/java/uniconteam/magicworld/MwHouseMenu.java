@@ -2,6 +2,7 @@ package uniconteam.magicworld;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.view.View;
@@ -21,6 +22,7 @@ public class MwHouseMenu {
     private LinearLayout mwHouseTab3;
     private HorizontalScrollView mwScrollTabs;
     private ImageView mwCloseIcon;
+    public TextView mwMenuHint;
         
 
     public void showDialog(Activity activity, String msg){
@@ -40,6 +42,7 @@ public class MwHouseMenu {
         mwHouseTab3 = dialog.findViewById(R.id.mwHouseTab3);
         mwCloseIcon = dialog.findViewById(R.id.mwCloseIcon);
         mwScrollTabs = dialog.findViewById(R.id.mwScrollTabs);
+        mwMenuHint = dialog.findViewById(R.id.mwMenuHint);
         
         if(Build.VERSION.SDK_INT >= 21) { mwHouseTab1.setElevation(8f); }
         if(Build.VERSION.SDK_INT >= 21) { mwHouseTab2.setElevation(8f); }

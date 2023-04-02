@@ -149,6 +149,7 @@ public class MwPlayHomeActivity extends AppCompatActivity {
     public static ImageView mwAnimImageDataThr3;
     
     MwTutorial mwTutorial = new MwTutorial();
+    MwHouseMenu mwHouseMenu = new MwHouseMenu();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -207,8 +208,7 @@ public class MwPlayHomeActivity extends AppCompatActivity {
 
     public void initialize(Bundle savedInstanceState) {
         // All objects id
-        mwJewelryBoxLinear =
-                findViewById(R.id.mwJewelryBoxLinear); // LinearLayout with coins and levels
+        mwJewelryBoxLinear = findViewById(R.id.mwJewelryBoxLinear); // LinearLayout with coins and levels
         mwJewelryBoxCoinCount = findViewById(R.id.mwJewelryBoxCoinCount); // TextView coin count
         mwJewelryBoxLevelCount = findViewById(R.id.mwJewelryBoxLevelCount); // TextView level count
         mwWinBoxCupCount = findViewById(R.id.mwWinBoxCupCount); // TextView cup count
@@ -250,7 +250,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
             getWindow().setNavigationBarColor(Color.parseColor("#FF61CBFF"));
         }
         if (Build.VERSION.SDK_INT >= 21) {
-            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             getWindow().setStatusBarColor(Color.parseColor("#FF3DBFFF"));
         }
@@ -282,6 +281,7 @@ public class MwPlayHomeActivity extends AppCompatActivity {
         mwJewelryBoxLevelCount.setTypeface(Typeface.createFromAsset(getAssets(), "mwFonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
         mwWinBoxCupCount.setTypeface(Typeface.createFromAsset(getAssets(), "mwFonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
         mwTutorialBoxText.setTypeface(Typeface.createFromAsset(getAssets(), "mwFonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
+        
         // Onclick  functions
         
         mwCloseBoxLinear.setOnClickListener(
@@ -450,7 +450,7 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     public void onClick(View view) {
 
                         MwHouseMenu alert = new MwHouseMenu();
-                        alert.showDialog(MwPlayHomeActivity.this, "9");
+                        alert.showDialog(MwPlayHomeActivity.this, "mwBlockTab1");
 
                         if (mwAnimRuleThr1) {
                             mwAnimObjDataThr1 = mwBlockTab1;

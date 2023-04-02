@@ -1,7 +1,6 @@
 package uniconteam.magicworld;
+
 import androidx.appcompat.app.AppCompatActivity;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MwHero extends AppCompatActivity{
     
@@ -10,6 +9,5 @@ public class MwHero extends AppCompatActivity{
     public int mwHeroY = 1100;
     public int mwHeroZ = 200;
     public int mwHeroW = 1200;
-    public int mwDeath = -1000;
     
 }

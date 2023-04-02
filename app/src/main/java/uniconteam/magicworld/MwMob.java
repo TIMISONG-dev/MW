@@ -1,5 +1,5 @@
 package uniconteam.magicworld;
-import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -7,12 +7,12 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class MwMob extends AppCompatActivity{
 
-    public static TimerTask mwTimerTask;
-	public static Timer _mwTimerTask  = new Timer();
-    public static Boolean mwMobXUpAcept = true;
-    public static Boolean mwMobYUpAcept = true;
-    public static Boolean mwMobXDownAcept = true;
-    public static Boolean mwMobYDownAcept = true;
+    public TimerTask mwTimerTask;
+	public Timer _mwTimerTask  = new Timer();
+    public Boolean mwMobXUpAcept = true;
+    public Boolean mwMobYUpAcept = true;
+    public Boolean mwMobXDownAcept = true;
+    public Boolean mwMobYDownAcept = true;
     
     // Random for IA slime (where will the mob go)
     
@@ -22,10 +22,13 @@ public class MwMob extends AppCompatActivity{
     // Duration of way
     public int mwSlimeDur = ThreadLocalRandom.current().nextInt(1, 6 + 1);
     
-    public int mwSlimeX = 100;
-    public int mwSlimeY = 110;
-    public int mwSlimeZ = 200;
-    public int mwSlimeW = 210;
+    // Random number for spawn mob 1 - slime, 2 - tikvach
+    public int mwSpawnRand = ThreadLocalRandom.current().nextInt(1, 2 + 1);
+    
+    public int mwSlimeX = 0;
+    public int mwSlimeY = 0;
+    public int mwSlimeZ = 0;
+    public int mwSlimeW = 0;
     public int mwMobHp = 6;
     
     public void mwSlimeRand(){

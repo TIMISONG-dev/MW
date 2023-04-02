@@ -41,7 +41,7 @@
         android:background="@drawable/mw_anybox_layout">
         <ImageView
             android:id="@+id/mwWinBox"
-            android:src="@drawable/magicworld_icon_additional_ability"
+            android:src="@drawable/magicworld_icon_cup"
             android:layout_width="28dp"
             android:layout_height="28dp"/>
         <TextView
