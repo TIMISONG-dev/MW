@@ -150,6 +150,7 @@ public class MwPlayHomeActivity extends AppCompatActivity {
     
     MwTutorial mwTutorial = new MwTutorial();
     MwHouseMenu mwHouseMenu = new MwHouseMenu();
+    MwHouseMain mwHouseMain = new MwHouseMain();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -244,6 +245,7 @@ public class MwPlayHomeActivity extends AppCompatActivity {
 
         MwConsortium mwConsortium = new MwConsortium(); // MwConsortium - MW engine - initialize
         MwPlayMainActivity.mwActivity = "mwHome";
+        MwHouseMenu alert = new MwHouseMenu(); // MwHouseMenu - menu for houses
 
         // Design
         if (Build.VERSION.SDK_INT >= 21) {
@@ -448,10 +450,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
-                        MwHouseMenu alert = new MwHouseMenu();
-                        alert.showDialog(MwPlayHomeActivity.this, "mwBlockTab1");
-
                         if (mwAnimRuleThr1) {
                             mwAnimObjDataThr1 = mwBlockTab1;
                             mwAnimDataXThr1 = mwBlock1ObjAnimationScaleX;
@@ -460,6 +458,8 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                             mwAnimFloats2Thr1 = 0.9f;
                             mwAnimFloats3Thr1 = 1.0f;
                             mwConsortium.mwClick();
+                            alert.showDialog(MwPlayHomeActivity.this, mwAnimObjDataThr1.getResources().getResourceEntryName(mwAnimObjDataThr1.getId()));
+                            
                         } else {
                             if (mwAnimRuleThr2) {
                                 mwAnimObjDataThr2 = mwBlockTab1;
@@ -469,6 +469,7 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                                 mwAnimFloats2Thr2 = 0.9f;
                                 mwAnimFloats3Thr2 = 1.0f;
                                 mwConsortium.mwClick();
+                                alert.showDialog(MwPlayHomeActivity.this, mwAnimObjDataThr2.getResources().getResourceEntryName(mwAnimObjDataThr2.getId()));
                             } else {
                                 if (mwAnimRuleThr3) {
                                     mwAnimObjDataThr3 = mwBlockTab1;
@@ -478,6 +479,7 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                                     mwAnimFloats2Thr3 = 0.9f;
                                     mwAnimFloats3Thr3 = 1.0f;
                                     mwConsortium.mwClick();
+                                    alert.showDialog(MwPlayHomeActivity.this, mwAnimObjDataThr3.getResources().getResourceEntryName(mwAnimObjDataThr3.getId()));
                                 }
                             }
                         }
