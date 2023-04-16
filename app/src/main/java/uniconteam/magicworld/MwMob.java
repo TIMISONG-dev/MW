@@ -6,6 +6,8 @@ import java.util.TimerTask;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class MwMob extends AppCompatActivity{
+    
+    MwCollisionRect rect;
 
     public TimerTask mwTimerTask;
 	public Timer _mwTimerTask  = new Timer();
@@ -27,13 +29,14 @@ public class MwMob extends AppCompatActivity{
     // Random number for spawn mob 1 - slime, 2 - tikvach
     public int mwSpawnRand = ThreadLocalRandom.current().nextInt(1, 2 + 1);
     
-    public int mwSlimeX = 0;
-    public int mwSlimeY = 0;
-    public int mwSlimeZ = 0;
-    public int mwSlimeW = 0;
+    public float mwSlimeX = 0;
+    public float mwSlimeY = 0;
+    public float mwSlimeZ = 0;
+    public float mwSlimeW = 0;
     public int mwMobHp = 6;
     
     public void mwSlimeRand(){
+        
         mwTimerTask = new TimerTask(){
                         @Override
             public void run(){
@@ -68,7 +71,12 @@ public class MwMob extends AppCompatActivity{
         _mwTimerTask.scheduleAtFixedRate(mwTimerTask, 500, 500);
     }
     
+    public void MwSlimeSpw(){
+        this.rect = new MwCollisionRect(mwSlimeX, mwSlimeY, 100f, 100f);
+    }
+    
     public void mwSlimeRoad(){
+        
     if (mwMobYUpAcept){
       if (mwSlimeWay == 1 || mwSlimeWay == 4){
         for (int i = 0; i < mwSlimeDur; i++){
@@ -101,5 +109,8 @@ public class MwMob extends AppCompatActivity{
         }
       } 
     }         
+   }
+   public MwCollisionRect getCollisionRect(){
+        return rect;
    }
 }
