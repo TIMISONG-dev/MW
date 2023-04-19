@@ -70,7 +70,8 @@ class MwBattleFieldMap extends View{
     
     
     // Array animation john and slime
-    Bitmap[] mwJohnBitmaps = new Bitmap[]{ BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_1), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_2), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_3),};
+    Bitmap[] mwJohnWalkBitmaps = new Bitmap[]{ BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_1), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_2), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_3),};
+    Bitmap[] mwJohnAttackBitmaps = new Bitmap[]{ BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_fight_1), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_fight_2), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_fight_3),};
     Bitmap[] mwSlimeBitmaps = new Bitmap[]{ BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_mob_slime_animation_walk_1), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_mob_slime_animation_walk_2), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_mob_slime_animation_walk_3),};
     Bitmap[] mwTikvachBitmaps = new Bitmap[]{ BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_mob_tikvach_animation_walk_1), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_mob_tikvach_animation_walk_2), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_mob_tikvach_animation_walk_3),};
     
@@ -104,15 +105,27 @@ class MwBattleFieldMap extends View{
         @Override
                 public void run() {
             while(true) {
-                for(int i = 0; i < mwJohnBitmaps.length; i++) {
+              if (mwHero.mwHeroAttackRule == false) {        
+                for(int i = 0; i < mwJohnWalkBitmaps.length; i++) {
                     currentFrame = i;
-                           mwJohn = mwJohnBitmaps[i];
+                           mwJohn = mwJohnWalkBitmaps[i];
                     try {
                         Thread.sleep(1000L / fps);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
+              } else {
+                  for(int a = 0; a < mwJohnAttackBitmaps.length; a++) {
+                    currentFrame = a;
+                           mwJohn = mwJohnAttackBitmaps[a];
+                    try {
+                        Thread.sleep(1000L / fps);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                 }
+               }   
             }
         } } ).start();
         
@@ -180,6 +193,19 @@ public boolean onTouchEvent(MotionEvent event){
             mwHero.mwHeroX += 30;
             mwHero.mwHeroZ += 30;
         }
+        if(xControll > 750f && xControll < 890f && yControll > 1800f && yControll < 1940f)
+        {
+            mwHero.MwHeroAttack();
+            
+            if (mwHero.getCollisionRect().CollidesWith(mwMob.getCollisionRect())) {
+                mwHero.mwHeroY += 20;
+                mwHero.mwHeroW += 20;
+                mwMob.mwSlimeY -= 10;
+                mwMob.mwSlimeW -= 10;
+                mwMob.mwSlimeHp -= 1;
+            }
+            
+        }
     return super.onTouchEvent(event);
 }
     
@@ -237,9 +263,9 @@ public boolean onTouchEvent(MotionEvent event){
         paint.setColor(Color.BLACK); 
         paint.setTextSize(60); 
         canvas.drawText(String.valueOf(mwMob.mwSlimeY), 10, 135, paint);
-        canvas.drawText(String.valueOf(mwMob.mwSlimeX), 150, 135, paint);
+        canvas.drawText(String.valueOf(mwMob.mwSlimeX), 250, 135, paint);
         canvas.drawText(String.valueOf(mwHero.mwHeroY), 10, 235, paint);
-        canvas.drawText(String.valueOf(mwHero.mwHeroX), 150, 235, paint);
+        canvas.drawText(String.valueOf(mwHero.mwHeroX), 250, 235, paint);
         canvas.drawText("Debug", 10, 55, paint);
         
         /*
@@ -259,6 +285,7 @@ public boolean onTouchEvent(MotionEvent event){
         // Tikvach
         canvas.drawBitmap(mwTikvach, null, new RectF(850f, 1900f, 990f, 2040f), null);
         
+        // Allow or deny move of slime (limit on the edges of the canvas)
         if(mwHero.mwHeroX > mwCanvasX || mwHero.mwHeroX < -80){
             mwBiome = "desert";
         }
@@ -267,36 +294,44 @@ public boolean onTouchEvent(MotionEvent event){
         }
         
         if(mwMob.mwSlimeX > mwCanvasX-300){
-            mwMob.mwMobXUpAcept = false;
+            mwMob.mwSlimeXUpAcept = false;
         } else {
-            mwMob.mwMobXUpAcept = true;
+            mwMob.mwSlimeXUpAcept = true;
         }
         if(mwMob.mwSlimeY > mwCanvasY-300){
-            mwMob.mwMobYUpAcept = false;
+            mwMob.mwSlimeYUpAcept = false;
         } else {
-            mwMob.mwMobYUpAcept = true;
+            mwMob.mwSlimeYUpAcept = true;
         }
         if(mwMob.mwSlimeX < -50){
-            mwMob.mwMobXDownAcept = false;
+            mwMob.mwSlimeXDownAcept = false;
         } else {
-            mwMob.mwMobXDownAcept = true;
+            mwMob.mwSlimeXDownAcept = true;
         }
         if(mwMob.mwSlimeY < -50){
-            mwMob.mwMobYDownAcept = false;
+            mwMob.mwSlimeYDownAcept = false;
         } else {
-            mwMob.mwMobYDownAcept = true;
+            mwMob.mwSlimeYDownAcept = true;
         }
         
+        // Detecting objects for collision 
         mwHero.MwHeroSpw();
         mwMob.MwSlimeSpw();
         
-        
+        // Collision
         if (mwHero.getCollisionRect().CollidesWith(mwMob.getCollisionRect())) {
-                mwHero.mwHeroX = 1000;
+            if(mwMob.mwSlimeCooldown == false){
+                mwMob.MwMobCooldown();
+                mwHero.mwHeroY += 10;
+                mwHero.mwHeroW += 10;
+                mwMob.mwSlimeY -= 10;
+                mwMob.mwSlimeW -= 10;
+                mwHero.mwHeroHp -= 1;
+            }
         }
         
         // Hp for slime
-        if(mwMob.mwMobHp == 6){
+        if(mwMob.mwSlimeHp == 6){
         canvas.drawBitmap(mwMobHp1, null, new RectF(mwMob.mwSlimeX+200, mwMob.mwSlimeY-30, mwMob.mwSlimeZ+250, mwMob.mwSlimeW+10), null);
         canvas.drawBitmap(mwMobHp2, null, new RectF(mwMob.mwSlimeX+250, mwMob.mwSlimeY-30, mwMob.mwSlimeZ+300, mwMob.mwSlimeW+10), null);
         canvas.drawBitmap(mwMobHp3, null, new RectF(mwMob.mwSlimeX+300, mwMob.mwSlimeY-30, mwMob.mwSlimeZ+350, mwMob.mwSlimeW+10), null);
@@ -304,30 +339,34 @@ public boolean onTouchEvent(MotionEvent event){
         canvas.drawBitmap(mwMobHp5, null, new RectF(mwMob.mwSlimeX+400, mwMob.mwSlimeY-30, mwMob.mwSlimeZ+450, mwMob.mwSlimeW+10), null);
         canvas.drawBitmap(mwMobHp6, null, new RectF(mwMob.mwSlimeX+450, mwMob.mwSlimeY-30, mwMob.mwSlimeZ+500, mwMob.mwSlimeW+10), null);     
         } else {
-            if(mwMob.mwMobHp == 5){
+            if(mwMob.mwSlimeHp == 5){
                canvas.drawBitmap(mwMobHp1, null, new RectF(mwMob.mwSlimeX+200, mwMob.mwSlimeY-30, mwMob.mwSlimeZ+260, mwMob.mwSlimeW+10), null);
                canvas.drawBitmap(mwMobHp2, null, new RectF(mwMob.mwSlimeX+250, mwMob.mwSlimeY-30, mwMob.mwSlimeZ+310, mwMob.mwSlimeW+10), null);
                canvas.drawBitmap(mwMobHp3, null, new RectF(mwMob.mwSlimeX+300, mwMob.mwSlimeY-30, mwMob.mwSlimeZ+350, mwMob.mwSlimeW+10), null);
                canvas.drawBitmap(mwMobHp4, null, new RectF(mwMob.mwSlimeX+350, mwMob.mwSlimeY-30, mwMob.mwSlimeZ+390, mwMob.mwSlimeW+10), null);
                canvas.drawBitmap(mwMobHp5, null, new RectF(mwMob.mwSlimeX+400, mwMob.mwSlimeY-30, mwMob.mwSlimeZ+430, mwMob.mwSlimeW+10), null); 
                 } else {
-                    if(mwMob.mwMobHp == 4){
+                    if(mwMob.mwSlimeHp == 4){
                    canvas.drawBitmap(mwMobHp1, null, new RectF(mwMob.mwSlimeX+200, mwMob.mwSlimeY-30, mwMob.mwSlimeZ+260, mwMob.mwSlimeW+10), null);
                    canvas.drawBitmap(mwMobHp2, null, new RectF(mwMob.mwSlimeX+250, mwMob.mwSlimeY-30, mwMob.mwSlimeZ+310, mwMob.mwSlimeW+10), null);
                    canvas.drawBitmap(mwMobHp3, null, new RectF(mwMob.mwSlimeX+300, mwMob.mwSlimeY-30, mwMob.mwSlimeZ+350, mwMob.mwSlimeW+10), null);
                    canvas.drawBitmap(mwMobHp4, null, new RectF(mwMob.mwSlimeX+350, mwMob.mwSlimeY-30, mwMob.mwSlimeZ+390, mwMob.mwSlimeW+10), null);
                    } else {
-                       if(mwMob.mwMobHp == 3){
+                       if(mwMob.mwSlimeHp == 3){
                       canvas.drawBitmap(mwMobHp1, null, new RectF(mwMob.mwSlimeX+200, mwMob.mwSlimeY-30, mwMob.mwSlimeZ+260, mwMob.mwSlimeW+10), null);
                       canvas.drawBitmap(mwMobHp2, null, new RectF(mwMob.mwSlimeX+250, mwMob.mwSlimeY-30, mwMob.mwSlimeZ+310, mwMob.mwSlimeW+10), null);
                       canvas.drawBitmap(mwMobHp3, null, new RectF(mwMob.mwSlimeX+300, mwMob.mwSlimeY-30, mwMob.mwSlimeZ+350, mwMob.mwSlimeW+10), null);
                      } else {
-                          if(mwMob.mwMobHp == 2){
+                          if(mwMob.mwSlimeHp == 2){
                             canvas.drawBitmap(mwMobHp1, null, new RectF(mwMob.mwSlimeX+200, mwMob.mwSlimeY-30, mwMob.mwSlimeZ+260, mwMob.mwSlimeW+10), null);
                             canvas.drawBitmap(mwMobHp2, null, new RectF(mwMob.mwSlimeX+250, mwMob.mwSlimeY-30, mwMob.mwSlimeZ+310, mwMob.mwSlimeW+10), null);
                          } else {
-                             if(mwMob.mwMobHp == 1){
+                             if(mwMob.mwSlimeHp == 1){
                              canvas.drawBitmap(mwMobHp1, null, new RectF(mwMob.mwSlimeX+200, mwMob.mwSlimeY-30, mwMob.mwSlimeZ+260, mwMob.mwSlimeW+10), null);
+                                mwMob.mwSlimeX = 12000;
+                                mwMob.mwSlimeY = 12000;
+                                mwMob.mwSlimeW = 12000;
+                                mwMob.mwSlimeZ = 12000;
                              }
                          }
                      }

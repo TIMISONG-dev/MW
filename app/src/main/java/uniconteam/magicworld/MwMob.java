@@ -11,10 +11,13 @@ public class MwMob extends AppCompatActivity{
 
     public TimerTask mwTimerTask;
 	public Timer _mwTimerTask  = new Timer();
-    public Boolean mwMobXUpAcept = true;
-    public Boolean mwMobYUpAcept = true;
-    public Boolean mwMobXDownAcept = true;
-    public Boolean mwMobYDownAcept = true;
+    
+    public boolean mwSlimeXUpAcept = true;
+    public boolean mwSlimeYUpAcept = true;
+    public boolean mwSlimeXDownAcept = true;
+    public boolean mwSlimeYDownAcept = true;
+    
+    public boolean mwSlimeCooldown = false;
     
     MwHero mwHero = new MwHero();
     
@@ -33,7 +36,7 @@ public class MwMob extends AppCompatActivity{
     public float mwSlimeY = 0;
     public float mwSlimeZ = 0;
     public float mwSlimeW = 0;
-    public int mwMobHp = 6;
+    public int mwSlimeHp = 6;
     
     public void mwSlimeRand(){
         
@@ -77,7 +80,7 @@ public class MwMob extends AppCompatActivity{
     
     public void mwSlimeRoad(){
         
-    if (mwMobYUpAcept){
+    if (mwSlimeYUpAcept){
       if (mwSlimeWay == 1 || mwSlimeWay == 4){
         for (int i = 0; i < mwSlimeDur; i++){
             mwSlimeY += 10;
@@ -85,7 +88,7 @@ public class MwMob extends AppCompatActivity{
         }
       }
     }
-    if (mwMobYDownAcept) {   
+    if (mwSlimeYDownAcept) {   
       if (mwSlimeWay == 2){
         for (int i = 0; i < mwSlimeDur; i++){
             mwSlimeY -= 10;
@@ -93,7 +96,7 @@ public class MwMob extends AppCompatActivity{
         }
       }
     }        
-    if (mwMobXUpAcept){ 
+    if (mwSlimeXUpAcept){ 
       if (mwSlimeWay == 3){
         for (int i = 0; i < mwSlimeDur; i++){
             mwSlimeX += 10;
@@ -101,7 +104,7 @@ public class MwMob extends AppCompatActivity{
         }
       }  
     }
-    if (mwMobXDownAcept){           
+    if (mwSlimeXDownAcept){           
       if (mwSlimeWay == 5){
         for (int i = 0; i < mwSlimeDur; i++){
             mwSlimeX -= 10;
@@ -112,5 +115,24 @@ public class MwMob extends AppCompatActivity{
    }
    public MwCollisionRect getCollisionRect(){
         return rect;
+   }
+   public void MwMobCooldown(){
+       if(mwSlimeCooldown == false){
+            
+            mwSlimeCooldown = true;
+            
+           mwTimerTask = new TimerTask(){
+                        @Override
+            public void run(){
+                            runOnUiThread(new Runnable(){
+                                @Override
+                                public void run(){
+                            mwSlimeCooldown = false;
+                  }
+              });
+            }
+       };
+        _mwTimerTask.scheduleAtFixedRate(mwTimerTask, 2000, 2000);
+       }
    }
 }
