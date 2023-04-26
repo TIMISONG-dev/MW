@@ -24,7 +24,7 @@ public class MwMob extends AppCompatActivity{
     // Random for IA slime (where will the mob go)
     
     // 1 - Up, 2 - Down, 3 - Right, 4 - Left
-    public int mwSlimeWay = ThreadLocalRandom.current().nextInt(1, 5 + 1);
+    public int mwSlimeWay = ThreadLocalRandom.current().nextInt(1, 6 + 1);
     
     // Duration of way
     public int mwSlimeDur = ThreadLocalRandom.current().nextInt(1, 6 + 1);
@@ -81,7 +81,7 @@ public class MwMob extends AppCompatActivity{
     public void mwSlimeRoad(){
         
     if (mwSlimeYUpAcept){
-      if (mwSlimeWay == 1 || mwSlimeWay == 4){
+      if (mwSlimeWay == 1 || mwSlimeWay == 2){
         for (int i = 0; i < mwSlimeDur; i++){
             mwSlimeY += 10;
             mwSlimeW += 10;
@@ -89,7 +89,7 @@ public class MwMob extends AppCompatActivity{
       }
     }
     if (mwSlimeYDownAcept) {   
-      if (mwSlimeWay == 2){
+      if (mwSlimeWay == 3){
         for (int i = 0; i < mwSlimeDur; i++){
             mwSlimeY -= 10;
             mwSlimeW -= 10;
@@ -97,7 +97,7 @@ public class MwMob extends AppCompatActivity{
       }
     }        
     if (mwSlimeXUpAcept){ 
-      if (mwSlimeWay == 3){
+      if (mwSlimeWay == 4){
         for (int i = 0; i < mwSlimeDur; i++){
             mwSlimeX += 10;
             mwSlimeZ += 10;
@@ -105,7 +105,7 @@ public class MwMob extends AppCompatActivity{
       }  
     }
     if (mwSlimeXDownAcept){           
-      if (mwSlimeWay == 5){
+      if (mwSlimeWay == 5 || mwSlimeWay == 6){
         for (int i = 0; i < mwSlimeDur; i++){
             mwSlimeX -= 10;
             mwSlimeZ -= 10;

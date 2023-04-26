@@ -63,14 +63,16 @@ class MwBattleFieldMap extends View{
     public int mwMobSpawnX = 0;
     public int mwMobSpawnY = 0;
     public boolean mwMobSpawnRule = true;
+    public int l;
     
     
     MwHero mwHero = new MwHero();
     MwMob mwMob = new MwMob();
+    MwConsortium mwConsortium = new MwConsortium();
     
     
     // Array animation john and slime
-    Bitmap[] mwJohnWalkBitmaps = new Bitmap[]{ BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_1), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_2), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_3),};
+    Bitmap[] mwJohnWalkBitmaps = new Bitmap[]{ BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_walk_1), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_walk_2), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_walk_3),};
     Bitmap[] mwJohnAttackBitmaps = new Bitmap[]{ BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_fight_1), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_fight_2), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_fight_3),};
     Bitmap[] mwSlimeBitmaps = new Bitmap[]{ BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_mob_slime_animation_walk_1), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_mob_slime_animation_walk_2), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_mob_slime_animation_walk_3),};
     Bitmap[] mwTikvachBitmaps = new Bitmap[]{ BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_mob_tikvach_animation_walk_1), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_mob_tikvach_animation_walk_2), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_mob_tikvach_animation_walk_3),};
@@ -113,16 +115,18 @@ class MwBattleFieldMap extends View{
                         Thread.sleep(1000L / fps);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
+                                    
                     }
                 }
               } else {
                   for(int a = 0; a < mwJohnAttackBitmaps.length; a++) {
                     currentFrame = a;
                            mwJohn = mwJohnAttackBitmaps[a];
+                                l = a;
                     try {
                         Thread.sleep(1000L / fps);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                    } catch (InterruptedException y) {
+                        y.printStackTrace();
                     }
                  }
                }   
@@ -263,7 +267,7 @@ public boolean onTouchEvent(MotionEvent event){
         paint.setColor(Color.BLACK); 
         paint.setTextSize(60); 
         canvas.drawText(String.valueOf(mwMob.mwSlimeY), 10, 135, paint);
-        canvas.drawText(String.valueOf(mwMob.mwSlimeX), 250, 135, paint);
+        canvas.drawText(String.valueOf(l), 250, 135, paint);
         canvas.drawText(String.valueOf(mwHero.mwHeroY), 10, 235, paint);
         canvas.drawText(String.valueOf(mwHero.mwHeroX), 250, 235, paint);
         canvas.drawText("Debug", 10, 55, paint);
@@ -284,36 +288,38 @@ public boolean onTouchEvent(MotionEvent event){
         
         // Tikvach
         canvas.drawBitmap(mwTikvach, null, new RectF(850f, 1900f, 990f, 2040f), null);
-        
+
         // Allow or deny move of slime (limit on the edges of the canvas)
-        if(mwHero.mwHeroX > mwCanvasX || mwHero.mwHeroX < -80){
-            mwBiome = "desert";
+        if (mwMob.mwSlimeHp != 0) {
+            if (mwHero.mwHeroX > mwCanvasX || mwHero.mwHeroX < -80) {
+                mwBiome = "desert";
+            }
+            if (mwHero.mwHeroY > mwCanvasY || mwHero.mwHeroY < -80) {
+                mwBiome = "landscape";
+            }
+
+            if (mwMob.mwSlimeX > mwCanvasX - 300) {
+                mwMob.mwSlimeXUpAcept = false;
+            } else {
+                mwMob.mwSlimeXUpAcept = true;
+            }
+            if (mwMob.mwSlimeY > mwCanvasY - 300) {
+                mwMob.mwSlimeYUpAcept = false;
+            } else {
+                mwMob.mwSlimeYUpAcept = true;
+            }
+            if (mwMob.mwSlimeX < -50) {
+                mwMob.mwSlimeXDownAcept = false;
+            } else {
+                mwMob.mwSlimeXDownAcept = true;
+            }
+            if (mwMob.mwSlimeY < -50) {
+                mwMob.mwSlimeYDownAcept = false;
+            } else {
+                mwMob.mwSlimeYDownAcept = true;
+            }
         }
-        if(mwHero.mwHeroY > mwCanvasY || mwHero.mwHeroY < -80){
-            mwBiome = "landscape";
-        }
-        
-        if(mwMob.mwSlimeX > mwCanvasX-300){
-            mwMob.mwSlimeXUpAcept = false;
-        } else {
-            mwMob.mwSlimeXUpAcept = true;
-        }
-        if(mwMob.mwSlimeY > mwCanvasY-300){
-            mwMob.mwSlimeYUpAcept = false;
-        } else {
-            mwMob.mwSlimeYUpAcept = true;
-        }
-        if(mwMob.mwSlimeX < -50){
-            mwMob.mwSlimeXDownAcept = false;
-        } else {
-            mwMob.mwSlimeXDownAcept = true;
-        }
-        if(mwMob.mwSlimeY < -50){
-            mwMob.mwSlimeYDownAcept = false;
-        } else {
-            mwMob.mwSlimeYDownAcept = true;
-        }
-        
+
         // Detecting objects for collision 
         mwHero.MwHeroSpw();
         mwMob.MwSlimeSpw();
