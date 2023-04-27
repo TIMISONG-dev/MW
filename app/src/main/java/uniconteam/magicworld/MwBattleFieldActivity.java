@@ -87,19 +87,18 @@ class MwBattleFieldMap extends View{
 		super(context);
         
         mwJohn = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_hero_john_animation_walk_2);
-        
+
         mHandler = new Handler();
-        mRunnable = new Runnable() {
-        @Override
-        public void run() {
-                mwJohnAnimationRule = false;
-                mwHero.mwHeroAttackRule = false;
-                
-            mwJohn = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_hero_john_animation_walk_2);
-        }
-    };
-    
-        
+        mRunnable =
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        mwJohn = BitmapFactory.decodeResource(context.getResources(),R.drawable.magicworld_hero_john_animation_walk_2);
+                        mwJohnAnimationRule = false;
+                        mwHero.mwHeroAttackRule = false;
+                    }
+                };
+
         // Draw objects
         mwButtonUp = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_button_up);
         mwButtonDown = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_button_down);
@@ -392,7 +391,7 @@ class MwBattleFieldMap extends View{
                 
                     if(mwJohnAnimationRule == false){
                     mwJohnAnimationRule = true;
-                    mHandler.postDelayed(mRunnable, 1000);
+                    mHandler.postDelayed(mRunnable, 500);
                     new Thread(
                                     new Runnable() {
                                         @Override
@@ -400,6 +399,7 @@ class MwBattleFieldMap extends View{
                                             while (mwJohnAnimationRule) {
 
                                                 for (int i = 0; i < mwJohnWalkBitmaps.length; i++) {
+                                                  if(mwJohnAnimationRule) {
                                                     currentFrame = i;
                                                     mwJohn = mwJohnWalkBitmaps[i];
                                                     try {
@@ -408,6 +408,7 @@ class MwBattleFieldMap extends View{
                                                         y.printStackTrace();
                                                     }
                                                   postInvalidate();
+                                                  }
                                                 }
                                             }
                                         }
@@ -421,7 +422,7 @@ class MwBattleFieldMap extends View{
                 
                 if(mwJohnAnimationRule == false){
                     mwJohnAnimationRule = true;
-                    mHandler.postDelayed(mRunnable, 1000);
+                    mHandler.postDelayed(mRunnable, 500);
                     new Thread(
                                     new Runnable() {
                                         @Override
@@ -429,6 +430,7 @@ class MwBattleFieldMap extends View{
                                             while (mwJohnAnimationRule) {
 
                                                 for (int i = 0; i < mwJohnWalkBitmaps.length; i++) {
+                                                  if(mwJohnAnimationRule) {
                                                     currentFrame = i;
                                                     mwJohn = mwJohnWalkBitmaps[i];
                                                     try {
@@ -437,13 +439,13 @@ class MwBattleFieldMap extends View{
                                                         y.printStackTrace();
                                                     }
                                                   postInvalidate();
+                                                  }
                                                 }
                                             }
                                         }
                                     })
                             .start();
                     }
-                
             }
             if (xControll > 100f && xControll < 240f && yControll > 1800f && yControll < 1940f) {
                 mwHero.mwHeroX -= 30;
@@ -451,7 +453,7 @@ class MwBattleFieldMap extends View{
                 
                 if(mwJohnAnimationRule == false){
                     mwJohnAnimationRule = true;
-                    mHandler.postDelayed(mRunnable, 1000);
+                    mHandler.postDelayed(mRunnable, 500);
                     new Thread(
                                     new Runnable() {
                                         @Override
@@ -459,6 +461,7 @@ class MwBattleFieldMap extends View{
                                             while (mwJohnAnimationRule) {
 
                                                 for (int i = 0; i < mwJohnWalkBitmaps.length; i++) {
+                                                  if(mwJohnAnimationRule) {
                                                     currentFrame = i;
                                                     mwJohn = mwJohnWalkBitmaps[i];
                                                     try {
@@ -467,6 +470,7 @@ class MwBattleFieldMap extends View{
                                                         y.printStackTrace();
                                                     }
                                                   postInvalidate();
+                                                  }
                                                 }
                                             }
                                         }
@@ -480,7 +484,7 @@ class MwBattleFieldMap extends View{
                 
                 if(mwJohnAnimationRule == false){
                     mwJohnAnimationRule = true;
-                    mHandler.postDelayed(mRunnable, 1000);
+                    mHandler.postDelayed(mRunnable, 500);
                     new Thread(
                                     new Runnable() {
                                         @Override
@@ -488,6 +492,7 @@ class MwBattleFieldMap extends View{
                                             while (mwJohnAnimationRule) {
 
                                                 for (int i = 0; i < mwJohnWalkBitmaps.length; i++) {
+                                                  if(mwJohnAnimationRule) {
                                                     currentFrame = i;
                                                     mwJohn = mwJohnWalkBitmaps[i];
                                                     try {
@@ -496,6 +501,7 @@ class MwBattleFieldMap extends View{
                                                         y.printStackTrace();
                                                     }
                                                   postInvalidate();
+                                                  }
                                                 }
                                             }
                                         }
@@ -539,6 +545,9 @@ class MwBattleFieldMap extends View{
             mHandler.removeCallbacks(mRunnable);
             mwJohnAnimationRule = false;
             mwHero.mwHeroAttackRule = false;
+            
+            l = 100;
+            
         }
         return super.onTouchEvent(event);
     }
