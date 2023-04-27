@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.graphics.RectF;
@@ -64,6 +65,11 @@ class MwBattleFieldMap extends View{
     public int mwMobSpawnY = 0;
     public boolean mwMobSpawnRule = true;
     public int l;
+    public boolean mwJohnAnimationRule = false;
+    
+    public Handler mHandler;
+    public Runnable mRunnable;
+
     
     
     MwHero mwHero = new MwHero();
@@ -79,6 +85,19 @@ class MwBattleFieldMap extends View{
     
 	public MwBattleFieldMap (Context context){
 		super(context);
+        
+        mwJohn = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_hero_john_animation_walk_2);
+        
+        mHandler = new Handler();
+        mRunnable = new Runnable() {
+        @Override
+        public void run() {
+                mwJohnAnimationRule = false;
+                mwHero.mwHeroAttackRule = false;
+                
+            mwJohn = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_hero_john_animation_walk_2);
+        }
+    };
     
         
         // Draw objects
@@ -101,37 +120,6 @@ class MwBattleFieldMap extends View{
         mwMobHp4 = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_mob_hp);
         mwMobHp5 = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_mob_hp);
         mwMobHp6 = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_mob_hp);
-        
-        
-        new Thread(new Runnable() { 
-        @Override
-                public void run() {
-            while(true) {
-              if (mwHero.mwHeroAttackRule == false) {        
-                for(int i = 0; i < mwJohnWalkBitmaps.length; i++) {
-                    currentFrame = i;
-                           mwJohn = mwJohnWalkBitmaps[i];
-                    try {
-                        Thread.sleep(1000L / fps);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                                    
-                    }
-                }
-              } else {
-                  for(int a = 0; a < mwJohnAttackBitmaps.length; a++) {
-                    currentFrame = a;
-                           mwJohn = mwJohnAttackBitmaps[a];
-                                l = a;
-                    try {
-                        Thread.sleep(1000L / fps);
-                    } catch (InterruptedException y) {
-                        y.printStackTrace();
-                    }
-                 }
-               }   
-            }
-        } } ).start();
         
         new Thread(new Runnable(){
             @Override
@@ -167,52 +155,7 @@ class MwBattleFieldMap extends View{
       }
 
     Paint paint = new Paint();
-    
-public boolean onTouchEvent(MotionEvent event){
-        
-        // Detect click using x y z
-       float xControll = event.getX();
-       float yControll = event.getY();
-        
-    if(event.getAction() == MotionEvent.ACTION_DOWN)
-        
-        
-       if(xControll > 300f && xControll < 440f && yControll > 1600f && yControll < 1740f)
-        {
-            mwHero.mwHeroY -= 30;
-            mwHero.mwHeroW -= 30;
-        }
-        if(xControll > 300f && xControll < 440f && yControll > 2000f && yControll < 2140f)
-        {
-            mwHero.mwHeroY += 30;
-            mwHero.mwHeroW += 30;
-        }
-        if(xControll > 100f && xControll < 240f && yControll > 1800f && yControll < 1940f)
-        {
-            mwHero.mwHeroX -= 30;
-            mwHero.mwHeroZ -= 30;
-        }
-        if(xControll > 500f && xControll < 640f && yControll > 1800f && yControll < 1940f)
-        {
-            mwHero.mwHeroX += 30;
-            mwHero.mwHeroZ += 30;
-        }
-        if(xControll > 750f && xControll < 890f && yControll > 1800f && yControll < 1940f)
-        {
-            mwHero.MwHeroAttack();
-            
-            if (mwHero.getCollisionRect().CollidesWith(mwMob.getCollisionRect())) {
-                mwHero.mwHeroY += 20;
-                mwHero.mwHeroW += 20;
-                mwMob.mwSlimeY -= 10;
-                mwMob.mwSlimeW -= 10;
-                mwMob.mwSlimeHp -= 1;
-            }
-            
-        }
-    return super.onTouchEvent(event);
-}
-    
+
 	@Override
 	protected void onDraw(Canvas canvas) {
         
@@ -435,4 +378,168 @@ public boolean onTouchEvent(MotionEvent event){
         canvas.drawBitmap(mwButtonAttack, null, new RectF(750f, 1800f, 890f, 1940f), null);
         invalidate();
         }
+    public boolean onTouchEvent(MotionEvent event) {
+
+        // Detect click using x y z
+        float xControll = event.getX();
+        float yControll = event.getY();
+
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+
+            if (xControll > 300f && xControll < 440f && yControll > 1600f && yControll < 1740f) {
+                mwHero.mwHeroY -= 30;
+                mwHero.mwHeroW -= 30;
+                
+                    if(mwJohnAnimationRule == false){
+                    mwJohnAnimationRule = true;
+                    mHandler.postDelayed(mRunnable, 1000);
+                    new Thread(
+                                    new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            while (mwJohnAnimationRule) {
+
+                                                for (int i = 0; i < mwJohnWalkBitmaps.length; i++) {
+                                                    currentFrame = i;
+                                                    mwJohn = mwJohnWalkBitmaps[i];
+                                                    try {
+                                                        Thread.sleep(1000L / fps);
+                                                    } catch (InterruptedException y) {
+                                                        y.printStackTrace();
+                                                    }
+                                                  postInvalidate();
+                                                }
+                                            }
+                                        }
+                                    })
+                            .start();
+                    }
+                }
+            if (xControll > 300f && xControll < 440f && yControll > 2000f && yControll < 2140f) {
+                mwHero.mwHeroY += 30;
+                mwHero.mwHeroW += 30;
+                
+                if(mwJohnAnimationRule == false){
+                    mwJohnAnimationRule = true;
+                    mHandler.postDelayed(mRunnable, 1000);
+                    new Thread(
+                                    new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            while (mwJohnAnimationRule) {
+
+                                                for (int i = 0; i < mwJohnWalkBitmaps.length; i++) {
+                                                    currentFrame = i;
+                                                    mwJohn = mwJohnWalkBitmaps[i];
+                                                    try {
+                                                        Thread.sleep(1000L / fps);
+                                                    } catch (InterruptedException y) {
+                                                        y.printStackTrace();
+                                                    }
+                                                  postInvalidate();
+                                                }
+                                            }
+                                        }
+                                    })
+                            .start();
+                    }
+                
+            }
+            if (xControll > 100f && xControll < 240f && yControll > 1800f && yControll < 1940f) {
+                mwHero.mwHeroX -= 30;
+                mwHero.mwHeroZ -= 30;
+                
+                if(mwJohnAnimationRule == false){
+                    mwJohnAnimationRule = true;
+                    mHandler.postDelayed(mRunnable, 1000);
+                    new Thread(
+                                    new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            while (mwJohnAnimationRule) {
+
+                                                for (int i = 0; i < mwJohnWalkBitmaps.length; i++) {
+                                                    currentFrame = i;
+                                                    mwJohn = mwJohnWalkBitmaps[i];
+                                                    try {
+                                                        Thread.sleep(1000L / fps);
+                                                    } catch (InterruptedException y) {
+                                                        y.printStackTrace();
+                                                    }
+                                                  postInvalidate();
+                                                }
+                                            }
+                                        }
+                                    })
+                            .start();
+                    }
+            }
+            if (xControll > 500f && xControll < 640f && yControll > 1800f && yControll < 1940f) {
+                mwHero.mwHeroX += 30;
+                mwHero.mwHeroZ += 30;
+                
+                if(mwJohnAnimationRule == false){
+                    mwJohnAnimationRule = true;
+                    mHandler.postDelayed(mRunnable, 1000);
+                    new Thread(
+                                    new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            while (mwJohnAnimationRule) {
+
+                                                for (int i = 0; i < mwJohnWalkBitmaps.length; i++) {
+                                                    currentFrame = i;
+                                                    mwJohn = mwJohnWalkBitmaps[i];
+                                                    try {
+                                                        Thread.sleep(1000L / fps);
+                                                    } catch (InterruptedException y) {
+                                                        y.printStackTrace();
+                                                    }
+                                                  postInvalidate();
+                                                }
+                                            }
+                                        }
+                                    })
+                            .start();
+                    }
+            }
+            if (xControll > 750f && xControll < 890f && yControll > 1800f && yControll < 1940f) {
+                mwHero.MwHeroAttack();
+                
+                mHandler.postDelayed(mRunnable, 1000);
+                new Thread(new Runnable() { 
+        @Override
+                public void run() {
+        if (mwHero.mwHeroAttackRule == true) {                          
+            while(mwHero.mwHeroAttackRule) {
+                  for(int a = 0; a < mwJohnAttackBitmaps.length; a++) {
+                    currentFrame = a;
+                    mwJohn = mwJohnAttackBitmaps[a];
+                    try {
+                        Thread.sleep(1000L / fps);
+                    } catch (InterruptedException y) {
+                        y.printStackTrace();
+                    }
+                    postInvalidate();                
+                  }
+            }
+        }
+        } } ).start();
+                
+                if (mwHero.getCollisionRect().CollidesWith(mwMob.getCollisionRect())) {
+                    mwHero.mwHeroY += 20;
+                    mwHero.mwHeroW += 20;
+                    mwMob.mwSlimeY -= 10;
+                    mwMob.mwSlimeW -= 10;
+                    mwMob.mwSlimeHp -= 1;
+                }
+            }
+        }
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            mHandler.removeCallbacks(mRunnable);
+            mwJohnAnimationRule = false;
+            mwHero.mwHeroAttackRule = false;
+        }
+        return super.onTouchEvent(event);
+    }
 }
