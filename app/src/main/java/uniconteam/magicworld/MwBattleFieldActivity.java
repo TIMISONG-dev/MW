@@ -64,8 +64,8 @@ class MwBattleFieldMap extends View{
     public int mwMobSpawnX = 0;
     public int mwMobSpawnY = 0;
     public boolean mwMobSpawnRule = true;
-    public int l;
     public boolean mwJohnAnimationRule = false;
+    public boolean mwHeroAttackRule = false;
     
     public Handler mHandler;
     public Runnable mRunnable;
@@ -93,9 +93,9 @@ class MwBattleFieldMap extends View{
                 new Runnable() {
                     @Override
                     public void run() {
-                        mwJohn = BitmapFactory.decodeResource(context.getResources(),R.drawable.magicworld_hero_john_animation_walk_2);
                         mwJohnAnimationRule = false;
-                        mwHero.mwHeroAttackRule = false;
+                        mwHeroAttackRule = false;
+                        mwJohn = BitmapFactory.decodeResource(context.getResources(),R.drawable.magicworld_hero_john_animation_walk_2);
                     }
                 };
 
@@ -190,19 +190,7 @@ class MwBattleFieldMap extends View{
         mwMob.mwSlimeW = mwMobSpawnY+110;
         }
         
-        // not collision
-        
         /*
-        if(mwHero.mwHeroHp != 0){
-        if ((mwHero.mwHeroY == mwMob.mwSlimeY + 70 || mwHero.mwHeroY == mwMob.mwSlimeY + 71 ||mwHero.mwHeroY == mwMob.mwSlimeY + 72 ||mwHero.mwHeroY == mwMob.mwSlimeY + 73 || mwHero.mwHeroY == mwMob.mwSlimeY + 74 || mwHero.mwHeroY == mwMob.mwSlimeY + 75 || mwHero.mwHeroY == mwMob.mwSlimeY + 76 || mwHero.mwHeroY == mwMob.mwSlimeY + 77 || mwHero.mwHeroY == mwMob.mwSlimeY + 78 || mwHero.mwHeroY == mwMob.mwSlimeY + 79 || mwHero.mwHeroY == mwMob.mwSlimeY + 80 || mwHero.mwHeroY == mwMob.mwSlimeY + 81 || mwHero.mwHeroY == mwMob.mwSlimeY + 82 || mwHero.mwHeroY == mwMob.mwSlimeY + 83 || mwHero.mwHeroY == mwMob.mwSlimeY + 84 || mwHero.mwHeroY == mwMob.mwSlimeY + 85 || mwHero.mwHeroY == mwMob.mwSlimeY + 86 || mwHero.mwHeroY == mwMob.mwSlimeY + 87 || mwHero.mwHeroY == mwMob.mwSlimeY + 88 || mwHero.mwHeroY == mwMob.mwSlimeY + 89 || mwHero.mwHeroY == mwMob.mwSlimeY + 90 || mwHero.mwHeroY == mwMob.mwSlimeY + 91 || mwHero.mwHeroY == mwMob.mwSlimeY + 92 || mwHero.mwHeroY == mwMob.mwSlimeY + 93 || mwHero.mwHeroY == mwMob.mwSlimeY + 94 || mwHero.mwHeroY == mwMob.mwSlimeY + 95 || mwHero.mwHeroY == mwMob.mwSlimeY + 96 || mwHero.mwHeroY == mwMob.mwSlimeY + 97)){
-            mwHero.mwHeroHp -= 1;
-            mwHero.mwHeroY += 100;
-            mwHero.mwHeroW += 100;        
-            mwMob.mwSlimeY += 50;
-            mwMob.mwSlimeW += 50;
-          }
-        } */
-        
         // Debug
         paint.setColor(Color.WHITE); 
         canvas.drawPaint(paint); 
@@ -213,14 +201,14 @@ class MwBattleFieldMap extends View{
         canvas.drawText(String.valueOf(mwHero.mwHeroY), 10, 235, paint);
         canvas.drawText(String.valueOf(mwHero.mwHeroX), 250, 235, paint);
         canvas.drawText("Debug", 10, 55, paint);
+        */ 
         
-        /*
         Paint rect_paint = new Paint();
         rect_paint.setStyle(Paint.Style.FILL);
         rect_paint.setColor(Color.rgb(0, 0, 0));
         rect_paint.setAlpha(0x80); // optional
         canvas.drawRect(0, 0, 100, 100, rect_paint);
-        */
+        
         BitmapFactory.Options opt = new BitmapFactory.Options();
         opt.inMutable = true;
         Bitmap brightBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_icon_coin, opt); 
@@ -510,28 +498,33 @@ class MwBattleFieldMap extends View{
                     }
             }
             if (xControll > 750f && xControll < 890f && yControll > 1800f && yControll < 1940f) {
-                mwHero.MwHeroAttack();
-                
-                mHandler.postDelayed(mRunnable, 1000);
-                new Thread(new Runnable() { 
-        @Override
-                public void run() {
-        if (mwHero.mwHeroAttackRule == true) {                          
-            while(mwHero.mwHeroAttackRule) {
-                  for(int a = 0; a < mwJohnAttackBitmaps.length; a++) {
-                    currentFrame = a;
-                    mwJohn = mwJohnAttackBitmaps[a];
-                    try {
-                        Thread.sleep(1000L / fps);
-                    } catch (InterruptedException y) {
-                        y.printStackTrace();
+              if(mwHeroAttackRule == false){
+                mwHeroAttackRule = true;    
+                mHandler.postDelayed(mRunnable, 500);
+                new Thread(
+                                new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        while (mwHeroAttackRule) {
+                                            for (int a = 0; a < mwJohnAttackBitmaps.length; a++) {
+                                              if(mwHeroAttackRule){
+                                                currentFrame = a;
+                                                mwJohn = mwJohnAttackBitmaps[a];
+                                                try {
+                                                    Thread.sleep(1000L / fps);
+                                                } catch (InterruptedException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                            postInvalidate();
+                                            }
+                                        }
+                                    }
+                                })
+                        .start();
                     }
-                    postInvalidate();                
-                  }
-            }
-        }
-        } } ).start();
-                
+
                 if (mwHero.getCollisionRect().CollidesWith(mwMob.getCollisionRect())) {
                     mwHero.mwHeroY += 20;
                     mwHero.mwHeroW += 20;
@@ -544,10 +537,7 @@ class MwBattleFieldMap extends View{
         if (event.getAction() == MotionEvent.ACTION_UP) {
             mHandler.removeCallbacks(mRunnable);
             mwJohnAnimationRule = false;
-            mwHero.mwHeroAttackRule = false;
-            
-            l = 100;
-            
+            mwHeroAttackRule = false;
         }
         return super.onTouchEvent(event);
     }
