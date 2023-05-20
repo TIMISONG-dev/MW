@@ -148,6 +148,8 @@ public class MwPlayHomeActivity extends AppCompatActivity {
     public static Boolean mwAnimRuleThr3 = true; // Bool for allowing or denying mwClick
     public static ImageView mwAnimImageDataThr3;
     
+    public static String mwItemTab1d;
+    
     MwTutorial mwTutorial = new MwTutorial();
     MwHouseMenu mwHouseMenu = new MwHouseMenu();
     MwHouseMain mwHouseMain = new MwHouseMain();

@@ -1,24 +1,14 @@
 package uniconteam.magicworld;
 
-import android.animation.ObjectAnimator;
-import android.view.View;
-import androidx.appcompat.app.AppCompatActivity;
-import java.util.Timer;
-import java.util.TimerTask;
-
-public class MwHero extends AppCompatActivity {
+public class MwHero {
     
     MwCollisionRect rect;
     
-    public int mwHeroHp = 6;
-    public float mwHeroX = 100;
-    public float mwHeroY = 1100;
-    public float mwHeroZ = 200;
-    public float mwHeroW = 1200;
-
-    public TimerTask mwTimerTask;
-    public Timer _mwTimerTask = new Timer();
-    
+    public static int mwHeroHp = 6;
+    public static float mwHeroX = 200;
+    public static float mwHeroY = 1100;
+    public static float mwHeroZ = 300;
+    public static float mwHeroW = 1200;
     
    public void MwHeroSpw(){
    this.rect = new MwCollisionRect(mwHeroX, mwHeroY, 100f, 100f);
@@ -27,4 +17,20 @@ public class MwHero extends AppCompatActivity {
    public MwCollisionRect getCollisionRect(){
         return rect;
    }
+   public void mwHeroUp(){
+       mwHeroY -= 30;
+       mwHeroW -= 30;
+   }
+   public void mwHeroDown(){
+       mwHeroY += 30;
+       mwHeroW += 30;
+   }
+   public void mwHeroLeft(){
+       mwHeroX -= 30;
+       mwHeroZ -= 30;
+   }
+   public void mwHeroRight(){
+       mwHeroX += 30;
+       mwHeroZ += 30;
+   } 
 }
