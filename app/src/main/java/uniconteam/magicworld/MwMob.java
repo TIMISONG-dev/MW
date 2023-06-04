@@ -39,6 +39,15 @@ public class MwMob extends AppCompatActivity{
     public static float mwSlimeW = 0;
     public static int mwSlimeHp = 6;
     
+    public void mwSlimeHpCheck(){
+        if(mwSlimeHp == 0 || mwSlimeHp < 0){
+            mwSlimeX = 24000;
+            mwSlimeY = 24000;
+            mwSlimeZ = 24000;
+            mwSlimeW = 24000;
+        }
+    }
+    
     public void mwSlimeRand(){
         mwTimerTask =
                 new TimerTask() {

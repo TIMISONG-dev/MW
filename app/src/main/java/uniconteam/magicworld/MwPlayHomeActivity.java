@@ -149,16 +149,22 @@ public class MwPlayHomeActivity extends AppCompatActivity {
     public static ImageView mwAnimImageDataThr3;
     
     public static String mwItemTab1d;
+    public static String mwItemTab2d;
+    public static String mwItemTab3d;
     
     MwTutorial mwTutorial = new MwTutorial();
     MwHouseMenu mwHouseMenu = new MwHouseMenu();
     MwHouseMain mwHouseMain = new MwHouseMain();
+    MwInventory mwInventory = new MwInventory();
+    
+    public static TextView test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mwplayhome);
         initialize(savedInstanceState);
+        mwInventory.mwDataInventory();
     }
 
     @Override
@@ -244,6 +250,7 @@ public class MwPlayHomeActivity extends AppCompatActivity {
         mwTutorialBoxText = findViewById(R.id.mwTutorialBoxText); // Tutorial text
         mwTutorialBoxIcon = findViewById(R.id.mwTutorialBoxIcon); // Tutorial icon
         mwCloseBoxLinear = findViewById(R.id.mwCloseBoxLinear); // Close icon
+        test = findViewById(R.id.test);
 
         MwConsortium mwConsortium = new MwConsortium(); // MwConsortium - MW engine - initialize
         MwPlayMainActivity.mwActivity = "mwHome";

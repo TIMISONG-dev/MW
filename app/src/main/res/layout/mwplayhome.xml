@@ -304,6 +304,12 @@
 				android:background="@drawable/magicworld_block_grass"/>
 		</LinearLayout>
 	</LinearLayout>
+    <TextView
+        android:id="@+id/test"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:padding="8dp"
+        android:text="test"/>
 	<LinearLayout
 		android:id="@+id/mwItemBoxLinear"
 		android:layout_width="wrap_content"
