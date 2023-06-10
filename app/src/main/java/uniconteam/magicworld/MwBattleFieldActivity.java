@@ -15,4 +15,14 @@ public class MwBattleFieldActivity extends AppCompatActivity {
             getWindow().setNavigationBarColor(Color.parseColor("#2C6E3C"));
         }
     }
+    @Override
+    protected void onPause(){
+        super.onPause();
+        MwBattleFieldMap.mwGameStoped = true;
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        MwBattleFieldMap.mwGameStoped = false;
+    }
 }

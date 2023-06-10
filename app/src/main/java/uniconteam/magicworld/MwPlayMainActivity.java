@@ -246,6 +246,10 @@ public class MwPlayMainActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                    
+                        MwHero.mwHeroX = 500;
+                        MwHero.mwHeroY = 1000;
+                         
                         if (mwAnimRuleThr1) {
                             mwAnimObjDataThr1 = mwBattleFieldButton;
                             mwAnimDataXThr1 = mwBattleFieldButtonObjAnimationScaleX;

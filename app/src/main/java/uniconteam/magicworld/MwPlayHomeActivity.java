@@ -30,9 +30,9 @@ public class MwPlayHomeActivity extends AppCompatActivity {
 	public LinearLayout mwWinBoxLinear;
 	public TextView mwWinBoxCupCount;
 	public LinearLayout mwItemBoxLinear;
-	public LinearLayout mwItemTab1;
-	public LinearLayout mwItemTab2;
-	public LinearLayout mwItemTab3;
+	public static LinearLayout mwItemTab1;
+	public static LinearLayout mwItemTab2;
+	public static LinearLayout mwItemTab3;
     public ImageView mwBlockTab1;
     public ImageView mwBlockTab2;
     public ImageView mwBlockTab3;

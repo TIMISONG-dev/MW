@@ -16,9 +16,14 @@ public class MwInventory extends AppCompatActivity {
     }
     public void mwDataInventory(){
         for(int i = 1; i < 4; i++){
-            String m = String.join("", "mwItemTab", Integer.toString(i), "d");
+            String slot = String.join("", "mwItemTab", Integer.toString(i), "d");
+            String[] mwItems = new String[]{"mwCoinHouse", "mwGardenHouse", "mwWorkshop","mwEnchTable"};
             
-            MwPlayHomeActivity.test.setText(m);
+            if(mwItems[i] == "mwEnchTable"){
+                MwPlayHomeActivity.mwItemTab1.setBackgroundResource(R.drawable.magicworld_house_coinhouse);
+            }
+            
+            MwPlayHomeActivity.test.setText(mwItems[i]);
         }
     }
 }

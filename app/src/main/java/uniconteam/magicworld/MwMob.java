@@ -8,10 +8,20 @@ import java.util.stream.IntStream;
 
 public class MwMob extends AppCompatActivity{
     
+    @Override
+    protected void onPause(){
+        super.onPause();
+        mwTimer.purge();
+        mwTimer.cancel();
+        mwTimerTask.cancel();
+    }
+    
     MwCollisionRect rect;
+    
+    MwBattleFieldActivity mwb = new MwBattleFieldActivity();
 
     public TimerTask mwTimerTask;
-	public Timer _mwTimerTask  = new Timer();
+	public Timer mwTimer = new Timer();
     
     public boolean mwSlimeXUpAcept = true;
     public boolean mwSlimeYUpAcept = true;
@@ -35,60 +45,48 @@ public class MwMob extends AppCompatActivity{
     
     public static float mwSlimeX = 0;
     public static float mwSlimeY = 0;
-    public static float mwSlimeZ = 0;
-    public static float mwSlimeW = 0;
     public static int mwSlimeHp = 6;
     
     public void mwSlimeHpCheck(){
         if(mwSlimeHp == 0 || mwSlimeHp < 0){
             mwSlimeX = 24000;
             mwSlimeY = 24000;
-            mwSlimeZ = 24000;
-            mwSlimeW = 24000;
         }
     }
-    
-    public void mwSlimeRand(){
-        mwTimerTask =
-                new TimerTask() {
-                    @Override
-                    public void run() {
-                        runOnUiThread(
-                                new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        if (Math.abs(mwSlimeX - MwHero.mwHeroX) <= 300 || Math.abs(mwSlimeY - MwHero.mwHeroY) <= 300) {
-                                           if (mwSlimeX < MwHero.mwHeroX) {
-                                               mwSlimeWay = 3;
-                                               mwSlimeDur = ThreadLocalRandom.current().nextInt(1, 6 + 1);
-                                               mwSlimeRoad();
-                                           } else 
-                                               if (mwSlimeX > MwHero.mwHeroX) {
-                                                  mwSlimeWay = 4;
-                                                  mwSlimeDur = ThreadLocalRandom.current().nextInt(1, 6 + 1);
-                                                  mwSlimeRoad();
-                                               }
-                                                  if (mwSlimeY < MwHero.mwHeroY) {
-                                                   mwSlimeWay = 1;
-                                                   mwSlimeDur = ThreadLocalRandom.current().nextInt(1, 6 + 1);
-                                                   mwSlimeRoad();
-                                                  } else 
-                                                      if (mwSlimeY > MwHero.mwHeroY) {
-                                                          mwSlimeWay = 2;
-                                                          mwSlimeDur = ThreadLocalRandom.current().nextInt(1, 6 + 1);
-                                                          mwSlimeRoad();
-                                                    }
-                                        } else {
-                                            mwSlimeWay = ThreadLocalRandom.current().nextInt(1, 4 + 1);
-                                            mwSlimeDur = ThreadLocalRandom.current().nextInt(1, 6 + 1);
-                                            mwSlimeRoad();
-                                        }
-                                   }
-                                });
+    public void mwSlimeRand() {
+      mwTimerTask = new TimerTask() {
+        @Override
+        public void run() {
+            runOnUiThread(() -> {
+                if (Math.abs(mwSlimeX - MwHero.mwHeroX) <= 300 || Math.abs(mwSlimeY - MwHero.mwHeroY) <= 300) {
+                    if (mwSlimeX < MwHero.mwHeroX) {
+                        mwSlimeWay = 3;
+                        mwSlimeRoad();
+                    } else 
+                    if (mwSlimeX > MwHero.mwHeroX) {
+                        mwSlimeWay = 4;
+                        mwSlimeRoad();
                     }
-                };
-        _mwTimerTask.scheduleAtFixedRate(mwTimerTask, 500, 500);
+                    if (mwSlimeY < MwHero.mwHeroY) {
+                        mwSlimeWay = 1;
+                        mwSlimeRoad();
+                    } else 
+                    if (mwSlimeY > MwHero.mwHeroY) {
+                        mwSlimeWay = 2;
+                        mwSlimeRoad();
+                    }
+                    mwSlimeDur = ThreadLocalRandom.current().nextInt(1, 6 + 1);
+                } else {
+                    mwSlimeWay = ThreadLocalRandom.current().nextInt(1, 4 + 1);
+                    mwSlimeDur = ThreadLocalRandom.current().nextInt(1, 6 + 1);
+                }
+                mwSlimeRoad();
+            });
+        }
+     };
+     mwTimer.scheduleAtFixedRate(mwTimerTask, 500, 500);
     }
+
     
     public void MwSlimeSpw(){
         this.rect = new MwCollisionRect(mwSlimeX, mwSlimeY, 100f, 100f);
@@ -100,7 +98,6 @@ public class MwMob extends AppCompatActivity{
       if (mwSlimeWay == 1){
         for (int yu = 0; yu < mwSlimeDur; yu++){
             mwSlimeY += 5;
-            mwSlimeW += 5;
         }
       }
     }
@@ -108,7 +105,6 @@ public class MwMob extends AppCompatActivity{
       if (mwSlimeWay == 2){
         for (int dy = 0; dy < mwSlimeDur; dy++){
             mwSlimeY -= 5;
-            mwSlimeW -= 5;
         }
       }
     }        
@@ -116,7 +112,6 @@ public class MwMob extends AppCompatActivity{
       if (mwSlimeWay == 3){
         for (int ux = 0; ux < mwSlimeDur; ux++){
             mwSlimeX += 5;
-            mwSlimeZ += 5;
         }
       }  
     }
@@ -124,7 +119,6 @@ public class MwMob extends AppCompatActivity{
       if (mwSlimeWay == 4){
         for (int dx = 0; dx < mwSlimeDur; dx++){
             mwSlimeX -= 5;
-            mwSlimeZ -= 5;
         }
       } 
     }         
@@ -148,7 +142,7 @@ public class MwMob extends AppCompatActivity{
               });
             }
        };
-        _mwTimerTask.scheduleAtFixedRate(mwTimerTask, 2000, 2000);
+        mwTimer.scheduleAtFixedRate(mwTimerTask, 2000, 2000);
        }
    }
 }

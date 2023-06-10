@@ -15,6 +15,10 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class MwBattleFieldMap extends View{
     
+    MwMob mwMob = new MwMob();
+    MwHero mwHero = new MwHero();
+    MwConsortium mwConsortium = new MwConsortium();
+    
     void drawHealthBar(float rx, float ry, Canvas canvas, Bitmap hearth, int size, int hpCount, int hpp) {
         int heartSize = size;
         int padding = hpp;
@@ -24,7 +28,6 @@ public class MwBattleFieldMap extends View{
             float y = ry;
             canvas.drawBitmap(hearth, null, new RectF( x+(padding*i), y, x+(padding*i)+heartSize, y+heartSize), null);
         }
-        
         mwHero.mwHeroHpCheck();
         mwMob.mwSlimeHpCheck();
     }
@@ -49,21 +52,17 @@ public class MwBattleFieldMap extends View{
     private int mwTouchTime = 0;
     public int mwCanvasX;
     public int mwCanvasY;
-    public int mwMobTimer = 0;
+    public static int mwMobTimer = 0;
     public int mwMobSpawnX = 0;
     public int mwMobSpawnY = 0;
     public boolean mwMobSpawnRule = true;
     public boolean mwJohnAnimationRule = false;
     public boolean mwHeroAttackRule = false;
+    public static boolean mwGameStoped = false;
     
     public Handler mHandler;
     public Runnable mRunnable;
 
-    MwMob mwMob = new MwMob();
-    MwHero mwHero = new MwHero();
-    MwConsortium mwConsortium = new MwConsortium();
-    
-    
     // Array animation john and slime
     Bitmap[] mwJohnWalkBitmaps = new Bitmap[]{ BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_walk_1), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_walk_2), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_walk_3),};
     Bitmap[] mwJohnAttackBitmaps = new Bitmap[]{ BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_fight_1), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_fight_2), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_fight_3),};
@@ -144,13 +143,6 @@ public class MwBattleFieldMap extends View{
             mwMobTimer += 1;
             }
         }    
-        
-        if (mwBiome.equals("landscape")){
-            canvas.drawColor(Color.parseColor("#2C6E3C"));
-        }
-        if (mwBiome.equals("desert")){
-            canvas.drawColor(Color.parseColor("#2C6E3C"));
-        }
         mwCanvasX = canvas.getWidth();
         mwCanvasY = canvas.getHeight();
        
@@ -159,9 +151,7 @@ public class MwBattleFieldMap extends View{
         mwMobSpawnX = ThreadLocalRandom.current().nextInt(100, mwCanvasX - 199);
         mwMobSpawnY = ThreadLocalRandom.current().nextInt(100, mwCanvasY - 199);
         MwMob.mwSlimeX = mwMobSpawnX;
-        MwMob.mwSlimeZ = mwMobSpawnX+100;
         MwMob.mwSlimeY = mwMobSpawnY;
-        MwMob.mwSlimeW = mwMobSpawnY+110;
         }
         
         
@@ -182,16 +172,21 @@ public class MwBattleFieldMap extends View{
         // Background
         Paint rect_paint = new Paint();
         rect_paint.setStyle(Paint.Style.FILL);
-        rect_paint.setColor(Color.rgb(0, 0, 0));
-        rect_paint.setAlpha(0x80); // optional
-        canvas.drawRect(0, 0, 100, 100, rect_paint);
+        rect_paint.setColor(Color.parseColor("#2C6E3C"));
+        rect_paint.setAlpha(0x100); // optional 
+        canvas.drawRect(0, 0, 1200, 1000, rect_paint);
+        rect_paint.setStyle(Paint.Style.FILL);
+        rect_paint.setColor(Color.parseColor("#f2ae24"));
+        rect_paint.setAlpha(0x100); // optional 
+        canvas.drawRect(0f, 1000f, 2200f, 2200f, rect_paint);
+        
         
         BitmapFactory.Options opt = new BitmapFactory.Options();
         opt.inMutable = true;
         Bitmap brightBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_icon_coin, opt); 
         Canvas hero = new Canvas(brightBitmap);
-        hero.drawBitmap(mwJohn, null, new RectF(MwHero.mwHeroX, MwHero.mwHeroY, MwHero.mwHeroZ, MwHero.mwHeroW), null);
-        canvas.drawBitmap(mwJohn, null, new RectF(MwHero.mwHeroX, MwHero.mwHeroY, MwHero.mwHeroZ, MwHero.mwHeroW), null);
+        hero.drawBitmap(mwJohn, null, new RectF(MwHero.mwHeroX, MwHero.mwHeroY, MwHero.mwHeroX + 100, MwHero.mwHeroY + 100), null);
+        canvas.drawBitmap(mwJohn, null, new RectF(MwHero.mwHeroX, MwHero.mwHeroY, MwHero.mwHeroX + 100, MwHero.mwHeroY + 100), null);
         
         // Tikvach
         canvas.drawBitmap(mwTikvach, null, new RectF(850f, 1900f, 990f, 2040f), null);
@@ -235,10 +230,8 @@ public class MwBattleFieldMap extends View{
         if (mwHero.getCollisionRect().CollidesWith(mwMob.getCollisionRect())) {
             if(mwMob.mwSlimeCooldown == false){
                 mwMob.MwMobCooldown();
-                MwHero.mwHeroY += 10;
-                MwHero.mwHeroW += 10;
-                MwMob.mwSlimeY -= 10;
-                MwMob.mwSlimeW -= 10;
+                MwHero.mwHeroY += 50;
+                MwMob.mwSlimeY -= 50;
                 MwHero.mwHeroHp -= 1;
             }
         }
@@ -246,7 +239,7 @@ public class MwBattleFieldMap extends View{
         drawHealthBar(MwMob.mwSlimeX-100, MwMob.mwSlimeY-50, canvas, mwMobHp, 64, MwMob.mwSlimeHp, -18);
         drawHealthBar(500f, 1600f, canvas, mwHeroHp, 124, MwHero.mwHeroHp, -38);
         
-        canvas.drawBitmap(mwSlime, null, new RectF(MwMob.mwSlimeX, MwMob.mwSlimeY, MwMob.mwSlimeZ, MwMob.mwSlimeW), null);
+        canvas.drawBitmap(mwSlime, null, new RectF(MwMob.mwSlimeX, MwMob.mwSlimeY, MwMob.mwSlimeX + 100, MwMob.mwSlimeY + 100), null);
         canvas.drawBitmap(mwButtonUp, null, new RectF(300f, 1600f, 440f, 1740f), null);
         canvas.drawBitmap(mwButtonDown, null, new RectF(300f, 2000f, 440f, 2140f), null);
         canvas.drawBitmap(mwButtonLeft, null, new RectF(100f, 1800f, 240f, 1940f), null);
@@ -408,9 +401,7 @@ public class MwBattleFieldMap extends View{
 
                 if (mwHero.getCollisionRect().CollidesWith(mwMob.getCollisionRect())) {
                     MwHero.mwHeroY += 20;
-                    MwHero.mwHeroW += 20;
                     MwMob.mwSlimeY -= 10;
-                    MwMob.mwSlimeW -= 10;
                     MwMob.mwSlimeHp -= 1;
                 }
             }
