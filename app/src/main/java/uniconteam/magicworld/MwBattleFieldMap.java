@@ -31,22 +31,30 @@ public class MwBattleFieldMap extends View{
         mwHero.mwHeroHpCheck();
         mwMob.mwSlimeHpCheck();
     }
+    void drawPlants(Canvas canvas, float x, float y, int count){
+        for(int i = 0; i < count; i++){
+            canvas.drawBitmap(mwMapBush, null, new RectF(x, y, x+100, y+100), null);
+            canvas.drawBitmap(mwMapTree, null, new RectF(x+500, y+700, x+600, y+800), null);
+        }
+    }
     
 	// All objects
     public Bitmap mwJohn; // John hero image
     public Bitmap mwSlime; // Slime image
     public Bitmap mwTikvach; // Tikvach image
-    private Bitmap mwButtonUp; // Buttons 1-4 \/
-    private Bitmap mwButtonDown;
-    private Bitmap mwButtonLeft;
-    private Bitmap mwButtonRight;
-    private Bitmap mwHeroHp; // Hero hp
-    private Bitmap mwMobHp; // Mob hp
-    private Bitmap mwHeroItem; // Hero item
-    private Bitmap mwButtonAttack; // Hero attack button
-    private String mwBiome = "landscape"; // Which background color #2C6E3C
-    private Timer mwTimer = new Timer();
-    private TimerTask mwTimerTask;
+    Bitmap mwButtonUp; // Buttons 1-4 \/
+    Bitmap mwButtonDown;
+    Bitmap mwButtonLeft;
+    Bitmap mwButtonRight;
+    Bitmap mwHeroHp; // Hero hp
+    Bitmap mwMobHp; // Mob hp
+    Bitmap mwHeroItem; // Hero item
+    Bitmap mwButtonAttack; // Hero attack button
+    Bitmap mwMapTree;
+    Bitmap mwMapBush;
+    String mwBiome = "landscape"; // Which background color #2C6E3C
+    Timer mwTimer = new Timer();
+    TimerTask mwTimerTask;
     public int currentFrame = 0;
     public int fps = 9;
     private int mwTouchTime = 0;
@@ -94,6 +102,10 @@ public class MwBattleFieldMap extends View{
         
         mwHeroHp = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_hero_hp);
         mwMobHp = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_mob_hp);
+        
+        mwMapTree = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_map_tree);
+        mwMapBush = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_map_bush);
+        
         
         new Thread(new Runnable(){
             @Override
@@ -170,16 +182,19 @@ public class MwBattleFieldMap extends View{
         */
         
         // Background
+        
+        // greenfield
         Paint rect_paint = new Paint();
         rect_paint.setStyle(Paint.Style.FILL);
         rect_paint.setColor(Color.parseColor("#2C6E3C"));
         rect_paint.setAlpha(0x100); // optional 
         canvas.drawRect(0, 0, 1200, 1000, rect_paint);
+        
+        // desert
         rect_paint.setStyle(Paint.Style.FILL);
         rect_paint.setColor(Color.parseColor("#f2ae24"));
         rect_paint.setAlpha(0x100); // optional 
-        canvas.drawRect(0f, 1000f, 2200f, 2200f, rect_paint);
-        
+        canvas.drawRect(0f, 1000f, 2200f, 2500f, rect_paint);
         
         BitmapFactory.Options opt = new BitmapFactory.Options();
         opt.inMutable = true;

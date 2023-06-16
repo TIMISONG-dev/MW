@@ -7,7 +7,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -69,10 +72,16 @@ public class MwPlayMainActivity extends AppCompatActivity {
 
     public LinearLayout mwVersionTab;
     public LinearLayout mwCompTab;
+    
+    int t = 0;
+    String r = "4";
+    String s = "2";
+    String d;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         LogSender.startLogging(this);
+        Log.println(t, r, s);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mwplaymain);
         initialize(savedInstanceState);
@@ -87,9 +96,9 @@ public class MwPlayMainActivity extends AppCompatActivity {
 
     private void initialize(Bundle savedInstanceState) {
         // Design, detect objects id, set Logo image ScaleX, ScaleY
-        if (Build.VERSION.SDK_INT >= 21) {
-            getWindow().setNavigationBarColor(Color.parseColor("#5C8368"));
-        }
+        Window w = getWindow();
+        w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, 
+        WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         mwLogoImg = findViewById(R.id.mwLogoImg);
         mwPlayButton = findViewById(R.id.mwPlayButton);
         mwBattleFieldButton = findViewById(R.id.mwBattleFieldButton);
@@ -99,6 +108,10 @@ public class MwPlayMainActivity extends AppCompatActivity {
         mwCompTab = findViewById(R.id.mwCompTab);
         mwPlayButton.setTypeface(Typeface.createFromAsset(getAssets(), "mwFonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
         mwBattleFieldButton.setTypeface(Typeface.createFromAsset(getAssets(), "mwFonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
+        
+        d = String.join("", Integer.toString(t), r, s);
+        
+        mwPlayButton.setText(d);
         
         if (Build.VERSION.SDK_INT >= 21) {
             mwVersionTab.setElevation(8f);
