@@ -166,13 +166,17 @@ public class MwPlayHomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mwplayhome);
         initialize(savedInstanceState);
-        mwInventory.mwDataInventory();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         SharedPreferences mwPlayData = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        
+        MwPlayHomeActivity.mwItemTab1d = mwPlayData.getString("mwItemTab1d", "");
+        MwPlayHomeActivity.mwItemTab2d = mwPlayData.getString("mwItemTab2d", "");
+        MwPlayHomeActivity.mwItemTab3d = mwPlayData.getString("mwItemTab3d", ""); 
+        mwInventory.mwDataInventory();
 
         mwItemSelected = mwPlayData.getString("mwItemSelected", "");
         if (mwItemSelected.equals("1")) {
@@ -213,6 +217,15 @@ public class MwPlayHomeActivity extends AppCompatActivity {
         SharedPreferences mwPlayData = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         SharedPreferences.Editor mwEditData = mwPlayData.edit();
         mwEditData.putString("mwItemSelected", mwItemSelected.toString());
+        if(mwItemTab1d == ""){
+            mwEditData.putString("mwItemTab1d", mwItemTab1d.toString());
+        }
+        if(mwItemTab2d == ""){
+            mwEditData.putString("mwItemTab2d", mwItemTab2d.toString());
+        }
+        if(mwItemTab3d == ""){
+            mwEditData.putString("mwItemTab3d", mwItemTab3d.toString());
+        }
         mwEditData.apply();
     }
 

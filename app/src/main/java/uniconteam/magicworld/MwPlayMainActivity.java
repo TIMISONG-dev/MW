@@ -110,6 +110,9 @@ public class MwPlayMainActivity extends AppCompatActivity {
         SharedPreferences.Editor mwEditData = mwPlayData.edit();
         mwEditData.putString("mwItemSelected", "1");
         mwEditData.putInt("mwTutorialLevel", 1);
+        mwEditData.putString("mwItemTab1d", "CoinHouse");
+        mwEditData.putString("mwItemTab2d", "");
+        mwEditData.putString("mwItemTab3d", "");
         mwFistOpen = mwPlayData.getString("mwFirstOpen", "");
         if(mwFistOpen == ""){
             mwEditData.putString("mwFirstOpen", "false");
