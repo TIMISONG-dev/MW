@@ -2,6 +2,7 @@ package uniconteam.magicworld;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 import com.itsaky.androidide.logsender.LogSender;
@@ -73,25 +75,64 @@ public class MwPlayMainActivity extends AppCompatActivity {
     public LinearLayout mwVersionTab;
     public LinearLayout mwCompTab;
     
-    int t = 0;
-    String r = "4";
-    String s = "2";
-    String d;
+    String mwFistOpen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         LogSender.startLogging(this);
-        Log.println(t, r, s);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mwplaymain);
         initialize(savedInstanceState);
         initializeLogic();
+
+        SharedPreferences mwPlayData = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+
+        // Получаем все записи из SharedPreferences
+        Map<String, ?> allEntries = mwPlayData.getAll();
+
+        // Перебираем все записи и выводим их на консоль или в лог
+        for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
+            String key = entry.getKey();
+            Object value = entry.getValue();
+
+            // Выводим ключ и значение на консоль или в лог
+            Log.d("mwData-SharedPreferences", key + ": " + value.toString());
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         mwActivity = "mwMain";
+        
+        // Default settings
+        SharedPreferences mwPlayData = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        SharedPreferences.Editor mwEditData = mwPlayData.edit();
+        mwEditData.putString("mwItemSelected", "1");
+        mwEditData.putInt("mwTutorialLevel", 1);
+        mwFistOpen = mwPlayData.getString("mwFirstOpen", "");
+        if(mwFistOpen == ""){
+            mwEditData.putString("mwFirstOpen", "false");
+            mwFistOpen = mwPlayData.getString("mwFirstOpen", "");
+            MwPlayHomeActivity.mwItemTab1d = "CoinHouse";
+            for (int i = 1; i < 21; i++){
+                String mwBlockTabN = "mwBlockTab" + i;
+                mwEditData.putString(mwBlockTabN, "");
+            }
+            for (int i = 2; i < 21; i++){
+                String mwBlockTabLckN = "mwBlockTabLck" + i;
+                mwEditData.putString(mwBlockTabLckN, "Lock");
+            }
+        }
+        mwEditData.apply();
+    }
+    
+    @Override
+    protected void onStop(){
+        super.onStop();
+        SharedPreferences mwPlayData = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        SharedPreferences.Editor mwEditData = mwPlayData.edit();
+        mwEditData.putString("mwFirstOpen", mwFistOpen);
     }
 
     private void initialize(Bundle savedInstanceState) {
@@ -109,9 +150,6 @@ public class MwPlayMainActivity extends AppCompatActivity {
         mwPlayButton.setTypeface(Typeface.createFromAsset(getAssets(), "mwFonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
         mwBattleFieldButton.setTypeface(Typeface.createFromAsset(getAssets(), "mwFonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
         
-        d = String.join("", Integer.toString(t), r, s);
-        
-        mwPlayButton.setText(d);
         
         if (Build.VERSION.SDK_INT >= 21) {
             mwVersionTab.setElevation(8f);

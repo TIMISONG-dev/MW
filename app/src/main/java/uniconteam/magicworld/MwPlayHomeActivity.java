@@ -34,6 +34,9 @@ public class MwPlayHomeActivity extends AppCompatActivity {
 	public static LinearLayout mwItemTab1;
 	public static LinearLayout mwItemTab2;
 	public static LinearLayout mwItemTab3;
+    public static ImageView mwItemId1;
+    public static ImageView mwItemId2;
+    public static ImageView mwItemId3;
     public ImageView mwBlockTab1;
     public ImageView mwBlockTab2;
     public ImageView mwBlockTab3;
@@ -157,8 +160,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
     MwHouseMenu mwHouseMenu = new MwHouseMenu();
     MwHouseMain mwHouseMain = new MwHouseMain();
     MwInventory mwInventory = new MwInventory();
-    
-    public static TextView test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -212,7 +213,6 @@ public class MwPlayHomeActivity extends AppCompatActivity {
         SharedPreferences mwPlayData = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         SharedPreferences.Editor mwEditData = mwPlayData.edit();
         mwEditData.putString("mwItemSelected", mwItemSelected.toString());
-        mwEditData.putInt("mwTutorialLevel", mwTutorialLevel);
         mwEditData.apply();
     }
 
@@ -247,11 +247,13 @@ public class MwPlayHomeActivity extends AppCompatActivity {
         mwBlockTab18 = findViewById(R.id.mwBlockTab18);
         mwBlockTab19 = findViewById(R.id.mwBlockTab19);
         mwBlockTab20 = findViewById(R.id.mwBlockTab20);
+        mwItemId1 = findViewById(R.id.mwItemId1);
+        mwItemId2 = findViewById(R.id.mwItemId2);
+        mwItemId3 = findViewById(R.id.mwItemId3);
         mwTutorialBoxLinear = findViewById(R.id.mwTutorialBoxLinear); // Tutorial box
         mwTutorialBoxText = findViewById(R.id.mwTutorialBoxText); // Tutorial text
         mwTutorialBoxIcon = findViewById(R.id.mwTutorialBoxIcon); // Tutorial icon
         mwCloseBoxLinear = findViewById(R.id.mwCloseBoxLinear); // Close icon
-        test = findViewById(R.id.test);
 
         MwConsortium mwConsortium = new MwConsortium(); // MwConsortium - MW engine - initialize
         MwPlayMainActivity.mwActivity = "mwHome";

@@ -1,7 +1,12 @@
 package uniconteam.magicworld;
 
 import android.content.SharedPreferences;
+import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import uniconteam.magicworld.MwPlayHomeActivity;
 
 public class MwInventory extends AppCompatActivity {
@@ -10,20 +15,35 @@ public class MwInventory extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
         SharedPreferences mwPlayData = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        
         MwPlayHomeActivity.mwItemTab1d = mwPlayData.getString("mwItemTab1d", "");
         MwPlayHomeActivity.mwItemTab2d = mwPlayData.getString("mwItemTab2d", "");
-        MwPlayHomeActivity.mwItemTab3d = mwPlayData.getString("mwItemTab3d", "");
+        MwPlayHomeActivity.mwItemTab3d = mwPlayData.getString("mwItemTab3d", ""); 
     }
+    
     public void mwDataInventory(){
-        for(int i = 1; i < 4; i++){
-            String slot = String.join("", "mwItemTab", Integer.toString(i), "d");
-            String[] mwItems = new String[]{"mwCoinHouse", "mwGardenHouse", "mwWorkshop","mwEnchTable"};
-            
-            if(mwItems[i] == "mwEnchTable"){
-                MwPlayHomeActivity.mwItemTab1.setBackgroundResource(R.drawable.magicworld_house_coinhouse);
-            }
-            
-            MwPlayHomeActivity.test.setText(mwItems[i]);
+        
+        // List of items
+        Map<String, Integer> itemIconMap = new HashMap<>();
+        itemIconMap.put("CoinHouse", R.drawable.magicworld_house_coinhouse);
+        itemIconMap.put("GardenHouse", R.drawable.magicworld_house_garden);
+        itemIconMap.put("Workshop", R.drawable.magicworld_house_workshop);
+        List<String> itemList = Arrays.asList("CoinHouse", "GardenHouse", "Workshop");
+
+        // ItemTab1    
+        if (itemList.contains(MwPlayHomeActivity.mwItemTab1d)) {
+                int iconResourceId = itemIconMap.get(MwPlayHomeActivity.mwItemTab1d);
+                MwPlayHomeActivity.mwItemId1.setImageResource(iconResourceId);
         }
+        // ItemTab2
+        if (itemList.contains(MwPlayHomeActivity.mwItemTab2d)) {
+                int iconResourceId = itemIconMap.get(MwPlayHomeActivity.mwItemTab2d);
+                MwPlayHomeActivity.mwItemId2.setImageResource(iconResourceId);
+        }
+        // ItemTab3
+        if (itemList.contains(MwPlayHomeActivity.mwItemTab3d)) {
+                int iconResourceId = itemIconMap.get(MwPlayHomeActivity.mwItemTab3d);
+                MwPlayHomeActivity.mwItemId3.setImageResource(iconResourceId);
+        } 
     }
 }

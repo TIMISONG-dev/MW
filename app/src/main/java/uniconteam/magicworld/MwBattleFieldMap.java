@@ -52,6 +52,7 @@ public class MwBattleFieldMap extends View{
     Bitmap mwButtonAttack; // Hero attack button
     Bitmap mwMapTree;
     Bitmap mwMapBush;
+    Bitmap mwJohnCard;
     String mwBiome = "landscape"; // Which background color #2C6E3C
     Timer mwTimer = new Timer();
     TimerTask mwTimerTask;
@@ -105,6 +106,8 @@ public class MwBattleFieldMap extends View{
         
         mwMapTree = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_map_tree);
         mwMapBush = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_map_bush);
+        
+        mwJohnCard = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_card_john);
         
         
         new Thread(new Runnable(){
@@ -260,6 +263,7 @@ public class MwBattleFieldMap extends View{
         canvas.drawBitmap(mwButtonLeft, null, new RectF(100f, 1800f, 240f, 1940f), null);
         canvas.drawBitmap(mwButtonRight, null, new RectF(500f, 1800f, 640f, 1940f), null);
         canvas.drawBitmap(mwButtonAttack, null, new RectF(750f, 1800f, 890f, 1940f), null);
+        canvas.drawBitmap(mwJohnCard, null, new RectF(650f, 1900f, 1150f, 2400f), null);
         invalidate();
         }
     public boolean onTouchEvent(MotionEvent event) {
