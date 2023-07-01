@@ -17,6 +17,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -87,16 +91,33 @@ public class MwPlayMainActivity extends AppCompatActivity {
 
         SharedPreferences mwPlayData = getSharedPreferences("MySharedPref", MODE_PRIVATE);
 
-        // Получаем все записи из SharedPreferences
-        Map<String, ?> allEntries = mwPlayData.getAll();
+        // Logs
+        String logFileName = "mwLogs.log";
+        File logFile = new File(getExternalFilesDir(null),logFileName);
 
-        // Перебираем все записи и выводим их на консоль или в лог
-        for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
-            String key = entry.getKey();
-            Object value = entry.getValue();
+        try {
+            logFile.createNewFile();
+            FileOutputStream fileOutputStream = new FileOutputStream(logFile);
+            PrintWriter printWriter = new PrintWriter(fileOutputStream);
+            Map<String, ?> allEntries = mwPlayData.getAll();
+            for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
+                try{
+                    String key = entry.getKey();
+                    Object value = entry.getValue();
+                
+                    String logMessage = "mwData-SharedPreferences" + key + ": " + value.toString();
 
-            // Выводим ключ и значение на консоль или в лог
-            Log.d("mwData-SharedPreferences", key + ": " + value.toString());
+                    printWriter.println(logMessage);
+                
+                } catch (Exception e){
+                    printWriter.println("Error occurred: " + e.getMessage());
+                    e.printStackTrace(printWriter);
+                }
+            }
+            printWriter.close();
+            fileOutputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -119,7 +140,7 @@ public class MwPlayMainActivity extends AppCompatActivity {
             mwFistOpen = mwPlayData.getString("mwFirstOpen", "");
             MwPlayHomeActivity.mwItemTab1d = "CoinHouse";
             for (int i = 1; i < 21; i++){
-                String mwBlockTabN = "mwBlockTab" + i;
+                String mwBlockTabN = "mwBlockTab" + i + "d";
                 mwEditData.putString(mwBlockTabN, "");
             }
             for (int i = 2; i < 21; i++){

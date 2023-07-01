@@ -23,6 +23,7 @@ import uniconteam.magicworld.MwPlayMainActivity;
 import uniconteam.magicworld.MwTutorial;
 
 public class MwPlayHomeActivity extends AppCompatActivity {
+    
     // all objects
     public LinearLayout mwCloseBoxLinear;
 	public LinearLayout mwJewelryBoxLinear;
@@ -62,7 +63,7 @@ public class MwPlayHomeActivity extends AppCompatActivity {
     public ImageView mwTutorialBoxIcon;
     public static TimerTask mwTimerTask;
     public static Timer _mwTimerTask = new Timer();
-	private ObjectAnimator mwBlock1ObjAnimationScaleX = new ObjectAnimator(); // Animator Block Tab 1-20 \/
+	private ObjectAnimator mwBlock1ObjAnimationScaleX = new ObjectAnimator(); // Animators \/
 	private ObjectAnimator mwBlock1ObjAnimationScaleY = new ObjectAnimator();
 	private ObjectAnimator mwBlock2ObjAnimationScaleX = new ObjectAnimator();
 	private ObjectAnimator mwBlock2ObjAnimationScaleY = new ObjectAnimator();
@@ -152,9 +153,13 @@ public class MwPlayHomeActivity extends AppCompatActivity {
     public static Boolean mwAnimRuleThr3 = true; // Bool for allowing or denying mwClick
     public static ImageView mwAnimImageDataThr3;
     
+    // Data of inventory cells
     public static String mwItemTab1d;
     public static String mwItemTab2d;
     public static String mwItemTab3d;
+    
+    // Data for 20 blocks
+    public static String[] mwBlockTab = new String[21];
     
     MwTutorial mwTutorial = new MwTutorial();
     MwHouseMenu mwHouseMenu = new MwHouseMenu();
@@ -173,11 +178,21 @@ public class MwPlayHomeActivity extends AppCompatActivity {
         super.onResume();
         SharedPreferences mwPlayData = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         
-        MwPlayHomeActivity.mwItemTab1d = mwPlayData.getString("mwItemTab1d", "");
-        MwPlayHomeActivity.mwItemTab2d = mwPlayData.getString("mwItemTab2d", "");
-        MwPlayHomeActivity.mwItemTab3d = mwPlayData.getString("mwItemTab3d", ""); 
+        // Getting data of inventory from SharedPreferences
+        mwItemTab1d = mwPlayData.getString("mwItemTab1d", "");
+        mwItemTab2d = mwPlayData.getString("mwItemTab2d", "");
+        mwItemTab3d = mwPlayData.getString("mwItemTab3d", ""); 
+        
+        // Inventory display
         mwInventory.mwDataInventory();
 
+        // Getting data of blocks from SharedPreferences
+        for (int i = 1; i < 21; i++) {
+            String key = "mwBlockTab" + i + "d";
+            mwBlockTab[i] = mwPlayData.getString(key, "");
+        }
+        
+        // Which cell of inventory selected
         mwItemSelected = mwPlayData.getString("mwItemSelected", "");
         if (mwItemSelected.equals("1")) {
             mwItemTab3.setBackgroundResource(R.drawable.mw_anybox_layout);
@@ -201,7 +216,8 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                 }
             }
         }
-
+        
+        // Tutorial of MW
         mwTutorialLevel = mwPlayData.getInt("mwTutorialLevel", 0);
         if (mwTutorialLevel == 0) {
             mwTutorialLevel = 1;
@@ -214,6 +230,7 @@ public class MwPlayHomeActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        // Save data
         SharedPreferences mwPlayData = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         SharedPreferences.Editor mwEditData = mwPlayData.edit();
         mwEditData.putString("mwItemSelected", mwItemSelected.toString());
@@ -237,9 +254,9 @@ public class MwPlayHomeActivity extends AppCompatActivity {
         mwWinBoxCupCount = findViewById(R.id.mwWinBoxCupCount); // TextView cup count
         mwWinBoxLinear = findViewById(R.id.mwWinBoxLinear); // LinearLayout with cups
         mwItemBoxLinear = findViewById(R.id.mwItemBoxLinear); // LinearLayout with item tabs
-        mwItemTab1 = findViewById(R.id.mwItemTab1); // LinearLayout item tab 1
-        mwItemTab2 = findViewById(R.id.mwItemTab2); // LinearLayout item tab 2
-        mwItemTab3 = findViewById(R.id.mwItemTab3); // LinearLayout item tab 3
+        mwItemTab1 = findViewById(R.id.mwItemTab1); // LinearLayout item tab 1-3 \/
+        mwItemTab2 = findViewById(R.id.mwItemTab2);
+        mwItemTab3 = findViewById(R.id.mwItemTab3);
         mwBlockTab1 = findViewById(R.id.mwBlockTab1); // ImageView block tab 1-20 \/
         mwBlockTab2 = findViewById(R.id.mwBlockTab2);
         mwBlockTab3 = findViewById(R.id.mwBlockTab3);
@@ -260,7 +277,7 @@ public class MwPlayHomeActivity extends AppCompatActivity {
         mwBlockTab18 = findViewById(R.id.mwBlockTab18);
         mwBlockTab19 = findViewById(R.id.mwBlockTab19);
         mwBlockTab20 = findViewById(R.id.mwBlockTab20);
-        mwItemId1 = findViewById(R.id.mwItemId1);
+        mwItemId1 = findViewById(R.id.mwItemId1); // ImageView item tab 1-3 \/
         mwItemId2 = findViewById(R.id.mwItemId2);
         mwItemId3 = findViewById(R.id.mwItemId3);
         mwTutorialBoxLinear = findViewById(R.id.mwTutorialBoxLinear); // Tutorial box
@@ -272,14 +289,12 @@ public class MwPlayHomeActivity extends AppCompatActivity {
         MwPlayMainActivity.mwActivity = "mwHome";
         MwHouseMenu alert = new MwHouseMenu(); // MwHouseMenu - menu for houses
 
-        // Design
+        // Transporant navbar
         Window w = getWindow();
         w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, 
         WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        if (Build.VERSION.SDK_INT >= 21) {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            getWindow().setStatusBarColor(Color.parseColor("#FF3DBFFF"));
-        }
+        
+        // Shadows
         if (Build.VERSION.SDK_INT >= 21) {
             mwCloseBoxLinear.setElevation(8f);
         }
@@ -304,13 +319,14 @@ public class MwPlayHomeActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= 21) {
             mwItemTab3.setElevation(8f);
         }
+        
+        // Fonts
         mwJewelryBoxCoinCount.setTypeface(Typeface.createFromAsset(getAssets(), "mwFonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
         mwJewelryBoxLevelCount.setTypeface(Typeface.createFromAsset(getAssets(), "mwFonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
         mwWinBoxCupCount.setTypeface(Typeface.createFromAsset(getAssets(), "mwFonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
         mwTutorialBoxText.setTypeface(Typeface.createFromAsset(getAssets(), "mwFonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
         
         // Onclick  functions
-        
         mwCloseBoxLinear.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -331,36 +347,8 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     };
                     _mwTimerTask.schedule(mwTimerTask, 500);
                     
-                        if (mwAnimRuleThr1) {
-                            mwAnimObjDataThr1 = mwCloseBoxLinear;
-                            mwAnimDataXThr1 = mwCloseBoxAnimationScaleX;
-                            mwAnimDataYThr1 = mwCloseBoxAnimationScaleY;
-                            mwAnimFloats1Thr1 = 1.1f;
-                            mwAnimFloats2Thr1 = 0.9f;
-                            mwAnimFloats3Thr1 = 1.0f;
-                            mwConsortium.mwClick();
-                             
-                        } else {
-                            if (mwAnimRuleThr2) {
-                                mwAnimObjDataThr2 = mwCloseBoxLinear;
-                                mwAnimDataXThr2 = mwCloseBoxAnimationScaleX;
-                                mwAnimDataYThr2 = mwCloseBoxAnimationScaleY;
-                                mwAnimFloats1Thr2 = 1.1f;
-                                mwAnimFloats2Thr2 = 0.9f;
-                                mwAnimFloats3Thr2 = 1.0f;
-                                mwConsortium.mwClick();
-                            } else {
-                                if (mwAnimRuleThr3) {
-                                    mwAnimObjDataThr3 = mwCloseBoxLinear;
-                                    mwAnimDataXThr3 = mwCloseBoxAnimationScaleX;
-                                    mwAnimDataYThr3 = mwCloseBoxAnimationScaleY;
-                                    mwAnimFloats1Thr3 = 1.1f;
-                                    mwAnimFloats2Thr3 = 0.9f;
-                                    mwAnimFloats3Thr3 = 1.0f;
-                                    mwConsortium.mwClick();
-                                }
-                            }
-                        }
+                    mwConsortium.mwClick();
+                    mwConsortium.mwThreads(mwCloseBoxLinear, mwCloseBoxAnimationScaleX, mwCloseBoxAnimationScaleY);
                     }
                 });
         
@@ -368,70 +356,16 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (mwAnimRuleThr1) {
-                            mwAnimObjDataThr1 = mwJewelryBoxLinear;
-                            mwAnimDataXThr1 = mwJewelryBoxAnimationScaleX;
-                            mwAnimDataYThr1 = mwJewelryBoxAnimationScaleY;
-                            mwAnimFloats1Thr1 = 1.1f;
-                            mwAnimFloats2Thr1 = 0.9f;
-                            mwAnimFloats3Thr1 = 1.0f;
-                            mwConsortium.mwClick();
-                        } else {
-                            if (mwAnimRuleThr2) {
-                                mwAnimObjDataThr2 = mwJewelryBoxLinear;
-                                mwAnimDataXThr2 = mwJewelryBoxAnimationScaleX;
-                                mwAnimDataYThr2 = mwJewelryBoxAnimationScaleY;
-                                mwAnimFloats1Thr2 = 1.1f;
-                                mwAnimFloats2Thr2 = 0.9f;
-                                mwAnimFloats3Thr2 = 1.0f;
-                                mwConsortium.mwClick();
-                            } else {
-                                if (mwAnimRuleThr3) {
-                                    mwAnimObjDataThr3 = mwJewelryBoxLinear;
-                                    mwAnimDataXThr3 = mwJewelryBoxAnimationScaleX;
-                                    mwAnimDataYThr3 = mwJewelryBoxAnimationScaleY;
-                                    mwAnimFloats1Thr3 = 1.1f;
-                                    mwAnimFloats2Thr3 = 0.9f;
-                                    mwAnimFloats3Thr3 = 1.0f;
-                                    mwConsortium.mwClick();
-                                }
-                            }
-                        }
+                        mwConsortium.mwClick();
+                        mwConsortium.mwThreads(mwJewelryBoxLinear, mwJewelryBoxAnimationScaleX, mwJewelryBoxAnimationScaleY);
                     }
                 });
         mwWinBoxLinear.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View viww) {
-                        if (mwAnimRuleThr1) {
-                            mwAnimObjDataThr1 = mwWinBoxLinear;
-                            mwAnimDataXThr1 = mwWinBoxAnimationScaleX;
-                            mwAnimDataYThr1 = mwWinBoxAnimationScaleY;
-                            mwAnimFloats1Thr1 = 1.1f;
-                            mwAnimFloats2Thr1 = 0.9f;
-                            mwAnimFloats3Thr1 = 1.0f;
-                            mwConsortium.mwClick();
-                        } else {
-                            if (mwAnimRuleThr2) {
-                                mwAnimObjDataThr2 = mwWinBoxLinear;
-                                mwAnimDataXThr2 = mwWinBoxAnimationScaleX;
-                                mwAnimDataYThr2 = mwWinBoxAnimationScaleY;
-                                mwAnimFloats1Thr2 = 1.1f;
-                                mwAnimFloats2Thr2 = 0.9f;
-                                mwAnimFloats3Thr2 = 1.0f;
-                                mwConsortium.mwClick();
-                            } else {
-                                if (mwAnimRuleThr3) {
-                                    mwAnimObjDataThr3 = mwWinBoxLinear;
-                                    mwAnimDataXThr3 = mwWinBoxAnimationScaleX;
-                                    mwAnimDataYThr3 = mwWinBoxAnimationScaleY;
-                                    mwAnimFloats1Thr3 = 1.1f;
-                                    mwAnimFloats2Thr3 = 0.9f;
-                                    mwAnimFloats3Thr3 = 1.0f;
-                                    mwConsortium.mwClick();
-                                }
-                            }
-                        }
+                        mwConsortium.mwClick();
+                        mwConsortium.mwThreads(mwWinBoxLinear, mwWinBoxAnimationScaleX, mwWinBoxAnimationScaleY);
                     }
                 });
         mwTutorialBoxLinear.setOnClickListener(
@@ -440,73 +374,19 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         mwTutorialLevel += 1;
                         mwTutorial.mwTutorialData();
-                        if (mwAnimRuleThr1) {
-                            mwAnimObjDataThr1 = mwTutorialBoxLinear;
-                            mwAnimDataXThr1 = mwTutorialBoxAnimationScaleX;
-                            mwAnimDataYThr1 = mwTutorialBoxAnimationScaleY;
-                            mwAnimFloats1Thr1 = 1.1f;
-                            mwAnimFloats2Thr1 = 0.9f;
-                            mwAnimFloats3Thr1 = 1.0f;
-                            mwConsortium.mwClick();
-                        } else {
-                            if (mwAnimRuleThr2) {
-                                mwAnimObjDataThr2 = mwTutorialBoxLinear;
-                                mwAnimDataXThr2 = mwTutorialBoxAnimationScaleX;
-                                mwAnimDataYThr2 = mwTutorialBoxAnimationScaleY;
-                                mwAnimFloats1Thr2 = 1.1f;
-                                mwAnimFloats2Thr2 = 0.9f;
-                                mwAnimFloats3Thr2 = 1.0f;
-                                mwConsortium.mwClick();
-                            } else {
-                                if (mwAnimRuleThr3) {
-                                    mwAnimObjDataThr3 = mwTutorialBoxLinear;
-                                    mwAnimDataXThr3 = mwTutorialBoxAnimationScaleX;
-                                    mwAnimDataYThr3 = mwTutorialBoxAnimationScaleY;
-                                    mwAnimFloats1Thr3 = 1.1f;
-                                    mwAnimFloats2Thr3 = 0.9f;
-                                    mwAnimFloats3Thr3 = 1.0f;
-                                    mwConsortium.mwClick();
-                                }
-                            }
-                        }
+                        mwConsortium.mwClick();
+                        mwConsortium.mwThreads(mwTutorialBoxLinear, mwTutorialBoxAnimationScaleX, mwTutorialBoxAnimationScaleY);
                     }
                 });
+        // Blocks
         mwBlockTab1.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (mwAnimRuleThr1) {
-                            mwAnimObjDataThr1 = mwBlockTab1;
-                            mwAnimDataXThr1 = mwBlock1ObjAnimationScaleX;
-                            mwAnimDataYThr1 = mwBlock1ObjAnimationScaleY;
-                            mwAnimFloats1Thr1 = 1.1f;
-                            mwAnimFloats2Thr1 = 0.9f;
-                            mwAnimFloats3Thr1 = 1.0f;
-                            mwConsortium.mwClick();
-                            alert.showDialog(MwPlayHomeActivity.this, mwAnimObjDataThr1.getResources().getResourceEntryName(mwAnimObjDataThr1.getId()));
-                            
-                        } else {
-                            if (mwAnimRuleThr2) {
-                                mwAnimObjDataThr2 = mwBlockTab1;
-                                mwAnimDataXThr2 = mwBlock1ObjAnimationScaleX;
-                                mwAnimDataYThr2 = mwBlock1ObjAnimationScaleY;
-                                mwAnimFloats1Thr2 = 1.1f;
-                                mwAnimFloats2Thr2 = 0.9f;
-                                mwAnimFloats3Thr2 = 1.0f;
-                                mwConsortium.mwClick();
-                                alert.showDialog(MwPlayHomeActivity.this, mwAnimObjDataThr2.getResources().getResourceEntryName(mwAnimObjDataThr2.getId()));
-                            } else {
-                                if (mwAnimRuleThr3) {
-                                    mwAnimObjDataThr3 = mwBlockTab1;
-                                    mwAnimDataXThr3 = mwBlock1ObjAnimationScaleX;
-                                    mwAnimDataYThr3 = mwBlock1ObjAnimationScaleY;
-                                    mwAnimFloats1Thr3 = 1.1f;
-                                    mwAnimFloats2Thr3 = 0.9f;
-                                    mwAnimFloats3Thr3 = 1.0f;
-                                    mwConsortium.mwClick();
-                                    alert.showDialog(MwPlayHomeActivity.this, mwAnimObjDataThr3.getResources().getResourceEntryName(mwAnimObjDataThr3.getId()));
-                                }
-                            }
+                        mwConsortium.mwClick();
+                        mwConsortium.mwThreads(mwBlockTab1, mwBlock1ObjAnimationScaleX, mwBlock1ObjAnimationScaleY);
+                        if (mwBlockTab[1] != "") {
+                                alert.showDialog(MwPlayHomeActivity.this,mwBlockTab[1]);
                         }
                     }
                 });
@@ -514,34 +394,10 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (mwAnimRuleThr1) {
-                            mwAnimObjDataThr1 = mwBlockTab2;
-                            mwAnimDataXThr1 = mwBlock2ObjAnimationScaleX;
-                            mwAnimDataYThr1 = mwBlock2ObjAnimationScaleY;
-                            mwAnimFloats1Thr1 = 1.1f;
-                            mwAnimFloats2Thr1 = 0.9f;
-                            mwAnimFloats3Thr1 = 1.0f;
-                            mwConsortium.mwClick();
-                        } else {
-                            if (mwAnimRuleThr2) {
-                                mwAnimObjDataThr2 = mwBlockTab2;
-                                mwAnimDataXThr2 = mwBlock2ObjAnimationScaleX;
-                                mwAnimDataYThr2 = mwBlock2ObjAnimationScaleY;
-                                mwAnimFloats1Thr2 = 1.1f;
-                                mwAnimFloats2Thr2 = 0.9f;
-                                mwAnimFloats3Thr2 = 1.0f;
-                                mwConsortium.mwClick();
-                            } else {
-                                if (mwAnimRuleThr3) {
-                                    mwAnimObjDataThr3 = mwBlockTab2;
-                                    mwAnimDataXThr3 = mwBlock2ObjAnimationScaleX;
-                                    mwAnimDataYThr3 = mwBlock2ObjAnimationScaleY;
-                                    mwAnimFloats1Thr3 = 1.1f;
-                                    mwAnimFloats2Thr3 = 0.9f;
-                                    mwAnimFloats3Thr3 = 1.0f;
-                                    mwConsortium.mwClick();
-                                }
-                            }
+                        mwConsortium.mwClick();
+                        mwConsortium.mwThreads(mwBlockTab2, mwBlock2ObjAnimationScaleX, mwBlock2ObjAnimationScaleY);
+                        if (mwBlockTab[2] != "") {
+                                alert.showDialog(MwPlayHomeActivity.this,mwBlockTab[2]);
                         }
                     }
                 });
@@ -549,34 +405,10 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (mwAnimRuleThr1) {
-                            mwAnimObjDataThr1 = mwBlockTab3;
-                            mwAnimDataXThr1 = mwBlock3ObjAnimationScaleX;
-                            mwAnimDataYThr1 = mwBlock3ObjAnimationScaleY;
-                            mwAnimFloats1Thr1 = 1.1f;
-                            mwAnimFloats2Thr1 = 0.9f;
-                            mwAnimFloats3Thr1 = 1.0f;
-                            mwConsortium.mwClick();
-                        } else {
-                            if (mwAnimRuleThr2) {
-                                mwAnimObjDataThr2 = mwBlockTab3;
-                                mwAnimDataXThr2 = mwBlock3ObjAnimationScaleX;
-                                mwAnimDataYThr2 = mwBlock3ObjAnimationScaleY;
-                                mwAnimFloats1Thr2 = 1.1f;
-                                mwAnimFloats2Thr2 = 0.9f;
-                                mwAnimFloats3Thr2 = 1.0f;
-                                mwConsortium.mwClick();
-                            } else {
-                                if (mwAnimRuleThr3) {
-                                    mwAnimObjDataThr3 = mwBlockTab3;
-                                    mwAnimDataXThr3 = mwBlock3ObjAnimationScaleX;
-                                    mwAnimDataYThr3 = mwBlock3ObjAnimationScaleY;
-                                    mwAnimFloats1Thr3 = 1.1f;
-                                    mwAnimFloats2Thr3 = 0.9f;
-                                    mwAnimFloats3Thr3 = 1.0f;
-                                    mwConsortium.mwClick();
-                                }
-                            }
+                        mwConsortium.mwClick();
+                        mwConsortium.mwThreads(mwBlockTab3, mwBlock3ObjAnimationScaleX, mwBlock3ObjAnimationScaleY);
+                        if (mwBlockTab[3] != "") {
+                                alert.showDialog(MwPlayHomeActivity.this,mwBlockTab[3]);
                         }
                     }
                 });
@@ -584,34 +416,10 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (mwAnimRuleThr1) {
-                            mwAnimObjDataThr1 = mwBlockTab4;
-                            mwAnimDataXThr1 = mwBlock4ObjAnimationScaleX;
-                            mwAnimDataYThr1 = mwBlock4ObjAnimationScaleY;
-                            mwAnimFloats1Thr1 = 1.1f;
-                            mwAnimFloats2Thr1 = 0.9f;
-                            mwAnimFloats3Thr1 = 1.0f;
-                            mwConsortium.mwClick();
-                        } else {
-                            if (mwAnimRuleThr2) {
-                                mwAnimObjDataThr2 = mwBlockTab4;
-                                mwAnimDataXThr2 = mwBlock4ObjAnimationScaleX;
-                                mwAnimDataYThr2 = mwBlock4ObjAnimationScaleY;
-                                mwAnimFloats1Thr2 = 1.1f;
-                                mwAnimFloats2Thr2 = 0.9f;
-                                mwAnimFloats3Thr2 = 1.0f;
-                                mwConsortium.mwClick();
-                            } else {
-                                if (mwAnimRuleThr3) {
-                                    mwAnimObjDataThr3 = mwBlockTab4;
-                                    mwAnimDataXThr3 = mwBlock4ObjAnimationScaleX;
-                                    mwAnimDataYThr3 = mwBlock4ObjAnimationScaleY;
-                                    mwAnimFloats1Thr3 = 1.1f;
-                                    mwAnimFloats2Thr3 = 0.9f;
-                                    mwAnimFloats3Thr3 = 1.0f;
-                                    mwConsortium.mwClick();
-                                }
-                            }
+                        mwConsortium.mwClick();
+                        mwConsortium.mwThreads(mwBlockTab4, mwBlock4ObjAnimationScaleX, mwBlock4ObjAnimationScaleY);
+                        if (mwBlockTab[4] != "") {
+                                alert.showDialog(MwPlayHomeActivity.this,mwBlockTab[4]);
                         }
                     }
                 });
@@ -619,34 +427,10 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (mwAnimRuleThr1) {
-                            mwAnimObjDataThr1 = mwBlockTab5;
-                            mwAnimDataXThr1 = mwBlock5ObjAnimationScaleX;
-                            mwAnimDataYThr1 = mwBlock5ObjAnimationScaleY;
-                            mwAnimFloats1Thr1 = 1.1f;
-                            mwAnimFloats2Thr1 = 0.9f;
-                            mwAnimFloats3Thr1 = 1.0f;
-                            mwConsortium.mwClick();
-                        } else {
-                            if (mwAnimRuleThr2) {
-                                mwAnimObjDataThr2 = mwBlockTab5;
-                                mwAnimDataXThr2 = mwBlock5ObjAnimationScaleX;
-                                mwAnimDataYThr2 = mwBlock5ObjAnimationScaleY;
-                                mwAnimFloats1Thr2 = 1.1f;
-                                mwAnimFloats2Thr2 = 0.9f;
-                                mwAnimFloats3Thr2 = 1.0f;
-                                mwConsortium.mwClick();
-                            } else {
-                                if (mwAnimRuleThr3) {
-                                    mwAnimObjDataThr3 = mwBlockTab5;
-                                    mwAnimDataXThr3 = mwBlock5ObjAnimationScaleX;
-                                    mwAnimDataYThr3 = mwBlock5ObjAnimationScaleY;
-                                    mwAnimFloats1Thr3 = 1.1f;
-                                    mwAnimFloats2Thr3 = 0.9f;
-                                    mwAnimFloats3Thr3 = 1.0f;
-                                    mwConsortium.mwClick();
-                                }
-                            }
+                        mwConsortium.mwClick();
+                        mwConsortium.mwThreads(mwBlockTab5, mwBlock5ObjAnimationScaleX, mwBlock5ObjAnimationScaleY);
+                        if (mwBlockTab[5] != "") {
+                                alert.showDialog(MwPlayHomeActivity.this,mwBlockTab[5]);
                         }
                     }
                 });
@@ -654,34 +438,10 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (mwAnimRuleThr1) {
-                            mwAnimObjDataThr1 = mwBlockTab6;
-                            mwAnimDataXThr1 = mwBlock6ObjAnimationScaleX;
-                            mwAnimDataYThr1 = mwBlock6ObjAnimationScaleY;
-                            mwAnimFloats1Thr1 = 1.1f;
-                            mwAnimFloats2Thr1 = 0.9f;
-                            mwAnimFloats3Thr1 = 1.0f;
-                            mwConsortium.mwClick();
-                        } else {
-                            if (mwAnimRuleThr2) {
-                                mwAnimObjDataThr2 = mwBlockTab6;
-                                mwAnimDataXThr2 = mwBlock6ObjAnimationScaleX;
-                                mwAnimDataYThr2 = mwBlock6ObjAnimationScaleY;
-                                mwAnimFloats1Thr2 = 1.1f;
-                                mwAnimFloats2Thr2 = 0.9f;
-                                mwAnimFloats3Thr2 = 1.0f;
-                                mwConsortium.mwClick();
-                            } else {
-                                if (mwAnimRuleThr3) {
-                                    mwAnimObjDataThr3 = mwBlockTab6;
-                                    mwAnimDataXThr3 = mwBlock6ObjAnimationScaleX;
-                                    mwAnimDataYThr3 = mwBlock6ObjAnimationScaleY;
-                                    mwAnimFloats1Thr3 = 1.1f;
-                                    mwAnimFloats2Thr3 = 0.9f;
-                                    mwAnimFloats3Thr3 = 1.0f;
-                                    mwConsortium.mwClick();
-                                }
-                            }
+                        mwConsortium.mwClick();
+                        mwConsortium.mwThreads(mwBlockTab6, mwBlock6ObjAnimationScaleX, mwBlock6ObjAnimationScaleY);
+                        if (mwBlockTab[6] != "") {
+                                alert.showDialog(MwPlayHomeActivity.this,mwBlockTab[6]);
                         }
                     }
                 });
@@ -689,34 +449,10 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (mwAnimRuleThr1) {
-                            mwAnimObjDataThr1 = mwBlockTab7;
-                            mwAnimDataXThr1 = mwBlock7ObjAnimationScaleX;
-                            mwAnimDataYThr1 = mwBlock7ObjAnimationScaleY;
-                            mwAnimFloats1Thr1 = 1.1f;
-                            mwAnimFloats2Thr1 = 0.9f;
-                            mwAnimFloats3Thr1 = 1.0f;
-                            mwConsortium.mwClick();
-                        } else {
-                            if (mwAnimRuleThr2) {
-                                mwAnimObjDataThr2 = mwBlockTab7;
-                                mwAnimDataXThr2 = mwBlock7ObjAnimationScaleX;
-                                mwAnimDataYThr2 = mwBlock7ObjAnimationScaleY;
-                                mwAnimFloats1Thr2 = 1.1f;
-                                mwAnimFloats2Thr2 = 0.9f;
-                                mwAnimFloats3Thr2 = 1.0f;
-                                mwConsortium.mwClick();
-                            } else {
-                                if (mwAnimRuleThr3) {
-                                    mwAnimObjDataThr3 = mwBlockTab7;
-                                    mwAnimDataXThr3 = mwBlock7ObjAnimationScaleX;
-                                    mwAnimDataYThr3 = mwBlock7ObjAnimationScaleY;
-                                    mwAnimFloats1Thr3 = 1.1f;
-                                    mwAnimFloats2Thr3 = 0.9f;
-                                    mwAnimFloats3Thr3 = 1.0f;
-                                    mwConsortium.mwClick();
-                                }
-                            }
+                        mwConsortium.mwClick();
+                        mwConsortium.mwThreads(mwBlockTab7, mwBlock7ObjAnimationScaleX, mwBlock7ObjAnimationScaleY);
+                        if (mwBlockTab[7] != "") {
+                                alert.showDialog(MwPlayHomeActivity.this,mwBlockTab[7]);
                         }
                     }
                 });
@@ -724,34 +460,10 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (mwAnimRuleThr1) {
-                            mwAnimObjDataThr1 = mwBlockTab8;
-                            mwAnimDataXThr1 = mwBlock8ObjAnimationScaleX;
-                            mwAnimDataYThr1 = mwBlock8ObjAnimationScaleY;
-                            mwAnimFloats1Thr1 = 1.1f;
-                            mwAnimFloats2Thr1 = 0.9f;
-                            mwAnimFloats3Thr1 = 1.0f;
-                            mwConsortium.mwClick();
-                        } else {
-                            if (mwAnimRuleThr2) {
-                                mwAnimObjDataThr2 = mwBlockTab8;
-                                mwAnimDataXThr2 = mwBlock8ObjAnimationScaleX;
-                                mwAnimDataYThr2 = mwBlock8ObjAnimationScaleY;
-                                mwAnimFloats1Thr2 = 1.1f;
-                                mwAnimFloats2Thr2 = 0.9f;
-                                mwAnimFloats3Thr2 = 1.0f;
-                                mwConsortium.mwClick();
-                            } else {
-                                if (mwAnimRuleThr3) {
-                                    mwAnimObjDataThr3 = mwBlockTab8;
-                                    mwAnimDataXThr3 = mwBlock8ObjAnimationScaleX;
-                                    mwAnimDataYThr3 = mwBlock8ObjAnimationScaleY;
-                                    mwAnimFloats1Thr3 = 1.1f;
-                                    mwAnimFloats2Thr3 = 0.9f;
-                                    mwAnimFloats3Thr3 = 1.0f;
-                                    mwConsortium.mwClick();
-                                }
-                            }
+                        mwConsortium.mwClick();
+                        mwConsortium.mwThreads(mwBlockTab8, mwBlock8ObjAnimationScaleX, mwBlock8ObjAnimationScaleY);
+                        if (mwBlockTab[8] != "") {
+                                alert.showDialog(MwPlayHomeActivity.this,mwBlockTab[8]);
                         }
                     }
                 });
@@ -759,34 +471,10 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (mwAnimRuleThr1) {
-                            mwAnimObjDataThr1 = mwBlockTab9;
-                            mwAnimDataXThr1 = mwBlock9ObjAnimationScaleX;
-                            mwAnimDataYThr1 = mwBlock9ObjAnimationScaleY;
-                            mwAnimFloats1Thr1 = 1.1f;
-                            mwAnimFloats2Thr1 = 0.9f;
-                            mwAnimFloats3Thr1 = 1.0f;
-                            mwConsortium.mwClick();
-                        } else {
-                            if (mwAnimRuleThr2) {
-                                mwAnimObjDataThr2 = mwBlockTab9;
-                                mwAnimDataXThr2 = mwBlock9ObjAnimationScaleX;
-                                mwAnimDataYThr2 = mwBlock9ObjAnimationScaleY;
-                                mwAnimFloats1Thr2 = 1.1f;
-                                mwAnimFloats2Thr2 = 0.9f;
-                                mwAnimFloats3Thr2 = 1.0f;
-                                mwConsortium.mwClick();
-                            } else {
-                                if (mwAnimRuleThr3) {
-                                    mwAnimObjDataThr3 = mwBlockTab9;
-                                    mwAnimDataXThr3 = mwBlock9ObjAnimationScaleX;
-                                    mwAnimDataYThr3 = mwBlock9ObjAnimationScaleY;
-                                    mwAnimFloats1Thr3 = 1.1f;
-                                    mwAnimFloats2Thr3 = 0.9f;
-                                    mwAnimFloats3Thr3 = 1.0f;
-                                    mwConsortium.mwClick();
-                                }
-                            }
+                        mwConsortium.mwClick();
+                        mwConsortium.mwThreads(mwBlockTab9, mwBlock9ObjAnimationScaleX, mwBlock9ObjAnimationScaleY);
+                        if (mwBlockTab[9] != "") {
+                                alert.showDialog(MwPlayHomeActivity.this,mwBlockTab[9]);
                         }
                     }
                 });
@@ -794,34 +482,10 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (mwAnimRuleThr1) {
-                            mwAnimObjDataThr1 = mwBlockTab10;
-                            mwAnimDataXThr1 = mwBlock10ObjAnimationScaleX;
-                            mwAnimDataYThr1 = mwBlock10ObjAnimationScaleY;
-                            mwAnimFloats1Thr1 = 1.1f;
-                            mwAnimFloats2Thr1 = 0.9f;
-                            mwAnimFloats3Thr1 = 1.0f;
-                            mwConsortium.mwClick();
-                        } else {
-                            if (mwAnimRuleThr2) {
-                                mwAnimObjDataThr2 = mwBlockTab10;
-                                mwAnimDataXThr2 = mwBlock10ObjAnimationScaleX;
-                                mwAnimDataYThr2 = mwBlock10ObjAnimationScaleY;
-                                mwAnimFloats1Thr2 = 1.1f;
-                                mwAnimFloats2Thr2 = 0.9f;
-                                mwAnimFloats3Thr2 = 1.0f;
-                                mwConsortium.mwClick();
-                            } else {
-                                if (mwAnimRuleThr3) {
-                                    mwAnimObjDataThr3 = mwBlockTab10;
-                                    mwAnimDataXThr3 = mwBlock10ObjAnimationScaleX;
-                                    mwAnimDataYThr3 = mwBlock10ObjAnimationScaleY;
-                                    mwAnimFloats1Thr3 = 1.1f;
-                                    mwAnimFloats2Thr3 = 0.9f;
-                                    mwAnimFloats3Thr3 = 1.0f;
-                                    mwConsortium.mwClick();
-                                }
-                            }
+                        mwConsortium.mwClick();
+                        mwConsortium.mwThreads(mwBlockTab10, mwBlock10ObjAnimationScaleX, mwBlock10ObjAnimationScaleY);
+                        if (mwBlockTab[10] != "") {
+                                alert.showDialog(MwPlayHomeActivity.this,mwBlockTab[10]);
                         }
                     }
                 });
@@ -829,34 +493,10 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (mwAnimRuleThr1) {
-                            mwAnimObjDataThr1 = mwBlockTab11;
-                            mwAnimDataXThr1 = mwBlock11ObjAnimationScaleX;
-                            mwAnimDataYThr1 = mwBlock11ObjAnimationScaleY;
-                            mwAnimFloats1Thr1 = 1.1f;
-                            mwAnimFloats2Thr1 = 0.9f;
-                            mwAnimFloats3Thr1 = 1.0f;
-                            mwConsortium.mwClick();
-                        } else {
-                            if (mwAnimRuleThr2) {
-                                mwAnimObjDataThr2 = mwBlockTab11;
-                                mwAnimDataXThr2 = mwBlock11ObjAnimationScaleX;
-                                mwAnimDataYThr2 = mwBlock11ObjAnimationScaleY;
-                                mwAnimFloats1Thr2 = 1.1f;
-                                mwAnimFloats2Thr2 = 0.9f;
-                                mwAnimFloats3Thr2 = 1.0f;
-                                mwConsortium.mwClick();
-                            } else {
-                                if (mwAnimRuleThr3) {
-                                    mwAnimObjDataThr3 = mwBlockTab11;
-                                    mwAnimDataXThr3 = mwBlock11ObjAnimationScaleX;
-                                    mwAnimDataYThr3 = mwBlock11ObjAnimationScaleY;
-                                    mwAnimFloats1Thr3 = 1.1f;
-                                    mwAnimFloats2Thr3 = 0.9f;
-                                    mwAnimFloats3Thr3 = 1.0f;
-                                    mwConsortium.mwClick();
-                                }
-                            }
+                        mwConsortium.mwClick();
+                        mwConsortium.mwThreads(mwBlockTab11, mwBlock11ObjAnimationScaleX, mwBlock11ObjAnimationScaleY);
+                        if (mwBlockTab[11] != "") {
+                                alert.showDialog(MwPlayHomeActivity.this,mwBlockTab[11]);
                         }
                     }
                 });
@@ -864,34 +504,10 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (mwAnimRuleThr1) {
-                            mwAnimObjDataThr1 = mwBlockTab12;
-                            mwAnimDataXThr1 = mwBlock12ObjAnimationScaleX;
-                            mwAnimDataYThr1 = mwBlock12ObjAnimationScaleY;
-                            mwAnimFloats1Thr1 = 1.1f;
-                            mwAnimFloats2Thr1 = 0.9f;
-                            mwAnimFloats3Thr1 = 1.0f;
-                            mwConsortium.mwClick();
-                        } else {
-                            if (mwAnimRuleThr2) {
-                                mwAnimObjDataThr2 = mwBlockTab12;
-                                mwAnimDataXThr2 = mwBlock12ObjAnimationScaleX;
-                                mwAnimDataYThr2 = mwBlock12ObjAnimationScaleY;
-                                mwAnimFloats1Thr2 = 1.1f;
-                                mwAnimFloats2Thr2 = 0.9f;
-                                mwAnimFloats3Thr2 = 1.0f;
-                                mwConsortium.mwClick();
-                            } else {
-                                if (mwAnimRuleThr3) {
-                                    mwAnimObjDataThr3 = mwBlockTab12;
-                                    mwAnimDataXThr3 = mwBlock12ObjAnimationScaleX;
-                                    mwAnimDataYThr3 = mwBlock12ObjAnimationScaleY;
-                                    mwAnimFloats1Thr3 = 1.1f;
-                                    mwAnimFloats2Thr3 = 0.9f;
-                                    mwAnimFloats3Thr3 = 1.0f;
-                                    mwConsortium.mwClick();
-                                }
-                            }
+                        mwConsortium.mwClick();
+                        mwConsortium.mwThreads(mwBlockTab12, mwBlock12ObjAnimationScaleX, mwBlock12ObjAnimationScaleY);
+                        if (mwBlockTab[12] != "") {
+                                alert.showDialog(MwPlayHomeActivity.this,mwBlockTab[12]);
                         }
                     }
                 });
@@ -899,34 +515,10 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (mwAnimRuleThr1) {
-                            mwAnimObjDataThr1 = mwBlockTab13;
-                            mwAnimDataXThr1 = mwBlock13ObjAnimationScaleX;
-                            mwAnimDataYThr1 = mwBlock13ObjAnimationScaleY;
-                            mwAnimFloats1Thr1 = 1.1f;
-                            mwAnimFloats2Thr1 = 0.9f;
-                            mwAnimFloats3Thr1 = 1.0f;
-                            mwConsortium.mwClick();
-                        } else {
-                            if (mwAnimRuleThr2) {
-                                mwAnimObjDataThr2 = mwBlockTab13;
-                                mwAnimDataXThr2 = mwBlock13ObjAnimationScaleX;
-                                mwAnimDataYThr2 = mwBlock13ObjAnimationScaleY;
-                                mwAnimFloats1Thr2 = 1.1f;
-                                mwAnimFloats2Thr2 = 0.9f;
-                                mwAnimFloats3Thr2 = 1.0f;
-                                mwConsortium.mwClick();
-                            } else {
-                                if (mwAnimRuleThr3) {
-                                    mwAnimObjDataThr3 = mwBlockTab13;
-                                    mwAnimDataXThr3 = mwBlock13ObjAnimationScaleX;
-                                    mwAnimDataYThr3 = mwBlock13ObjAnimationScaleY;
-                                    mwAnimFloats1Thr3 = 1.1f;
-                                    mwAnimFloats2Thr3 = 0.9f;
-                                    mwAnimFloats3Thr3 = 1.0f;
-                                    mwConsortium.mwClick();
-                                }
-                            }
+                        mwConsortium.mwClick();
+                        mwConsortium.mwThreads(mwBlockTab13, mwBlock13ObjAnimationScaleX, mwBlock13ObjAnimationScaleY);
+                        if (mwBlockTab[13] != "") {
+                                alert.showDialog(MwPlayHomeActivity.this,mwBlockTab[13]);
                         }
                     }
                 });
@@ -934,34 +526,10 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (mwAnimRuleThr1) {
-                            mwAnimObjDataThr1 = mwBlockTab14;
-                            mwAnimDataXThr1 = mwBlock14ObjAnimationScaleX;
-                            mwAnimDataYThr1 = mwBlock14ObjAnimationScaleY;
-                            mwAnimFloats1Thr1 = 1.1f;
-                            mwAnimFloats2Thr1 = 0.9f;
-                            mwAnimFloats3Thr1 = 1.0f;
-                            mwConsortium.mwClick();
-                        } else {
-                            if (mwAnimRuleThr2) {
-                                mwAnimObjDataThr2 = mwBlockTab14;
-                                mwAnimDataXThr2 = mwBlock14ObjAnimationScaleX;
-                                mwAnimDataYThr2 = mwBlock14ObjAnimationScaleY;
-                                mwAnimFloats1Thr2 = 1.1f;
-                                mwAnimFloats2Thr2 = 0.9f;
-                                mwAnimFloats3Thr2 = 1.0f;
-                                mwConsortium.mwClick();
-                            } else {
-                                if (mwAnimRuleThr3) {
-                                    mwAnimObjDataThr3 = mwBlockTab14;
-                                    mwAnimDataXThr3 = mwBlock14ObjAnimationScaleX;
-                                    mwAnimDataYThr3 = mwBlock14ObjAnimationScaleY;
-                                    mwAnimFloats1Thr3 = 1.1f;
-                                    mwAnimFloats2Thr3 = 0.9f;
-                                    mwAnimFloats3Thr3 = 1.0f;
-                                    mwConsortium.mwClick();
-                                }
-                            }
+                        mwConsortium.mwClick();
+                        mwConsortium.mwThreads(mwBlockTab14, mwBlock14ObjAnimationScaleX, mwBlock14ObjAnimationScaleY);
+                        if (mwBlockTab[14] != "") {
+                                alert.showDialog(MwPlayHomeActivity.this,mwBlockTab[14]);
                         }
                     }
                 });
@@ -969,34 +537,10 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (mwAnimRuleThr1) {
-                            mwAnimObjDataThr1 = mwBlockTab15;
-                            mwAnimDataXThr1 = mwBlock15ObjAnimationScaleX;
-                            mwAnimDataYThr1 = mwBlock15ObjAnimationScaleY;
-                            mwAnimFloats1Thr1 = 1.1f;
-                            mwAnimFloats2Thr1 = 0.9f;
-                            mwAnimFloats3Thr1 = 1.0f;
-                            mwConsortium.mwClick();
-                        } else {
-                            if (mwAnimRuleThr2) {
-                                mwAnimObjDataThr2 = mwBlockTab15;
-                                mwAnimDataXThr2 = mwBlock15ObjAnimationScaleX;
-                                mwAnimDataYThr2 = mwBlock15ObjAnimationScaleY;
-                                mwAnimFloats1Thr2 = 1.1f;
-                                mwAnimFloats2Thr2 = 0.9f;
-                                mwAnimFloats3Thr2 = 1.0f;
-                                mwConsortium.mwClick();
-                            } else {
-                                if (mwAnimRuleThr3) {
-                                    mwAnimObjDataThr3 = mwBlockTab15;
-                                    mwAnimDataXThr3 = mwBlock15ObjAnimationScaleX;
-                                    mwAnimDataYThr3 = mwBlock15ObjAnimationScaleY;
-                                    mwAnimFloats1Thr3 = 1.1f;
-                                    mwAnimFloats2Thr3 = 0.9f;
-                                    mwAnimFloats3Thr3 = 1.0f;
-                                    mwConsortium.mwClick();
-                                }
-                            }
+                        mwConsortium.mwClick();
+                        mwConsortium.mwThreads(mwBlockTab15, mwBlock15ObjAnimationScaleX, mwBlock15ObjAnimationScaleY);
+                        if (mwBlockTab[15] != "") {
+                                alert.showDialog(MwPlayHomeActivity.this,mwBlockTab[15]);
                         }
                     }
                 });
@@ -1004,34 +548,10 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (mwAnimRuleThr1) {
-                            mwAnimObjDataThr1 = mwBlockTab16;
-                            mwAnimDataXThr1 = mwBlock16ObjAnimationScaleX;
-                            mwAnimDataYThr1 = mwBlock16ObjAnimationScaleY;
-                            mwAnimFloats1Thr1 = 1.1f;
-                            mwAnimFloats2Thr1 = 0.9f;
-                            mwAnimFloats3Thr1 = 1.0f;
-                            mwConsortium.mwClick();
-                        } else {
-                            if (mwAnimRuleThr2) {
-                                mwAnimObjDataThr2 = mwBlockTab16;
-                                mwAnimDataXThr2 = mwBlock16ObjAnimationScaleX;
-                                mwAnimDataYThr2 = mwBlock16ObjAnimationScaleY;
-                                mwAnimFloats1Thr2 = 1.1f;
-                                mwAnimFloats2Thr2 = 0.9f;
-                                mwAnimFloats3Thr2 = 1.0f;
-                                mwConsortium.mwClick();
-                            } else {
-                                if (mwAnimRuleThr3) {
-                                    mwAnimObjDataThr3 = mwBlockTab16;
-                                    mwAnimDataXThr3 = mwBlock16ObjAnimationScaleX;
-                                    mwAnimDataYThr3 = mwBlock16ObjAnimationScaleY;
-                                    mwAnimFloats1Thr3 = 1.1f;
-                                    mwAnimFloats2Thr3 = 0.9f;
-                                    mwAnimFloats3Thr3 = 1.0f;
-                                    mwConsortium.mwClick();
-                                }
-                            }
+                        mwConsortium.mwClick();
+                        mwConsortium.mwThreads(mwBlockTab16, mwBlock16ObjAnimationScaleX, mwBlock16ObjAnimationScaleY);
+                        if (mwBlockTab[16] != "") {
+                                alert.showDialog(MwPlayHomeActivity.this,mwBlockTab[16]);
                         }
                     }
                 });
@@ -1039,34 +559,10 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (mwAnimRuleThr1) {
-                            mwAnimObjDataThr1 = mwBlockTab17;
-                            mwAnimDataXThr1 = mwBlock17ObjAnimationScaleX;
-                            mwAnimDataYThr1 = mwBlock17ObjAnimationScaleY;
-                            mwAnimFloats1Thr1 = 1.1f;
-                            mwAnimFloats2Thr1 = 0.9f;
-                            mwAnimFloats3Thr1 = 1.0f;
-                            mwConsortium.mwClick();
-                        } else {
-                            if (mwAnimRuleThr2) {
-                                mwAnimObjDataThr2 = mwBlockTab17;
-                                mwAnimDataXThr2 = mwBlock17ObjAnimationScaleX;
-                                mwAnimDataYThr2 = mwBlock17ObjAnimationScaleY;
-                                mwAnimFloats1Thr2 = 1.1f;
-                                mwAnimFloats2Thr2 = 0.9f;
-                                mwAnimFloats3Thr2 = 1.0f;
-                                mwConsortium.mwClick();
-                            } else {
-                                if (mwAnimRuleThr3) {
-                                    mwAnimObjDataThr3 = mwBlockTab17;
-                                    mwAnimDataXThr3 = mwBlock17ObjAnimationScaleX;
-                                    mwAnimDataYThr3 = mwBlock17ObjAnimationScaleY;
-                                    mwAnimFloats1Thr3 = 1.1f;
-                                    mwAnimFloats2Thr3 = 0.9f;
-                                    mwAnimFloats3Thr3 = 1.0f;
-                                    mwConsortium.mwClick();
-                                }
-                            }
+                        mwConsortium.mwClick();
+                        mwConsortium.mwThreads(mwBlockTab17, mwBlock17ObjAnimationScaleX, mwBlock17ObjAnimationScaleY);
+                        if (mwBlockTab[17] != "") {
+                                alert.showDialog(MwPlayHomeActivity.this,mwBlockTab[17]);
                         }
                     }
                 });
@@ -1074,34 +570,10 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (mwAnimRuleThr1) {
-                            mwAnimObjDataThr1 = mwBlockTab18;
-                            mwAnimDataXThr1 = mwBlock18ObjAnimationScaleX;
-                            mwAnimDataYThr1 = mwBlock18ObjAnimationScaleY;
-                            mwAnimFloats1Thr1 = 1.1f;
-                            mwAnimFloats2Thr1 = 0.9f;
-                            mwAnimFloats3Thr1 = 1.0f;
-                            mwConsortium.mwClick();
-                        } else {
-                            if (mwAnimRuleThr2) {
-                                mwAnimObjDataThr2 = mwBlockTab18;
-                                mwAnimDataXThr2 = mwBlock18ObjAnimationScaleX;
-                                mwAnimDataYThr2 = mwBlock18ObjAnimationScaleY;
-                                mwAnimFloats1Thr2 = 1.1f;
-                                mwAnimFloats2Thr2 = 0.9f;
-                                mwAnimFloats3Thr2 = 1.0f;
-                                mwConsortium.mwClick();
-                            } else {
-                                if (mwAnimRuleThr3) {
-                                    mwAnimObjDataThr3 = mwBlockTab18;
-                                    mwAnimDataXThr3 = mwBlock18ObjAnimationScaleX;
-                                    mwAnimDataYThr3 = mwBlock18ObjAnimationScaleY;
-                                    mwAnimFloats1Thr3 = 1.1f;
-                                    mwAnimFloats2Thr3 = 0.9f;
-                                    mwAnimFloats3Thr3 = 1.0f;
-                                    mwConsortium.mwClick();
-                                }
-                            }
+                        mwConsortium.mwClick();
+                        mwConsortium.mwThreads(mwBlockTab18, mwBlock18ObjAnimationScaleX, mwBlock18ObjAnimationScaleY);
+                        if (mwBlockTab[18] != "") {
+                                alert.showDialog(MwPlayHomeActivity.this,mwBlockTab[18]);
                         }
                     }
                 });
@@ -1109,34 +581,10 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (mwAnimRuleThr1) {
-                            mwAnimObjDataThr1 = mwBlockTab19;
-                            mwAnimDataXThr1 = mwBlock19ObjAnimationScaleX;
-                            mwAnimDataYThr1 = mwBlock19ObjAnimationScaleY;
-                            mwAnimFloats1Thr1 = 1.1f;
-                            mwAnimFloats2Thr1 = 0.9f;
-                            mwAnimFloats3Thr1 = 1.0f;
-                            mwConsortium.mwClick();
-                        } else {
-                            if (mwAnimRuleThr2) {
-                                mwAnimObjDataThr2 = mwBlockTab19;
-                                mwAnimDataXThr2 = mwBlock19ObjAnimationScaleX;
-                                mwAnimDataYThr2 = mwBlock19ObjAnimationScaleY;
-                                mwAnimFloats1Thr2 = 1.1f;
-                                mwAnimFloats2Thr2 = 0.9f;
-                                mwAnimFloats3Thr2 = 1.0f;
-                                mwConsortium.mwClick();
-                            } else {
-                                if (mwAnimRuleThr3) {
-                                    mwAnimObjDataThr3 = mwBlockTab19;
-                                    mwAnimDataXThr3 = mwBlock19ObjAnimationScaleX;
-                                    mwAnimDataYThr3 = mwBlock19ObjAnimationScaleY;
-                                    mwAnimFloats1Thr3 = 1.1f;
-                                    mwAnimFloats2Thr3 = 0.9f;
-                                    mwAnimFloats3Thr3 = 1.0f;
-                                    mwConsortium.mwClick();
-                                }
-                            }
+                        mwConsortium.mwClick();
+                        mwConsortium.mwThreads(mwBlockTab19, mwBlock19ObjAnimationScaleX, mwBlock19ObjAnimationScaleY);
+                        if (mwBlockTab[19] != "") {
+                                alert.showDialog(MwPlayHomeActivity.this,mwBlockTab[19]);
                         }
                     }
                 });
@@ -1144,37 +592,14 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (mwAnimRuleThr1) {
-                            mwAnimObjDataThr1 = mwBlockTab20;
-                            mwAnimDataXThr1 = mwBlock20ObjAnimationScaleX;
-                            mwAnimDataYThr1 = mwBlock20ObjAnimationScaleY;
-                            mwAnimFloats1Thr1 = 1.1f;
-                            mwAnimFloats2Thr1 = 0.9f;
-                            mwAnimFloats3Thr1 = 1.0f;
-                            mwConsortium.mwClick();
-                        } else {
-                            if (mwAnimRuleThr2) {
-                                mwAnimObjDataThr2 = mwBlockTab20;
-                                mwAnimDataXThr2 = mwBlock20ObjAnimationScaleX;
-                                mwAnimDataYThr2 = mwBlock20ObjAnimationScaleY;
-                                mwAnimFloats1Thr2 = 1.1f;
-                                mwAnimFloats2Thr2 = 0.9f;
-                                mwAnimFloats3Thr2 = 1.0f;
-                                mwConsortium.mwClick();
-                            } else {
-                                if (mwAnimRuleThr3) {
-                                    mwAnimObjDataThr3 = mwBlockTab20;
-                                    mwAnimDataXThr3 = mwBlock20ObjAnimationScaleX;
-                                    mwAnimDataYThr3 = mwBlock20ObjAnimationScaleY;
-                                    mwAnimFloats1Thr3 = 1.1f;
-                                    mwAnimFloats2Thr3 = 0.9f;
-                                    mwAnimFloats3Thr3 = 1.0f;
-                                    mwConsortium.mwClick();
-                                }
-                            }
+                        mwConsortium.mwClick();
+                        mwConsortium.mwThreads(mwBlockTab20, mwBlock20ObjAnimationScaleX, mwBlock20ObjAnimationScaleY);
+                        if (mwBlockTab[20] != "") {
+                                alert.showDialog(MwPlayHomeActivity.this,mwBlockTab[20]);
                         }
                     }
                 });
+        // Items
         mwItemTab1.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -1183,35 +608,8 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                         mwItemTab1.setBackgroundResource(R.drawable.mw_selectedbox_layout);
                         mwItemTab3.setBackgroundResource(R.drawable.mw_anybox_layout);
                         mwItemSelected = "1";
-                        if (mwAnimRuleThr1) {
-                            mwAnimObjDataThr1 = mwItemTab1;
-                            mwAnimDataXThr1 = mwItemTab1AnimationScaleX;
-                            mwAnimDataYThr1 = mwItemTab1AnimationScaleY;
-                            mwAnimFloats1Thr1 = 1.1f;
-                            mwAnimFloats2Thr1 = 0.9f;
-                            mwAnimFloats3Thr1 = 1.0f;
-                            mwConsortium.mwClick();
-                        } else {
-                            if (mwAnimRuleThr2) {
-                                mwAnimObjDataThr2 = mwItemTab1;
-                                mwAnimDataXThr2 = mwItemTab1AnimationScaleX;
-                                mwAnimDataYThr2 = mwItemTab1AnimationScaleY;
-                                mwAnimFloats1Thr2 = 1.1f;
-                                mwAnimFloats2Thr2 = 0.9f;
-                                mwAnimFloats3Thr2 = 1.0f;
-                                mwConsortium.mwClick();
-                            } else {
-                                if (mwAnimRuleThr3) {
-                                    mwAnimObjDataThr3 = mwItemTab1;
-                                    mwAnimDataXThr3 = mwItemTab1AnimationScaleX;
-                                    mwAnimDataYThr3 = mwItemTab1AnimationScaleY;
-                                    mwAnimFloats1Thr3 = 1.1f;
-                                    mwAnimFloats2Thr3 = 0.9f;
-                                    mwAnimFloats3Thr3 = 1.0f;
-                                    mwConsortium.mwClick();
-                                }
-                            }
-                        }
+                        mwConsortium.mwClick();
+                        mwConsortium.mwThreads(mwItemTab1, mwItemTab1AnimationScaleX, mwItemTab1AnimationScaleY);
                     }
                 });
         mwItemTab2.setOnClickListener(
@@ -1222,35 +620,8 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                         mwItemTab2.setBackgroundResource(R.drawable.mw_selectedbox_layout);
                         mwItemTab3.setBackgroundResource(R.drawable.mw_anybox_layout);
                         mwItemSelected = "2";
-                        if (mwAnimRuleThr1) {
-                            mwAnimObjDataThr1 = mwItemTab2;
-                            mwAnimDataXThr1 = mwItemTab2AnimationScaleX;
-                            mwAnimDataYThr1 = mwItemTab2AnimationScaleY;
-                            mwAnimFloats1Thr1 = 1.1f;
-                            mwAnimFloats2Thr1 = 0.9f;
-                            mwAnimFloats3Thr1 = 1.0f;
-                            mwConsortium.mwClick();
-                        } else {
-                            if (mwAnimRuleThr2) {
-                                mwAnimObjDataThr2 = mwItemTab2;
-                                mwAnimDataXThr2 = mwItemTab2AnimationScaleX;
-                                mwAnimDataYThr2 = mwItemTab2AnimationScaleY;
-                                mwAnimFloats1Thr2 = 1.1f;
-                                mwAnimFloats2Thr2 = 0.9f;
-                                mwAnimFloats3Thr2 = 1.0f;
-                                mwConsortium.mwClick();
-                            } else {
-                                if (mwAnimRuleThr3) {
-                                    mwAnimObjDataThr3 = mwItemTab2;
-                                    mwAnimDataXThr3 = mwItemTab2AnimationScaleX;
-                                    mwAnimDataYThr3 = mwItemTab2AnimationScaleY;
-                                    mwAnimFloats1Thr3 = 1.1f;
-                                    mwAnimFloats2Thr3 = 0.9f;
-                                    mwAnimFloats3Thr3 = 1.0f;
-                                    mwConsortium.mwClick();
-                                }
-                            }
-                        }
+                        mwConsortium.mwClick();
+                        mwConsortium.mwThreads(mwItemTab2, mwItemTab2AnimationScaleX, mwItemTab2AnimationScaleY);
                     }
                 });
         mwItemTab3.setOnClickListener(
@@ -1261,35 +632,8 @@ public class MwPlayHomeActivity extends AppCompatActivity {
                         mwItemTab3.setBackgroundResource(R.drawable.mw_selectedbox_layout);
                         mwItemTab2.setBackgroundResource(R.drawable.mw_anybox_layout);
                         mwItemSelected = "3";
-                        if (mwAnimRuleThr1) {
-                            mwAnimObjDataThr1 = mwItemTab3;
-                            mwAnimDataXThr1 = mwItemTab3AnimationScaleX;
-                            mwAnimDataYThr1 = mwItemTab3AnimationScaleY;
-                            mwAnimFloats1Thr1 = 1.1f;
-                            mwAnimFloats2Thr1 = 0.9f;
-                            mwAnimFloats3Thr1 = 1.0f;
-                            mwConsortium.mwClick();
-                        } else {
-                            if (mwAnimRuleThr2) {
-                                mwAnimObjDataThr2 = mwItemTab3;
-                                mwAnimDataXThr2 = mwItemTab3AnimationScaleX;
-                                mwAnimDataYThr2 = mwItemTab3AnimationScaleY;
-                                mwAnimFloats1Thr2 = 1.1f;
-                                mwAnimFloats2Thr2 = 0.9f;
-                                mwAnimFloats3Thr2 = 1.0f;
-                                mwConsortium.mwClick();
-                            } else {
-                                if (mwAnimRuleThr3) {
-                                    mwAnimObjDataThr3 = mwItemTab3;
-                                    mwAnimDataXThr3 = mwItemTab3AnimationScaleX;
-                                    mwAnimDataYThr3 = mwItemTab3AnimationScaleY;
-                                    mwAnimFloats1Thr3 = 1.1f;
-                                    mwAnimFloats2Thr3 = 0.9f;
-                                    mwAnimFloats3Thr3 = 1.0f;
-                                    mwConsortium.mwClick();
-                                }
-                            }
-                        }
+                        mwConsortium.mwClick();
+                        mwConsortium.mwThreads(mwItemTab3, mwItemTab3AnimationScaleX, mwItemTab3AnimationScaleY);
                     }
                 });
     }

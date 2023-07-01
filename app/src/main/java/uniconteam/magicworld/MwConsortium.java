@@ -1,12 +1,44 @@
 package uniconteam.magicworld;
 
+import android.animation.ObjectAnimator;
+import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.TimerTask;
 
 // MwConsortium - engine for Magic World
-// MwConsortium v0.3b
+// MwConsortium v0.4b
 
 public class MwConsortium extends AppCompatActivity{
+    
+    void mwThreads(View view, ObjectAnimator objX, ObjectAnimator objY){
+        
+        if (MwPlayHomeActivity.mwAnimRuleThr1) {
+            MwPlayHomeActivity.mwAnimObjDataThr1 = view;
+            MwPlayHomeActivity.mwAnimDataXThr1 = objX;
+            MwPlayHomeActivity.mwAnimDataYThr1 = objY;
+            MwPlayHomeActivity.mwAnimFloats1Thr1 = 1.1f;
+            MwPlayHomeActivity.mwAnimFloats2Thr1 = 0.9f;
+            MwPlayHomeActivity.mwAnimFloats3Thr1 = 1.0f;
+        } else {
+            if (MwPlayHomeActivity.mwAnimRuleThr2) {
+                MwPlayHomeActivity.mwAnimObjDataThr2 = view;
+                MwPlayHomeActivity.mwAnimDataXThr2 = objX;
+                MwPlayHomeActivity.mwAnimDataYThr2 = objY;
+                MwPlayHomeActivity.mwAnimFloats1Thr2 = 1.1f;
+                MwPlayHomeActivity.mwAnimFloats2Thr2 = 0.9f;
+                MwPlayHomeActivity.mwAnimFloats3Thr2 = 1.0f;
+            } else {
+                if (MwPlayHomeActivity.mwAnimRuleThr3) {
+                    MwPlayHomeActivity.mwAnimObjDataThr3 = view;
+                    MwPlayHomeActivity.mwAnimDataXThr3 = objX;
+                    MwPlayHomeActivity.mwAnimDataYThr3 = objY;
+                    MwPlayHomeActivity.mwAnimFloats1Thr3 = 1.1f;
+                    MwPlayHomeActivity.mwAnimFloats2Thr3 = 0.9f;
+                    MwPlayHomeActivity.mwAnimFloats3Thr3 = 1.0f;
+                }
+            }
+        }
+    }
     
     public void mwClick(){
         
