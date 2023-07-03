@@ -16,7 +16,7 @@ public class Inventory {
         itemIconMap.put("GardenHouse", R.drawable.magicworld_house_garden);
         itemIconMap.put("Workshop", R.drawable.magicworld_house_workshop);
         itemIconMap.put("", R.drawable.magicworld_item_0);
-        List<String> itemList = Arrays.asList("CoinHouse", "GardenHouse", "Workshop");
+        List<String> itemList = Arrays.asList("CoinHouse", "GardenHouse", "Workshop", "");
 
         // ItemTab1    
         if (itemList.contains(HomeActivity.itemTab1d)) {

@@ -160,11 +160,11 @@ public class MenuActivity extends AppCompatActivity {
             editData.putString("itemTab2d", "");
             editData.putString("itemTab3d", "");
             fistOpen = playData.getString("firstOpen", "");
-            for (int i = 1; i < 21; i++){
+            for (int i = 1; i <= 20; i++){
                 String blockTabN = "blockTab" + i + "d";
                 editData.putString(blockTabN, "");
             }
-            for (int i = 2; i < 21; i++){
+            for (int i = 2; i <= 20; i++){
                 String blockTabLckN = "blockTabLck" + i;
                 editData.putString(blockTabLckN, "Lock");
             }

@@ -31,26 +31,26 @@ public class HomeActivity extends AppCompatActivity {
     public static ImageView itemId1;
     public static ImageView itemId2;
     public static ImageView itemId3;
-    public ImageView blockTab1;
-    public ImageView blockTab2;
-    public ImageView blockTab3;
-    public ImageView blockTab4;
-    public ImageView blockTab5;
-	public ImageView blockTab6; // Comments about this objects in «// All objects id»
-    public ImageView blockTab7;
-    public ImageView blockTab8;
-    public ImageView blockTab9;
-    public ImageView blockTab10;
-	public ImageView blockTab11;
-    public ImageView blockTab12;
-    public ImageView blockTab13;
-    public ImageView blockTab14;
-    public ImageView blockTab15;
-	public ImageView blockTab16;
-    public ImageView blockTab17;
-    public ImageView blockTab18;
-    public ImageView blockTab19;
-    public ImageView blockTab20;
+    public static ImageView blockTab1;
+    public static ImageView blockTab2;
+    public static ImageView blockTab3;
+    public static ImageView blockTab4;
+    public static ImageView blockTab5;
+	public static ImageView blockTab6; // Comments about this objects in «// All objects id»
+    public static ImageView blockTab7;
+    public static ImageView blockTab8;
+    public static ImageView blockTab9;
+    public static ImageView blockTab10;
+	public static ImageView blockTab11;
+    public static ImageView blockTab12;
+    public static ImageView blockTab13;
+    public static ImageView blockTab14;
+    public static ImageView blockTab15;
+	public static ImageView blockTab16;
+    public static ImageView blockTab17;
+    public static ImageView blockTab18;
+    public static ImageView blockTab19;
+    public static ImageView blockTab20;
     public static TextView tutorialBoxText;
     public LinearLayout tutorialBoxLinear;
     public ImageView tutorialBoxIcon;
@@ -156,7 +156,7 @@ public class HomeActivity extends AppCompatActivity {
     
     Tutorial tutorial = new Tutorial();
     HouseMenu houseMenu = new HouseMenu();
-    HouseMain houseMain = new HouseMain();
+    Houses houses = new Houses();
     Inventory inventory = new Inventory();
 
     @Override
@@ -178,9 +178,9 @@ public class HomeActivity extends AppCompatActivity {
         
         // Inventory display
         inventory.dataInventory();
-
+        
         // Getting data of blocks from SharedPreferences
-        for (int i = 1; i < 21; i++) {
+        for (int i = 1; i <= 20; i++) {
             String blocks = "blockTab" + i + "d";
             blocksTab[i] = playData.getString(blocks, "");
         }
@@ -218,6 +218,8 @@ public class HomeActivity extends AppCompatActivity {
         } else {
             tutorial.tutorialData();
         }
+        // Setup all houses
+        houses.dataHouses();
     }
 
     @Override
@@ -236,7 +238,7 @@ public class HomeActivity extends AppCompatActivity {
         if(itemTab3d == ""){
             editData.putString("itemTab3d", itemTab3d.toString());
         }
-        for (int i = 1; i < 21; i++) {
+        for (int i = 1; i <= 20; i++) {
             String blocks = "blockTab" + i + "d";
             editData.putString(blocks, blocksTab[i]);
         }
@@ -382,15 +384,15 @@ public class HomeActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         mwConsortium.mwClick();
                         mwConsortium.mwThreads(blockTab1, block1objX, block1objY, 1.1f, 0.9f, 1.0f);
-                        if(itemSelected == "1"){
+                        if(itemSelected == "1" && (itemTab1d.endsWith("House") || itemTab1d.equals("Workshop"))){
                             blocksTab[1] = itemTab1d;
                             itemTab1d = "";
                         } else {
-                            if(itemSelected == "2"){
+                            if(itemSelected == "2" && (itemTab2d.endsWith("House") || itemTab2d.equals("Workshop"))){
                                 blocksTab[1] = itemTab2d;
                                 itemTab2d = "";
                             } else {
-                                if(itemSelected == "3"){
+                                if(itemSelected == "3" && (itemTab3d.endsWith("House") || itemTab3d.equals("Workshop"))){
                                     blocksTab[1] = itemTab3d;
                                     itemTab3d = "";
                                 }
@@ -399,6 +401,8 @@ public class HomeActivity extends AppCompatActivity {
                         if (blocksTab[1] != "") {
                                 alert.showDialog(HomeActivity.this,blocksTab[1]);
                         }
+                        inventory.dataInventory();
+                        houses.dataHouses();
                     }
                 });
         blockTab2.setOnClickListener(
