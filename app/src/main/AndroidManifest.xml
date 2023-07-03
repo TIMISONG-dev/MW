@@ -16,7 +16,7 @@
         android:theme="@style/Theme.Application"
         android:enableOnBackInvokedCallback="true">
         <activity
-            android:name=".MwPlayMainActivity"
+            android:name=".MenuActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -25,10 +25,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MwPlayHomeActivity"
+            android:name=".HomeActivity"
             android:screenOrientation="portrait"/>
     <activity
-        android:name=".MwBattleFieldActivity"
+        android:name=".MagicAttackActivity"
         android:screenOrientation="portrait"/>
     </application>
 </manifest>

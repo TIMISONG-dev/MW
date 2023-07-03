@@ -13,10 +13,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class MwBattleFieldMap extends View{
+public class MagicAttackMap extends View{
     
-    MwMob mwMob = new MwMob();
-    MwHero mwHero = new MwHero();
+    MagicMob magicMob = new MagicMob();
+    MagicHero magicHero = new MagicHero();
     MwConsortium mwConsortium = new MwConsortium();
     
     void drawHealthBar(float rx, float ry, Canvas canvas, Bitmap hearth, int size, int hpCount, int hpp) {
@@ -28,95 +28,95 @@ public class MwBattleFieldMap extends View{
             float y = ry;
             canvas.drawBitmap(hearth, null, new RectF( x+(padding*i), y, x+(padding*i)+heartSize, y+heartSize), null);
         }
-        mwHero.mwHeroHpCheck();
-        mwMob.mwSlimeHpCheck();
+        magicHero.heroHpCheck();
+        magicMob.slimeHpCheck();
     }
     void drawPlants(Canvas canvas, float x, float y, int count){
         for(int i = 0; i < count; i++){
-            canvas.drawBitmap(mwMapBush, null, new RectF(x, y, x+100, y+100), null);
-            canvas.drawBitmap(mwMapTree, null, new RectF(x+500, y+700, x+600, y+800), null);
+            canvas.drawBitmap(mapBush, null, new RectF(x, y, x+100, y+100), null);
+            canvas.drawBitmap(mapTree, null, new RectF(x+500, y+700, x+600, y+800), null);
         }
     }
     
 	// All objects
-    public Bitmap mwJohn; // John hero image
-    public Bitmap mwSlime; // Slime image
-    public Bitmap mwTikvach; // Tikvach image
-    Bitmap mwButtonUp; // Buttons 1-4 \/
-    Bitmap mwButtonDown;
-    Bitmap mwButtonLeft;
-    Bitmap mwButtonRight;
-    Bitmap mwHeroHp; // Hero hp
-    Bitmap mwMobHp; // Mob hp
-    Bitmap mwHeroItem; // Hero item
-    Bitmap mwButtonAttack; // Hero attack button
-    Bitmap mwMapTree;
-    Bitmap mwMapBush;
-    Bitmap mwJohnCard;
-    String mwBiome = "landscape"; // Which background color #2C6E3C
-    Timer mwTimer = new Timer();
-    TimerTask mwTimerTask;
+    public Bitmap john; // John hero image
+    public Bitmap slime; // Slime image
+    public Bitmap tikvach; // Tikvach image
+    Bitmap buttonUp; // Buttons 1-4 \/
+    Bitmap buttonDown;
+    Bitmap buttonLeft;
+    Bitmap buttonRight;
+    Bitmap heroHp; // Hero hp
+    Bitmap mobHp; // Mob hp
+    Bitmap heroItem; // Hero item
+    Bitmap buttonAttack; // Hero attack button
+    Bitmap mapTree;
+    Bitmap mapBush;
+    Bitmap johnCard;
+    String biome = "landscape"; // Which background color #2C6E3C
+    Timer timer = new Timer();
+    TimerTask timerTask;
     public int currentFrame = 0;
     public int fps = 9;
-    private int mwTouchTime = 0;
-    public int mwCanvasX;
-    public int mwCanvasY;
-    public static int mwMobTimer = 0;
-    public int mwMobSpawnX = 0;
-    public int mwMobSpawnY = 0;
-    public boolean mwMobSpawnRule = true;
-    public boolean mwJohnAnimationRule = false;
-    public boolean mwHeroAttackRule = false;
-    public static boolean mwGameStoped = false;
+    private int touchTime = 0;
+    public int canvasX;
+    public int canvasY;
+    public static int mobTimer = 0;
+    public int mobSpawnX = 0;
+    public int mobSpawnY = 0;
+    public boolean mobSpawnRule = true;
+    public boolean johnAnimationRule = false;
+    public boolean heroAttackRule = false;
+    public static boolean gameStoped = false;
     
     public Handler mHandler;
     public Runnable mRunnable;
 
     // Array animation john and slime
-    Bitmap[] mwJohnWalkBitmaps = new Bitmap[]{ BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_walk_1), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_walk_2), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_walk_3),};
-    Bitmap[] mwJohnAttackBitmaps = new Bitmap[]{ BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_fight_1), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_fight_2), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_fight_3),};
-    Bitmap[] mwSlimeBitmaps = new Bitmap[]{ BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_mob_slime_animation_walk_1), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_mob_slime_animation_walk_2), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_mob_slime_animation_walk_3),};
-    Bitmap[] mwTikvachBitmaps = new Bitmap[]{ BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_mob_tikvach_animation_walk_1), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_mob_tikvach_animation_walk_2), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_mob_tikvach_animation_walk_3),};
+    Bitmap[] johnWalkBitmaps = new Bitmap[]{ BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_walk_1), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_walk_2), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_walk_3),};
+    Bitmap[] johnAttackBitmaps = new Bitmap[]{ BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_fight_1), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_fight_2), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_hero_john_animation_fight_3),};
+    Bitmap[] slimeBitmaps = new Bitmap[]{ BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_mob_slime_animation_walk_1), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_mob_slime_animation_walk_2), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_mob_slime_animation_walk_3),};
+    Bitmap[] tikvachBitmaps = new Bitmap[]{ BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_mob_tikvach_animation_walk_1), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_mob_tikvach_animation_walk_2), BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_mob_tikvach_animation_walk_3),};
     
-	public MwBattleFieldMap (Context context){
+	public MagicAttackMap (Context context){
 		super(context);
         
-        mwJohn = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_hero_john_animation_walk_2);
+        john = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_hero_john_animation_walk_2);
 
         mHandler = new Handler();
         mRunnable =
                 new Runnable() {
                     @Override
                     public void run() {
-                        mwJohnAnimationRule = false;
-                        mwHeroAttackRule = false;
-                        mwJohn = BitmapFactory.decodeResource(context.getResources(),R.drawable.magicworld_hero_john_animation_walk_2);
+                        johnAnimationRule = false;
+                        heroAttackRule = false;
+                        john = BitmapFactory.decodeResource(context.getResources(),R.drawable.magicworld_hero_john_animation_walk_2);
                     }
                 };
 
         // Draw objects
-        mwButtonUp = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_button_up);
-        mwButtonDown = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_button_down);
-        mwButtonRight = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_button_right);
-        mwButtonLeft = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_button_left);
-        mwButtonAttack = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_button_attack);
+        buttonUp = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_button_up);
+        buttonDown = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_button_down);
+        buttonRight = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_button_right);
+        buttonLeft = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_button_left);
+        buttonAttack = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_button_attack);
         
-        mwHeroHp = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_hero_hp);
-        mwMobHp = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_mob_hp);
+        heroHp = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_hero_hp);
+        mobHp = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_mob_hp);
         
-        mwMapTree = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_map_tree);
-        mwMapBush = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_map_bush);
+        mapTree = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_map_tree);
+        mapBush = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_map_bush);
         
-        mwJohnCard = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_card_john);
+        johnCard = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_card_john);
         
         
         new Thread(new Runnable(){
             @Override
             public void run(){
                 while(true){
-                    for(int j = 0; j < mwSlimeBitmaps.length; j++){
+                    for(int j = 0; j < slimeBitmaps.length; j++){
                         currentFrame = j;
-                        mwSlime = mwSlimeBitmaps[j];
+                        slime = slimeBitmaps[j];
                     try{
                         Thread.sleep(1000L / fps);
                     } catch (InterruptedException e){
@@ -130,9 +130,9 @@ public class MwBattleFieldMap extends View{
             @Override
             public void run(){
                 while(true){
-                    for(int j = 0; j < mwTikvachBitmaps.length; j++){
+                    for(int j = 0; j < tikvachBitmaps.length; j++){
                         currentFrame = j;
-                        mwTikvach = mwTikvachBitmaps[j];
+                        tikvach = tikvachBitmaps[j];
                     try{
                         Thread.sleep(1000L / fps);
                     } catch (InterruptedException e){
@@ -150,23 +150,23 @@ public class MwBattleFieldMap extends View{
         
 		super.onDraw(canvas);
         
-        if(mwMobTimer == 150){
-            mwMob.mwSlimeRand();
-            mwMobTimer += 5;
+        if(mobTimer == 150){
+            magicMob.slimeRand();
+            mobTimer += 5;
         } else {
-            if(mwMobTimer < 200){ 
-            mwMobTimer += 1;
+            if(mobTimer < 200){ 
+            mobTimer += 1;
             }
         }    
-        mwCanvasX = canvas.getWidth();
-        mwCanvasY = canvas.getHeight();
+        canvasX = canvas.getWidth();
+        canvasY = canvas.getHeight();
        
-        if(mwMobSpawnRule){
-        mwMobSpawnRule = false;    
-        mwMobSpawnX = ThreadLocalRandom.current().nextInt(100, mwCanvasX - 199);
-        mwMobSpawnY = ThreadLocalRandom.current().nextInt(100, mwCanvasY - 199);
-        MwMob.mwSlimeX = mwMobSpawnX;
-        MwMob.mwSlimeY = mwMobSpawnY;
+        if(mobSpawnRule){
+        mobSpawnRule = false;    
+        mobSpawnX = ThreadLocalRandom.current().nextInt(100, canvasX - 199);
+        mobSpawnY = ThreadLocalRandom.current().nextInt(100, canvasY - 199);
+        MagicMob.slimeX = mobSpawnX;
+        MagicMob.slimeY = mobSpawnY;
         }
         
         
@@ -203,67 +203,67 @@ public class MwBattleFieldMap extends View{
         opt.inMutable = true;
         Bitmap brightBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_icon_coin, opt); 
         Canvas hero = new Canvas(brightBitmap);
-        hero.drawBitmap(mwJohn, null, new RectF(MwHero.mwHeroX, MwHero.mwHeroY, MwHero.mwHeroX + 100, MwHero.mwHeroY + 100), null);
-        canvas.drawBitmap(mwJohn, null, new RectF(MwHero.mwHeroX, MwHero.mwHeroY, MwHero.mwHeroX + 100, MwHero.mwHeroY + 100), null);
+        hero.drawBitmap(john, null, new RectF(MagicHero.heroX, MagicHero.heroY, MagicHero.heroX + 100, MagicHero.heroY + 100), null);
+        canvas.drawBitmap(john, null, new RectF(MagicHero.heroX, MagicHero.heroY, MagicHero.heroX + 100, MagicHero.heroY + 100), null);
         
         // Tikvach
-        canvas.drawBitmap(mwTikvach, null, new RectF(850f, 1900f, 990f, 2040f), null);
+        canvas.drawBitmap(tikvach, null, new RectF(850f, 1900f, 990f, 2040f), null);
 
         // Allow or deny move of slime (limit on the edges of the canvas)
-        if (MwMob.mwSlimeHp != 0) {
-            if (MwHero.mwHeroX > mwCanvasX || MwHero.mwHeroX < -80) {
-                mwBiome = "desert";
+        if (MagicMob.slimeHp != 0) {
+            if (MagicHero.heroX > canvasX || MagicHero.heroX < -80) {
+                biome = "desert";
             }
-            if (MwHero.mwHeroY > mwCanvasY || MwHero.mwHeroY < -80) {
-                mwBiome = "landscape";
+            if (MagicHero.heroY > canvasY || MagicHero.heroY < -80) {
+                biome = "landscape";
             }
 
-            if (MwMob.mwSlimeX > mwCanvasX - 300) {
-                mwMob.mwSlimeXUpAcept = false;
+            if (MagicMob.slimeX > canvasX - 300) {
+                magicMob.slimeXUpAcept = false;
             } else {
-                mwMob.mwSlimeXUpAcept = true;
+                magicMob.slimeXUpAcept = true;
             }
-            if (MwMob.mwSlimeY > mwCanvasY - 300) {
-                mwMob.mwSlimeYUpAcept = false;
+            if (MagicMob.slimeY > canvasY - 300) {
+                magicMob.slimeYUpAcept = false;
             } else {
-                mwMob.mwSlimeYUpAcept = true;
+                magicMob.slimeYUpAcept = true;
             }
-            if (MwMob.mwSlimeX < -50) {
-                mwMob.mwSlimeXDownAcept = false;
+            if (MagicMob.slimeX < -50) {
+                magicMob.slimeXDownAcept = false;
             } else {
-                mwMob.mwSlimeXDownAcept = true;
+                magicMob.slimeXDownAcept = true;
             }
-            if (MwMob.mwSlimeY < -50) {
-                mwMob.mwSlimeYDownAcept = false;
+            if (MagicMob.slimeY < -50) {
+                magicMob.slimeYDownAcept = false;
             } else {
-                mwMob.mwSlimeYDownAcept = true;
+                magicMob.slimeYDownAcept = true;
             }
         }
 
         // Detecting objects for collision 
-        mwHero.MwHeroSpw();
-        mwMob.MwSlimeSpw();
+        magicHero.heroSpw();
+        magicMob.slimeSpw();
         
         // Collision
-        if (mwHero.getCollisionRect().CollidesWith(mwMob.getCollisionRect())) {
-            if(mwMob.mwSlimeCooldown == false){
-                mwMob.MwMobCooldown();
-                MwHero.mwHeroY += 50;
-                MwMob.mwSlimeY -= 50;
-                MwHero.mwHeroHp -= 1;
+        if (magicHero.getCollisionRect().CollidesWith(magicMob.getCollisionRect())) {
+            if(magicMob.slimeCooldown == false){
+                magicMob.mobCooldown();
+                MagicHero.heroY += 50;
+                MagicMob.slimeY -= 50;
+                MagicHero.heroHp -= 1;
             }
         }
         
-        drawHealthBar(MwMob.mwSlimeX-100, MwMob.mwSlimeY-50, canvas, mwMobHp, 64, MwMob.mwSlimeHp, -18);
-        drawHealthBar(500f, 1600f, canvas, mwHeroHp, 124, MwHero.mwHeroHp, -38);
+        drawHealthBar(MagicMob.slimeX-100, MagicMob.slimeY-50, canvas, mobHp, 64, MagicMob.slimeHp, -18);
+        drawHealthBar(500f, 1600f, canvas, heroHp, 124, MagicHero.heroHp, -38);
         
-        canvas.drawBitmap(mwSlime, null, new RectF(MwMob.mwSlimeX, MwMob.mwSlimeY, MwMob.mwSlimeX + 100, MwMob.mwSlimeY + 100), null);
-        canvas.drawBitmap(mwButtonUp, null, new RectF(300f, 1600f, 440f, 1740f), null);
-        canvas.drawBitmap(mwButtonDown, null, new RectF(300f, 2000f, 440f, 2140f), null);
-        canvas.drawBitmap(mwButtonLeft, null, new RectF(100f, 1800f, 240f, 1940f), null);
-        canvas.drawBitmap(mwButtonRight, null, new RectF(500f, 1800f, 640f, 1940f), null);
-        canvas.drawBitmap(mwButtonAttack, null, new RectF(750f, 1800f, 890f, 1940f), null);
-        canvas.drawBitmap(mwJohnCard, null, new RectF(650f, 1900f, 1150f, 2400f), null);
+        canvas.drawBitmap(slime, null, new RectF(MagicMob.slimeX, MagicMob.slimeY, MagicMob.slimeX + 100, MagicMob.slimeY + 100), null);
+        canvas.drawBitmap(buttonUp, null, new RectF(300f, 1600f, 440f, 1740f), null);
+        canvas.drawBitmap(buttonDown, null, new RectF(300f, 2000f, 440f, 2140f), null);
+        canvas.drawBitmap(buttonLeft, null, new RectF(100f, 1800f, 240f, 1940f), null);
+        canvas.drawBitmap(buttonRight, null, new RectF(500f, 1800f, 640f, 1940f), null);
+        canvas.drawBitmap(buttonAttack, null, new RectF(750f, 1800f, 890f, 1940f), null);
+        canvas.drawBitmap(johnCard, null, new RectF(650f, 1900f, 1150f, 2400f), null);
         invalidate();
         }
     public boolean onTouchEvent(MotionEvent event) {
@@ -275,20 +275,20 @@ public class MwBattleFieldMap extends View{
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
             if (xControll > 300f && xControll < 440f && yControll > 1600f && yControll < 1740f) {
-                mwHero.mwHeroUp();
-                    if(mwJohnAnimationRule == false){
-                    mwJohnAnimationRule = true;
+                magicHero.heroUp();
+                    if(johnAnimationRule == false){
+                    johnAnimationRule = true;
                     mHandler.postDelayed(mRunnable, 500);
                     new Thread(
                                     new Runnable() {
                                         @Override
                                         public void run() {
-                                            while (mwJohnAnimationRule) {
+                                            while (johnAnimationRule) {
 
-                                                for (int i = 0; i < mwJohnWalkBitmaps.length; i++) {
-                                                  if(mwJohnAnimationRule) {
+                                                for (int i = 0; i < johnWalkBitmaps.length; i++) {
+                                                  if(johnAnimationRule) {
                                                     currentFrame = i;
-                                                    mwJohn = mwJohnWalkBitmaps[i];
+                                                    john = johnWalkBitmaps[i];
                                                     try {
                                                         Thread.sleep(1000L / fps);
                                                     } catch (InterruptedException y) {
@@ -304,20 +304,20 @@ public class MwBattleFieldMap extends View{
                     }
                 }
             if (xControll > 300f && xControll < 440f && yControll > 2000f && yControll < 2140f) {
-                mwHero.mwHeroDown();
-                if(mwJohnAnimationRule == false){
-                    mwJohnAnimationRule = true;
+                magicHero.heroDown();
+                if(johnAnimationRule == false){
+                    johnAnimationRule = true;
                     mHandler.postDelayed(mRunnable, 500);
                     new Thread(
                                     new Runnable() {
                                         @Override
                                         public void run() {
-                                            while (mwJohnAnimationRule) {
+                                            while (johnAnimationRule) {
 
-                                                for (int i = 0; i < mwJohnWalkBitmaps.length; i++) {
-                                                  if(mwJohnAnimationRule) {
+                                                for (int i = 0; i < johnWalkBitmaps.length; i++) {
+                                                  if(johnAnimationRule) {
                                                     currentFrame = i;
-                                                    mwJohn = mwJohnWalkBitmaps[i];
+                                                    john = johnWalkBitmaps[i];
                                                     try {
                                                         Thread.sleep(1000L / fps);
                                                     } catch (InterruptedException y) {
@@ -333,20 +333,20 @@ public class MwBattleFieldMap extends View{
                     }
             }
             if (xControll > 100f && xControll < 240f && yControll > 1800f && yControll < 1940f) {
-                mwHero.mwHeroLeft();
-                if(mwJohnAnimationRule == false){
-                    mwJohnAnimationRule = true;
+                magicHero.heroLeft();
+                if(johnAnimationRule == false){
+                    johnAnimationRule = true;
                     mHandler.postDelayed(mRunnable, 500);
                     new Thread(
                                     new Runnable() {
                                         @Override
                                         public void run() {
-                                            while (mwJohnAnimationRule) {
+                                            while (johnAnimationRule) {
 
-                                                for (int i = 0; i < mwJohnWalkBitmaps.length; i++) {
-                                                  if(mwJohnAnimationRule) {
+                                                for (int i = 0; i < johnWalkBitmaps.length; i++) {
+                                                  if(johnAnimationRule) {
                                                     currentFrame = i;
-                                                    mwJohn = mwJohnWalkBitmaps[i];
+                                                    john = johnWalkBitmaps[i];
                                                     try {
                                                         Thread.sleep(1000L / fps);
                                                     } catch (InterruptedException y) {
@@ -362,20 +362,20 @@ public class MwBattleFieldMap extends View{
                     }
             }
             if (xControll > 500f && xControll < 640f && yControll > 1800f && yControll < 1940f) {
-                mwHero.mwHeroRight();
-                if(mwJohnAnimationRule == false){
-                    mwJohnAnimationRule = true;
+                magicHero.heroRight();
+                if(johnAnimationRule == false){
+                    johnAnimationRule = true;
                     mHandler.postDelayed(mRunnable, 500);
                     new Thread(
                                     new Runnable() {
                                         @Override
                                         public void run() {
-                                            while (mwJohnAnimationRule) {
+                                            while (johnAnimationRule) {
 
-                                                for (int i = 0; i < mwJohnWalkBitmaps.length; i++) {
-                                                  if(mwJohnAnimationRule) {
+                                                for (int i = 0; i < johnWalkBitmaps.length; i++) {
+                                                  if(johnAnimationRule) {
                                                     currentFrame = i;
-                                                    mwJohn = mwJohnWalkBitmaps[i];
+                                                    john = johnWalkBitmaps[i];
                                                     try {
                                                         Thread.sleep(1000L / fps);
                                                     } catch (InterruptedException y) {
@@ -391,19 +391,19 @@ public class MwBattleFieldMap extends View{
                     }
             }
             if (xControll > 750f && xControll < 890f && yControll > 1800f && yControll < 1940f) {
-              if(mwHeroAttackRule == false){
-                mwHeroAttackRule = true;    
+              if(heroAttackRule == false){
+                heroAttackRule = true;    
                 mHandler.postDelayed(mRunnable, 500);
                 new Thread(
                                 new Runnable() {
                                     @Override
                                     public void run() {
 
-                                        while (mwHeroAttackRule) {
-                                            for (int a = 0; a < mwJohnAttackBitmaps.length; a++) {
-                                              if(mwHeroAttackRule){
+                                        while (heroAttackRule) {
+                                            for (int a = 0; a < johnAttackBitmaps.length; a++) {
+                                              if(heroAttackRule){
                                                 currentFrame = a;
-                                                mwJohn = mwJohnAttackBitmaps[a];
+                                                john = johnAttackBitmaps[a];
                                                 try {
                                                     Thread.sleep(1000L / fps);
                                                 } catch (InterruptedException e) {
@@ -418,17 +418,17 @@ public class MwBattleFieldMap extends View{
                         .start();
                     }
 
-                if (mwHero.getCollisionRect().CollidesWith(mwMob.getCollisionRect())) {
-                    MwHero.mwHeroY += 20;
-                    MwMob.mwSlimeY -= 10;
-                    MwMob.mwSlimeHp -= 1;
+                if (magicHero.getCollisionRect().CollidesWith(magicMob.getCollisionRect())) {
+                    MagicHero.heroY += 20;
+                    MagicMob.slimeY -= 10;
+                    MagicMob.slimeHp -= 1;
                 }
             }
         }
         if (event.getAction() == MotionEvent.ACTION_UP) {
             mHandler.removeCallbacks(mRunnable);
-            mwJohnAnimationRule = false;
-            mwHeroAttackRule = false;
+            johnAnimationRule = false;
+            heroAttackRule = false;
         }
         return super.onTouchEvent(event);
     }

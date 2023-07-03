@@ -6,47 +6,77 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.TimerTask;
 
 // MwConsortium - engine for Magic World
-// MwConsortium v0.4b
+// MwConsortium v0.5b
 
 public class MwConsortium extends AppCompatActivity{
-    
-    void mwThreads(View view, ObjectAnimator objX, ObjectAnimator objY){
-        
-        if (MwPlayHomeActivity.mwAnimRuleThr1) {
-            MwPlayHomeActivity.mwAnimObjDataThr1 = view;
-            MwPlayHomeActivity.mwAnimDataXThr1 = objX;
-            MwPlayHomeActivity.mwAnimDataYThr1 = objY;
-            MwPlayHomeActivity.mwAnimFloats1Thr1 = 1.1f;
-            MwPlayHomeActivity.mwAnimFloats2Thr1 = 0.9f;
-            MwPlayHomeActivity.mwAnimFloats3Thr1 = 1.0f;
-        } else {
-            if (MwPlayHomeActivity.mwAnimRuleThr2) {
-                MwPlayHomeActivity.mwAnimObjDataThr2 = view;
-                MwPlayHomeActivity.mwAnimDataXThr2 = objX;
-                MwPlayHomeActivity.mwAnimDataYThr2 = objY;
-                MwPlayHomeActivity.mwAnimFloats1Thr2 = 1.1f;
-                MwPlayHomeActivity.mwAnimFloats2Thr2 = 0.9f;
-                MwPlayHomeActivity.mwAnimFloats3Thr2 = 1.0f;
+
+    void mwThreads(View view, ObjectAnimator objX, ObjectAnimator objY, float f1, float f2, float f3) {
+
+        if (MenuActivity.mwActivity.equals("mwMain")) {
+            if (MenuActivity.animRuleThr1) {
+                MenuActivity.animObjDataThr1 = view;
+                MenuActivity.animDataXThr1 = objX;
+                MenuActivity.animDataYThr1 = objY;
+                MenuActivity.animFloats1Thr1 = f1;
+                MenuActivity.animFloats2Thr1 = f2;
+                MenuActivity.animFloats3Thr1 = f3;
             } else {
-                if (MwPlayHomeActivity.mwAnimRuleThr3) {
-                    MwPlayHomeActivity.mwAnimObjDataThr3 = view;
-                    MwPlayHomeActivity.mwAnimDataXThr3 = objX;
-                    MwPlayHomeActivity.mwAnimDataYThr3 = objY;
-                    MwPlayHomeActivity.mwAnimFloats1Thr3 = 1.1f;
-                    MwPlayHomeActivity.mwAnimFloats2Thr3 = 0.9f;
-                    MwPlayHomeActivity.mwAnimFloats3Thr3 = 1.0f;
+                if (MenuActivity.animRuleThr2) {
+                    MenuActivity.animObjDataThr2 = view;
+                    MenuActivity.animDataXThr2 = objX;
+                    MenuActivity.animDataYThr2 = objY;
+                    MenuActivity.animFloats1Thr2 = f1;
+                    MenuActivity.animFloats2Thr2 = f2;
+                    MenuActivity.animFloats3Thr2 = f3;
+                } else {
+                    if (MenuActivity.animRuleThr3) {
+                        MenuActivity.animObjDataThr3 = view;
+                        MenuActivity.animDataXThr3 = objX;
+                        MenuActivity.animDataYThr3 = objY;
+                        MenuActivity.animFloats1Thr3 = f1;
+                        MenuActivity.animFloats2Thr3 = f2;
+                        MenuActivity.animFloats3Thr3 = f3;
+                    }
+                }
+            }
+        }
+        if (MenuActivity.mwActivity.equals("mwHome")) {
+            if (HomeActivity.animRuleThr1) {
+                HomeActivity.animObjDataThr1 = view;
+                HomeActivity.animDataXThr1 = objX;
+                HomeActivity.animDataYThr1 = objY;
+                HomeActivity.animFloats1Thr1 = f1;
+                HomeActivity.animFloats2Thr1 = f2;
+                HomeActivity.animFloats3Thr1 = f3;
+            } else {
+                if (HomeActivity.animRuleThr2) {
+                    HomeActivity.animObjDataThr2 = view;
+                    HomeActivity.animDataXThr2 = objX;
+                    HomeActivity.animDataYThr2 = objY;
+                    HomeActivity.animFloats1Thr2 = f1;
+                    HomeActivity.animFloats2Thr2 = f2;
+                    HomeActivity.animFloats3Thr2 = f3;
+                } else {
+                    if (HomeActivity.animRuleThr3) {
+                        HomeActivity.animObjDataThr3 = view;
+                        HomeActivity.animDataXThr3 = objX;
+                        HomeActivity.animDataYThr3 = objY;
+                        HomeActivity.animFloats1Thr3 = f1;
+                        HomeActivity.animFloats2Thr3 = f2;
+                        HomeActivity.animFloats3Thr3 = f3;
+                    }
                 }
             }
         }
     }
-    
+
     public void mwClick(){
         
-        if (MwPlayMainActivity.mwActivity.equals("mwMain")){
+        if (MenuActivity.mwActivity.equals("mwMain")){
 
             // Thread 1
-            if (MwPlayMainActivity.mwAnimRuleThr1) {
-                MwPlayMainActivity.mwTimerTaskThr1 =
+            if (MenuActivity.animRuleThr1) {
+                MenuActivity.timerTaskThr1 =
                         new TimerTask() {
                             @Override
                             public void run() {
@@ -54,24 +84,24 @@ public class MwConsortium extends AppCompatActivity{
                                         new Runnable() {
                                             @Override
                                             public void run() {
-                                                MwPlayMainActivity.mwAnimRuleThr1 = false;
-                                                MwPlayMainActivity.mwAnimDataXThr1.setTarget(
-                                                        MwPlayMainActivity.mwAnimObjDataThr1);
-                                                MwPlayMainActivity.mwAnimDataXThr1.setPropertyName(
+                                                MenuActivity.animRuleThr1 = false;
+                                                MenuActivity.animDataXThr1.setTarget(
+                                                        MenuActivity.animObjDataThr1);
+                                                MenuActivity.animDataXThr1.setPropertyName(
                                                         "scaleX");
-                                                MwPlayMainActivity.mwAnimDataXThr1.setFloatValues(
-                                                        MwPlayMainActivity.mwAnimFloats1Thr1);
-                                                MwPlayMainActivity.mwAnimDataXThr1.setDuration(100);
-                                                MwPlayMainActivity.mwAnimDataXThr1.start();
-                                                MwPlayMainActivity.mwAnimDataYThr1.setTarget(
-                                                        MwPlayMainActivity.mwAnimObjDataThr1);
-                                                MwPlayMainActivity.mwAnimDataYThr1.setPropertyName(
+                                                MenuActivity.animDataXThr1.setFloatValues(
+                                                        MenuActivity.animFloats1Thr1);
+                                                MenuActivity.animDataXThr1.setDuration(100);
+                                                MenuActivity.animDataXThr1.start();
+                                                MenuActivity.animDataYThr1.setTarget(
+                                                        MenuActivity.animObjDataThr1);
+                                                MenuActivity.animDataYThr1.setPropertyName(
                                                         "scaleY");
-                                                MwPlayMainActivity.mwAnimDataYThr1.setFloatValues(
-                                                        MwPlayMainActivity.mwAnimFloats1Thr1);
-                                                MwPlayMainActivity.mwAnimDataYThr1.setDuration(100);
-                                                MwPlayMainActivity.mwAnimDataYThr1.start();
-                                                MwPlayMainActivity.mwTimerTaskThr1 =
+                                                MenuActivity.animDataYThr1.setFloatValues(
+                                                        MenuActivity.animFloats1Thr1);
+                                                MenuActivity.animDataYThr1.setDuration(100);
+                                                MenuActivity.animDataYThr1.start();
+                                                MenuActivity.timerTaskThr1 =
                                                         new TimerTask() {
                                                             @Override
                                                             public void run() {
@@ -79,50 +109,50 @@ public class MwConsortium extends AppCompatActivity{
                                                                         new Runnable() {
                                                                             @Override
                                                                             public void run() {
-                                                                                MwPlayMainActivity
-                                                                                        .mwAnimDataXThr1
+                                                                                MenuActivity
+                                                                                        .animDataXThr1
                                                                                         .setTarget(
-                                                                                                MwPlayMainActivity
-                                                                                                        .mwAnimObjDataThr1);
-                                                                                MwPlayMainActivity
-                                                                                        .mwAnimDataXThr1
+                                                                                                MenuActivity
+                                                                                                        .animObjDataThr1);
+                                                                                MenuActivity
+                                                                                        .animDataXThr1
                                                                                         .setPropertyName(
                                                                                                 "scaleX");
-                                                                                MwPlayMainActivity
-                                                                                        .mwAnimDataXThr1
+                                                                                MenuActivity
+                                                                                        .animDataXThr1
                                                                                         .setFloatValues(
-                                                                                                MwPlayMainActivity
-                                                                                                        .mwAnimFloats2Thr1);
-                                                                                MwPlayMainActivity
-                                                                                        .mwAnimDataXThr1
+                                                                                                MenuActivity
+                                                                                                        .animFloats2Thr1);
+                                                                                MenuActivity
+                                                                                        .animDataXThr1
                                                                                         .setDuration(
                                                                                                 200);
-                                                                                MwPlayMainActivity
-                                                                                        .mwAnimDataXThr1
+                                                                                MenuActivity
+                                                                                        .animDataXThr1
                                                                                         .start();
-                                                                                MwPlayMainActivity
-                                                                                        .mwAnimDataYThr1
+                                                                                MenuActivity
+                                                                                        .animDataYThr1
                                                                                         .setTarget(
-                                                                                                MwPlayMainActivity
-                                                                                                        .mwAnimObjDataThr1);
-                                                                                MwPlayMainActivity
-                                                                                        .mwAnimDataYThr1
+                                                                                                MenuActivity
+                                                                                                        .animObjDataThr1);
+                                                                                MenuActivity
+                                                                                        .animDataYThr1
                                                                                         .setPropertyName(
                                                                                                 "scaleY");
-                                                                                MwPlayMainActivity
-                                                                                        .mwAnimDataYThr1
+                                                                                MenuActivity
+                                                                                        .animDataYThr1
                                                                                         .setFloatValues(
-                                                                                                MwPlayMainActivity
-                                                                                                        .mwAnimFloats2Thr1);
-                                                                                MwPlayMainActivity
-                                                                                        .mwAnimDataYThr1
+                                                                                                MenuActivity
+                                                                                                        .animFloats2Thr1);
+                                                                                MenuActivity
+                                                                                        .animDataYThr1
                                                                                         .setDuration(
                                                                                                 200);
-                                                                                MwPlayMainActivity
-                                                                                        .mwAnimDataYThr1
+                                                                                MenuActivity
+                                                                                        .animDataYThr1
                                                                                         .start();
-                                                                                MwPlayMainActivity
-                                                                                                .mwTimerTaskThr1 =
+                                                                                MenuActivity
+                                                                                                .timerTaskThr1 =
                                                                                         new TimerTask() {
                                                                                             @Override
                                                                                             public
@@ -134,77 +164,77 @@ public class MwConsortium extends AppCompatActivity{
                                                                                                             public
                                                                                                             void
                                                                                                                     run() {
-                                                                                                                MwPlayMainActivity
-                                                                                                                        .mwAnimDataXThr1
+                                                                                                                MenuActivity
+                                                                                                                        .animDataXThr1
                                                                                                                         .setTarget(
-                                                                                                                                MwPlayMainActivity
-                                                                                                                                        .mwAnimObjDataThr1);
-                                                                                                                MwPlayMainActivity
-                                                                                                                        .mwAnimDataXThr1
+                                                                                                                                MenuActivity
+                                                                                                                                        .animObjDataThr1);
+                                                                                                                MenuActivity
+                                                                                                                        .animDataXThr1
                                                                                                                         .setPropertyName(
                                                                                                                                 "scaleX");
-                                                                                                                MwPlayMainActivity
-                                                                                                                        .mwAnimDataXThr1
+                                                                                                                MenuActivity
+                                                                                                                        .animDataXThr1
                                                                                                                         .setFloatValues(
-                                                                                                                                MwPlayMainActivity
-                                                                                                                                        .mwAnimFloats3Thr1);
-                                                                                                                MwPlayMainActivity
-                                                                                                                        .mwAnimDataXThr1
+                                                                                                                                MenuActivity
+                                                                                                                                        .animFloats3Thr1);
+                                                                                                                MenuActivity
+                                                                                                                        .animDataXThr1
                                                                                                                         .setDuration(
                                                                                                                                 250);
-                                                                                                                MwPlayMainActivity
-                                                                                                                        .mwAnimDataXThr1
+                                                                                                                MenuActivity
+                                                                                                                        .animDataXThr1
                                                                                                                         .start();
-                                                                                                                MwPlayMainActivity
-                                                                                                                        .mwAnimDataYThr1
+                                                                                                                MenuActivity
+                                                                                                                        .animDataYThr1
                                                                                                                         .setTarget(
-                                                                                                                                MwPlayMainActivity
-                                                                                                                                        .mwAnimObjDataThr1);
-                                                                                                                MwPlayMainActivity
-                                                                                                                        .mwAnimDataYThr1
+                                                                                                                                MenuActivity
+                                                                                                                                        .animObjDataThr1);
+                                                                                                                MenuActivity
+                                                                                                                        .animDataYThr1
                                                                                                                         .setPropertyName(
                                                                                                                                 "scaleY");
-                                                                                                                MwPlayMainActivity
-                                                                                                                        .mwAnimDataYThr1
+                                                                                                                MenuActivity
+                                                                                                                        .animDataYThr1
                                                                                                                         .setFloatValues(
-                                                                                                                                MwPlayMainActivity
-                                                                                                                                        .mwAnimFloats3Thr1);
-                                                                                                                MwPlayMainActivity
-                                                                                                                        .mwAnimDataYThr1
+                                                                                                                                MenuActivity
+                                                                                                                                        .animFloats3Thr1);
+                                                                                                                MenuActivity
+                                                                                                                        .animDataYThr1
                                                                                                                         .setDuration(
                                                                                                                                 250);
-                                                                                                                MwPlayMainActivity
-                                                                                                                        .mwAnimDataYThr1
+                                                                                                                MenuActivity
+                                                                                                                        .animDataYThr1
                                                                                                                         .start();
-                                                                                                                MwPlayMainActivity
-                                                                                                                                .mwAnimRuleThr1 =
+                                                                                                                MenuActivity
+                                                                                                                                .animRuleThr1 =
                                                                                                                         true;
                                                                                                             }
                                                                                                         });
                                                                                             }
                                                                                         };
-                                                                                MwPlayMainActivity
-                                                                                        ._mwTimerTaskThr1
+                                                                                MenuActivity
+                                                                                        ._timerTaskThr1
                                                                                         .schedule(
-                                                                                                MwPlayMainActivity
-                                                                                                        .mwTimerTaskThr1,
+                                                                                                MenuActivity
+                                                                                                        .timerTaskThr1,
                                                                                                 200);
                                                                             }
                                                                         });
                                                             }
                                                         };
-                                                MwPlayMainActivity._mwTimerTaskThr1.schedule(
-                                                        MwPlayMainActivity.mwTimerTaskThr1, 100);
+                                                MenuActivity._timerTaskThr1.schedule(
+                                                        MenuActivity.timerTaskThr1, 100);
                                             }
                                         });
                             }
                         };
-                MwPlayMainActivity._mwTimerTaskThr1.schedule(MwPlayMainActivity.mwTimerTaskThr1, 0);
+                MenuActivity._timerTaskThr1.schedule(MenuActivity.timerTaskThr1, 0);
             } else {
 
                 // Thread 2
-                if (MwPlayMainActivity.mwAnimRuleThr2) {
-                    MwPlayMainActivity.mwTimerTaskThr2 =
+                if (MenuActivity.animRuleThr2) {
+                    MenuActivity.timerTaskThr2 =
                             new TimerTask() {
                                 @Override
                                 public void run() {
@@ -212,30 +242,30 @@ public class MwConsortium extends AppCompatActivity{
                                             new Runnable() {
                                                 @Override
                                                 public void run() {
-                                                    MwPlayMainActivity.mwAnimRuleThr2 = false;
-                                                    MwPlayMainActivity.mwAnimDataXThr2.setTarget(
-                                                            MwPlayMainActivity.mwAnimObjDataThr2);
-                                                    MwPlayMainActivity.mwAnimDataXThr2
+                                                    MenuActivity.animRuleThr2 = false;
+                                                    MenuActivity.animDataXThr2.setTarget(
+                                                            MenuActivity.animObjDataThr2);
+                                                    MenuActivity.animDataXThr2
                                                             .setPropertyName("scaleX");
-                                                    MwPlayMainActivity.mwAnimDataXThr2
+                                                    MenuActivity.animDataXThr2
                                                             .setFloatValues(
-                                                                    MwPlayMainActivity
-                                                                            .mwAnimFloats1Thr2);
-                                                    MwPlayMainActivity.mwAnimDataXThr2.setDuration(
+                                                                    MenuActivity
+                                                                            .animFloats1Thr2);
+                                                    MenuActivity.animDataXThr2.setDuration(
                                                             100);
-                                                    MwPlayMainActivity.mwAnimDataXThr2.start();
-                                                    MwPlayMainActivity.mwAnimDataYThr2.setTarget(
-                                                            MwPlayMainActivity.mwAnimObjDataThr2);
-                                                    MwPlayMainActivity.mwAnimDataYThr2
+                                                    MenuActivity.animDataXThr2.start();
+                                                    MenuActivity.animDataYThr2.setTarget(
+                                                            MenuActivity.animObjDataThr2);
+                                                    MenuActivity.animDataYThr2
                                                             .setPropertyName("scaleY");
-                                                    MwPlayMainActivity.mwAnimDataYThr2
+                                                    MenuActivity.animDataYThr2
                                                             .setFloatValues(
-                                                                    MwPlayMainActivity
-                                                                            .mwAnimFloats1Thr2);
-                                                    MwPlayMainActivity.mwAnimDataYThr2.setDuration(
+                                                                    MenuActivity
+                                                                            .animFloats1Thr2);
+                                                    MenuActivity.animDataYThr2.setDuration(
                                                             100);
-                                                    MwPlayMainActivity.mwAnimDataYThr2.start();
-                                                    MwPlayMainActivity.mwTimerTaskThr2 =
+                                                    MenuActivity.animDataYThr2.start();
+                                                    MenuActivity.timerTaskThr2 =
                                                             new TimerTask() {
                                                                 @Override
                                                                 public void run() {
@@ -243,50 +273,50 @@ public class MwConsortium extends AppCompatActivity{
                                                                             new Runnable() {
                                                                                 @Override
                                                                                 public void run() {
-                                                                                    MwPlayMainActivity
-                                                                                            .mwAnimDataXThr2
+                                                                                    MenuActivity
+                                                                                            .animDataXThr2
                                                                                             .setTarget(
-                                                                                                    MwPlayMainActivity
-                                                                                                            .mwAnimObjDataThr2);
-                                                                                    MwPlayMainActivity
-                                                                                            .mwAnimDataXThr2
+                                                                                                    MenuActivity
+                                                                                                            .animObjDataThr2);
+                                                                                    MenuActivity
+                                                                                            .animDataXThr2
                                                                                             .setPropertyName(
                                                                                                     "scaleX");
-                                                                                    MwPlayMainActivity
-                                                                                            .mwAnimDataXThr2
+                                                                                    MenuActivity
+                                                                                            .animDataXThr2
                                                                                             .setFloatValues(
-                                                                                                    MwPlayMainActivity
-                                                                                                            .mwAnimFloats2Thr2);
-                                                                                    MwPlayMainActivity
-                                                                                            .mwAnimDataXThr2
+                                                                                                    MenuActivity
+                                                                                                            .animFloats2Thr2);
+                                                                                    MenuActivity
+                                                                                            .animDataXThr2
                                                                                             .setDuration(
                                                                                                     200);
-                                                                                    MwPlayMainActivity
-                                                                                            .mwAnimDataXThr2
+                                                                                    MenuActivity
+                                                                                            .animDataXThr2
                                                                                             .start();
-                                                                                    MwPlayMainActivity
-                                                                                            .mwAnimDataYThr2
+                                                                                    MenuActivity
+                                                                                            .animDataYThr2
                                                                                             .setTarget(
-                                                                                                    MwPlayMainActivity
-                                                                                                            .mwAnimObjDataThr2);
-                                                                                    MwPlayMainActivity
-                                                                                            .mwAnimDataYThr2
+                                                                                                    MenuActivity
+                                                                                                            .animObjDataThr2);
+                                                                                    MenuActivity
+                                                                                            .animDataYThr2
                                                                                             .setPropertyName(
                                                                                                     "scaleY");
-                                                                                    MwPlayMainActivity
-                                                                                            .mwAnimDataYThr2
+                                                                                    MenuActivity
+                                                                                            .animDataYThr2
                                                                                             .setFloatValues(
-                                                                                                    MwPlayMainActivity
-                                                                                                            .mwAnimFloats2Thr2);
-                                                                                    MwPlayMainActivity
-                                                                                            .mwAnimDataYThr2
+                                                                                                    MenuActivity
+                                                                                                            .animFloats2Thr2);
+                                                                                    MenuActivity
+                                                                                            .animDataYThr2
                                                                                             .setDuration(
                                                                                                     200);
-                                                                                    MwPlayMainActivity
-                                                                                            .mwAnimDataYThr2
+                                                                                    MenuActivity
+                                                                                            .animDataYThr2
                                                                                             .start();
-                                                                                    MwPlayMainActivity
-                                                                                                    .mwTimerTaskThr2 =
+                                                                                    MenuActivity
+                                                                                                    .timerTaskThr2 =
                                                                                             new TimerTask() {
                                                                                                 @Override
                                                                                                 public
@@ -298,79 +328,79 @@ public class MwConsortium extends AppCompatActivity{
                                                                                                                 public
                                                                                                                 void
                                                                                                                         run() {
-                                                                                                                    MwPlayMainActivity
-                                                                                                                            .mwAnimDataXThr2
+                                                                                                                    MenuActivity
+                                                                                                                            .animDataXThr2
                                                                                                                             .setTarget(
-                                                                                                                                    MwPlayMainActivity
-                                                                                                                                            .mwAnimObjDataThr2);
-                                                                                                                    MwPlayMainActivity
-                                                                                                                            .mwAnimDataXThr2
+                                                                                                                                    MenuActivity
+                                                                                                                                            .animObjDataThr2);
+                                                                                                                    MenuActivity
+                                                                                                                            .animDataXThr2
                                                                                                                             .setPropertyName(
                                                                                                                                     "scaleX");
-                                                                                                                    MwPlayMainActivity
-                                                                                                                            .mwAnimDataXThr2
+                                                                                                                    MenuActivity
+                                                                                                                            .animDataXThr2
                                                                                                                             .setFloatValues(
-                                                                                                                                    MwPlayMainActivity
-                                                                                                                                            .mwAnimFloats3Thr2);
-                                                                                                                    MwPlayMainActivity
-                                                                                                                            .mwAnimDataXThr2
+                                                                                                                                    MenuActivity
+                                                                                                                                            .animFloats3Thr2);
+                                                                                                                    MenuActivity
+                                                                                                                            .animDataXThr2
                                                                                                                             .setDuration(
                                                                                                                                     250);
-                                                                                                                    MwPlayMainActivity
-                                                                                                                            .mwAnimDataXThr2
+                                                                                                                    MenuActivity
+                                                                                                                            .animDataXThr2
                                                                                                                             .start();
-                                                                                                                    MwPlayMainActivity
-                                                                                                                            .mwAnimDataYThr2
+                                                                                                                    MenuActivity
+                                                                                                                            .animDataYThr2
                                                                                                                             .setTarget(
-                                                                                                                                    MwPlayMainActivity
-                                                                                                                                            .mwAnimObjDataThr2);
-                                                                                                                    MwPlayMainActivity
-                                                                                                                            .mwAnimDataYThr2
+                                                                                                                                    MenuActivity
+                                                                                                                                            .animObjDataThr2);
+                                                                                                                    MenuActivity
+                                                                                                                            .animDataYThr2
                                                                                                                             .setPropertyName(
                                                                                                                                     "scaleY");
-                                                                                                                    MwPlayMainActivity
-                                                                                                                            .mwAnimDataYThr2
+                                                                                                                    MenuActivity
+                                                                                                                            .animDataYThr2
                                                                                                                             .setFloatValues(
-                                                                                                                                    MwPlayMainActivity
-                                                                                                                                            .mwAnimFloats3Thr2);
-                                                                                                                    MwPlayMainActivity
-                                                                                                                            .mwAnimDataYThr2
+                                                                                                                                    MenuActivity
+                                                                                                                                            .animFloats3Thr2);
+                                                                                                                    MenuActivity
+                                                                                                                            .animDataYThr2
                                                                                                                             .setDuration(
                                                                                                                                     250);
-                                                                                                                    MwPlayMainActivity
-                                                                                                                            .mwAnimDataYThr2
+                                                                                                                    MenuActivity
+                                                                                                                            .animDataYThr2
                                                                                                                             .start();
-                                                                                                                    MwPlayMainActivity
-                                                                                                                                    .mwAnimRuleThr2 =
+                                                                                                                    MenuActivity
+                                                                                                                                    .animRuleThr2 =
                                                                                                                             true;
                                                                                                                 }
                                                                                                             });
                                                                                                 }
                                                                                             };
-                                                                                    MwPlayMainActivity
-                                                                                            ._mwTimerTaskThr2
+                                                                                    MenuActivity
+                                                                                            ._timerTaskThr2
                                                                                             .schedule(
-                                                                                                    MwPlayMainActivity
-                                                                                                            .mwTimerTaskThr2,
+                                                                                                    MenuActivity
+                                                                                                            .timerTaskThr2,
                                                                                                     200);
                                                                                 }
                                                                             });
                                                                 }
                                                             };
-                                                    MwPlayMainActivity._mwTimerTaskThr2.schedule(
-                                                            MwPlayMainActivity.mwTimerTaskThr2,
+                                                    MenuActivity._timerTaskThr2.schedule(
+                                                            MenuActivity.timerTaskThr2,
                                                             100);
                                                 }
                                             });
                                 }
                             };
-                    MwPlayMainActivity._mwTimerTaskThr2.schedule(
-                            MwPlayMainActivity.mwTimerTaskThr2, 0);
+                    MenuActivity._timerTaskThr2.schedule(
+                            MenuActivity.timerTaskThr2, 0);
                 } else {
 
                     // Thread 3
-                    if (MwPlayMainActivity.mwAnimRuleThr3) {
-                        MwPlayMainActivity.mwTimerTaskThr3 =
+                    if (MenuActivity.animRuleThr3) {
+                        MenuActivity.timerTaskThr3 =
                                 new TimerTask() {
                                     @Override
                                     public void run() {
@@ -378,34 +408,34 @@ public class MwConsortium extends AppCompatActivity{
                                                 new Runnable() {
                                                     @Override
                                                     public void run() {
-                                                        MwPlayMainActivity.mwAnimRuleThr3 = false;
-                                                        MwPlayMainActivity.mwAnimDataXThr3
+                                                        MenuActivity.animRuleThr3 = false;
+                                                        MenuActivity.animDataXThr3
                                                                 .setTarget(
-                                                                        MwPlayMainActivity
-                                                                                .mwAnimObjDataThr3);
-                                                        MwPlayMainActivity.mwAnimDataXThr3
+                                                                        MenuActivity
+                                                                                .animObjDataThr3);
+                                                        MenuActivity.animDataXThr3
                                                                 .setPropertyName("scaleX");
-                                                        MwPlayMainActivity.mwAnimDataXThr3
+                                                        MenuActivity.animDataXThr3
                                                                 .setFloatValues(
-                                                                        MwPlayMainActivity
-                                                                                .mwAnimFloats1Thr3);
-                                                        MwPlayMainActivity.mwAnimDataXThr3
+                                                                        MenuActivity
+                                                                                .animFloats1Thr3);
+                                                        MenuActivity.animDataXThr3
                                                                 .setDuration(100);
-                                                        MwPlayMainActivity.mwAnimDataXThr3.start();
-                                                        MwPlayMainActivity.mwAnimDataYThr3
+                                                        MenuActivity.animDataXThr3.start();
+                                                        MenuActivity.animDataYThr3
                                                                 .setTarget(
-                                                                        MwPlayMainActivity
-                                                                                .mwAnimObjDataThr3);
-                                                        MwPlayMainActivity.mwAnimDataYThr3
+                                                                        MenuActivity
+                                                                                .animObjDataThr3);
+                                                        MenuActivity.animDataYThr3
                                                                 .setPropertyName("scaleY");
-                                                        MwPlayMainActivity.mwAnimDataYThr3
+                                                        MenuActivity.animDataYThr3
                                                                 .setFloatValues(
-                                                                        MwPlayMainActivity
-                                                                                .mwAnimFloats1Thr3);
-                                                        MwPlayMainActivity.mwAnimDataYThr3
+                                                                        MenuActivity
+                                                                                .animFloats1Thr3);
+                                                        MenuActivity.animDataYThr3
                                                                 .setDuration(100);
-                                                        MwPlayMainActivity.mwAnimDataYThr3.start();
-                                                        MwPlayMainActivity.mwTimerTaskThr3 =
+                                                        MenuActivity.animDataYThr3.start();
+                                                        MenuActivity.timerTaskThr3 =
                                                                 new TimerTask() {
                                                                     @Override
                                                                     public void run() {
@@ -414,50 +444,50 @@ public class MwConsortium extends AppCompatActivity{
                                                                                     @Override
                                                                                     public void
                                                                                             run() {
-                                                                                        MwPlayMainActivity
-                                                                                                .mwAnimDataXThr3
+                                                                                        MenuActivity
+                                                                                                .animDataXThr3
                                                                                                 .setTarget(
-                                                                                                        MwPlayMainActivity
-                                                                                                                .mwAnimObjDataThr3);
-                                                                                        MwPlayMainActivity
-                                                                                                .mwAnimDataXThr3
+                                                                                                        MenuActivity
+                                                                                                                .animObjDataThr3);
+                                                                                        MenuActivity
+                                                                                                .animDataXThr3
                                                                                                 .setPropertyName(
                                                                                                         "scaleX");
-                                                                                        MwPlayMainActivity
-                                                                                                .mwAnimDataXThr3
+                                                                                        MenuActivity
+                                                                                                .animDataXThr3
                                                                                                 .setFloatValues(
-                                                                                                        MwPlayMainActivity
-                                                                                                                .mwAnimFloats2Thr3);
-                                                                                        MwPlayMainActivity
-                                                                                                .mwAnimDataXThr3
+                                                                                                        MenuActivity
+                                                                                                                .animFloats2Thr3);
+                                                                                        MenuActivity
+                                                                                                .animDataXThr3
                                                                                                 .setDuration(
                                                                                                         200);
-                                                                                        MwPlayMainActivity
-                                                                                                .mwAnimDataXThr3
+                                                                                        MenuActivity
+                                                                                                .animDataXThr3
                                                                                                 .start();
-                                                                                        MwPlayMainActivity
-                                                                                                .mwAnimDataYThr3
+                                                                                        MenuActivity
+                                                                                                .animDataYThr3
                                                                                                 .setTarget(
-                                                                                                        MwPlayMainActivity
-                                                                                                                .mwAnimObjDataThr3);
-                                                                                        MwPlayMainActivity
-                                                                                                .mwAnimDataYThr3
+                                                                                                        MenuActivity
+                                                                                                                .animObjDataThr3);
+                                                                                        MenuActivity
+                                                                                                .animDataYThr3
                                                                                                 .setPropertyName(
                                                                                                         "scaleY");
-                                                                                        MwPlayMainActivity
-                                                                                                .mwAnimDataYThr3
+                                                                                        MenuActivity
+                                                                                                .animDataYThr3
                                                                                                 .setFloatValues(
-                                                                                                        MwPlayMainActivity
-                                                                                                                .mwAnimFloats2Thr3);
-                                                                                        MwPlayMainActivity
-                                                                                                .mwAnimDataXThr3
+                                                                                                        MenuActivity
+                                                                                                                .animFloats2Thr3);
+                                                                                        MenuActivity
+                                                                                                .animDataXThr3
                                                                                                 .setDuration(
                                                                                                         200);
-                                                                                        MwPlayMainActivity
-                                                                                                .mwAnimDataYThr3
+                                                                                        MenuActivity
+                                                                                                .animDataYThr3
                                                                                                 .start();
-                                                                                        MwPlayMainActivity
-                                                                                                        .mwTimerTaskThr3 =
+                                                                                        MenuActivity
+                                                                                                        .timerTaskThr3 =
                                                                                                 new TimerTask() {
                                                                                                     @Override
                                                                                                     public
@@ -469,86 +499,86 @@ public class MwConsortium extends AppCompatActivity{
                                                                                                                     public
                                                                                                                     void
                                                                                                                             run() {
-                                                                                                                        MwPlayMainActivity
-                                                                                                                                .mwAnimDataXThr3
+                                                                                                                        MenuActivity
+                                                                                                                                .animDataXThr3
                                                                                                                                 .setTarget(
-                                                                                                                                        MwPlayMainActivity
-                                                                                                                                                .mwAnimObjDataThr3);
-                                                                                                                        MwPlayMainActivity
-                                                                                                                                .mwAnimDataXThr3
+                                                                                                                                        MenuActivity
+                                                                                                                                                .animObjDataThr3);
+                                                                                                                        MenuActivity
+                                                                                                                                .animDataXThr3
                                                                                                                                 .setPropertyName(
                                                                                                                                         "scaleX");
-                                                                                                                        MwPlayMainActivity
-                                                                                                                                .mwAnimDataXThr3
+                                                                                                                        MenuActivity
+                                                                                                                                .animDataXThr3
                                                                                                                                 .setFloatValues(
-                                                                                                                                        MwPlayMainActivity
-                                                                                                                                                .mwAnimFloats3Thr3);
-                                                                                                                        MwPlayMainActivity
-                                                                                                                                .mwAnimDataXThr3
+                                                                                                                                        MenuActivity
+                                                                                                                                                .animFloats3Thr3);
+                                                                                                                        MenuActivity
+                                                                                                                                .animDataXThr3
                                                                                                                                 .setDuration(
                                                                                                                                         250);
-                                                                                                                        MwPlayMainActivity
-                                                                                                                                .mwAnimDataXThr3
+                                                                                                                        MenuActivity
+                                                                                                                                .animDataXThr3
                                                                                                                                 .start();
-                                                                                                                        MwPlayMainActivity
-                                                                                                                                .mwAnimDataYThr3
+                                                                                                                        MenuActivity
+                                                                                                                                .animDataYThr3
                                                                                                                                 .setTarget(
-                                                                                                                                        MwPlayMainActivity
-                                                                                                                                                .mwAnimObjDataThr3);
-                                                                                                                        MwPlayMainActivity
-                                                                                                                                .mwAnimDataYThr3
+                                                                                                                                        MenuActivity
+                                                                                                                                                .animObjDataThr3);
+                                                                                                                        MenuActivity
+                                                                                                                                .animDataYThr3
                                                                                                                                 .setPropertyName(
                                                                                                                                         "scaleY");
-                                                                                                                        MwPlayMainActivity
-                                                                                                                                .mwAnimDataYThr3
+                                                                                                                        MenuActivity
+                                                                                                                                .animDataYThr3
                                                                                                                                 .setFloatValues(
-                                                                                                                                        MwPlayMainActivity
-                                                                                                                                                .mwAnimFloats3Thr3);
-                                                                                                                        MwPlayMainActivity
-                                                                                                                                .mwAnimDataYThr3
+                                                                                                                                        MenuActivity
+                                                                                                                                                .animFloats3Thr3);
+                                                                                                                        MenuActivity
+                                                                                                                                .animDataYThr3
                                                                                                                                 .setDuration(
                                                                                                                                         250);
-                                                                                                                        MwPlayMainActivity
-                                                                                                                                .mwAnimDataYThr3
+                                                                                                                        MenuActivity
+                                                                                                                                .animDataYThr3
                                                                                                                                 .start();
-                                                                                                                        MwPlayMainActivity
-                                                                                                                                        .mwAnimRuleThr3 =
+                                                                                                                        MenuActivity
+                                                                                                                                        .animRuleThr3 =
                                                                                                                                 true;
                                                                                                                     }
                                                                                                                 });
                                                                                                     }
                                                                                                 };
-                                                                                        MwPlayMainActivity
-                                                                                                ._mwTimerTaskThr3
+                                                                                        MenuActivity
+                                                                                                ._timerTaskThr3
                                                                                                 .schedule(
-                                                                                                        MwPlayMainActivity
-                                                                                                                .mwTimerTaskThr3,
+                                                                                                        MenuActivity
+                                                                                                                .timerTaskThr3,
                                                                                                         200);
                                                                                     }
                                                                                 });
                                                                     }
                                                                 };
-                                                        MwPlayMainActivity._mwTimerTaskThr3
+                                                        MenuActivity._timerTaskThr3
                                                                 .schedule(
-                                                                        MwPlayMainActivity
-                                                                                .mwTimerTaskThr3,
+                                                                        MenuActivity
+                                                                                .timerTaskThr3,
                                                                         100);
                                                     }
                                                 });
                                     }
                                 };
-                        MwPlayMainActivity._mwTimerTaskThr3.schedule(
-                                MwPlayMainActivity.mwTimerTaskThr3, 0);
+                        MenuActivity._timerTaskThr3.schedule(
+                                MenuActivity.timerTaskThr3, 0);
                     }
                 }
             }
         }
 
-        if (MwPlayMainActivity.mwActivity.equals("mwHome")) {
+        if (MenuActivity.mwActivity.equals("mwHome")) {
 
             // Thread 1
-            if (MwPlayHomeActivity.mwAnimRuleThr1) {
-                MwPlayHomeActivity.mwTimerTaskThr1 =
+            if (HomeActivity.animRuleThr1) {
+                HomeActivity.timerTaskThr1 =
                         new TimerTask() {
                             @Override
                             public void run() {
@@ -556,24 +586,24 @@ public class MwConsortium extends AppCompatActivity{
                                         new Runnable() {
                                             @Override
                                             public void run() {
-                                                MwPlayHomeActivity.mwAnimRuleThr1 = false;
-                                                MwPlayHomeActivity.mwAnimDataXThr1.setTarget(
-                                                        MwPlayHomeActivity.mwAnimObjDataThr1);
-                                                MwPlayHomeActivity.mwAnimDataXThr1.setPropertyName(
+                                                HomeActivity.animRuleThr1 = false;
+                                                HomeActivity.animDataXThr1.setTarget(
+                                                        HomeActivity.animObjDataThr1);
+                                                HomeActivity.animDataXThr1.setPropertyName(
                                                         "scaleX");
-                                                MwPlayHomeActivity.mwAnimDataXThr1.setFloatValues(
-                                                        MwPlayHomeActivity.mwAnimFloats1Thr1);
-                                                MwPlayHomeActivity.mwAnimDataXThr1.setDuration(100);
-                                                MwPlayHomeActivity.mwAnimDataXThr1.start();
-                                                MwPlayHomeActivity.mwAnimDataYThr1.setTarget(
-                                                        MwPlayHomeActivity.mwAnimObjDataThr1);
-                                                MwPlayHomeActivity.mwAnimDataYThr1.setPropertyName(
+                                                HomeActivity.animDataXThr1.setFloatValues(
+                                                        HomeActivity.animFloats1Thr1);
+                                                HomeActivity.animDataXThr1.setDuration(100);
+                                                HomeActivity.animDataXThr1.start();
+                                                HomeActivity.animDataYThr1.setTarget(
+                                                        HomeActivity.animObjDataThr1);
+                                                HomeActivity.animDataYThr1.setPropertyName(
                                                         "scaleY");
-                                                MwPlayHomeActivity.mwAnimDataYThr1.setFloatValues(
-                                                        MwPlayHomeActivity.mwAnimFloats1Thr1);
-                                                MwPlayHomeActivity.mwAnimDataYThr1.setDuration(100);
-                                                MwPlayHomeActivity.mwAnimDataYThr1.start();
-                                                MwPlayHomeActivity.mwTimerTaskThr1 =
+                                                HomeActivity.animDataYThr1.setFloatValues(
+                                                        HomeActivity.animFloats1Thr1);
+                                                HomeActivity.animDataYThr1.setDuration(100);
+                                                HomeActivity.animDataYThr1.start();
+                                                HomeActivity.timerTaskThr1 =
                                                         new TimerTask() {
                                                             @Override
                                                             public void run() {
@@ -581,50 +611,50 @@ public class MwConsortium extends AppCompatActivity{
                                                                         new Runnable() {
                                                                             @Override
                                                                             public void run() {
-                                                                                MwPlayHomeActivity
-                                                                                        .mwAnimDataXThr1
+                                                                                HomeActivity
+                                                                                        .animDataXThr1
                                                                                         .setTarget(
-                                                                                                MwPlayHomeActivity
-                                                                                                        .mwAnimObjDataThr1);
-                                                                                MwPlayHomeActivity
-                                                                                        .mwAnimDataXThr1
+                                                                                                HomeActivity
+                                                                                                        .animObjDataThr1);
+                                                                                HomeActivity
+                                                                                        .animDataXThr1
                                                                                         .setPropertyName(
                                                                                                 "scaleX");
-                                                                                MwPlayHomeActivity
-                                                                                        .mwAnimDataXThr1
+                                                                                HomeActivity
+                                                                                        .animDataXThr1
                                                                                         .setFloatValues(
-                                                                                                MwPlayHomeActivity
-                                                                                                        .mwAnimFloats2Thr1);
-                                                                                MwPlayHomeActivity
-                                                                                        .mwAnimDataXThr1
+                                                                                                HomeActivity
+                                                                                                        .animFloats2Thr1);
+                                                                                HomeActivity
+                                                                                        .animDataXThr1
                                                                                         .setDuration(
                                                                                                 200);
-                                                                                MwPlayHomeActivity
-                                                                                        .mwAnimDataXThr1
+                                                                                HomeActivity
+                                                                                        .animDataXThr1
                                                                                         .start();
-                                                                                MwPlayHomeActivity
-                                                                                        .mwAnimDataYThr1
+                                                                                HomeActivity
+                                                                                        .animDataYThr1
                                                                                         .setTarget(
-                                                                                                MwPlayHomeActivity
-                                                                                                        .mwAnimObjDataThr1);
-                                                                                MwPlayHomeActivity
-                                                                                        .mwAnimDataYThr1
+                                                                                                HomeActivity
+                                                                                                        .animObjDataThr1);
+                                                                                HomeActivity
+                                                                                        .animDataYThr1
                                                                                         .setPropertyName(
                                                                                                 "scaleY");
-                                                                                MwPlayHomeActivity
-                                                                                        .mwAnimDataYThr1
+                                                                                HomeActivity
+                                                                                        .animDataYThr1
                                                                                         .setFloatValues(
-                                                                                                MwPlayHomeActivity
-                                                                                                        .mwAnimFloats2Thr1);
-                                                                                MwPlayHomeActivity
-                                                                                        .mwAnimDataYThr1
+                                                                                                HomeActivity
+                                                                                                        .animFloats2Thr1);
+                                                                                HomeActivity
+                                                                                        .animDataYThr1
                                                                                         .setDuration(
                                                                                                 200);
-                                                                                MwPlayHomeActivity
-                                                                                        .mwAnimDataYThr1
+                                                                                HomeActivity
+                                                                                        .animDataYThr1
                                                                                         .start();
-                                                                                MwPlayHomeActivity
-                                                                                                .mwTimerTaskThr1 =
+                                                                                HomeActivity
+                                                                                                .timerTaskThr1 =
                                                                                         new TimerTask() {
                                                                                             @Override
                                                                                             public
@@ -636,77 +666,77 @@ public class MwConsortium extends AppCompatActivity{
                                                                                                             public
                                                                                                             void
                                                                                                                     run() {
-                                                                                                                MwPlayHomeActivity
-                                                                                                                        .mwAnimDataXThr1
+                                                                                                                HomeActivity
+                                                                                                                        .animDataXThr1
                                                                                                                         .setTarget(
-                                                                                                                                MwPlayHomeActivity
-                                                                                                                                        .mwAnimObjDataThr1);
-                                                                                                                MwPlayHomeActivity
-                                                                                                                        .mwAnimDataXThr1
+                                                                                                                                HomeActivity
+                                                                                                                                        .animObjDataThr1);
+                                                                                                                HomeActivity
+                                                                                                                        .animDataXThr1
                                                                                                                         .setPropertyName(
                                                                                                                                 "scaleX");
-                                                                                                                MwPlayHomeActivity
-                                                                                                                        .mwAnimDataXThr1
+                                                                                                                HomeActivity
+                                                                                                                        .animDataXThr1
                                                                                                                         .setFloatValues(
-                                                                                                                                MwPlayHomeActivity
-                                                                                                                                        .mwAnimFloats3Thr1);
-                                                                                                                MwPlayHomeActivity
-                                                                                                                        .mwAnimDataXThr1
+                                                                                                                                HomeActivity
+                                                                                                                                        .animFloats3Thr1);
+                                                                                                                HomeActivity
+                                                                                                                        .animDataXThr1
                                                                                                                         .setDuration(
                                                                                                                                 250);
-                                                                                                                MwPlayHomeActivity
-                                                                                                                        .mwAnimDataXThr1
+                                                                                                                HomeActivity
+                                                                                                                        .animDataXThr1
                                                                                                                         .start();
-                                                                                                                MwPlayHomeActivity
-                                                                                                                        .mwAnimDataYThr1
+                                                                                                                HomeActivity
+                                                                                                                        .animDataYThr1
                                                                                                                         .setTarget(
-                                                                                                                                MwPlayHomeActivity
-                                                                                                                                        .mwAnimObjDataThr1);
-                                                                                                                MwPlayHomeActivity
-                                                                                                                        .mwAnimDataYThr1
+                                                                                                                                HomeActivity
+                                                                                                                                        .animObjDataThr1);
+                                                                                                                HomeActivity
+                                                                                                                        .animDataYThr1
                                                                                                                         .setPropertyName(
                                                                                                                                 "scaleY");
-                                                                                                                MwPlayHomeActivity
-                                                                                                                        .mwAnimDataYThr1
+                                                                                                                HomeActivity
+                                                                                                                        .animDataYThr1
                                                                                                                         .setFloatValues(
-                                                                                                                                MwPlayHomeActivity
-                                                                                                                                        .mwAnimFloats3Thr1);
-                                                                                                                MwPlayHomeActivity
-                                                                                                                        .mwAnimDataYThr1
+                                                                                                                                HomeActivity
+                                                                                                                                        .animFloats3Thr1);
+                                                                                                                HomeActivity
+                                                                                                                        .animDataYThr1
                                                                                                                         .setDuration(
                                                                                                                                 250);
-                                                                                                                MwPlayHomeActivity
-                                                                                                                        .mwAnimDataYThr1
+                                                                                                                HomeActivity
+                                                                                                                        .animDataYThr1
                                                                                                                         .start();
-                                                                                                                MwPlayHomeActivity
-                                                                                                                                .mwAnimRuleThr1 =
+                                                                                                                HomeActivity
+                                                                                                                                .animRuleThr1 =
                                                                                                                         true;
                                                                                                             }
                                                                                                         });
                                                                                             }
                                                                                         };
-                                                                                MwPlayHomeActivity
-                                                                                        ._mwTimerTaskThr1
+                                                                                HomeActivity
+                                                                                        ._timerTaskThr1
                                                                                         .schedule(
-                                                                                                MwPlayHomeActivity
-                                                                                                        .mwTimerTaskThr1,
+                                                                                                HomeActivity
+                                                                                                        .timerTaskThr1,
                                                                                                 200);
                                                                             }
                                                                         });
                                                             }
                                                         };
-                                                MwPlayHomeActivity._mwTimerTaskThr1.schedule(
-                                                        MwPlayHomeActivity.mwTimerTaskThr1, 100);
+                                                HomeActivity._timerTaskThr1.schedule(
+                                                        HomeActivity.timerTaskThr1, 100);
                                             }
                                         });
                             }
                         };
-                MwPlayHomeActivity._mwTimerTaskThr1.schedule(MwPlayHomeActivity.mwTimerTaskThr1, 0);
+                HomeActivity._timerTaskThr1.schedule(HomeActivity.timerTaskThr1, 0);
             } else {
 
                 // Thread 2
-                if (MwPlayHomeActivity.mwAnimRuleThr2) {
-                    MwPlayHomeActivity.mwTimerTaskThr2 =
+                if (HomeActivity.animRuleThr2) {
+                    HomeActivity.timerTaskThr2 =
                             new TimerTask() {
                                 @Override
                                 public void run() {
@@ -714,30 +744,30 @@ public class MwConsortium extends AppCompatActivity{
                                             new Runnable() {
                                                 @Override
                                                 public void run() {
-                                                    MwPlayHomeActivity.mwAnimRuleThr2 = false;
-                                                    MwPlayHomeActivity.mwAnimDataXThr2.setTarget(
-                                                            MwPlayHomeActivity.mwAnimObjDataThr2);
-                                                    MwPlayMainActivity.mwAnimDataXThr2
+                                                    HomeActivity.animRuleThr2 = false;
+                                                    HomeActivity.animDataXThr2.setTarget(
+                                                            HomeActivity.animObjDataThr2);
+                                                    HomeActivity.animDataXThr2
                                                             .setPropertyName("scaleX");
-                                                    MwPlayHomeActivity.mwAnimDataXThr2
+                                                    HomeActivity.animDataXThr2
                                                             .setFloatValues(
-                                                                    MwPlayHomeActivity
-                                                                            .mwAnimFloats1Thr2);
-                                                    MwPlayHomeActivity.mwAnimDataXThr2.setDuration(
+                                                                    HomeActivity
+                                                                            .animFloats1Thr2);
+                                                    HomeActivity.animDataXThr2.setDuration(
                                                             100);
-                                                    MwPlayHomeActivity.mwAnimDataXThr2.start();
-                                                    MwPlayHomeActivity.mwAnimDataYThr2.setTarget(
-                                                            MwPlayHomeActivity.mwAnimObjDataThr2);
-                                                    MwPlayHomeActivity.mwAnimDataYThr2
+                                                    HomeActivity.animDataXThr2.start();
+                                                    HomeActivity.animDataYThr2.setTarget(
+                                                            HomeActivity.animObjDataThr2);
+                                                    HomeActivity.animDataYThr2
                                                             .setPropertyName("scaleY");
-                                                    MwPlayHomeActivity.mwAnimDataYThr2
+                                                    HomeActivity.animDataYThr2
                                                             .setFloatValues(
-                                                                    MwPlayHomeActivity
-                                                                            .mwAnimFloats1Thr2);
-                                                    MwPlayHomeActivity.mwAnimDataYThr2.setDuration(
+                                                                    HomeActivity
+                                                                            .animFloats1Thr2);
+                                                    HomeActivity.animDataYThr2.setDuration(
                                                             100);
-                                                    MwPlayHomeActivity.mwAnimDataYThr2.start();
-                                                    MwPlayHomeActivity.mwTimerTaskThr2 =
+                                                    HomeActivity.animDataYThr2.start();
+                                                    HomeActivity.timerTaskThr2 =
                                                             new TimerTask() {
                                                                 @Override
                                                                 public void run() {
@@ -745,50 +775,49 @@ public class MwConsortium extends AppCompatActivity{
                                                                             new Runnable() {
                                                                                 @Override
                                                                                 public void run() {
-                                                                                    MwPlayHomeActivity
-                                                                                            .mwAnimDataXThr2
+                                                                                    HomeActivity
+                                                                                            .animDataXThr2
                                                                                             .setTarget(
-                                                                                                    MwPlayHomeActivity
-                                                                                                            .mwAnimObjDataThr2);
-                                                                                    MwPlayHomeActivity
-                                                                                            .mwAnimDataXThr2
+                                                                                                    HomeActivity
+                                                                                                            .animObjDataThr2);
+                                                                                    HomeActivity
+                                                                                            .animDataXThr2
                                                                                             .setPropertyName(
                                                                                                     "scaleX");
-                                                                                    MwPlayHomeActivity
-                                                                                            .mwAnimDataXThr2
+                                                                                    HomeActivity
+                                                                                            .animDataXThr2
                                                                                             .setFloatValues(
-                                                                                                    MwPlayHomeActivity
-                                                                                                            .mwAnimFloats2Thr2);
-                                                                                    MwPlayHomeActivity
-                                                                                            .mwAnimDataXThr2
+                                                                                                    HomeActivity
+                                                                                                            .animFloats2Thr2);
+                                                                                    HomeActivity
+                                                                                            .animDataXThr2
                                                                                             .setDuration(
                                                                                                     200);
-                                                                                    MwPlayHomeActivity
-                                                                                            .mwAnimDataXThr2
+                                                                                    HomeActivity
+                                                                                            .animDataXThr2
                                                                                             .start();
-                                                                                    MwPlayHomeActivity
-                                                                                            .mwAnimDataYThr2
+                                                                                    HomeActivity
+                                                                                            .animDataYThr2
                                                                                             .setTarget(
-                                                                                                    MwPlayHomeActivity
-                                                                                                            .mwAnimObjDataThr2);
-                                                                                    MwPlayHomeActivity
-                                                                                            .mwAnimDataYThr2
+                                                                                                    HomeActivity
+                                                                                                            .animObjDataThr2);
+                                                                                    HomeActivity
+                                                                                            .animDataYThr2
                                                                                             .setPropertyName(
                                                                                                     "scaleY");
-                                                                                    MwPlayHomeActivity
-                                                                                            .mwAnimDataYThr2
+                                                                                    HomeActivity
+                                                                                            .animDataYThr2
                                                                                             .setFloatValues(
-                                                                                                    MwPlayHomeActivity
-                                                                                                            .mwAnimFloats2Thr2);
-                                                                                    MwPlayHomeActivity
-                                                                                            .mwAnimDataYThr2
+                                                                                                    HomeActivity.animFloats2Thr2);
+                                                                                    HomeActivity
+                                                                                            .animDataYThr2
                                                                                             .setDuration(
                                                                                                     200);
-                                                                                    MwPlayHomeActivity
-                                                                                            .mwAnimDataYThr2
+                                                                                    HomeActivity
+                                                                                            .animDataYThr2
                                                                                             .start();
-                                                                                    MwPlayHomeActivity
-                                                                                                    .mwTimerTaskThr2 =
+                                                                                    HomeActivity
+                                                                                                    .timerTaskThr2 =
                                                                                             new TimerTask() {
                                                                                                 @Override
                                                                                                 public
@@ -800,79 +829,79 @@ public class MwConsortium extends AppCompatActivity{
                                                                                                                 public
                                                                                                                 void
                                                                                                                         run() {
-                                                                                                                    MwPlayHomeActivity
-                                                                                                                            .mwAnimDataXThr2
+                                                                                                                    HomeActivity
+                                                                                                                            .animDataXThr2
                                                                                                                             .setTarget(
-                                                                                                                                    MwPlayHomeActivity
-                                                                                                                                            .mwAnimObjDataThr2);
-                                                                                                                    MwPlayHomeActivity
-                                                                                                                            .mwAnimDataXThr2
+                                                                                                                                    HomeActivity
+                                                                                                                                            .animObjDataThr2);
+                                                                                                                    HomeActivity
+                                                                                                                            .animDataXThr2
                                                                                                                             .setPropertyName(
                                                                                                                                     "scaleX");
-                                                                                                                    MwPlayHomeActivity
-                                                                                                                            .mwAnimDataXThr2
+                                                                                                                    HomeActivity
+                                                                                                                            .animDataXThr2
                                                                                                                             .setFloatValues(
-                                                                                                                                    MwPlayHomeActivity
-                                                                                                                                            .mwAnimFloats3Thr2);
-                                                                                                                    MwPlayHomeActivity
-                                                                                                                            .mwAnimDataXThr2
+                                                                                                                                    HomeActivity
+                                                                                                                                            .animFloats3Thr2);
+                                                                                                                    HomeActivity
+                                                                                                                            .animDataXThr2
                                                                                                                             .setDuration(
                                                                                                                                     250);
-                                                                                                                    MwPlayHomeActivity
-                                                                                                                            .mwAnimDataXThr2
+                                                                                                                    HomeActivity
+                                                                                                                            .animDataXThr2
                                                                                                                             .start();
-                                                                                                                    MwPlayHomeActivity
-                                                                                                                            .mwAnimDataYThr2
+                                                                                                                    HomeActivity
+                                                                                                                            .animDataYThr2
                                                                                                                             .setTarget(
-                                                                                                                                    MwPlayHomeActivity
-                                                                                                                                            .mwAnimObjDataThr2);
-                                                                                                                    MwPlayHomeActivity
-                                                                                                                            .mwAnimDataYThr2
+                                                                                                                                    HomeActivity
+                                                                                                                                            .animObjDataThr2);
+                                                                                                                    HomeActivity
+                                                                                                                            .animDataYThr2
                                                                                                                             .setPropertyName(
                                                                                                                                     "scaleY");
-                                                                                                                    MwPlayHomeActivity
-                                                                                                                            .mwAnimDataYThr2
+                                                                                                                    HomeActivity
+                                                                                                                            .animDataYThr2
                                                                                                                             .setFloatValues(
-                                                                                                                                    MwPlayHomeActivity
-                                                                                                                                            .mwAnimFloats3Thr2);
-                                                                                                                    MwPlayHomeActivity
-                                                                                                                            .mwAnimDataYThr2
+                                                                                                                                    HomeActivity
+                                                                                                                                            .animFloats3Thr2);
+                                                                                                                    HomeActivity
+                                                                                                                            .animDataYThr2
                                                                                                                             .setDuration(
                                                                                                                                     250);
-                                                                                                                    MwPlayHomeActivity
-                                                                                                                            .mwAnimDataYThr2
+                                                                                                                    HomeActivity
+                                                                                                                            .animDataYThr2
                                                                                                                             .start();
-                                                                                                                    MwPlayHomeActivity
-                                                                                                                                    .mwAnimRuleThr2 =
+                                                                                                                    HomeActivity
+                                                                                                                                    .animRuleThr2 =
                                                                                                                             true;
                                                                                                                 }
                                                                                                             });
                                                                                                 }
                                                                                             };
-                                                                                    MwPlayHomeActivity
-                                                                                            ._mwTimerTaskThr2
+                                                                                    HomeActivity
+                                                                                            ._timerTaskThr2
                                                                                             .schedule(
-                                                                                                    MwPlayHomeActivity
-                                                                                                            .mwTimerTaskThr2,
+                                                                                                    HomeActivity
+                                                                                                            .timerTaskThr2,
                                                                                                     200);
                                                                                 }
                                                                             });
                                                                 }
                                                             };
-                                                    MwPlayHomeActivity._mwTimerTaskThr2.schedule(
-                                                            MwPlayHomeActivity.mwTimerTaskThr2,
+                                                    HomeActivity._timerTaskThr2.schedule(
+                                                            HomeActivity.timerTaskThr2,
                                                             100);
                                                 }
                                             });
                                 }
                             };
-                    MwPlayHomeActivity._mwTimerTaskThr2.schedule(
-                            MwPlayHomeActivity.mwTimerTaskThr2, 0);
+                    HomeActivity._timerTaskThr2.schedule(
+                            HomeActivity.timerTaskThr2, 0);
                 } else {
 
                     // Thread 3
-                    if (MwPlayHomeActivity.mwAnimRuleThr3) {
-                        MwPlayHomeActivity.mwTimerTaskThr3 =
+                    if (HomeActivity.animRuleThr3) {
+                        HomeActivity.timerTaskThr3 =
                                 new TimerTask() {
                                     @Override
                                     public void run() {
@@ -880,34 +909,34 @@ public class MwConsortium extends AppCompatActivity{
                                                 new Runnable() {
                                                     @Override
                                                     public void run() {
-                                                        MwPlayHomeActivity.mwAnimRuleThr3 = false;
-                                                        MwPlayHomeActivity.mwAnimDataXThr3
+                                                        HomeActivity.animRuleThr3 = false;
+                                                        HomeActivity.animDataXThr3
                                                                 .setTarget(
-                                                                        MwPlayHomeActivity
-                                                                                .mwAnimObjDataThr3);
-                                                        MwPlayHomeActivity.mwAnimDataXThr3
+                                                                        HomeActivity
+                                                                                .animObjDataThr3);
+                                                        HomeActivity.animDataXThr3
                                                                 .setPropertyName("scaleX");
-                                                        MwPlayHomeActivity.mwAnimDataXThr3
+                                                        HomeActivity.animDataXThr3
                                                                 .setFloatValues(
-                                                                        MwPlayHomeActivity
-                                                                                .mwAnimFloats1Thr3);
-                                                        MwPlayHomeActivity.mwAnimDataXThr3
+                                                                        HomeActivity
+                                                                                .animFloats1Thr3);
+                                                        HomeActivity.animDataXThr3
                                                                 .setDuration(100);
-                                                        MwPlayHomeActivity.mwAnimDataXThr3.start();
-                                                        MwPlayHomeActivity.mwAnimDataYThr3
+                                                        HomeActivity.animDataXThr3.start();
+                                                        HomeActivity.animDataYThr3
                                                                 .setTarget(
-                                                                        MwPlayHomeActivity
-                                                                                .mwAnimObjDataThr3);
-                                                        MwPlayHomeActivity.mwAnimDataYThr3
+                                                                        HomeActivity
+                                                                                .animObjDataThr3);
+                                                        HomeActivity.animDataYThr3
                                                                 .setPropertyName("scaleY");
-                                                        MwPlayHomeActivity.mwAnimDataYThr3
+                                                        HomeActivity.animDataYThr3
                                                                 .setFloatValues(
-                                                                        MwPlayHomeActivity
-                                                                                .mwAnimFloats1Thr3);
-                                                        MwPlayHomeActivity.mwAnimDataYThr3
+                                                                        HomeActivity
+                                                                                .animFloats1Thr3);
+                                                        HomeActivity.animDataYThr3
                                                                 .setDuration(100);
-                                                        MwPlayHomeActivity.mwAnimDataYThr3.start();
-                                                        MwPlayHomeActivity.mwTimerTaskThr3 =
+                                                        HomeActivity.animDataYThr3.start();
+                                                        HomeActivity.timerTaskThr3 =
                                                                 new TimerTask() {
                                                                     @Override
                                                                     public void run() {
@@ -916,50 +945,50 @@ public class MwConsortium extends AppCompatActivity{
                                                                                     @Override
                                                                                     public void
                                                                                             run() {
-                                                                                        MwPlayHomeActivity
-                                                                                                .mwAnimDataXThr3
+                                                                                        HomeActivity
+                                                                                                .animDataXThr3
                                                                                                 .setTarget(
-                                                                                                        MwPlayHomeActivity
-                                                                                                                .mwAnimObjDataThr3);
-                                                                                        MwPlayHomeActivity
-                                                                                                .mwAnimDataXThr3
+                                                                                                        HomeActivity
+                                                                                                                .animObjDataThr3);
+                                                                                        HomeActivity
+                                                                                                .animDataXThr3
                                                                                                 .setPropertyName(
                                                                                                         "scaleX");
-                                                                                        MwPlayHomeActivity
-                                                                                                .mwAnimDataXThr3
+                                                                                        HomeActivity
+                                                                                                .animDataXThr3
                                                                                                 .setFloatValues(
-                                                                                                        MwPlayHomeActivity
-                                                                                                                .mwAnimFloats2Thr3);
-                                                                                        MwPlayHomeActivity
-                                                                                                .mwAnimDataXThr3
+                                                                                                        HomeActivity
+                                                                                                                .animFloats2Thr3);
+                                                                                        HomeActivity
+                                                                                                .animDataXThr3
                                                                                                 .setDuration(
                                                                                                         200);
-                                                                                        MwPlayHomeActivity
-                                                                                                .mwAnimDataXThr3
+                                                                                        HomeActivity
+                                                                                                .animDataXThr3
                                                                                                 .start();
-                                                                                        MwPlayHomeActivity
-                                                                                                .mwAnimDataYThr3
+                                                                                        HomeActivity
+                                                                                                .animDataYThr3
                                                                                                 .setTarget(
-                                                                                                        MwPlayHomeActivity
-                                                                                                                .mwAnimObjDataThr3);
-                                                                                        MwPlayHomeActivity
-                                                                                                .mwAnimDataYThr3
+                                                                                                        HomeActivity
+                                                                                                                .animObjDataThr3);
+                                                                                        HomeActivity
+                                                                                                .animDataYThr3
                                                                                                 .setPropertyName(
                                                                                                         "scaleY");
-                                                                                        MwPlayHomeActivity
-                                                                                                .mwAnimDataYThr3
+                                                                                        HomeActivity
+                                                                                                .animDataYThr3
                                                                                                 .setFloatValues(
-                                                                                                        MwPlayHomeActivity
-                                                                                                                .mwAnimFloats2Thr3);
-                                                                                        MwPlayHomeActivity
-                                                                                                .mwAnimDataXThr3
+                                                                                                        HomeActivity
+                                                                                                                .animFloats2Thr3);
+                                                                                        HomeActivity
+                                                                                                .animDataXThr3
                                                                                                 .setDuration(
                                                                                                         200);
-                                                                                        MwPlayHomeActivity
-                                                                                                .mwAnimDataYThr3
+                                                                                        HomeActivity
+                                                                                                .animDataYThr3
                                                                                                 .start();
-                                                                                        MwPlayHomeActivity
-                                                                                                        .mwTimerTaskThr3 =
+                                                                                        HomeActivity
+                                                                                                        .timerTaskThr3 =
                                                                                                 new TimerTask() {
                                                                                                     @Override
                                                                                                     public
@@ -971,76 +1000,76 @@ public class MwConsortium extends AppCompatActivity{
                                                                                                                     public
                                                                                                                     void
                                                                                                                             run() {
-                                                                                                                        MwPlayHomeActivity
-                                                                                                                                .mwAnimDataXThr3
+                                                                                                                        HomeActivity
+                                                                                                                                .animDataXThr3
                                                                                                                                 .setTarget(
-                                                                                                                                        MwPlayHomeActivity
-                                                                                                                                                .mwAnimObjDataThr3);
-                                                                                                                        MwPlayHomeActivity
-                                                                                                                                .mwAnimDataXThr3
+                                                                                                                                        HomeActivity
+                                                                                                                                                .animObjDataThr3);
+                                                                                                                        HomeActivity
+                                                                                                                                .animDataXThr3
                                                                                                                                 .setPropertyName(
                                                                                                                                         "scaleX");
-                                                                                                                        MwPlayHomeActivity
-                                                                                                                                .mwAnimDataXThr3
+                                                                                                                        HomeActivity
+                                                                                                                                .animDataXThr3
                                                                                                                                 .setFloatValues(
-                                                                                                                                        MwPlayHomeActivity
-                                                                                                                                                .mwAnimFloats3Thr3);
-                                                                                                                        MwPlayHomeActivity
-                                                                                                                                .mwAnimDataXThr3
+                                                                                                                                        HomeActivity
+                                                                                                                                                .animFloats3Thr3);
+                                                                                                                        HomeActivity
+                                                                                                                                .animDataXThr3
                                                                                                                                 .setDuration(
                                                                                                                                         250);
-                                                                                                                        MwPlayHomeActivity
-                                                                                                                                .mwAnimDataXThr3
+                                                                                                                        HomeActivity
+                                                                                                                                .animDataXThr3
                                                                                                                                 .start();
-                                                                                                                        MwPlayHomeActivity
-                                                                                                                                .mwAnimDataYThr3
+                                                                                                                        HomeActivity
+                                                                                                                                .animDataYThr3
                                                                                                                                 .setTarget(
-                                                                                                                                        MwPlayHomeActivity
-                                                                                                                                                .mwAnimObjDataThr3);
-                                                                                                                        MwPlayHomeActivity
-                                                                                                                                .mwAnimDataYThr3
+                                                                                                                                        HomeActivity
+                                                                                                                                                .animObjDataThr3);
+                                                                                                                        HomeActivity
+                                                                                                                                .animDataYThr3
                                                                                                                                 .setPropertyName(
                                                                                                                                         "scaleY");
-                                                                                                                        MwPlayHomeActivity
-                                                                                                                                .mwAnimDataYThr3
+                                                                                                                        HomeActivity
+                                                                                                                                .animDataYThr3
                                                                                                                                 .setFloatValues(
-                                                                                                                                        MwPlayHomeActivity
-                                                                                                                                                .mwAnimFloats3Thr3);
-                                                                                                                        MwPlayHomeActivity
-                                                                                                                                .mwAnimDataYThr3
+                                                                                                                                        HomeActivity
+                                                                                                                                                .animFloats3Thr3);
+                                                                                                                        HomeActivity
+                                                                                                                                .animDataYThr3
                                                                                                                                 .setDuration(
                                                                                                                                         250);
-                                                                                                                        MwPlayHomeActivity
-                                                                                                                                .mwAnimDataYThr3
+                                                                                                                        HomeActivity
+                                                                                                                                .animDataYThr3
                                                                                                                                 .start();
-                                                                                                                        MwPlayHomeActivity
-                                                                                                                                        .mwAnimRuleThr3 =
+                                                                                                                        HomeActivity
+                                                                                                                                        .animRuleThr3 =
                                                                                                                                 true;
                                                                                                                     }
                                                                                                                 });
                                                                                                     }
                                                                                                 };
-                                                                                        MwPlayHomeActivity
-                                                                                                ._mwTimerTaskThr3
+                                                                                        HomeActivity
+                                                                                                ._timerTaskThr3
                                                                                                 .schedule(
-                                                                                                        MwPlayHomeActivity
-                                                                                                                .mwTimerTaskThr3,
+                                                                                                        HomeActivity
+                                                                                                                .timerTaskThr3,
                                                                                                         200);
                                                                                     }
                                                                                 });
                                                                     }
                                                                 };
-                                                        MwPlayHomeActivity._mwTimerTaskThr3
+                                                        HomeActivity._timerTaskThr3
                                                                 .schedule(
-                                                                        MwPlayHomeActivity
-                                                                                .mwTimerTaskThr3,
+                                                                        HomeActivity
+                                                                                .timerTaskThr3,
                                                                         100);
                                                     }
                                                 });
                                     }
                                 };
-                        MwPlayHomeActivity._mwTimerTaskThr3.schedule(
-                                MwPlayHomeActivity.mwTimerTaskThr3, 0);
+                        HomeActivity._timerTaskThr3.schedule(
+                                HomeActivity.timerTaskThr3, 0);
                     }
                 }
             }

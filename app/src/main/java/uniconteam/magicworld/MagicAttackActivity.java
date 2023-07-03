@@ -8,11 +8,11 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-public class MwBattleFieldActivity extends AppCompatActivity {
+public class MagicAttackActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(new MwBattleFieldMap(this));
+        setContentView(new MagicAttackMap(this));
         Window w = getWindow();
         w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, 
         WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
@@ -20,11 +20,11 @@ public class MwBattleFieldActivity extends AppCompatActivity {
     @Override
     protected void onPause(){
         super.onPause();
-        MwBattleFieldMap.mwGameStoped = true;
+        MagicAttackMap.gameStoped = true;
     }
     @Override
     protected void onResume(){
         super.onResume();
-        MwBattleFieldMap.mwGameStoped = false;
+        MagicAttackMap.gameStoped = false;
     }
 }
