@@ -11,12 +11,29 @@
         android:layout_width="match_parent"
         android:gravity="center_horizontal|right">
         <ImageView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
             android:id="@+id/mwCloseIcon"
+            android:layout_height="55dp"
+            android:layout_width="55dp"
             android:src="@drawable/magicworld_icon_close"
             android:layout_margin="16dp"/>
     </LinearLayout>
+       <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal|center_vertical">
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_margin="10dp"
+                android:textSize="13dp"
+                android:textColor="#000000"
+                android:id="@+id/mwHouseLevel"
+                android:layout_gravity="center"
+                android:text="LvL 1"
+                android:gravity="center_horizontal|center_vertical"
+                android:layout_weight="1"
+                android:textStyle="bold"/>
+        </LinearLayout>
         <LinearLayout
             android:layout_height="wrap_content"
             android:layout_width="match_parent"

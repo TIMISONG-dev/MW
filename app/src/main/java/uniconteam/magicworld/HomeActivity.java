@@ -21,9 +21,12 @@ public class HomeActivity extends AppCompatActivity {
     public LinearLayout closeBoxLinear;
 	public LinearLayout jewelryBoxLinear;
 	public TextView jewelryBoxCoinCount;
+    public static int jewelryBoxCoinData;
 	public TextView jewelryBoxLevelCount;
+    public static int jewelryBoxLevelData;
 	public LinearLayout winBoxLinear;
 	public TextView winBoxCupCount;
+    public static int winBoxCupData;
 	public LinearLayout itemBoxLinear;
 	public static LinearLayout itemTab1;
 	public static LinearLayout itemTab2;
@@ -56,60 +59,60 @@ public class HomeActivity extends AppCompatActivity {
     public ImageView tutorialBoxIcon;
     public static TimerTask timerTask;
     public static Timer _timerTask = new Timer();
-	private ObjectAnimator block1objX = new ObjectAnimator(); // Animators \/
-	private ObjectAnimator block1objY = new ObjectAnimator();
-	private ObjectAnimator block2objX = new ObjectAnimator();
-	private ObjectAnimator block2objY = new ObjectAnimator();
-	private ObjectAnimator block3objX = new ObjectAnimator();
-	private ObjectAnimator block3objY = new ObjectAnimator();
-	private ObjectAnimator block4objX = new ObjectAnimator();
-	private ObjectAnimator block4objY = new ObjectAnimator();
-	private ObjectAnimator block5objX = new ObjectAnimator();
-	private ObjectAnimator block5objY = new ObjectAnimator();
-	private ObjectAnimator block6objX = new ObjectAnimator();
-	private ObjectAnimator block6objY = new ObjectAnimator();
-	private ObjectAnimator block7objX = new ObjectAnimator();
-	private ObjectAnimator block7objY = new ObjectAnimator();
-	private ObjectAnimator block8objX = new ObjectAnimator();
-	private ObjectAnimator block8objY = new ObjectAnimator();
-	private ObjectAnimator block9objX = new ObjectAnimator();
-	private ObjectAnimator block9objY = new ObjectAnimator();
-	private ObjectAnimator block10objX = new ObjectAnimator();
-	private ObjectAnimator block10objY = new ObjectAnimator();
-	private ObjectAnimator block11objX = new ObjectAnimator();
-	private ObjectAnimator block11objY = new ObjectAnimator();
-	private ObjectAnimator block12objX = new ObjectAnimator();
-	private ObjectAnimator block12objY = new ObjectAnimator();
-	private ObjectAnimator block13objX = new ObjectAnimator();
-	private ObjectAnimator block13objY = new ObjectAnimator();
-	private ObjectAnimator block14objX = new ObjectAnimator();
-	private ObjectAnimator block14objY = new ObjectAnimator();
-	private ObjectAnimator block15objX = new ObjectAnimator();
-	private ObjectAnimator block15objY = new ObjectAnimator();
-	private ObjectAnimator block16objX = new ObjectAnimator();
-	private ObjectAnimator block16objY = new ObjectAnimator();
-	private ObjectAnimator block17objX = new ObjectAnimator();
-	private ObjectAnimator block17objY = new ObjectAnimator();
-	private ObjectAnimator block18objX = new ObjectAnimator();
-	private ObjectAnimator block18objY = new ObjectAnimator();
-	private ObjectAnimator block19objX = new ObjectAnimator();
-	private ObjectAnimator block19objY = new ObjectAnimator();
-	private ObjectAnimator block20objX = new ObjectAnimator();
-	private ObjectAnimator block20objY = new ObjectAnimator();
-	private ObjectAnimator itemTab1objX = new ObjectAnimator();
-	private ObjectAnimator itemTab1objY = new ObjectAnimator();
-	private ObjectAnimator itemTab2objX = new ObjectAnimator();
-	private ObjectAnimator itemTab2objY = new ObjectAnimator();
-	private ObjectAnimator itemTab3objX = new ObjectAnimator();
-	private ObjectAnimator itemTab3objY = new ObjectAnimator();
-    private ObjectAnimator jewelryBoxObjX = new ObjectAnimator();
-	private ObjectAnimator jewelryBoxObjY = new ObjectAnimator();
-    private ObjectAnimator winBoxObjX = new ObjectAnimator();
-	private ObjectAnimator winBoxObjY = new ObjectAnimator();
-    private ObjectAnimator tutorialBoxObjX = new ObjectAnimator();
-	private ObjectAnimator tutorialBoxObjY = new ObjectAnimator();
-    private ObjectAnimator closeBoxObjX = new ObjectAnimator();
-    private ObjectAnimator closeBoxObjY = new ObjectAnimator();
+    ObjectAnimator block1objX = new ObjectAnimator(); // Animators \/
+    ObjectAnimator block1objY = new ObjectAnimator();
+	ObjectAnimator block2objX = new ObjectAnimator();
+	ObjectAnimator block2objY = new ObjectAnimator();
+	ObjectAnimator block3objX = new ObjectAnimator();
+	ObjectAnimator block3objY = new ObjectAnimator();
+	ObjectAnimator block4objX = new ObjectAnimator();
+	ObjectAnimator block4objY = new ObjectAnimator();
+	ObjectAnimator block5objX = new ObjectAnimator();
+	ObjectAnimator block5objY = new ObjectAnimator();
+	ObjectAnimator block6objX = new ObjectAnimator();
+	ObjectAnimator block6objY = new ObjectAnimator();
+	ObjectAnimator block7objX = new ObjectAnimator();
+	ObjectAnimator block7objY = new ObjectAnimator();
+    ObjectAnimator block8objX = new ObjectAnimator();
+	ObjectAnimator block8objY = new ObjectAnimator();
+	ObjectAnimator block9objX = new ObjectAnimator();
+	ObjectAnimator block9objY = new ObjectAnimator();
+	ObjectAnimator block10objX = new ObjectAnimator();
+	ObjectAnimator block10objY = new ObjectAnimator();
+	ObjectAnimator block11objX = new ObjectAnimator();
+	ObjectAnimator block11objY = new ObjectAnimator();
+	ObjectAnimator block12objX = new ObjectAnimator();
+	ObjectAnimator block12objY = new ObjectAnimator();
+	ObjectAnimator block13objX = new ObjectAnimator();
+	ObjectAnimator block13objY = new ObjectAnimator();
+	ObjectAnimator block14objX = new ObjectAnimator();
+	ObjectAnimator block14objY = new ObjectAnimator();
+	ObjectAnimator block15objX = new ObjectAnimator();
+	ObjectAnimator block15objY = new ObjectAnimator();
+	ObjectAnimator block16objX = new ObjectAnimator();
+	ObjectAnimator block16objY = new ObjectAnimator();
+    ObjectAnimator block17objX = new ObjectAnimator();
+	ObjectAnimator block17objY = new ObjectAnimator();
+	ObjectAnimator block18objX = new ObjectAnimator();
+	ObjectAnimator block18objY = new ObjectAnimator();
+	ObjectAnimator block19objX = new ObjectAnimator();
+	ObjectAnimator block19objY = new ObjectAnimator();
+	ObjectAnimator block20objX = new ObjectAnimator();
+	ObjectAnimator block20objY = new ObjectAnimator();
+	ObjectAnimator itemTab1objX = new ObjectAnimator();
+	ObjectAnimator itemTab1objY = new ObjectAnimator();
+	ObjectAnimator itemTab2objX = new ObjectAnimator();
+	ObjectAnimator itemTab2objY = new ObjectAnimator();
+	ObjectAnimator itemTab3objX = new ObjectAnimator();
+	ObjectAnimator itemTab3objY = new ObjectAnimator();
+    ObjectAnimator jewelryBoxObjX = new ObjectAnimator();
+	ObjectAnimator jewelryBoxObjY = new ObjectAnimator();
+    ObjectAnimator winBoxObjX = new ObjectAnimator();
+	ObjectAnimator winBoxObjY = new ObjectAnimator();
+    ObjectAnimator tutorialBoxObjX = new ObjectAnimator();
+    ObjectAnimator tutorialBoxObjY = new ObjectAnimator();
+    ObjectAnimator closeBoxObjX = new ObjectAnimator();
+    ObjectAnimator closeBoxObjY = new ObjectAnimator();
     public static String itemSelected;
     public static int tutorialLevel;
     
@@ -154,6 +157,10 @@ public class HomeActivity extends AppCompatActivity {
     // Data for 20 blocks
     public static String[] blocksTab = new String[21];
     
+    public static int coinHouseLevel;
+    public static int gardenHouseLevel;
+    public static int workshopLevel;
+    
     Tutorial tutorial = new Tutorial();
     HouseMenu houseMenu = new HouseMenu();
     Houses houses = new Houses();
@@ -176,9 +183,39 @@ public class HomeActivity extends AppCompatActivity {
         itemTab2d = playData.getString("itemTab2d", "");
         itemTab3d = playData.getString("itemTab3d", ""); 
         
+        // Getting data of coins, levels, cups
+        jewelryBoxCoinData = playData.getInt("magicCoin", 0);
+        jewelryBoxLevelData = playData.getInt("magicLevel", 0);
+        winBoxCupData = playData.getInt("magicCup", 0);
+        
+        // Getting data of level houses
+        coinHouseLevel = playData.getInt("coinHouseLevel", 0);
+        gardenHouseLevel = playData.getInt("gardenHouseLevel", 0);
+        workshopLevel = playData.getInt("workshopLevel", 0);
+        
         // Inventory display
         inventory.dataInventory();
         
+        jewelryBoxCoinCount.setText(Integer.toString(jewelryBoxCoinData));
+        jewelryBoxLevelCount.setText(Integer.toString(jewelryBoxLevelData));
+        winBoxCupCount.setText(Integer.toString(winBoxCupData));
+
+        timerTask =
+                new TimerTask() {
+                    @Override
+                    public void run() {
+                        runOnUiThread(
+                                () -> {
+                                    jewelryBoxCoinCount.setText(
+                                            Integer.toString(jewelryBoxCoinData));
+                                    jewelryBoxLevelCount.setText(
+                                            Integer.toString(jewelryBoxLevelData));
+                                    winBoxCupCount.setText(Integer.toString(winBoxCupData));
+                                });
+                    }
+                };
+        _timerTask.scheduleAtFixedRate(timerTask, 250, 250);
+
         // Getting data of blocks from SharedPreferences
         for (int i = 1; i <= 20; i++) {
             String blocks = "blockTab" + i + "d";
@@ -242,15 +279,40 @@ public class HomeActivity extends AppCompatActivity {
             String blocks = "blockTab" + i + "d";
             editData.putString(blocks, blocksTab[i]);
         }
+        editData.putInt("magicCoin", jewelryBoxCoinData);
+        editData.putInt("magicLevel", jewelryBoxLevelData);
+        editData.putInt("magicCup", winBoxCupData);
+        editData.putInt("coinHouseLevel", coinHouseLevel);
+        editData.putInt("gardenHouseLevel", gardenHouseLevel);
+        editData.putInt("workshopLevel", workshopLevel);
         editData.apply();
+    }
+
+    void setUpHouse(int block) {
+        if (itemSelected.equals("1") && (itemTab1d.endsWith("House") || itemTab1d.equals("Workshop"))) {
+            blocksTab[block] = itemTab1d;
+            itemTab1d = "";
+        } else {
+            if (itemSelected.equals("2") && (itemTab2d.endsWith("House") || itemTab2d.equals("Workshop"))) {
+                blocksTab[block] = itemTab2d;
+                itemTab2d = "";
+            } else {
+                if (itemSelected.equals("3") && (itemTab3d.endsWith("House") || itemTab3d.equals("Workshop"))) {
+                    blocksTab[block] = itemTab3d;
+                    itemTab3d = "";
+                }
+            }
+        }
+        inventory.dataInventory();
+        houses.dataHouses();
     }
 
     public void initialize(Bundle savedInstanceState) {
         // All objects id
-        jewelryBoxLinear = findViewById(R.id.mwJewelryBoxLinear); // LinearLayout with coins and levels
-        jewelryBoxCoinCount = findViewById(R.id.mwJewelryBoxCoinCount); // TextView coin count
-        jewelryBoxLevelCount = findViewById(R.id.mwJewelryBoxLevelCount); // TextView level count
         winBoxCupCount = findViewById(R.id.mwWinBoxCupCount); // TextView cup count
+        jewelryBoxLinear = findViewById(R.id.mwJewelryBoxLinear);
+        jewelryBoxCoinCount = findViewById(R.id.mwJewelryBoxCoinCount);
+        jewelryBoxLevelCount = findViewById(R.id.mwJewelryBoxLevelCount);
         winBoxLinear = findViewById(R.id.mwWinBoxLinear); // LinearLayout with cups
         itemBoxLinear = findViewById(R.id.mwItemBoxLinear); // LinearLayout with item tabs
         itemTab1 = findViewById(R.id.mwItemTab1); // LinearLayout item tab 1-3 \/
@@ -318,39 +380,40 @@ public class HomeActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= 21) {
             itemTab3.setElevation(8f);
         }
-        
+
         // Fonts
         jewelryBoxCoinCount.setTypeface(Typeface.createFromAsset(getAssets(), "mwFonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
         jewelryBoxLevelCount.setTypeface(Typeface.createFromAsset(getAssets(), "mwFonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
         winBoxCupCount.setTypeface(Typeface.createFromAsset(getAssets(), "mwFonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
         tutorialBoxText.setTypeface(Typeface.createFromAsset(getAssets(), "mwFonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
-        
+
         // Onclick  functions
         closeBoxLinear.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                    
+
                         timerTask =
-                           new TimerTask() {
-                              @Override
-                                public void run() {
-                                   runOnUiThread(
-                                      new Runnable() {
-                                          @Override
-                                            public void run() {
-                                        finish();
-                                }
-                           });
-                        }
-                    };
-                    _timerTask.schedule(timerTask, 500);
-                    
-                    mwConsortium.mwClick();
-                    mwConsortium.mwThreads(closeBoxLinear, closeBoxObjX, closeBoxObjY, 1.1f, 0.9f, 1.0f);
+                                new TimerTask() {
+                                    @Override
+                                    public void run() {
+                                        runOnUiThread(
+                                                new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        finish();
+                                                    }
+                                                });
+                                    }
+                                };
+                        _timerTask.schedule(timerTask, 500);
+
+                        mwConsortium.mwClick();
+                        mwConsortium.mwThreads(
+                                closeBoxLinear, closeBoxObjX, closeBoxObjY, 1.1f, 0.9f, 1.0f);
                     }
                 });
-        
+
         jewelryBoxLinear.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -384,25 +447,10 @@ public class HomeActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         mwConsortium.mwClick();
                         mwConsortium.mwThreads(blockTab1, block1objX, block1objY, 1.1f, 0.9f, 1.0f);
-                        if(itemSelected == "1" && (itemTab1d.endsWith("House") || itemTab1d.equals("Workshop"))){
-                            blocksTab[1] = itemTab1d;
-                            itemTab1d = "";
-                        } else {
-                            if(itemSelected == "2" && (itemTab2d.endsWith("House") || itemTab2d.equals("Workshop"))){
-                                blocksTab[1] = itemTab2d;
-                                itemTab2d = "";
-                            } else {
-                                if(itemSelected == "3" && (itemTab3d.endsWith("House") || itemTab3d.equals("Workshop"))){
-                                    blocksTab[1] = itemTab3d;
-                                    itemTab3d = "";
-                                }
-                            }
-                        }
                         if (blocksTab[1] != "") {
                                 alert.showDialog(HomeActivity.this,blocksTab[1]);
                         }
-                        inventory.dataInventory();
-                        houses.dataHouses();
+                        setUpHouse(1);
                     }
                 });
         blockTab2.setOnClickListener(
@@ -414,6 +462,7 @@ public class HomeActivity extends AppCompatActivity {
                         if (blocksTab[2] != "") {
                                 alert.showDialog(HomeActivity.this,blocksTab[2]);
                         }
+                        setUpHouse(2);
                     }
                 });
         blockTab3.setOnClickListener(
@@ -425,6 +474,7 @@ public class HomeActivity extends AppCompatActivity {
                         if (blocksTab[3] != "") {
                                 alert.showDialog(HomeActivity.this,blocksTab[3]);
                         }
+                        setUpHouse(3);
                     }
                 });
         blockTab4.setOnClickListener(
@@ -436,6 +486,7 @@ public class HomeActivity extends AppCompatActivity {
                         if (blocksTab[4] != "") {
                                 alert.showDialog(HomeActivity.this,blocksTab[4]);
                         }
+                        setUpHouse(4);
                     }
                 });
         blockTab5.setOnClickListener(
@@ -447,6 +498,7 @@ public class HomeActivity extends AppCompatActivity {
                         if (blocksTab[5] != "") {
                                 alert.showDialog(HomeActivity.this,blocksTab[5]);
                         }
+                        setUpHouse(5);
                     }
                 });
         blockTab6.setOnClickListener(
@@ -458,6 +510,7 @@ public class HomeActivity extends AppCompatActivity {
                         if (blocksTab[6] != "") {
                                 alert.showDialog(HomeActivity.this,blocksTab[6]);
                         }
+                        setUpHouse(6);
                     }
                 });
         blockTab7.setOnClickListener(
@@ -469,6 +522,7 @@ public class HomeActivity extends AppCompatActivity {
                         if (blocksTab[7] != "") {
                                 alert.showDialog(HomeActivity.this,blocksTab[7]);
                         }
+                        setUpHouse(7);
                     }
                 });
         blockTab8.setOnClickListener(
@@ -480,6 +534,7 @@ public class HomeActivity extends AppCompatActivity {
                         if (blocksTab[8] != "") {
                                 alert.showDialog(HomeActivity.this,blocksTab[8]);
                         }
+                        setUpHouse(8);
                     }
                 });
         blockTab9.setOnClickListener(
@@ -491,6 +546,7 @@ public class HomeActivity extends AppCompatActivity {
                         if (blocksTab[9] != "") {
                                 alert.showDialog(HomeActivity.this,blocksTab[9]);
                         }
+                        setUpHouse(9);
                     }
                 });
         blockTab10.setOnClickListener(
@@ -502,6 +558,7 @@ public class HomeActivity extends AppCompatActivity {
                         if (blocksTab[10] != "") {
                                 alert.showDialog(HomeActivity.this,blocksTab[10]);
                         }
+                        setUpHouse(10);
                     }
                 });
         blockTab11.setOnClickListener(
@@ -513,6 +570,7 @@ public class HomeActivity extends AppCompatActivity {
                         if (blocksTab[11] != "") {
                                 alert.showDialog(HomeActivity.this,blocksTab[11]);
                         }
+                        setUpHouse(11);
                     }
                 });
         blockTab12.setOnClickListener(
@@ -524,6 +582,7 @@ public class HomeActivity extends AppCompatActivity {
                         if (blocksTab[12] != "") {
                                 alert.showDialog(HomeActivity.this,blocksTab[12]);
                         }
+                        setUpHouse(12);
                     }
                 });
         blockTab13.setOnClickListener(
@@ -535,6 +594,7 @@ public class HomeActivity extends AppCompatActivity {
                         if (blocksTab[13] != "") {
                                 alert.showDialog(HomeActivity.this,blocksTab[13]);
                         }
+                        setUpHouse(13);
                     }
                 });
         blockTab14.setOnClickListener(
@@ -546,6 +606,7 @@ public class HomeActivity extends AppCompatActivity {
                         if (blocksTab[14] != "") {
                                 alert.showDialog(HomeActivity.this,blocksTab[14]);
                         }
+                        setUpHouse(14);
                     }
                 });
         blockTab15.setOnClickListener(
@@ -557,6 +618,7 @@ public class HomeActivity extends AppCompatActivity {
                         if (blocksTab[15] != "") {
                                 alert.showDialog(HomeActivity.this,blocksTab[15]);
                         }
+                        setUpHouse(15);
                     }
                 });
         blockTab16.setOnClickListener(
@@ -568,6 +630,7 @@ public class HomeActivity extends AppCompatActivity {
                         if (blocksTab[16] != "") {
                                 alert.showDialog(HomeActivity.this,blocksTab[16]);
                         }
+                        setUpHouse(16);
                     }
                 });
         blockTab17.setOnClickListener(
@@ -579,6 +642,7 @@ public class HomeActivity extends AppCompatActivity {
                         if (blocksTab[17] != "") {
                                 alert.showDialog(HomeActivity.this,blocksTab[17]);
                         }
+                        setUpHouse(17);
                     }
                 });
         blockTab18.setOnClickListener(
@@ -590,6 +654,7 @@ public class HomeActivity extends AppCompatActivity {
                         if (blocksTab[18] != "") {
                                 alert.showDialog(HomeActivity.this,blocksTab[18]);
                         }
+                        setUpHouse(18);
                     }
                 });
         blockTab19.setOnClickListener(
@@ -601,6 +666,7 @@ public class HomeActivity extends AppCompatActivity {
                         if (blocksTab[19] != "") {
                                 alert.showDialog(HomeActivity.this,blocksTab[19]);
                         }
+                        setUpHouse(19);
                     }
                 });
         blockTab20.setOnClickListener(
@@ -612,6 +678,7 @@ public class HomeActivity extends AppCompatActivity {
                         if (blocksTab[20] != "") {
                                 alert.showDialog(HomeActivity.this,blocksTab[20]);
                         }
+                        setUpHouse(20);
                     }
                 });
         // Items

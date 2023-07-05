@@ -117,6 +117,7 @@ public class MenuActivity extends AppCompatActivity {
                         System.exit(1);
                     }
                 });
+        /*
         // All data from SharedPreferences
         String logFileName = "mwLogSh-" + date + ".log";
         File logFile = new File(getExternalFilesDir(null), logFileName);
@@ -141,6 +142,7 @@ public class MenuActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        */
     }
 
     @Override
@@ -151,14 +153,20 @@ public class MenuActivity extends AppCompatActivity {
         // Default settings
         SharedPreferences playData = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         SharedPreferences.Editor editData = playData.edit();
-        fistOpen = playData.getString("firstOpen", "");
+        fistOpen = playData.getString("firstOpen_506", "");
         if(fistOpen == ""){
-            editData.putString("firstOpen", "false");
+            editData.putString("firstOpen_506", "false");
             editData.putString("itemSelected", "1");
             editData.putInt("tutorialLevel", 1);
             editData.putString("itemTab1d", "CoinHouse");
             editData.putString("itemTab2d", "");
             editData.putString("itemTab3d", "");
+            editData.putInt("magicCoin", 100);
+            editData.putInt("magicLevel", 0);
+            editData.putInt("magicCup", 0);
+            editData.putInt("coinHouseLevel", 1);
+            editData.putInt("gardenHouseLevel", 1);
+            editData.putInt("workshopLevel", 1);
             fistOpen = playData.getString("firstOpen", "");
             for (int i = 1; i <= 20; i++){
                 String blockTabN = "blockTab" + i + "d";
@@ -177,7 +185,7 @@ public class MenuActivity extends AppCompatActivity {
         super.onStop();
         SharedPreferences playData = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         SharedPreferences.Editor editData = playData.edit();
-        editData.putString("firstOpen", fistOpen);
+        editData.putString("firstOpen_506", fistOpen);
     }
 
     private void initialize(Bundle savedInstanceState) {
