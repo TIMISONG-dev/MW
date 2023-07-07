@@ -73,7 +73,7 @@ public class MwConsortium extends AppCompatActivity{
     public void mwClick(){
         
         if (MenuActivity.mwActivity.equals("mwMain")){
-
+            System.out.println("menu/thr1");
             // Thread 1
             if (MenuActivity.animRuleThr1) {
                 MenuActivity.timerTaskThr1 =
@@ -234,6 +234,7 @@ public class MwConsortium extends AppCompatActivity{
 
                 // Thread 2
                 if (MenuActivity.animRuleThr2) {
+                    System.out.println("menu/thr2");
                     MenuActivity.timerTaskThr2 =
                             new TimerTask() {
                                 @Override
@@ -400,6 +401,7 @@ public class MwConsortium extends AppCompatActivity{
 
                     // Thread 3
                     if (MenuActivity.animRuleThr3) {
+                        System.out.println("menu/thr3");
                         MenuActivity.timerTaskThr3 =
                                 new TimerTask() {
                                     @Override
@@ -578,6 +580,7 @@ public class MwConsortium extends AppCompatActivity{
 
             // Thread 1
             if (HomeActivity.animRuleThr1) {
+                System.out.println("home/thr1");
                 HomeActivity.timerTaskThr1 =
                         new TimerTask() {
                             @Override
@@ -736,6 +739,7 @@ public class MwConsortium extends AppCompatActivity{
 
                 // Thread 2
                 if (HomeActivity.animRuleThr2) {
+                    System.out.println("home/thr2");
                     HomeActivity.timerTaskThr2 =
                             new TimerTask() {
                                 @Override
@@ -901,6 +905,7 @@ public class MwConsortium extends AppCompatActivity{
 
                     // Thread 3
                     if (HomeActivity.animRuleThr3) {
+                        System.out.println("home/thr3");
                         HomeActivity.timerTaskThr3 =
                                 new TimerTask() {
                                     @Override

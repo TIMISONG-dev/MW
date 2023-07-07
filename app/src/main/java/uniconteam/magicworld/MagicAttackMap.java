@@ -29,13 +29,18 @@ public class MagicAttackMap extends View{
             canvas.drawBitmap(hearth, null, new RectF( x+(padding*i), y, x+(padding*i)+heartSize, y+heartSize), null);
         }
         magicHero.heroHpCheck();
-        magicMob.slimeHpCheck();
     }
     void drawPlants(Canvas canvas, float x, float y, int count){
         for(int i = 0; i < count; i++){
             canvas.drawBitmap(mapBush, null, new RectF(x, y, x+100, y+100), null);
             canvas.drawBitmap(mapTree, null, new RectF(x+500, y+700, x+600, y+800), null);
         }
+    }
+    void drawLoot(Canvas canvas, float x, float y){
+        MagicMob.slimeDead = true;
+        canvas.drawBitmap(mucusLoot, null, new RectF(x+100, y+100, x+300, y+300), null);
+        MagicMob.slimeX = 24000;
+        MagicMob.slimeY = 24000;
     }
     
 	// All objects
@@ -53,7 +58,7 @@ public class MagicAttackMap extends View{
     Bitmap mapTree;
     Bitmap mapBush;
     Bitmap johnCard;
-    String biome = "landscape"; // Which background color #2C6E3C
+    public static Bitmap mucusLoot;
     Timer timer = new Timer();
     TimerTask timerTask;
     public int currentFrame = 0;
@@ -109,6 +114,7 @@ public class MagicAttackMap extends View{
         
         johnCard = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_card_john);
         
+        mucusLoot = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_item_mucus);
         
         new Thread(new Runnable(){
             @Override
@@ -169,6 +175,10 @@ public class MagicAttackMap extends View{
         MagicMob.slimeY = mobSpawnY;
         }
         
+        if((MagicMob.slimeHp == 0 || MagicMob.slimeHp < 0) && MagicMob.slimeDead == false){
+            drawLoot(canvas, MagicMob.slimeX, MagicMob.slimeY);
+        }
+        
         
         // Debug
         
@@ -211,12 +221,6 @@ public class MagicAttackMap extends View{
 
         // Allow or deny move of slime (limit on the edges of the canvas)
         if (MagicMob.slimeHp != 0) {
-            if (MagicHero.heroX > canvasX || MagicHero.heroX < -80) {
-                biome = "desert";
-            }
-            if (MagicHero.heroY > canvasY || MagicHero.heroY < -80) {
-                biome = "landscape";
-            }
 
             if (MagicMob.slimeX > canvasX - 300) {
                 magicMob.slimeXUpAcept = false;
@@ -264,6 +268,7 @@ public class MagicAttackMap extends View{
         canvas.drawBitmap(buttonRight, null, new RectF(500f, 1800f, 640f, 1940f), null);
         canvas.drawBitmap(buttonAttack, null, new RectF(750f, 1800f, 890f, 1940f), null);
         canvas.drawBitmap(johnCard, null, new RectF(650f, 1900f, 1150f, 2400f), null);
+        // canvas.drawBitmap(mucusLoot, null, new RectF(850f, 2000f, 950f, 2100f), null);
         invalidate();
         }
     public boolean onTouchEvent(MotionEvent event) {

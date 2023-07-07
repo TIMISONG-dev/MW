@@ -113,8 +113,11 @@ public class HomeActivity extends AppCompatActivity {
     ObjectAnimator tutorialBoxObjY = new ObjectAnimator();
     ObjectAnimator closeBoxObjX = new ObjectAnimator();
     ObjectAnimator closeBoxObjY = new ObjectAnimator();
+    ObjectAnimator shopBoxObjX = new ObjectAnimator();
+    ObjectAnimator shopBoxObjY = new ObjectAnimator();
     public static String itemSelected;
     public static int tutorialLevel;
+    LinearLayout shopTab;
     
     public static TimerTask timerTaskThr1;
 	public static Timer _timerTaskThr1  = new Timer();
@@ -161,10 +164,12 @@ public class HomeActivity extends AppCompatActivity {
     public static int gardenHouseLevel;
     public static int workshopLevel;
     
-    Tutorial tutorial = new Tutorial();
-    HouseMenu houseMenu = new HouseMenu();
+    MwConsortium mwConsortium = new MwConsortium(); // MwConsortium - MW engine - initialize
+    HouseMenu houseMenu = new HouseMenu(); // MwHouseMenu - menu for houses
+    ShopMenu shopMenu = new ShopMenu();
     Houses houses = new Houses();
     Inventory inventory = new Inventory();
+    Tutorial tutorial = new Tutorial();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -192,7 +197,7 @@ public class HomeActivity extends AppCompatActivity {
         coinHouseLevel = playData.getInt("coinHouseLevel", 0);
         gardenHouseLevel = playData.getInt("gardenHouseLevel", 0);
         workshopLevel = playData.getInt("workshopLevel", 0);
-        
+
         // Inventory display
         inventory.dataInventory();
         
@@ -289,6 +294,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     void setUpHouse(int block) {
+
         if (itemSelected.equals("1") && (itemTab1d.endsWith("House") || itemTab1d.equals("Workshop"))) {
             blocksTab[block] = itemTab1d;
             itemTab1d = "";
@@ -345,10 +351,9 @@ public class HomeActivity extends AppCompatActivity {
         tutorialBoxText = findViewById(R.id.mwTutorialBoxText); // Tutorial text
         tutorialBoxIcon = findViewById(R.id.mwTutorialBoxIcon); // Tutorial icon
         closeBoxLinear = findViewById(R.id.mwCloseBoxLinear); // Close icon
-
-        MwConsortium mwConsortium = new MwConsortium(); // MwConsortium - MW engine - initialize
+        shopTab = findViewById(R.id.mwShopTab);
+        
         MenuActivity.mwActivity = "mwHome";
-        HouseMenu alert = new HouseMenu(); // MwHouseMenu - menu for houses
 
         // Transporant navbar
         Window w = getWindow();
@@ -379,6 +384,9 @@ public class HomeActivity extends AppCompatActivity {
         }
         if (Build.VERSION.SDK_INT >= 21) {
             itemTab3.setElevation(8f);
+        }
+        if (Build.VERSION.SDK_INT >= 21) {
+            shopTab.setElevation(8f);
         }
 
         // Fonts
@@ -448,7 +456,7 @@ public class HomeActivity extends AppCompatActivity {
                         mwConsortium.mwClick();
                         mwConsortium.mwThreads(blockTab1, block1objX, block1objY, 1.1f, 0.9f, 1.0f);
                         if (blocksTab[1] != "") {
-                                alert.showDialog(HomeActivity.this,blocksTab[1]);
+                                houseMenu.showDialog(HomeActivity.this,blocksTab[1]);
                         }
                         setUpHouse(1);
                     }
@@ -460,7 +468,7 @@ public class HomeActivity extends AppCompatActivity {
                         mwConsortium.mwClick();
                         mwConsortium.mwThreads(blockTab2, block2objX, block2objY, 1.1f, 0.9f, 1.0f);
                         if (blocksTab[2] != "") {
-                                alert.showDialog(HomeActivity.this,blocksTab[2]);
+                                houseMenu.showDialog(HomeActivity.this,blocksTab[2]);
                         }
                         setUpHouse(2);
                     }
@@ -472,7 +480,7 @@ public class HomeActivity extends AppCompatActivity {
                         mwConsortium.mwClick();
                         mwConsortium.mwThreads(blockTab3, block3objX, block3objY, 1.1f, 0.9f, 1.0f);
                         if (blocksTab[3] != "") {
-                                alert.showDialog(HomeActivity.this,blocksTab[3]);
+                                houseMenu.showDialog(HomeActivity.this,blocksTab[3]);
                         }
                         setUpHouse(3);
                     }
@@ -484,7 +492,7 @@ public class HomeActivity extends AppCompatActivity {
                         mwConsortium.mwClick();
                         mwConsortium.mwThreads(blockTab4, block4objX, block4objY, 1.1f, 0.9f, 1.0f);
                         if (blocksTab[4] != "") {
-                                alert.showDialog(HomeActivity.this,blocksTab[4]);
+                                houseMenu.showDialog(HomeActivity.this,blocksTab[4]);
                         }
                         setUpHouse(4);
                     }
@@ -496,7 +504,7 @@ public class HomeActivity extends AppCompatActivity {
                         mwConsortium.mwClick();
                         mwConsortium.mwThreads(blockTab5, block5objX, block5objY, 1.1f, 0.9f, 1.0f);
                         if (blocksTab[5] != "") {
-                                alert.showDialog(HomeActivity.this,blocksTab[5]);
+                                houseMenu.showDialog(HomeActivity.this,blocksTab[5]);
                         }
                         setUpHouse(5);
                     }
@@ -508,7 +516,7 @@ public class HomeActivity extends AppCompatActivity {
                         mwConsortium.mwClick();
                         mwConsortium.mwThreads(blockTab6, block6objX, block6objY, 1.1f, 0.9f, 1.0f);
                         if (blocksTab[6] != "") {
-                                alert.showDialog(HomeActivity.this,blocksTab[6]);
+                                houseMenu.showDialog(HomeActivity.this,blocksTab[6]);
                         }
                         setUpHouse(6);
                     }
@@ -520,7 +528,7 @@ public class HomeActivity extends AppCompatActivity {
                         mwConsortium.mwClick();
                         mwConsortium.mwThreads(blockTab7, block7objX, block7objY, 1.1f, 0.9f, 1.0f);
                         if (blocksTab[7] != "") {
-                                alert.showDialog(HomeActivity.this,blocksTab[7]);
+                                houseMenu.showDialog(HomeActivity.this,blocksTab[7]);
                         }
                         setUpHouse(7);
                     }
@@ -532,7 +540,7 @@ public class HomeActivity extends AppCompatActivity {
                         mwConsortium.mwClick();
                         mwConsortium.mwThreads(blockTab8, block8objX, block8objY, 1.1f, 0.9f, 1.0f);
                         if (blocksTab[8] != "") {
-                                alert.showDialog(HomeActivity.this,blocksTab[8]);
+                                houseMenu.showDialog(HomeActivity.this,blocksTab[8]);
                         }
                         setUpHouse(8);
                     }
@@ -544,7 +552,7 @@ public class HomeActivity extends AppCompatActivity {
                         mwConsortium.mwClick();
                         mwConsortium.mwThreads(blockTab9, block9objX, block9objY, 1.1f, 0.9f, 1.0f);
                         if (blocksTab[9] != "") {
-                                alert.showDialog(HomeActivity.this,blocksTab[9]);
+                                houseMenu.showDialog(HomeActivity.this,blocksTab[9]);
                         }
                         setUpHouse(9);
                     }
@@ -556,7 +564,7 @@ public class HomeActivity extends AppCompatActivity {
                         mwConsortium.mwClick();
                         mwConsortium.mwThreads(blockTab10, block10objX, block10objY, 1.1f, 0.9f, 1.0f);
                         if (blocksTab[10] != "") {
-                                alert.showDialog(HomeActivity.this,blocksTab[10]);
+                                houseMenu.showDialog(HomeActivity.this,blocksTab[10]);
                         }
                         setUpHouse(10);
                     }
@@ -568,7 +576,7 @@ public class HomeActivity extends AppCompatActivity {
                         mwConsortium.mwClick();
                         mwConsortium.mwThreads(blockTab11, block11objX, block11objY, 1.1f, 0.9f, 1.0f);
                         if (blocksTab[11] != "") {
-                                alert.showDialog(HomeActivity.this,blocksTab[11]);
+                                houseMenu.showDialog(HomeActivity.this,blocksTab[11]);
                         }
                         setUpHouse(11);
                     }
@@ -580,7 +588,7 @@ public class HomeActivity extends AppCompatActivity {
                         mwConsortium.mwClick();
                         mwConsortium.mwThreads(blockTab12, block12objX, block12objY, 1.1f, 0.9f, 1.0f);
                         if (blocksTab[12] != "") {
-                                alert.showDialog(HomeActivity.this,blocksTab[12]);
+                                houseMenu.showDialog(HomeActivity.this,blocksTab[12]);
                         }
                         setUpHouse(12);
                     }
@@ -592,7 +600,7 @@ public class HomeActivity extends AppCompatActivity {
                         mwConsortium.mwClick();
                         mwConsortium.mwThreads(blockTab13, block13objX, block13objY, 1.1f, 0.9f, 1.0f);
                         if (blocksTab[13] != "") {
-                                alert.showDialog(HomeActivity.this,blocksTab[13]);
+                                houseMenu.showDialog(HomeActivity.this,blocksTab[13]);
                         }
                         setUpHouse(13);
                     }
@@ -604,7 +612,7 @@ public class HomeActivity extends AppCompatActivity {
                         mwConsortium.mwClick();
                         mwConsortium.mwThreads(blockTab14, block14objX, block14objY, 1.1f, 0.9f, 1.0f);
                         if (blocksTab[14] != "") {
-                                alert.showDialog(HomeActivity.this,blocksTab[14]);
+                                houseMenu.showDialog(HomeActivity.this,blocksTab[14]);
                         }
                         setUpHouse(14);
                     }
@@ -616,7 +624,7 @@ public class HomeActivity extends AppCompatActivity {
                         mwConsortium.mwClick();
                         mwConsortium.mwThreads(blockTab15, block15objX, block15objY, 1.1f, 0.9f, 1.0f);
                         if (blocksTab[15] != "") {
-                                alert.showDialog(HomeActivity.this,blocksTab[15]);
+                                houseMenu.showDialog(HomeActivity.this,blocksTab[15]);
                         }
                         setUpHouse(15);
                     }
@@ -628,7 +636,7 @@ public class HomeActivity extends AppCompatActivity {
                         mwConsortium.mwClick();
                         mwConsortium.mwThreads(blockTab16, block16objX, block16objY, 1.1f, 0.9f, 1.0f);
                         if (blocksTab[16] != "") {
-                                alert.showDialog(HomeActivity.this,blocksTab[16]);
+                                houseMenu.showDialog(HomeActivity.this,blocksTab[16]);
                         }
                         setUpHouse(16);
                     }
@@ -640,7 +648,7 @@ public class HomeActivity extends AppCompatActivity {
                         mwConsortium.mwClick();
                         mwConsortium.mwThreads(blockTab17, block17objX, block17objY, 1.1f, 0.9f, 1.0f);
                         if (blocksTab[17] != "") {
-                                alert.showDialog(HomeActivity.this,blocksTab[17]);
+                                houseMenu.showDialog(HomeActivity.this,blocksTab[17]);
                         }
                         setUpHouse(17);
                     }
@@ -652,7 +660,7 @@ public class HomeActivity extends AppCompatActivity {
                         mwConsortium.mwClick();
                         mwConsortium.mwThreads(blockTab18, block18objX, block18objY, 1.1f, 0.9f, 1.0f);
                         if (blocksTab[18] != "") {
-                                alert.showDialog(HomeActivity.this,blocksTab[18]);
+                                houseMenu.showDialog(HomeActivity.this,blocksTab[18]);
                         }
                         setUpHouse(18);
                     }
@@ -664,7 +672,7 @@ public class HomeActivity extends AppCompatActivity {
                         mwConsortium.mwClick();
                         mwConsortium.mwThreads(blockTab19, block19objX, block19objY, 1.1f, 0.9f, 1.0f);
                         if (blocksTab[19] != "") {
-                                alert.showDialog(HomeActivity.this,blocksTab[19]);
+                                houseMenu.showDialog(HomeActivity.this,blocksTab[19]);
                         }
                         setUpHouse(19);
                     }
@@ -676,11 +684,22 @@ public class HomeActivity extends AppCompatActivity {
                         mwConsortium.mwClick();
                         mwConsortium.mwThreads(blockTab20, block20objX, block20objY, 1.1f, 0.9f, 1.0f);
                         if (blocksTab[20] != "") {
-                                alert.showDialog(HomeActivity.this,blocksTab[20]);
+                                houseMenu.showDialog(HomeActivity.this,blocksTab[20]);
                         }
                         setUpHouse(20);
                     }
                 });
+        // Shop
+        shopTab.setOnClickListener(
+            new View.OnClickListener(){
+                @Override
+                public void onClick(View view){
+                    mwConsortium.mwClick();
+                    mwConsortium.mwThreads(shopTab, shopBoxObjX, shopBoxObjY, 1.1f, 0.9f, 1.0f);
+                    shopMenu.showShopMenu(HomeActivity.this, jewelryBoxCoinData, jewelryBoxLevelData);
+                }
+            }
+        );
         // Items
         itemTab1.setOnClickListener(
                 new View.OnClickListener() {

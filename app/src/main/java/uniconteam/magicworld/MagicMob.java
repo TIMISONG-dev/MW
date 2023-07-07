@@ -27,6 +27,7 @@ public class MagicMob extends AppCompatActivity{
     public boolean slimeYDownAcept = true;
     
     public boolean slimeCooldown = false;
+    public static boolean slimeDead = false;
     
     // Random for IA slime (where will the mob go)
     
@@ -43,17 +44,13 @@ public class MagicMob extends AppCompatActivity{
     public static float slimeY = 0;
     public static int slimeHp = 6;
     
-    public void slimeHpCheck(){
-        if(slimeHp == 0 || slimeHp < 0){
-            slimeX = 24000;
-            slimeY = 24000;
-        }
-    }
+    
     public void slimeRand() {
       timerTask = new TimerTask() {
         @Override
         public void run() {
             runOnUiThread(() -> {
+              if(!slimeDead){          
                 if (Math.abs(slimeX - MagicHero.heroX) <= 300 || Math.abs(slimeY - MagicHero.heroY) <= 300) {
                     if (slimeX < MagicHero.heroX) {
                         slimeWay = 3;
@@ -77,6 +74,7 @@ public class MagicMob extends AppCompatActivity{
                     slimeDur = ThreadLocalRandom.current().nextInt(1, 6 + 1);
                 }
                 slimeRoad();
+              }
             });
         }
      };
