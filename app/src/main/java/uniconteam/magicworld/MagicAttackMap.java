@@ -91,14 +91,10 @@ public class MagicAttackMap extends View{
         john = BitmapFactory.decodeResource(context.getResources(), R.drawable.magicworld_hero_john_animation_walk_2);
 
         mHandler = new Handler();
-        mRunnable =
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        johnAnimationRule = false;
-                        heroAttackRule = false;
-                        john = BitmapFactory.decodeResource(context.getResources(),R.drawable.magicworld_hero_john_animation_walk_2);
-                    }
+        mRunnable = () -> {
+                    johnAnimationRule = false;
+                    heroAttackRule = false;
+                    john = BitmapFactory.decodeResource(context.getResources(),R.drawable.magicworld_hero_john_animation_walk_2);
                 };
 
         // Draw objects
@@ -134,21 +130,19 @@ public class MagicAttackMap extends View{
             }
         } } ).start();
         
-        new Thread(new Runnable(){
-            @Override
-            public void run(){
-                while(true){
-                    for(int j = 0; j < tikvachBitmaps.length; j++){
-                        currentFrame = j;
-                        tikvach = tikvachBitmaps[j];
-                    try{
-                        Thread.sleep(1000L / fps);
-                    } catch (InterruptedException e){
-                        e.printStackTrace();
-                    }
+        new Thread(() -> {
+            while(true){
+                for(int j = 0; j < tikvachBitmaps.length; j++){
+                    currentFrame = j;
+                    tikvach = tikvachBitmaps[j];
+                try{
+                    Thread.sleep(1000L / fps);
+                } catch (InterruptedException e){
+                    e.printStackTrace();
                 }
             }
-        } } ).start();
+        }
+    }).start();
       }
 
     Paint paint = new Paint();
@@ -252,7 +246,7 @@ public class MagicAttackMap extends View{
         
         // Collision
         if (magicHero.getCollisionRect().isCollideWith(magicMob.getCollisionRect())) {
-            if(magicMob.slimeCooldown == false){
+            if(!magicMob.slimeCooldown){
                 magicMob.mobCooldown();
                 MagicHero.heroY += 50;
                 MagicMob.slimeY -= 50;
@@ -292,145 +286,121 @@ public class MagicAttackMap extends View{
 
             if (xControll > 300f && xControll < 440f && yControll > 1600f && yControll < 1740f) {
                 magicHero.heroUp();
-                    if(johnAnimationRule == false){
+                    if(!johnAnimationRule){
                     johnAnimationRule = true;
                     mHandler.postDelayed(mRunnable, 500);
-                    new Thread(
-                                    new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            while (johnAnimationRule) {
-
-                                                for (int i = 0; i < johnWalkBitmaps.length; i++) {
-                                                  if(johnAnimationRule) {
-                                                    currentFrame = i;
-                                                    john = johnWalkBitmaps[i];
-                                                    try {
-                                                        Thread.sleep(1000L / fps);
-                                                    } catch (InterruptedException y) {
-                                                        y.printStackTrace();
-                                                    }
-                                                  postInvalidate();
-                                                  }
-                                                }
-                                            }
+                    new Thread(() -> {
+                                while (johnAnimationRule) {
+                                    for (int i = 0; i < johnWalkBitmaps.length; i++) {
+                                      if(johnAnimationRule) {
+                                        currentFrame = i;
+                                        john = johnWalkBitmaps[i];
+                                        try {
+                                            Thread.sleep(1000L / fps);
+                                        } catch (InterruptedException y) {
+                                            y.printStackTrace();
                                         }
-                                    })
+                                      postInvalidate();
+                                      }
+                                    }
+                                }
+                            })
                             .start();
                     }
                 }
             if (xControll > 300f && xControll < 440f && yControll > 2000f && yControll < 2140f) {
                 magicHero.heroDown();
-                if(johnAnimationRule == false){
+                if(!johnAnimationRule){
                     johnAnimationRule = true;
                     mHandler.postDelayed(mRunnable, 500);
-                    new Thread(
-                                    new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            while (johnAnimationRule) {
-
-                                                for (int i = 0; i < johnWalkBitmaps.length; i++) {
-                                                  if(johnAnimationRule) {
-                                                    currentFrame = i;
-                                                    john = johnWalkBitmaps[i];
-                                                    try {
-                                                        Thread.sleep(1000L / fps);
-                                                    } catch (InterruptedException y) {
-                                                        y.printStackTrace();
-                                                    }
-                                                  postInvalidate();
-                                                  }
-                                                }
-                                            }
+                    new Thread(() -> {
+                                while (johnAnimationRule) {
+                                    for (int i = 0; i < johnWalkBitmaps.length; i++) {
+                                      if(johnAnimationRule) {
+                                        currentFrame = i;
+                                        john = johnWalkBitmaps[i];
+                                        try {
+                                            Thread.sleep(1000L / fps);
+                                        } catch (InterruptedException y) {
+                                            y.printStackTrace();
                                         }
-                                    })
+                                      postInvalidate();
+                                      }
+                                    }
+                                }
+                            })
                             .start();
                     }
             }
             if (xControll > 100f && xControll < 240f && yControll > 1800f && yControll < 1940f) {
                 magicHero.heroLeft();
-                if(johnAnimationRule == false){
+                if(!johnAnimationRule){
                     johnAnimationRule = true;
                     mHandler.postDelayed(mRunnable, 500);
-                    new Thread(
-                                    new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            while (johnAnimationRule) {
-
-                                                for (int i = 0; i < johnWalkBitmaps.length; i++) {
-                                                  if(johnAnimationRule) {
-                                                    currentFrame = i;
-                                                    john = johnWalkBitmaps[i];
-                                                    try {
-                                                        Thread.sleep(1000L / fps);
-                                                    } catch (InterruptedException y) {
-                                                        y.printStackTrace();
-                                                    }
-                                                  postInvalidate();
-                                                  }
-                                                }
-                                            }
+                    new Thread(() -> {
+                                while (johnAnimationRule) {
+                                    for (int i = 0; i < johnWalkBitmaps.length; i++) {
+                                      if(johnAnimationRule) {
+                                        currentFrame = i;
+                                        john = johnWalkBitmaps[i];
+                                        try {
+                                            Thread.sleep(1000L / fps);
+                                        } catch (InterruptedException y) {
+                                            y.printStackTrace();
                                         }
-                                    })
+                                      postInvalidate();
+                                      }
+                                    }
+                                }
+                            })
                             .start();
                     }
             }
             if (xControll > 500f && xControll < 640f && yControll > 1800f && yControll < 1940f) {
                 magicHero.heroRight();
-                if(johnAnimationRule == false){
+                if(!johnAnimationRule){
                     johnAnimationRule = true;
                     mHandler.postDelayed(mRunnable, 500);
-                    new Thread(
-                                    new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            while (johnAnimationRule) {
+                    new Thread(() -> {
+                                while (johnAnimationRule) {
 
-                                                for (int i = 0; i < johnWalkBitmaps.length; i++) {
-                                                  if(johnAnimationRule) {
-                                                    currentFrame = i;
-                                                    john = johnWalkBitmaps[i];
-                                                    try {
-                                                        Thread.sleep(1000L / fps);
-                                                    } catch (InterruptedException y) {
-                                                        y.printStackTrace();
-                                                    }
-                                                  postInvalidate();
-                                                  }
-                                                }
-                                            }
+                                    for (int i = 0; i < johnWalkBitmaps.length; i++) {
+                                      if(johnAnimationRule) {
+                                        currentFrame = i;
+                                        john = johnWalkBitmaps[i];
+                                        try {
+                                            Thread.sleep(1000L / fps);
+                                        } catch (InterruptedException y) {
+                                            y.printStackTrace();
                                         }
-                                    })
+                                      postInvalidate();
+                                      }
+                                    }
+                                }
+                            })
                             .start();
                     }
             }
             if (xControll > 750f && xControll < 890f && yControll > 1800f && yControll < 1940f) {
-              if(heroAttackRule == false){
+              if(!heroAttackRule){
                 heroAttackRule = true;    
                 mHandler.postDelayed(mRunnable, 500);
-                new Thread(
-                                new Runnable() {
-                                    @Override
-                                    public void run() {
-
-                                        while (heroAttackRule) {
-                                            for (int a = 0; a < johnAttackBitmaps.length; a++) {
-                                              if(heroAttackRule){
-                                                currentFrame = a;
-                                                john = johnAttackBitmaps[a];
-                                                try {
-                                                    Thread.sleep(1000L / fps);
-                                                } catch (InterruptedException e) {
-                                                    e.printStackTrace();
-                                                }
-                                            }
-                                            postInvalidate();
-                                            }
-                                        }
+                new Thread(() -> {
+                            while (heroAttackRule) {
+                                for (int a = 0; a < johnAttackBitmaps.length; a++) {
+                                  if(heroAttackRule){
+                                    currentFrame = a;
+                                    john = johnAttackBitmaps[a];
+                                    try {
+                                        Thread.sleep(1000L / fps);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
                                     }
-                                })
+                                }
+                                postInvalidate();
+                                }
+                            }
+                        })
                         .start();
                     }
 
