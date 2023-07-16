@@ -30,11 +30,9 @@ public class MagicAttackMap extends View{
         }
         magicHero.heroHpCheck();
     }
-    void drawPlants(Canvas canvas, float x, float y, int count){
-        for(int i = 0; i < count; i++){
-            canvas.drawBitmap(mapBush, null, new RectF(x, y, x+100, y+100), null);
-            canvas.drawBitmap(mapTree, null, new RectF(x+500, y+700, x+600, y+800), null);
-        }
+    void drawPlants(Canvas canvas, float x, float y, float distance){
+        canvas.drawBitmap(mapBush, null, new RectF(x, y, x+100, y+100), null);
+        canvas.drawBitmap(mapBush, null, new RectF(x + distance, y + distance, x+100+distance, y+100+distance), null);
     }
     void drawLoot(Canvas canvas, float x, float y){
         MagicMob.slimeDead = true;
@@ -73,6 +71,10 @@ public class MagicAttackMap extends View{
     public boolean johnAnimationRule = false;
     public boolean heroAttackRule = false;
     public static boolean gameStoped = false;
+    boolean plantDrawed = false;
+    float plantX;
+    float plantY;
+    float plantDistance;
     
     public Handler mHandler;
     public Runnable mRunnable;
@@ -260,6 +262,15 @@ public class MagicAttackMap extends View{
         
         drawHealthBar(MagicMob.slimeX-100, MagicMob.slimeY-50, canvas, mobHp, 64, MagicMob.slimeHp, -18);
         drawHealthBar(500f, 1600f, canvas, heroHp, 124, MagicHero.heroHp, -38);
+        
+        if(!plantDrawed){
+            plantX = ThreadLocalRandom.current().nextInt(100, canvasX - 199);
+            plantY = ThreadLocalRandom.current().nextInt(100, canvasY - 199);
+            plantDistance = plantY = ThreadLocalRandom.current().nextInt(80, 150);
+            plantDrawed = true;
+        }
+        
+        drawPlants(canvas, plantX, plantY, plantDistance);
         
         canvas.drawBitmap(slime, null, new RectF(MagicMob.slimeX, MagicMob.slimeY, MagicMob.slimeX + 100, MagicMob.slimeY + 100), null);
         canvas.drawBitmap(buttonUp, null, new RectF(300f, 1600f, 440f, 1740f), null);

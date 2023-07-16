@@ -1,6 +1,8 @@
 package uniconteam.magicworld;
 
 import android.animation.ObjectAnimator;
+import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -11,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -456,7 +459,7 @@ public class HomeActivity extends AppCompatActivity {
                         mwConsortium.mwClick();
                         mwConsortium.mwThreads(blockTab1, block1objX, block1objY, 1.1f, 0.9f, 1.0f);
                         if (blocksTab[1] != "") {
-                                houseMenu.showDialog(HomeActivity.this,blocksTab[1]);
+                            houseMenu.showDialog(HomeActivity.this, blocksTab[1]);
                         }
                         setUpHouse(1);
                     }

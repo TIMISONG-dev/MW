@@ -24,7 +24,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
-import com.itsaky.androidide.logsender.LogSender;
 
 public class MenuActivity extends AppCompatActivity {
     // All objects
@@ -81,7 +80,6 @@ public class MenuActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        LogSender.startLogging(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
         initialize(savedInstanceState);

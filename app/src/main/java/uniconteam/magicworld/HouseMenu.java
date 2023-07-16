@@ -3,18 +3,17 @@ package uniconteam.magicworld;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Dialog;
-import android.graphics.Typeface;
+import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
-import uniconteam.magicworld.HouseMenu;
+import android.widget.Toast;
+import uniconteam.magicworld.HomeActivity;
 
 public class HouseMenu {
     
@@ -25,10 +24,10 @@ public class HouseMenu {
     ImageView closeIcon;
     public TextView menuHint;
     public TextView houseLevel;
+    Context context;
     
     int clickCount = 0;
         
-
     public void showDialog(Activity activity, String msg){
         
         final Dialog dialog = new Dialog(activity);
@@ -101,6 +100,17 @@ public class HouseMenu {
             public void onClick(View view){
                 mwConsortium.mwThreads(houseTab2, houseTab2objX, houseTab2objY, 1.1f, 0.9f, 1.0f);
                 mwConsortium.mwClick();
+                    
+                    for(int i = 1; i <= 20; i++){
+                        if(HomeActivity.blocksTab[i].equals("Workshop")){
+                            // upgrade panel
+                        } else {
+                            if(i == 20){
+                                Toast toast = Toast.makeText(activity, "you haven't workshop", Toast.LENGTH_SHORT);
+                                toast.show();
+                            }
+                        }
+                    }
             }    
         });
         houseTab3.setOnClickListener(new View.OnClickListener(){
