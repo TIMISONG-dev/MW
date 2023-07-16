@@ -251,7 +251,7 @@ public class MagicAttackMap extends View{
         magicMob.slimeSpw();
         
         // Collision
-        if (magicHero.getCollisionRect().CollidesWith(magicMob.getCollisionRect())) {
+        if (magicHero.getCollisionRect().isCollideWith(magicMob.getCollisionRect())) {
             if(magicMob.slimeCooldown == false){
                 magicMob.mobCooldown();
                 MagicHero.heroY += 50;
@@ -434,7 +434,7 @@ public class MagicAttackMap extends View{
                         .start();
                     }
 
-                if (magicHero.getCollisionRect().CollidesWith(magicMob.getCollisionRect())) {
+                if (magicHero.getCollisionRect().isCollideWith(magicMob.getCollisionRect())) {
                     MagicHero.heroY += 20;
                     MagicMob.slimeY -= 10;
                     MagicMob.slimeHp -= 1;
