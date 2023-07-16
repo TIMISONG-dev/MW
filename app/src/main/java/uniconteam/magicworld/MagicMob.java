@@ -121,19 +121,13 @@ public class MagicMob extends AppCompatActivity{
         return rect;
    }
    public void mobCooldown(){
-       if(slimeCooldown == false){
-            
+       if(!slimeCooldown){
             slimeCooldown = true;
             
            timerTask = new TimerTask(){
                         @Override
             public void run(){
-                            runOnUiThread(new Runnable(){
-                                @Override
-                                public void run(){
-                            slimeCooldown = false;
-                  }
-              });
+                            runOnUiThread(() -> slimeCooldown = false);
             }
        };
         timer.scheduleAtFixedRate(timerTask, 2000, 2000);
