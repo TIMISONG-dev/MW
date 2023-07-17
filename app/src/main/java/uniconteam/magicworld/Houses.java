@@ -18,28 +18,28 @@ public class Houses {
         itemIconMap.put("Workshop", R.drawable.magicworld_house_workshop);
         itemIconMap.put("", R.drawable.magicworld_block_grass);
 
-        List<ImageView> blockImageViews = new ArrayList<>();
-
-        blockImageViews.add(HomeActivity.blockTab1);
-        blockImageViews.add(HomeActivity.blockTab2);
-        blockImageViews.add(HomeActivity.blockTab3);
-        blockImageViews.add(HomeActivity.blockTab4);
-        blockImageViews.add(HomeActivity.blockTab5);
-        blockImageViews.add(HomeActivity.blockTab6);
-        blockImageViews.add(HomeActivity.blockTab7);
-        blockImageViews.add(HomeActivity.blockTab8);
-        blockImageViews.add(HomeActivity.blockTab9);
-        blockImageViews.add(HomeActivity.blockTab10);
-        blockImageViews.add(HomeActivity.blockTab11);
-        blockImageViews.add(HomeActivity.blockTab12);
-        blockImageViews.add(HomeActivity.blockTab13);
-        blockImageViews.add(HomeActivity.blockTab14);
-        blockImageViews.add(HomeActivity.blockTab15);
-        blockImageViews.add(HomeActivity.blockTab16);
-        blockImageViews.add(HomeActivity.blockTab17);
-        blockImageViews.add(HomeActivity.blockTab18);
-        blockImageViews.add(HomeActivity.blockTab19);
-        blockImageViews.add(HomeActivity.blockTab20);
+        List<ImageView> blockImageViews = List.of(
+                HomeActivity.blockTab1,
+                HomeActivity.blockTab2,
+                HomeActivity.blockTab3,
+                HomeActivity.blockTab4,
+                HomeActivity.blockTab5,
+                HomeActivity.blockTab6,
+                HomeActivity.blockTab7,
+                HomeActivity.blockTab8,
+                HomeActivity.blockTab9,
+                HomeActivity.blockTab10,
+                HomeActivity.blockTab11,
+                HomeActivity.blockTab12,
+                HomeActivity.blockTab13,
+                HomeActivity.blockTab14,
+                HomeActivity.blockTab15,
+                HomeActivity.blockTab16,
+                HomeActivity.blockTab17,
+                HomeActivity.blockTab18,
+                HomeActivity.blockTab19,
+                HomeActivity.blockTab20
+        );
 
         for (int i = 1; i <= 20; i++) {
             String block = HomeActivity.blocksTab[i];
