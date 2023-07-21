@@ -151,9 +151,9 @@ public class MenuActivity extends AppCompatActivity {
         // Default settings
         SharedPreferences playData = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         SharedPreferences.Editor editData = playData.edit();
-        fistOpen = playData.getString("firstOpen_506", "");
+        fistOpen = playData.getString("firstOpen_1.0t1", "");
         if(fistOpen == ""){
-            editData.putString("firstOpen_506", "false");
+            editData.putString("firstOpen_1.0t1", "false");
             editData.putString("itemSelected", "1");
             editData.putInt("tutorialLevel", 1);
             editData.putString("itemTab1d", "CoinHouse");
@@ -161,7 +161,7 @@ public class MenuActivity extends AppCompatActivity {
             editData.putString("itemTab3d", "");
             editData.putInt("magicCoin", 100);
             editData.putInt("magicLevel", 0);
-            editData.putInt("magicCup", 0);
+            editData.putInt("magicGem", 0);
             editData.putInt("coinHouseLevel", 1);
             editData.putInt("gardenHouseLevel", 1);
             editData.putInt("workshopLevel", 1);
@@ -183,7 +183,7 @@ public class MenuActivity extends AppCompatActivity {
         super.onStop();
         SharedPreferences playData = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         SharedPreferences.Editor editData = playData.edit();
-        editData.putString("firstOpen_506", fistOpen);
+        editData.putString("firstOpen_1.0t1", fistOpen);
     }
 
     private void initialize(Bundle savedInstanceState) {
@@ -217,13 +217,9 @@ public class MenuActivity extends AppCompatActivity {
                 new TimerTask() {
                     @Override
                     public void run() {
-                        runOnUiThread(
-                                new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        mwConsortium.mwClick();
-                                        mwConsortium.mwThreads(logoImg, logoObjX, logoObjY, 0.9f, 1.1f, 1.0f);
-                                    }
+                        runOnUiThread(() -> {
+                                    mwConsortium.mwClick();
+                                    mwConsortium.mwThreads(logoImg, logoObjX, logoObjY, 0.9f, 1.1f, 1.0f);
                                 });
                     }
                 };
@@ -231,60 +227,44 @@ public class MenuActivity extends AppCompatActivity {
         
 
         playButton.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                    
-                        mwConsortium.mwThreads(playButton, playButtonObjX, playButtonObjY, 1.1f, 0.9f, 1.0f);
-                        mwConsortium.mwClick();
-                    
-                        timerTask =
-                                    new TimerTask() {
-                                        @Override
-                                        public void run() {
-                                            runOnUiThread(
-                                                    new Runnable() {
-                                                        @Override
-                                                        public void run() {
-                                                            intent.setClass(
-                                                                    getApplicationContext(),HomeActivity.class);
-                                                            startActivity(intent);
-                                                        }
-                                                    });
-                                        }
-                                    };
-                            _timerTask.schedule(timerTask, 250);
-                    }
+                view -> {
+                    mwConsortium.mwThreads(playButton, playButtonObjX, playButtonObjY, 1.1f, 0.9f, 1.0f);
+                    mwConsortium.mwClick();
+
+                    timerTask =
+                                new TimerTask() {
+                                    @Override
+                                    public void run() {
+                                        runOnUiThread(() -> {
+                                                    intent.setClass(
+                                                            getApplicationContext(),HomeActivity.class);
+                                                    startActivity(intent);
+                                                });
+                                    }
+                                };
+                        _timerTask.schedule(timerTask, 250);
                 });
         magicAttackButton.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                    
-                        mwConsortium.mwThreads(magicAttackButton, magicAttackButtonObjX, magicAttackButtonObjY, 1.1f, 0.9f, 1.0f);
-                        mwConsortium.mwClick();
-                    
-                        MagicHero.heroX = 500;
-                        MagicHero.heroY = 1000;
-                       
-                        timerTask =
-                                    new TimerTask() {
-                                        @Override
-                                        public void run() {
-                                            runOnUiThread(
-                                                    new Runnable() {
-                                                        @Override
-                                                        public void run() {
-                                                            intent.setClass(
-                                                                    getApplicationContext(),
-                                                                    MagicAttackActivity.class);
-                                                            startActivity(intent);
-                                                        }
-                                                    });
-                                        }
-                                    };
-                            _timerTask.schedule(timerTask, 250);
-                    }
+                view -> {
+                    mwConsortium.mwThreads(magicAttackButton, magicAttackButtonObjX, magicAttackButtonObjY, 1.1f, 0.9f, 1.0f);
+                    mwConsortium.mwClick();
+
+                    MagicHero.heroX = 500;
+                    MagicHero.heroY = 1000;
+
+                    timerTask =
+                                new TimerTask() {
+                                    @Override
+                                    public void run() {
+                                        runOnUiThread(() -> {
+                                                    intent.setClass(
+                                                            getApplicationContext(),
+                                                            MagicAttackActivity.class);
+                                                    startActivity(intent);
+                                                });
+                                    }
+                                };
+                        _timerTask.schedule(timerTask, 250);
                 });
     } 
 } 

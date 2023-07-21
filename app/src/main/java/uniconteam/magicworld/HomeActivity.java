@@ -27,9 +27,9 @@ public class HomeActivity extends AppCompatActivity {
     public static int jewelryBoxCoinData;
 	public TextView jewelryBoxLevelCount;
     public static int jewelryBoxLevelData;
-	public LinearLayout winBoxLinear;
-	public TextView winBoxCupCount;
-    public static int winBoxCupData;
+	public LinearLayout gemBoxLinear;
+	public TextView gemBoxCount;
+    public static int gemBoxData;
 	public LinearLayout itemBoxLinear;
 	public static LinearLayout itemTab1;
 	public static LinearLayout itemTab2;
@@ -110,8 +110,8 @@ public class HomeActivity extends AppCompatActivity {
 	ObjectAnimator itemTab3objY = new ObjectAnimator();
     ObjectAnimator jewelryBoxObjX = new ObjectAnimator();
 	ObjectAnimator jewelryBoxObjY = new ObjectAnimator();
-    ObjectAnimator winBoxObjX = new ObjectAnimator();
-	ObjectAnimator winBoxObjY = new ObjectAnimator();
+    ObjectAnimator gemBoxObjX = new ObjectAnimator();
+	ObjectAnimator gemBoxObjY = new ObjectAnimator();
     ObjectAnimator tutorialBoxObjX = new ObjectAnimator();
     ObjectAnimator tutorialBoxObjY = new ObjectAnimator();
     ObjectAnimator closeBoxObjX = new ObjectAnimator();
@@ -194,7 +194,7 @@ public class HomeActivity extends AppCompatActivity {
         // Getting data of coins, levels, cups
         jewelryBoxCoinData = playData.getInt("magicCoin", 0);
         jewelryBoxLevelData = playData.getInt("magicLevel", 0);
-        winBoxCupData = playData.getInt("magicCup", 0);
+        gemBoxData = playData.getInt("magicGem", 0);
         
         // Getting data of level houses
         coinHouseLevel = playData.getInt("coinHouseLevel", 0);
@@ -206,7 +206,7 @@ public class HomeActivity extends AppCompatActivity {
         
         jewelryBoxCoinCount.setText(Integer.toString(jewelryBoxCoinData));
         jewelryBoxLevelCount.setText(Integer.toString(jewelryBoxLevelData));
-        winBoxCupCount.setText(Integer.toString(winBoxCupData));
+        gemBoxCount.setText(Integer.toString(gemBoxData));
 
         timerTask =
                 new TimerTask() {
@@ -218,7 +218,7 @@ public class HomeActivity extends AppCompatActivity {
                                             Integer.toString(jewelryBoxCoinData));
                                     jewelryBoxLevelCount.setText(
                                             Integer.toString(jewelryBoxLevelData));
-                                    winBoxCupCount.setText(Integer.toString(winBoxCupData));
+                                    gemBoxCount.setText(Integer.toString(gemBoxData));
                                 });
                     }
                 };
@@ -289,7 +289,7 @@ public class HomeActivity extends AppCompatActivity {
         }
         editData.putInt("magicCoin", jewelryBoxCoinData);
         editData.putInt("magicLevel", jewelryBoxLevelData);
-        editData.putInt("magicCup", winBoxCupData);
+        editData.putInt("magicCup", gemBoxData);
         editData.putInt("coinHouseLevel", coinHouseLevel);
         editData.putInt("gardenHouseLevel", gardenHouseLevel);
         editData.putInt("workshopLevel", workshopLevel);
@@ -318,11 +318,11 @@ public class HomeActivity extends AppCompatActivity {
 
     public void initialize(Bundle savedInstanceState) {
         // All objects id
-        winBoxCupCount = findViewById(R.id.mwWinBoxCupCount); // TextView cup count
+        gemBoxCount = findViewById(R.id.mwGemBoxCount); // TextView cup count
         jewelryBoxLinear = findViewById(R.id.mwJewelryBoxLinear);
         jewelryBoxCoinCount = findViewById(R.id.mwJewelryBoxCoinCount);
         jewelryBoxLevelCount = findViewById(R.id.mwJewelryBoxLevelCount);
-        winBoxLinear = findViewById(R.id.mwWinBoxLinear); // LinearLayout with cups
+        gemBoxLinear = findViewById(R.id.mwGemBoxLinear); // LinearLayout with cups
         itemBoxLinear = findViewById(R.id.mwItemBoxLinear); // LinearLayout with item tabs
         itemTab1 = findViewById(R.id.mwItemTab1); // LinearLayout item tab 1-3 \/
         itemTab2 = findViewById(R.id.mwItemTab2);
@@ -374,7 +374,7 @@ public class HomeActivity extends AppCompatActivity {
             tutorialBoxLinear.setElevation(8f);
         }
         if (Build.VERSION.SDK_INT >= 21) {
-            winBoxLinear.setElevation(8f);
+            gemBoxLinear.setElevation(8f);
         }
         if (Build.VERSION.SDK_INT >= 21) {
             itemBoxLinear.setElevation(8f);
@@ -395,7 +395,7 @@ public class HomeActivity extends AppCompatActivity {
         // Fonts
         jewelryBoxCoinCount.setTypeface(Typeface.createFromAsset(getAssets(), "mwFonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
         jewelryBoxLevelCount.setTypeface(Typeface.createFromAsset(getAssets(), "mwFonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
-        winBoxCupCount.setTypeface(Typeface.createFromAsset(getAssets(), "mwFonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
+        gemBoxCount.setTypeface(Typeface.createFromAsset(getAssets(), "mwFonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
         tutorialBoxText.setTypeface(Typeface.createFromAsset(getAssets(), "mwFonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
 
         // Onclick  functions
@@ -403,25 +403,7 @@ public class HomeActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
-                        timerTask =
-                                new TimerTask() {
-                                    @Override
-                                    public void run() {
-                                        runOnUiThread(
-                                                new Runnable() {
-                                                    @Override
-                                                    public void run() {
-                                                        finish();
-                                                    }
-                                                });
-                                    }
-                                };
-                        _timerTask.schedule(timerTask, 500);
-
-                        mwConsortium.mwClick();
-                        mwConsortium.mwThreads(
-                                closeBoxLinear, closeBoxObjX, closeBoxObjY, 1.1f, 0.9f, 1.0f);
+                            finish();
                     }
                 });
 
@@ -433,12 +415,12 @@ public class HomeActivity extends AppCompatActivity {
                         mwConsortium.mwThreads(jewelryBoxLinear, jewelryBoxObjX, jewelryBoxObjY, 1.1f, 0.9f, 1.0f);
                     }
                 });
-        winBoxLinear.setOnClickListener(
+        gemBoxLinear.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View viww) {
                         mwConsortium.mwClick();
-                        mwConsortium.mwThreads(winBoxLinear, winBoxObjX, winBoxObjY, 1.1f, 0.9f, 1.0f);
+                        mwConsortium.mwThreads(gemBoxLinear, gemBoxObjX, gemBoxObjY, 1.1f, 0.9f, 1.0f);
                     }
                 });
         tutorialBoxLinear.setOnClickListener(

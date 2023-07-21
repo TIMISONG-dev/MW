@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
         <LinearLayout
-            android:id="@+id/mwWinBoxLinear"
+            android:id="@+id/mwGemBoxLinear"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:padding="8dp"
@@ -46,12 +46,12 @@
             android:gravity="center_vertical|center_horizontal"
             android:background="@drawable/mw_anybox_layout">
             <ImageView
-                android:id="@+id/mwWinBox"
-                android:src="@drawable/magicworld_icon_cup"
+                android:id="@+id/mwGemBox"
+                android:src="@drawable/magicworld_icon_gem"
                 android:layout_width="28dp"
                 android:layout_height="28dp" />
             <TextView
-                android:id="@+id/mwWinBoxCupCount"
+                android:id="@+id/mwGemBoxCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
