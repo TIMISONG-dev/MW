@@ -24,7 +24,6 @@ public class HouseMenu {
     ImageView closeIcon;
     public TextView menuHint;
     public TextView houseLevel;
-    Context context;
     
     int clickCount = 0;
         
@@ -102,8 +101,10 @@ public class HouseMenu {
                 mwConsortium.mwClick();
                     
                     for(int i = 1; i <= 20; i++){
-                        if(HomeActivity.blocksTab[i].equals("Workshop")){
-                            // upgrade panel
+                        if(!HomeActivity.blocksTab[i].equals("Workshop")){
+                            if(i == 20){
+                                home.upgMenu.showUpgradeMenu(activity);
+                            }
                         } else {
                             if(i == 20){
                                 Toast toast = Toast.makeText(activity, "you haven't workshop", Toast.LENGTH_SHORT);

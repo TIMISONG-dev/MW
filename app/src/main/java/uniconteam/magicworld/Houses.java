@@ -16,6 +16,7 @@ public class Houses {
         itemIconMap.put("CoinHouse", R.drawable.magicworld_house_coinhouse);
         itemIconMap.put("GardenHouse", R.drawable.magicworld_house_garden);
         itemIconMap.put("Workshop", R.drawable.magicworld_house_workshop);
+        itemIconMap.put("Mine", R.drawable.magicworld_house_mine);
         itemIconMap.put("", R.drawable.magicworld_block_grass);
 
         List<ImageView> blockImageViews = List.of(

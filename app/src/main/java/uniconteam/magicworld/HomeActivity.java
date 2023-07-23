@@ -169,6 +169,7 @@ public class HomeActivity extends AppCompatActivity {
     
     MwConsortium mwConsortium = new MwConsortium(); // MwConsortium - MW engine - initialize
     HouseMenu houseMenu = new HouseMenu(); // MwHouseMenu - menu for houses
+    public UpgradeMenu upgMenu = new UpgradeMenu();
     ShopMenu shopMenu = new ShopMenu();
     Houses houses = new Houses();
     Inventory inventory = new Inventory();
@@ -298,15 +299,15 @@ public class HomeActivity extends AppCompatActivity {
 
     void setUpHouse(int block) {
 
-        if (itemSelected.equals("1") && (itemTab1d.endsWith("House") || itemTab1d.equals("Workshop"))) {
+        if (itemSelected.equals("1") && (itemTab1d.endsWith("House") || itemTab1d.equals("Workshop") || itemTab1d.equals("Mine"))) {
             blocksTab[block] = itemTab1d;
             itemTab1d = "";
         } else {
-            if (itemSelected.equals("2") && (itemTab2d.endsWith("House") || itemTab2d.equals("Workshop"))) {
+            if (itemSelected.equals("2") && (itemTab2d.endsWith("House") || itemTab2d.equals("Workshop") || itemTab2d.equals("Mine"))) {
                 blocksTab[block] = itemTab2d;
                 itemTab2d = "";
             } else {
-                if (itemSelected.equals("3") && (itemTab3d.endsWith("House") || itemTab3d.equals("Workshop"))) {
+                if (itemSelected.equals("3") && (itemTab3d.endsWith("House") || itemTab3d.equals("Workshop") || itemTab3d.equals("Mine"))) {
                     blocksTab[block] = itemTab3d;
                     itemTab3d = "";
                 }

@@ -8,25 +8,23 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-public class ShopMenu {
+public class UpgradeMenu {
     
-    public void showShopMenu(Activity activity, int coin, int level){
+    public void showUpgradeMenu(Activity activity){
+        
         final Dialog dialog = new Dialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.shopmenu);
+        dialog.setContentView(R.layout.upgrademenu);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.show();
         
-        LinearLayout shopTab1;
-        LinearLayout shopTab2;
+        LinearLayout upgTab1;
         ImageView closeIcon;
         
-        shopTab2 = dialog.findViewById(R.id.mwShopTab2);
-        shopTab1 = dialog.findViewById(R.id.mwShopTab1);
+        upgTab1 = dialog.findViewById(R.id.mwUpgTab1);
         closeIcon = dialog.findViewById(R.id.mwCloseIcon);
         
-        if(Build.VERSION.SDK_INT >= 21) { shopTab1.setElevation(8f); }
-        if(Build.VERSION.SDK_INT >= 21) { shopTab2.setElevation(8f); }
+        if(Build.VERSION.SDK_INT >= 21) { upgTab1.setElevation(8f); }
 
         closeIcon.setOnClickListener(
                 new View.OnClickListener() {
