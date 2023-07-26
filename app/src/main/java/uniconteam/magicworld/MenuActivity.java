@@ -151,13 +151,13 @@ public class MenuActivity extends AppCompatActivity {
         // Default settings
         SharedPreferences playData = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         SharedPreferences.Editor editData = playData.edit();
-        fistOpen = playData.getString("firstOpen_1.0t2", "");
+        fistOpen = playData.getString("firstOpen_1.0t4", "");
         if(fistOpen == ""){
-            editData.putString("firstOpen_1.0t2", "false");
+            editData.putString("firstOpen_1.0t4", "false");
             editData.putString("itemSelected", "1");
             editData.putInt("tutorialLevel", 1);
             editData.putString("itemTab1d", "CoinHouse");
-            editData.putString("itemTab2d", "Mine");
+            editData.putString("itemTab2d", "");
             editData.putString("itemTab3d", "");
             editData.putInt("magicCoin", 100);
             editData.putInt("magicLevel", 0);
@@ -165,7 +165,7 @@ public class MenuActivity extends AppCompatActivity {
             editData.putInt("coinHouseLevel", 1);
             editData.putInt("gardenHouseLevel", 1);
             editData.putInt("workshopLevel", 1);
-            fistOpen = playData.getString("firstOpen", "");
+            fistOpen = playData.getString("firstOpen_1.0t4", "");
             for (int i = 1; i <= 20; i++){
                 String blockTabN = "blockTab" + i + "d";
                 editData.putString(blockTabN, "");
@@ -183,7 +183,7 @@ public class MenuActivity extends AppCompatActivity {
         super.onStop();
         SharedPreferences playData = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         SharedPreferences.Editor editData = playData.edit();
-        editData.putString("firstOpen_1.0t2", fistOpen);
+        editData.putString("firstOpen_1.0t4", fistOpen);
     }
 
     private void initialize(Bundle savedInstanceState) {

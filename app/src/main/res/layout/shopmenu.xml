@@ -11,113 +11,164 @@
         android:layout_width="match_parent"
         android:gravity="center_horizontal|right"
         android:padding="8dp">
-    <ImageView
-        android:id="@+id/mwCloseIcon"
-        android:layout_height="44dp"
-        android:layout_width="44dp"
-        android:layout_margin="8dp"
-        android:src="@drawable/magicworld_icon_close"/>
+        <ImageView
+            android:id="@+id/mwCloseIcon"
+            android:layout_height="44dp"
+            android:layout_width="44dp"
+            android:layout_margin="8dp"
+            android:src="@drawable/magicworld_icon_close" />
     </LinearLayout>
-    <LinearLayout
-        android:layout_height="match_parent"
+    <HorizontalScrollView
         android:layout_width="match_parent"
-        android:gravity="center_horizontal|center_vertical"
-        android:padding="8dp">
+        android:layout_height="match_parent">
         <LinearLayout
-            android:id="@+id/mwShopTab1"
-            android:layout_height="124dp"
-            android:layout_width="124dp"
-            android:layout_margin="24dp"
-            android:orientation="vertical"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
             android:gravity="center_horizontal|center_vertical"
-            android:background="@drawable/mw_anybox_layout">
-            <ImageView
-                android:layout_height="55dp"
-                android:layout_width="55dp"
-                android:layout_margin="8dp"
-                android:src="@drawable/magicworld_house_workshop" />
+            android:padding="8dp">
             <LinearLayout
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:gravity="center_horizontal|center_vertical">
-            <ImageView
-                android:layout_height="24dp"
-                android:layout_width="24dp"
-                android:layout_marginRight="2dp"
-                android:layout_marginLeft="2dp"    
-                android:src="@drawable/magicworld_icon_coin"/>
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="168"
-                android:layout_marginRight="2dp"
-                android:layout_marginLeft="2dp"    
-                android:textColor="#000000"
-                android:textSize="12sp"/>
-            <ImageView
-                android:layout_height="24dp"
-                android:layout_width="24dp"
-                android:layout_marginRight="2dp"
-                android:layout_marginLeft="2dp"       
-                android:src="@drawable/magicworld_icon_level"/>
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="79"
-                android:layout_marginRight="2dp"
-                android:layout_marginLeft="2dp"       
-                android:textColor="#000000"
-                android:textSize="12sp"/>
+                android:id="@+id/mwShopTab1"
+                android:layout_height="124dp"
+                android:layout_width="124dp"
+                android:layout_margin="24dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal|center_vertical"
+                android:background="@drawable/mw_anybox_layout">
+                <ImageView
+                    android:layout_height="55dp"
+                    android:layout_width="55dp"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/magicworld_house_workshop" />
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:gravity="center_horizontal|center_vertical">
+                    <ImageView
+                        android:layout_height="24dp"
+                        android:layout_width="24dp"
+                        android:layout_marginRight="2dp"
+                        android:layout_marginLeft="2dp"
+                        android:src="@drawable/magicworld_icon_coin" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="168"
+                        android:layout_marginRight="2dp"
+                        android:layout_marginLeft="2dp"
+                        android:textColor="#000000"
+                        android:textSize="12sp" />
+                    <ImageView
+                        android:layout_height="24dp"
+                        android:layout_width="24dp"
+                        android:layout_marginRight="2dp"
+                        android:layout_marginLeft="2dp"
+                        android:src="@drawable/magicworld_icon_level" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="79"
+                        android:layout_marginRight="2dp"
+                        android:layout_marginLeft="2dp"
+                        android:textColor="#000000"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/mwShopTab2"
+                android:layout_height="124dp"
+                android:layout_width="124dp"
+                android:layout_margin="24dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal|center_vertical"
+                android:background="@drawable/mw_anybox_layout">
+                <ImageView
+                    android:layout_height="55dp"
+                    android:layout_width="55dp"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/magicworld_house_garden" />
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:gravity="center_horizontal|center_vertical">
+                    <ImageView
+                        android:layout_height="24dp"
+                        android:layout_width="24dp"
+                        android:layout_marginRight="2dp"
+                        android:layout_marginLeft="2dp"
+                        android:src="@drawable/magicworld_icon_coin" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="144"
+                        android:layout_marginRight="2dp"
+                        android:layout_marginLeft="2dp"
+                        android:textColor="#000000"
+                        android:textSize="12sp" />
+                    <ImageView
+                        android:layout_height="24dp"
+                        android:layout_width="24dp"
+                        android:layout_marginRight="2dp"
+                        android:layout_marginLeft="2dp"
+                        android:src="@drawable/magicworld_icon_level" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="68"
+                        android:layout_marginRight="2dp"
+                        android:layout_marginLeft="2dp"
+                        android:textColor="#000000"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/mwShopTab3"
+                android:layout_height="124dp"
+                android:layout_width="124dp"
+                android:layout_margin="24dp"
+                android:orientation="vertical"
+                android:gravity="center_horizontal|center_vertical"
+                android:background="@drawable/mw_anybox_layout">
+                <ImageView
+                    android:layout_height="55dp"
+                    android:layout_width="55dp"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/magicworld_house_mine" />
+                <LinearLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:gravity="center_horizontal|center_vertical">
+                    <ImageView
+                        android:layout_height="24dp"
+                        android:layout_width="24dp"
+                        android:layout_marginRight="2dp"
+                        android:layout_marginLeft="2dp"
+                        android:src="@drawable/magicworld_icon_coin" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="376"
+                        android:layout_marginRight="2dp"
+                        android:layout_marginLeft="2dp"
+                        android:textColor="#000000"
+                        android:textSize="12sp" />
+                    <ImageView
+                        android:layout_height="24dp"
+                        android:layout_width="24dp"
+                        android:layout_marginRight="2dp"
+                        android:layout_marginLeft="2dp"
+                        android:src="@drawable/magicworld_icon_level" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="95"
+                        android:layout_marginRight="2dp"
+                        android:layout_marginLeft="2dp"
+                        android:textColor="#000000"
+                        android:textSize="12sp" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-        <LinearLayout
-            android:id="@+id/mwShopTab2"
-            android:layout_height="124dp"
-            android:layout_width="124dp"
-            android:layout_margin="24dp"
-            android:orientation="vertical"
-            android:gravity="center_horizontal|center_vertical"
-            android:background="@drawable/mw_anybox_layout">
-            <ImageView
-                android:layout_height="55dp"
-                android:layout_width="55dp"
-                android:layout_margin="8dp"
-                android:src="@drawable/magicworld_house_garden" />
-            <LinearLayout
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:gravity="center_horizontal|center_vertical">
-            <ImageView
-                android:layout_height="24dp"
-                android:layout_width="24dp"
-                android:layout_marginRight="2dp"
-                android:layout_marginLeft="2dp"    
-                android:src="@drawable/magicworld_icon_coin"/>
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="144"
-                android:layout_marginRight="2dp"
-                android:layout_marginLeft="2dp"    
-                android:textColor="#000000"
-                android:textSize="12sp"/>
-            <ImageView
-                android:layout_height="24dp"
-                android:layout_width="24dp"
-                android:layout_marginRight="2dp"
-                android:layout_marginLeft="2dp"       
-                android:src="@drawable/magicworld_icon_level"/>
-            <TextView
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="68"
-                android:layout_marginRight="2dp"
-                android:layout_marginLeft="2dp"       
-                android:textColor="#000000"
-                android:textSize="12sp"/>
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
+    </HorizontalScrollView>
     <TextView
         android:id="@+id/mwMenuHint"
         android:layout_height="wrap_content"
@@ -126,5 +177,5 @@
         android:textSize="16sp"
         android:layout_margin="8dp"
         android:gravity="center_horizontal|center_vertical"
-        android:textColor="#000000"/>
+        android:textColor="#000000" />
 </LinearLayout>

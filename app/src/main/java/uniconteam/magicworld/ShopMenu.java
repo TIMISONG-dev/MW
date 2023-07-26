@@ -19,14 +19,17 @@ public class ShopMenu {
         
         LinearLayout shopTab1;
         LinearLayout shopTab2;
+        LinearLayout shopTab3;
         ImageView closeIcon;
         
-        shopTab2 = dialog.findViewById(R.id.mwShopTab2);
         shopTab1 = dialog.findViewById(R.id.mwShopTab1);
+        shopTab2 = dialog.findViewById(R.id.mwShopTab2);
+        shopTab3 = dialog.findViewById(R.id.mwShopTab3);
         closeIcon = dialog.findViewById(R.id.mwCloseIcon);
         
         if(Build.VERSION.SDK_INT >= 21) { shopTab1.setElevation(8f); }
         if(Build.VERSION.SDK_INT >= 21) { shopTab2.setElevation(8f); }
+        if(Build.VERSION.SDK_INT >= 21) { shopTab3.setElevation(8f); }
 
         closeIcon.setOnClickListener(
                 new View.OnClickListener() {

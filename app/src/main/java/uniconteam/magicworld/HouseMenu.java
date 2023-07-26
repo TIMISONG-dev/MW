@@ -22,8 +22,12 @@ public class HouseMenu {
     LinearLayout houseTab3;
     HorizontalScrollView scrollTabs;
     ImageView closeIcon;
+    ImageView houseIcon1;
+    ImageView houseIcon2;
+    ImageView houseIcon3;
     public TextView menuHint;
     public TextView houseLevel;
+    TextView houseFunc1;
     
     int clickCount = 0;
         
@@ -46,6 +50,10 @@ public class HouseMenu {
         scrollTabs = dialog.findViewById(R.id.mwScrollTabs);
         menuHint = dialog.findViewById(R.id.mwMenuHint);
         houseLevel = dialog.findViewById(R.id.mwHouseLevel);
+        houseIcon1 = dialog.findViewById(R.id.mwHouseIcon1);
+        houseIcon2 = dialog.findViewById(R.id.mwHouseIcon2);
+        houseIcon3 = dialog.findViewById(R.id.mwHouseIcon3);
+        houseFunc1 = dialog.findViewById(R.id.mwHouseFunc1);
         
         if(Build.VERSION.SDK_INT >= 21) { houseTab1.setElevation(8f); }
         if(Build.VERSION.SDK_INT >= 21) { houseTab2.setElevation(8f); }
@@ -64,6 +72,32 @@ public class HouseMenu {
         
         String houseLevelText = "LvL " + HomeActivity.coinHouseLevel;
         houseLevel.setText(houseLevelText);
+        
+        // Functions of houses
+        if(msg.equals("CoinHouse")){
+            houseIcon1.setImageResource(R.drawable.magicworld_opt_coinhouse_getcoin);
+            houseIcon2.setImageResource(R.drawable.magicworld_opt_coinhouse_getupgrade);
+            houseIcon3.setImageResource(R.drawable.magicworld_opt_coinhouse_getdestroy);
+            houseFunc1.setText("Get coins");
+        }
+        if(msg.equals("GardenHouse")){
+            houseIcon1.setImageResource(R.drawable.magicworld_opt_garden_getfunction);
+            houseIcon2.setImageResource(R.drawable.magicworld_opt_garden_getupgrade);
+            houseIcon3.setImageResource(R.drawable.magicworld_opt_garden_getdestroy);
+            houseFunc1.setText("Come in");
+        }
+        if(msg.equals("Workshop")){
+            houseIcon1.setImageResource(R.drawable.magicworld_opt_workshop_getfunction);
+            houseIcon2.setImageResource(R.drawable.magicworld_opt_workshop_getupgrade);
+            houseIcon3.setImageResource(R.drawable.magicworld_opt_workshop_getdestroy);
+            houseFunc1.setText("New Work");
+        }
+        if(msg.equals("Mine")){
+            houseIcon1.setImageResource(R.drawable.magicworld_opt_mine_getfunction);
+            houseIcon2.setImageResource(R.drawable.magicworld_opt_mine_getupgrade);
+            houseIcon3.setImageResource(R.drawable.magicworld_opt_mine_getdestroy);
+            houseFunc1.setText("Let's go");
+        }
         
         closeIcon.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -101,7 +135,7 @@ public class HouseMenu {
                 mwConsortium.mwClick();
                     
                     for(int i = 1; i <= 20; i++){
-                        if(!HomeActivity.blocksTab[i].equals("Workshop")){
+                        if(HomeActivity.blocksTab[i].equals("Workshop")){
                             if(i == 20){
                                 home.upgMenu.showUpgradeMenu(activity);
                             }
