@@ -198,8 +198,8 @@ public class MenuActivity extends AppCompatActivity {
         logoImg.setScaleY((float) (5.0d));
         versionTab = findViewById(R.id.mwVersionTab);
         compTab = findViewById(R.id.mwCompTab);
-        playButton.setTypeface(Typeface.createFromAsset(getAssets(), "mwFonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
-        magicAttackButton.setTypeface(Typeface.createFromAsset(getAssets(), "mwFonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
+        playButton.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
+        magicAttackButton.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
         
         
         if (Build.VERSION.SDK_INT >= 21) {
