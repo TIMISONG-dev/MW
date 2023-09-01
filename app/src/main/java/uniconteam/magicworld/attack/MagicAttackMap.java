@@ -1,10 +1,12 @@
 package uniconteam.magicworld;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.os.Handler;
 import android.view.MotionEvent;
@@ -13,7 +15,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class MagicAttackMap extends View{
+public class MagicAttackMap extends View {
     
     MagicMob magicMob = new MagicMob();
     MagicHero magicHero = new MagicHero();
@@ -146,11 +148,20 @@ public class MagicAttackMap extends View{
       }
 
     Paint paint = new Paint();
-
-	@Override
-	protected void onDraw(Canvas canvas) {
+    
+	protected void onDraw(Canvas background) {
         
-		super.onDraw(canvas);
+        BitmapFactory.Options opt = new BitmapFactory.Options();
+        opt.inMutable = true;
+        Bitmap brightBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_icon_coin, opt); 
+        Canvas hero = new Canvas(brightBitmap);
+        Canvas player = new Canvas(brightBitmap);
+        Canvas elements = new Canvas(brightBitmap);
+        Canvas mob = new Canvas(brightBitmap);
+        
+        player.translate(MagicHero.heroX - 500, MagicHero.heroY - 1000);
+        
+       // canvas.drawRect(MagicHero.heroX + canvasX, MagicHero.heroY + canvasY, MagicHero.heroX + 100 + canvasX, MagicHero.heroY + 100 + canvasY, paint);
         
         if(mobTimer == 150){
             magicMob.slimeRand();
@@ -160,8 +171,8 @@ public class MagicAttackMap extends View{
             mobTimer += 1;
             }
         }    
-        canvasX = canvas.getWidth();
-        canvasY = canvas.getHeight();
+        canvasX = background.getWidth();
+        canvasY = background.getHeight();
        
         if(mobSpawnRule){
         mobSpawnRule = false;    
@@ -172,7 +183,7 @@ public class MagicAttackMap extends View{
         }
         
         if((MagicMob.slimeHp == 0 || MagicMob.slimeHp < 0) && MagicMob.slimeDead == false){
-            drawLoot(canvas, MagicMob.slimeX, MagicMob.slimeY);
+            drawLoot(elements, MagicMob.slimeX, MagicMob.slimeY);
         }
         
         
@@ -193,27 +204,20 @@ public class MagicAttackMap extends View{
         // Background
         
         // greenfield
-        Paint rect_paint = new Paint();
-        rect_paint.setStyle(Paint.Style.FILL);
-        rect_paint.setColor(Color.parseColor("#2C6E3C"));
-        rect_paint.setAlpha(0x100); // optional 
-        canvas.drawRect(0, 0, 1200, 1000, rect_paint);
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(Color.parseColor("#2C6E3C"));
+        paint.setAlpha(0x100); // optional 
+        background.drawRect(0, 0, 1200, 1000, paint);
         
         // desert
-        rect_paint.setStyle(Paint.Style.FILL);
-        rect_paint.setColor(Color.parseColor("#f2ae24"));
-        rect_paint.setAlpha(0x100); // optional 
-        canvas.drawRect(0f, 1000f, 2200f, 2500f, rect_paint);
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(Color.parseColor("#f2ae24"));
+        paint.setAlpha(0x100); // optional 
+        background.drawRect(0f, 1000f, 2200f, 2500f, paint);
         
-        BitmapFactory.Options opt = new BitmapFactory.Options();
-        opt.inMutable = true;
-        Bitmap brightBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_icon_coin, opt); 
-        Canvas hero = new Canvas(brightBitmap);
-        hero.drawBitmap(john, null, new RectF(MagicHero.heroX, MagicHero.heroY, MagicHero.heroX + 100, MagicHero.heroY + 100), null);
-        canvas.drawBitmap(john, null, new RectF(MagicHero.heroX, MagicHero.heroY, MagicHero.heroX + 100, MagicHero.heroY + 100), null);
         
         // Tikvach
-        canvas.drawBitmap(tikvach, null, new RectF(850f, 1900f, 990f, 2040f), null);
+        mob.drawBitmap(tikvach, null, new RectF(850f, 1900f, 990f, 2040f), paint);
 
         // Allow or deny move of slime (limit on the edges of the canvas)
         if (MagicMob.slimeHp != 0) {
@@ -254,8 +258,8 @@ public class MagicAttackMap extends View{
             }
         }
         
-        drawHealthBar(MagicMob.slimeX-100, MagicMob.slimeY-50, canvas, mobHp, 64, MagicMob.slimeHp, -18);
-        drawHealthBar(500f, 1600f, canvas, heroHp, 124, MagicHero.heroHp, -38);
+        drawHealthBar(MagicMob.slimeX-100, MagicMob.slimeY-50, elements, mobHp, 64, MagicMob.slimeHp, -18);
+        drawHealthBar(500f, 1600f, elements, heroHp, 124, MagicHero.heroHp, -38);
         
         if(!plantDrawed){
             plantX = ThreadLocalRandom.current().nextInt(100, canvasX - 199);
@@ -264,16 +268,18 @@ public class MagicAttackMap extends View{
             plantDrawed = true;
         }
         
-        drawPlants(canvas, plantX, plantY, plantDistance);
+        drawPlants(background, plantX, plantY, plantDistance);
         
-        canvas.drawBitmap(slime, null, new RectF(MagicMob.slimeX, MagicMob.slimeY, MagicMob.slimeX + 100, MagicMob.slimeY + 100), null);
-        canvas.drawBitmap(buttonUp, null, new RectF(300f, 1600f, 440f, 1740f), null);
-        canvas.drawBitmap(buttonDown, null, new RectF(300f, 2000f, 440f, 2140f), null);
-        canvas.drawBitmap(buttonLeft, null, new RectF(100f, 1800f, 240f, 1940f), null);
-        canvas.drawBitmap(buttonRight, null, new RectF(500f, 1800f, 640f, 1940f), null);
-        canvas.drawBitmap(buttonAttack, null, new RectF(750f, 1800f, 890f, 1940f), null);
-        canvas.drawBitmap(johnCard, null, new RectF(650f, 1900f, 1150f, 2400f), null);
-        // canvas.drawBitmap(mucusLoot, null, new RectF(850f, 2000f, 950f, 2100f), null);
+        mob.drawBitmap(slime, null, new RectF(MagicMob.slimeX, MagicMob.slimeY, MagicMob.slimeX + 100, MagicMob.slimeY + 100), null);
+        elements.drawBitmap(buttonUp, null, new RectF(300f, 1600f, 440f, 1740f), null);
+        elements.drawBitmap(buttonDown, null, new RectF(300f, 2000f, 440f, 2140f), null);
+        elements.drawBitmap(buttonLeft, null, new RectF(100f, 1800f, 240f, 1940f), null);
+        elements.drawBitmap(buttonRight, null, new RectF(500f, 1800f, 640f, 1940f), null);
+        background.drawBitmap(buttonAttack, null, new RectF(750f, 1800f, 890f, 1940f), null);
+        background.drawBitmap(johnCard, null, new RectF(650f, 1900f, 1150f, 2400f), null);
+        background.drawBitmap(mucusLoot, null, new RectF(850f, 2000f, 950f, 2100f), null);
+        hero.drawBitmap(john, null, new RectF(MagicHero.heroX, MagicHero.heroY, MagicHero.heroX + 100, MagicHero.heroY + 100), null);
+        player.drawBitmap(john, null, new RectF(MagicHero.heroX, MagicHero.heroY, MagicHero.heroX + 100, MagicHero.heroY + 100), null);
         invalidate();
         }
     public boolean onTouchEvent(MotionEvent event) {

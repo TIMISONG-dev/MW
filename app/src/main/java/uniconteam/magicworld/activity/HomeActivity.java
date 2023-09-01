@@ -58,7 +58,7 @@ public class HomeActivity extends AppCompatActivity {
     public static ImageView blockTab19;
     public static ImageView blockTab20;
     public static TextView tutorialBoxText;
-    public LinearLayout tutorialBoxLinear;
+    public static LinearLayout tutorialBoxLinear;
     public ImageView tutorialBoxIcon;
     public static TimerTask timerTask;
     public static Timer _timerTask = new Timer();
@@ -112,8 +112,9 @@ public class HomeActivity extends AppCompatActivity {
 	ObjectAnimator jewelryBoxObjY = new ObjectAnimator();
     ObjectAnimator gemBoxObjX = new ObjectAnimator();
 	ObjectAnimator gemBoxObjY = new ObjectAnimator();
-    ObjectAnimator tutorialBoxObjX = new ObjectAnimator();
-    ObjectAnimator tutorialBoxObjY = new ObjectAnimator();
+    public static ObjectAnimator tutorialBoxObjX = new ObjectAnimator();
+    public static ObjectAnimator tutorialBoxObjY = new ObjectAnimator();
+    public static ObjectAnimator tutorialBoxAlpha = new ObjectAnimator();
     ObjectAnimator closeBoxObjX = new ObjectAnimator();
     ObjectAnimator closeBoxObjY = new ObjectAnimator();
     ObjectAnimator shopBoxObjX = new ObjectAnimator();
