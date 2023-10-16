@@ -7,6 +7,7 @@ public class MagicHero {
     public static int heroHp = 6;
     public static float heroX = 200;
     public static float heroY = 1100;
+    public static String loc = "";
     
     public void heroHpCheck(){
         if(heroHp == 0 || heroHp < 0){
@@ -24,10 +25,12 @@ public class MagicHero {
     }
 
     public void heroUp() {
+        loc = "up";
         heroY -= 30;
     }
 
     public void heroDown() {
+        loc = "down";
         heroY += 30;
     }
 

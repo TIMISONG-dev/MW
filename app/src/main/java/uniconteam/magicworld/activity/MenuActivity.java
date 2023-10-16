@@ -1,6 +1,7 @@
 package uniconteam.magicworld;
 
 import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.text.SimpleDateFormat;
@@ -24,6 +25,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+import uniconteam.magicworld.attack.BackElement;
 
 public class MenuActivity extends AppCompatActivity {
     // All objects
@@ -77,7 +79,7 @@ public class MenuActivity extends AppCompatActivity {
     MwConsortium mwConsortium = new MwConsortium();
     
     String fistOpen;
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -133,6 +135,7 @@ public class MenuActivity extends AppCompatActivity {
 
                 String logMessage = key + ": " + value.toString();
                 printWriter.println(logMessage);
+                printWriter.println(BackElement.biomeSizeX);
             }
 
             printWriter.close();
