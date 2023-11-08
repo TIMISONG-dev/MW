@@ -1,4 +1,5 @@
-package uniconteam.magicworld;
+package uniconteam.magicworld.dialog;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.drawable.ColorDrawable;
@@ -7,6 +8,8 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import uniconteam.magicworld.R;
 
 public class ShopMenu {
     
@@ -26,17 +29,11 @@ public class ShopMenu {
         shopTab2 = dialog.findViewById(R.id.mwShopTab2);
         shopTab3 = dialog.findViewById(R.id.mwShopTab3);
         closeIcon = dialog.findViewById(R.id.mwCloseIcon);
-        
-        if(Build.VERSION.SDK_INT >= 21) { shopTab1.setElevation(8f); }
-        if(Build.VERSION.SDK_INT >= 21) { shopTab2.setElevation(8f); }
-        if(Build.VERSION.SDK_INT >= 21) { shopTab3.setElevation(8f); }
 
-        closeIcon.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog.dismiss();
-                    }
-                });
+        shopTab1.setElevation(8f);
+        shopTab2.setElevation(8f);
+        shopTab3.setElevation(8f);
+
+        closeIcon.setOnClickListener(view -> dialog.dismiss());
     }
 }

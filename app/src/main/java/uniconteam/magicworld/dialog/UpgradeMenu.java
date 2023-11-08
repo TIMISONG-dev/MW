@@ -1,4 +1,5 @@
-package uniconteam.magicworld;
+package uniconteam.magicworld.dialog;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.drawable.ColorDrawable;
@@ -8,10 +9,10 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import uniconteam.magicworld.R;
+
 public class UpgradeMenu {
-    
     public void showUpgradeMenu(Activity activity){
-        
         final Dialog dialog = new Dialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.upgrademenu);
@@ -23,15 +24,9 @@ public class UpgradeMenu {
         
         upgTab1 = dialog.findViewById(R.id.mwUpgTab1);
         closeIcon = dialog.findViewById(R.id.mwCloseIcon);
-        
-        if(Build.VERSION.SDK_INT >= 21) { upgTab1.setElevation(8f); }
 
-        closeIcon.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog.dismiss();
-                    }
-                });
+        upgTab1.setElevation(8f);
+
+        closeIcon.setOnClickListener(view -> dialog.dismiss());
     }
 }

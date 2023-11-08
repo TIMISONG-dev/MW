@@ -1,4 +1,4 @@
-package uniconteam.magicworld;
+package uniconteam.magicworld.component;
 
 import android.util.LogPrinter;
 import android.widget.ImageView;
@@ -7,14 +7,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import uniconteam.magicworld.R;
+import uniconteam.magicworld.activity.HomeActivity;
 import uniconteam.magicworld.databinding.HomeBinding;
 
 public class Houses {
-    
-    
-
     public void dataHouses() {
-        
         // List of houses
         Map<String, Integer> itemIconMap = new HashMap<>();
         itemIconMap.put("CoinHouse", R.drawable.magicworld_house_coinhouse);

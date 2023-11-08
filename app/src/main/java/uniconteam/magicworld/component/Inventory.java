@@ -1,15 +1,15 @@
-package uniconteam.magicworld;
+package uniconteam.magicworld.component;
 
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import uniconteam.magicworld.R;
+import uniconteam.magicworld.activity.HomeActivity;
 
 public class Inventory {
-    
     public void dataInventory(){
-        
         // List of items
         Map<String, Integer> itemIconMap = new HashMap<>();
         itemIconMap.put("CoinHouse", R.drawable.magicworld_house_coinhouse);

@@ -1,4 +1,4 @@
-package uniconteam.magicworld;
+package uniconteam.magicworld.dialog;
 
 import android.animation.ObjectAnimator;
 import android.app.Activity;
@@ -13,7 +13,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import uniconteam.magicworld.HomeActivity;
+import uniconteam.magicworld.R;
+import uniconteam.magicworld.activity.HomeActivity;
+import uniconteam.magicworld.component.Houses;
+import uniconteam.magicworld.component.Inventory;
 
 public class HouseMenu {
     
@@ -54,10 +57,10 @@ public class HouseMenu {
         houseIcon2 = dialog.findViewById(R.id.mwHouseIcon2);
         houseIcon3 = dialog.findViewById(R.id.mwHouseIcon3);
         houseFunc1 = dialog.findViewById(R.id.mwHouseFunc1);
-        
-        if(Build.VERSION.SDK_INT >= 21) { houseTab1.setElevation(8f); }
-        if(Build.VERSION.SDK_INT >= 21) { houseTab2.setElevation(8f); }
-        if(Build.VERSION.SDK_INT >= 21) { houseTab3.setElevation(8f); }
+
+        houseTab1.setElevation(8f);
+        houseTab2.setElevation(8f);
+        houseTab3.setElevation(8f);
         scrollTabs.setHorizontalScrollBarEnabled(false);
         
         ObjectAnimator houseTab1objX = new ObjectAnimator();
@@ -98,54 +101,42 @@ public class HouseMenu {
             houseFunc1.setText("Let's go");
         }
         
-        closeIcon.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                dialog.dismiss();
-            }
-        });
-        houseTab1.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                       // mwConsortium.mwThreads(
-                           //     houseTab1, houseTab1objX, houseTab1objY, 1.1f, 0.9f, 1.0f);
-                    //    mwConsortium.mwClick();
-                        // ClickEngine (beta) for 1 level of coinhouse
-                        if (HomeActivity.coinHouseLevel == 1) {
-                            if (clickCount <= 14) {
-                                HomeActivity.jewelryBoxCoinData++;
-                            } else {
-                                if (clickCount <= 20) {
-                                    HomeActivity.jewelryBoxCoinData =
-                                            HomeActivity.jewelryBoxCoinData + 12;
-                                } else {
-                                    clickCount = 0;
-                                }
-                            }
-                        }
-                        clickCount++;
-                    }
-                });
-        houseTab2.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                // mwConsortium.mwThreads(houseTab2, houseTab2objX, houseTab2objY, 1.1f, 0.9f, 1.0f);
-                // mwConsortium.mwClick();
-                    
-                    for(int i = 1; i <= 20; i++){
-                        if(HomeActivity.blocksTab[i].equals("Workshop")){
-                            if(i == 20){
-                                home.upgMenu.showUpgradeMenu(activity);
-                            }
+        closeIcon.setOnClickListener(view -> dialog.dismiss());
+        houseTab1.setOnClickListener(view -> {
+                   // mwConsortium.mwThreads(
+                       //     houseTab1, houseTab1objX, houseTab1objY, 1.1f, 0.9f, 1.0f);
+                //    mwConsortium.mwClick();
+                    // ClickEngine (beta) for 1 level of coinhouse
+                    if (HomeActivity.coinHouseLevel == 1) {
+                        if (clickCount <= 14) {
+                            HomeActivity.jewelryBoxCoinData++;
                         } else {
-                            if(i == 20){
-                                Toast toast = Toast.makeText(activity, "you haven't workshop", Toast.LENGTH_SHORT);
-                                toast.show();
+                            if (clickCount <= 20) {
+                                HomeActivity.jewelryBoxCoinData =
+                                        HomeActivity.jewelryBoxCoinData + 12;
+                            } else {
+                                clickCount = 0;
                             }
                         }
                     }
-            }    
+                    clickCount++;
+                });
+        houseTab2.setOnClickListener(view -> {
+            // mwConsortium.mwThreads(houseTab2, houseTab2objX, houseTab2objY, 1.1f, 0.9f, 1.0f);
+            // mwConsortium.mwClick();
+
+                for(int i = 1; i <= 20; i++){
+                    if(HomeActivity.blocksTab[i].equals("Workshop")){
+                        if(i == 20){
+                            home.upgMenu.showUpgradeMenu(activity);
+                        }
+                    } else {
+                        if(i == 20){
+                            Toast toast = Toast.makeText(activity, "you haven't workshop", Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                    }
+                }
         });
         houseTab3.setOnClickListener(new View.OnClickListener(){
             @Override

@@ -1,4 +1,4 @@
-package uniconteam.magicworld;
+package uniconteam.magicworld.attack;
 
 import android.graphics.RectF;
 

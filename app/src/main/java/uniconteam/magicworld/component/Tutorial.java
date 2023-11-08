@@ -1,9 +1,10 @@
-package uniconteam.magicworld;
+package uniconteam.magicworld.component;
 
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.Timer;
 import java.util.TimerTask;
-import uniconteam.magicworld.HomeActivity;
+
+import uniconteam.magicworld.activity.HomeActivity;
 
 public class Tutorial extends AppCompatActivity{
     

@@ -1,4 +1,4 @@
-package uniconteam.magicworld;
+package uniconteam.magicworld.activity;
 
 import android.animation.ObjectAnimator;
 import android.app.Activity;
@@ -17,11 +17,19 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import kotlin.jvm.Throws;
+import uniconteam.magicworld.R;
+import uniconteam.magicworld.component.Houses;
+import uniconteam.magicworld.component.Inventory;
+import uniconteam.magicworld.component.Tutorial;
 import uniconteam.magicworld.databinding.HomeBinding;
+import uniconteam.magicworld.dialog.HouseMenu;
+import uniconteam.magicworld.dialog.ShopMenu;
+import uniconteam.magicworld.dialog.UpgradeMenu;
 import uniconteam.magicworld.engine.MwConsortium2;
 
 public class HomeActivity extends AppCompatActivity {
-    
     public static TimerTask timerTask;
     public static Timer _timerTask = new Timer();
     public static String itemSelected;
@@ -63,10 +71,11 @@ public class HomeActivity extends AppCompatActivity {
         binding = HomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         initialize(savedInstanceState);
-        
-        for(int i = 0; i<=12; i++){
-            objectX = new ObjectAnimator[i];
-            objectY = new ObjectAnimator[i];
+
+        // Fix the object animators
+        for(int i = 0; i < 12; i++){
+            objectX[i] = new ObjectAnimator();
+            objectY[i] = new ObjectAnimator();
         }
     }
 
@@ -121,27 +130,24 @@ public class HomeActivity extends AppCompatActivity {
         
         // Which cell of inventory selected
         itemSelected = playData.getString("itemSelected", "");
-        if (itemSelected.equals("1")) {
-            binding.mwItemTab3.setBackgroundResource(R.drawable.mw_anybox_layout);
-            binding.mwItemTab1.setBackgroundResource(R.drawable.mw_selectedbox_layout);
-            binding.mwItemTab2.setBackgroundResource(R.drawable.mw_anybox_layout);
-        } else {
-            if (itemSelected.equals("2")) {
+        switch(itemSelected) {
+            case "2":
                 binding.mwItemTab3.setBackgroundResource(R.drawable.mw_anybox_layout);
                 binding.mwItemTab2.setBackgroundResource(R.drawable.mw_selectedbox_layout);
                 binding.mwItemTab1.setBackgroundResource(R.drawable.mw_anybox_layout);
-            } else {
-                if (itemSelected.equals("3")) {
-                    binding.mwItemTab1.setBackgroundResource(R.drawable.mw_anybox_layout);
-                    binding.mwItemTab3.setBackgroundResource(R.drawable.mw_selectedbox_layout);
-                    binding.mwItemTab2.setBackgroundResource(R.drawable.mw_anybox_layout);
-                } else {
-                    itemSelected = "1";
-                    binding.mwItemTab3.setBackgroundResource(R.drawable.mw_anybox_layout);
-                    binding.mwItemTab1.setBackgroundResource(R.drawable.mw_selectedbox_layout);
-                    binding.mwItemTab2.setBackgroundResource(R.drawable.mw_anybox_layout);
-                }
-            }
+                break;
+            case "3":
+                binding.mwItemTab1.setBackgroundResource(R.drawable.mw_anybox_layout);
+                binding.mwItemTab3.setBackgroundResource(R.drawable.mw_selectedbox_layout);
+                binding.mwItemTab2.setBackgroundResource(R.drawable.mw_anybox_layout);
+                break;
+            default:
+                itemSelected = "1";
+            case "1":
+                binding.mwItemTab3.setBackgroundResource(R.drawable.mw_anybox_layout);
+                binding.mwItemTab1.setBackgroundResource(R.drawable.mw_selectedbox_layout);
+                binding.mwItemTab2.setBackgroundResource(R.drawable.mw_anybox_layout);
+                break;
         }
         
         // Tutorial of MW
@@ -162,15 +168,15 @@ public class HomeActivity extends AppCompatActivity {
         // Save data
         SharedPreferences playData = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         SharedPreferences.Editor editData = playData.edit();
-        editData.putString("itemSelected", itemSelected.toString());
-        if(itemTab1d == ""){
-            editData.putString("itemTab1d", itemTab1d.toString());
+        editData.putString("itemSelected", itemSelected);
+        if(itemTab1d.isEmpty()){
+            editData.putString("itemTab1d", itemTab1d);
         }
-        if(itemTab2d == ""){
-            editData.putString("itemTab2d", itemTab2d.toString());
+        if(itemTab2d.isEmpty()){
+            editData.putString("itemTab2d", itemTab2d);
         }
-        if(itemTab3d == ""){
-            editData.putString("itemTab3d", itemTab3d.toString());
+        if(itemTab3d.isEmpty()){
+            editData.putString("itemTab3d", itemTab3d);
         }
         for (int i = 1; i <= 20; i++) {
             String blocks = "blockTab" + i + "d";
@@ -250,36 +256,17 @@ public class HomeActivity extends AppCompatActivity {
         binding.mwTutorialBoxText.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
 
         // Onclick  functions
-        binding.mwCloseBoxLinear.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                            finish();
-                    }
-                });
+        binding.mwCloseBoxLinear.setOnClickListener(view -> finish());
 
         binding.mwJewelryBoxLinear.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        m2.mwClick(binding.mwJewelryBoxLinear, objectX[1], objectY[1], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
-                    }
-                });
+                view -> m2.mwClick(binding.mwJewelryBoxLinear, objectX[1], objectY[1], 1.1f, 0.9f, 1.0f, _timerTask, timerTask));
         binding.mwGemBoxLinear.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View viww) {
-                        m2.mwClick(binding.mwGemBoxLinear, objectX[2], objectY[2], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
-                    }
-                });
+                viww -> m2.mwClick(binding.mwGemBoxLinear, objectX[2], objectY[2], 1.1f, 0.9f, 1.0f, _timerTask, timerTask));
         binding.mwTutorialBoxLinear.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        tutorialLevel += 1;
-                        tutorial.tutorialData();
-                        m2.mwClick(binding.mwTutorialBoxLinear, objectX[3], objectY[3], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
-                    }
+                view -> {
+                    tutorialLevel += 1;
+                    tutorial.tutorialData();
+                    m2.mwClick(binding.mwTutorialBoxLinear, objectX[3], objectY[3], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
                 });
         /*
         // Blocks
