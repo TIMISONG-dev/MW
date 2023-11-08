@@ -1,4 +1,4 @@
-package uniconteam.magicworld;
+package uniconteam.magicworld.activity;
 
 import android.animation.ObjectAnimator;
 import android.app.Activity;
@@ -17,11 +17,18 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import uniconteam.magicworld.R;
+import uniconteam.magicworld.component.Houses;
+import uniconteam.magicworld.component.Inventory;
+import uniconteam.magicworld.component.Tutorial;
 import uniconteam.magicworld.databinding.HomeBinding;
+import uniconteam.magicworld.dialog.HouseMenu;
+import uniconteam.magicworld.dialog.ShopMenu;
+import uniconteam.magicworld.dialog.UpgradeMenu;
 import uniconteam.magicworld.engine.MwConsortium2;
 
 public class HomeActivity extends AppCompatActivity {
-    
     public static TimerTask timerTask;
     public static Timer _timerTask = new Timer();
     public static String itemSelected;

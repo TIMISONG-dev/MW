@@ -1,4 +1,4 @@
-package uniconteam.magicworld;
+package uniconteam.magicworld.attack;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -17,6 +17,8 @@ import android.view.ViewGroup;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ThreadLocalRandom;
+
+import uniconteam.magicworld.R;
 import uniconteam.magicworld.attack.GameElements;
 import uniconteam.magicworld.attack.HeroElement;
 import uniconteam.magicworld.attack.BackElement;

@@ -1,11 +1,11 @@
-package uniconteam.magicworld;
+package uniconteam.magicworld.activity;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.text.SimpleDateFormat;
-import android.icu.util.Calendar;
+import java.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
 import android.graphics.Typeface;
@@ -25,7 +25,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import uniconteam.magicworld.R;
 import uniconteam.magicworld.attack.BackElement;
+import uniconteam.magicworld.attack.MagicHero;
 import uniconteam.magicworld.engine.MwConsortium2;
 
 public class MenuActivity extends AppCompatActivity {
@@ -63,7 +66,7 @@ public class MenuActivity extends AppCompatActivity {
 
         // Logs
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd-HHmmss", Locale.getDefault());
+        java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyyMMdd-HHmmss", Locale.getDefault());
         String date = dateFormat.format(calendar.getTime());
         
         Thread.setDefaultUncaughtExceptionHandler(

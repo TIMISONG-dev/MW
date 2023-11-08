@@ -8,7 +8,6 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
-import uniconteam.magicworld.MagicHero;
 
 public class HeroElement extends AppCompatActivity{
     private final Context context;

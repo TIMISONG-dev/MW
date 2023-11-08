@@ -1,4 +1,4 @@
-package uniconteam.magicworld;
+package uniconteam.magicworld.attack;
 
 public class MagicHero {
 
