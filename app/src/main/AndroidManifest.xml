@@ -16,7 +16,7 @@
         android:theme="@style/Theme.Application"
         android:enableOnBackInvokedCallback="true">
         <activity
-            android:name=".MenuActivity"
+            android:name=".activity.MenuActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -25,10 +25,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".HomeActivity"
+            android:name=".activity.HomeActivity"
             android:screenOrientation="portrait"/>
     <activity
-        android:name=".MagicAttackActivity"
+        android:name=".activity.MagicAttackActivity"
         android:screenOrientation="portrait"/>
     </application>
 </manifest>
