@@ -64,34 +64,9 @@ public class MenuActivity extends AppCompatActivity {
 
         SharedPreferences playData = getSharedPreferences("MySharedPref", MODE_PRIVATE);
 
-        // Logs
-        Calendar calendar = Calendar.getInstance();
-        java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyyMMdd-HHmmss", Locale.getDefault());
-        String date = dateFormat.format(calendar.getTime());
+
         
-        Thread.setDefaultUncaughtExceptionHandler(
-                new Thread.UncaughtExceptionHandler() {
-                    @Override
-                    public void uncaughtException(Thread thread, Throwable throwable) {
-                        String logFileName = "mwLogs-" + date + ".log";
-                        File logFile = new File(getExternalFilesDir(null), logFileName);
 
-                        try {
-                            FileWriter fileWriter =
-                                    new FileWriter(
-                                            logFile, true);
-                            PrintWriter printWriter = new PrintWriter(fileWriter);
-
-                            printWriter.println("MagicWorld exception:");
-                            throwable.printStackTrace(printWriter);
-                            printWriter.close();
-                            fileWriter.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        System.exit(1);
-                    }
-                });
         /*
         // All data from SharedPreferences
         String logFileName = "mwLogSh-" + date + ".log";
