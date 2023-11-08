@@ -64,9 +64,6 @@ public class MenuActivity extends AppCompatActivity {
 
         SharedPreferences playData = getSharedPreferences("MySharedPref", MODE_PRIVATE);
 
-
-        
-
         /*
         // All data from SharedPreferences
         String logFileName = "mwLogSh-" + date + ".log";
