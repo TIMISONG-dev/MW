@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import kotlin.jvm.Throws;
 import uniconteam.magicworld.R;
 import uniconteam.magicworld.component.Houses;
 import uniconteam.magicworld.component.Inventory;
@@ -70,11 +71,13 @@ public class HomeActivity extends AppCompatActivity {
         binding = HomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         initialize(savedInstanceState);
-        
-        for(int i = 0; i<=12; i++){
-            objectX = new ObjectAnimator[i];
-            objectY = new ObjectAnimator[i];
+
+        // Fix the object animators
+        for(int i = 0; i < 12; i++){
+            objectX[i] = new ObjectAnimator();
+            objectY[i] = new ObjectAnimator();
         }
+        binding.mwJewelryBoxCoinCount
     }
 
     @Override
