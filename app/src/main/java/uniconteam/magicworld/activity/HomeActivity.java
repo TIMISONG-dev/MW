@@ -77,7 +77,6 @@ public class HomeActivity extends AppCompatActivity {
             objectX[i] = new ObjectAnimator();
             objectY[i] = new ObjectAnimator();
         }
-        binding.mwJewelryBoxCoinCount
     }
 
     @Override
