@@ -25,8 +25,6 @@ public class MagicAttackMap extends View {
     
     MagicMob magicMob = new MagicMob();
     MagicHero magicHero = new MagicHero();
-    MwConsortium mwConsortium = new MwConsortium();
-    JoystickView joystickView;
     
     void drawHealthBar(float rx, float ry, Canvas canvas, Bitmap hearth, int size, int hpCount, int hpp) {
         int heartSize = size;
@@ -77,6 +75,7 @@ public class MagicAttackMap extends View {
     float plantX;
     float plantY;
     float plantDistance;
+    int map[] = {};
     
     public Handler mHandler;
     public Runnable mRunnable;
@@ -90,7 +89,11 @@ public class MagicAttackMap extends View {
 	public MagicAttackMap (Context context){
 		super(context);
         
-        joystickView = new JoystickView(context);
+        for(int m=1; m < 100; m++){
+            // map[m] = ThreadLocalRandom.current().nextInt(0, 1);
+            map[m] = 1;
+        }
+        
         // addContentView(joystickView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
         GameElements gameElements = new GameElements(context);
@@ -152,16 +155,14 @@ public class MagicAttackMap extends View {
         }
     }).start();
       }
-
     Paint paint = new Paint();
     
 	protected void onDraw(Canvas background) {
 
-        /*
         BitmapFactory.Options opt = new BitmapFactory.Options();
         opt.inMutable = true;
         Bitmap brightBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.magicworld_icon_coin, opt); 
-        */
+        
         
         if(mobTimer == 150){
             magicMob.slimeRand();
@@ -185,20 +186,17 @@ public class MagicAttackMap extends View {
         if((MagicMob.slimeHp == 0 || MagicMob.slimeHp < 0) && MagicMob.slimeDead == false){
             drawLoot(background, MagicMob.slimeX, MagicMob.slimeY);
         }
-        
-        /*
         // Debug
         
         paint.setColor(Color.WHITE); 
         background.drawPaint(paint); 
         paint.setColor(Color.BLACK); 
         paint.setTextSize(60); 
-        background.drawText(String.valueOf(MagicMob.slimeY), 10, 135, paint);
-        background.drawText(String.valueOf(MagicMob.slimeX), 250, 135, paint);
-        background.drawText(String.valueOf(MagicHero.heroY), 10, 235, paint);
-        background.drawText(String.valueOf(MagicHero.heroX), 250, 235, paint);
+        // background.drawText(String.valueOf(MagicMob.slimeY), 10, 135, paint);
+        // background.drawText(String.valueOf(MagicMob.slimeX), 250, 135, paint);
+        background.drawText(String.valueOf(map), 10, 235, paint);
+        // background.drawText(String.valueOf(JoystickView.touchY), 250, 235, paint);
         background.drawText("Debug", 10, 55, paint);
-       */
         
         // Tikvach
         background.drawBitmap(tikvach, null, new RectF(850f, 1900f, 990f, 2040f), paint);
@@ -242,21 +240,13 @@ public class MagicAttackMap extends View {
             }
         }
         
-        if(!plantDrawed){
-            plantX = ThreadLocalRandom.current().nextInt(100, canvasX - 199);
-            plantY = ThreadLocalRandom.current().nextInt(100, canvasY - 199);
-            plantDistance = plantY = ThreadLocalRandom.current().nextInt(80, 150);
-            plantDrawed = true;
-        }
-        
         BackElement.drawBack(background);
         HeroElement.drawHero(background);
         drawHealthBar(MagicMob.slimeX-100, MagicMob.slimeY-50, background, mobHp, 64, MagicMob.slimeHp, -18);
         drawHealthBar(500f, 1600f, background, heroHp, 124, MagicHero.heroHp, -38);
-        // GameElements.drawBackground(background);
-        
-        joystickView.drawJoy(background);
+        GameElements.drawBackground(background);
         drawPlants(background, plantX, plantY, plantDistance);
+        
         if(MagicHero.loc == "up"){
             MagicMob.slimeY -= 20;
             MagicHero.loc = "";
@@ -270,7 +260,9 @@ public class MagicAttackMap extends View {
         background.drawRect(MagicHero.heroX + canvasX, MagicHero.heroY + canvasY, MagicHero.heroX + 100 + canvasX, MagicHero.heroY + 100 + canvasY, paint);
         invalidate();
         }
-  /*  public boolean onTouchEvent(MotionEvent event) {
+    
+    @Override
+   public boolean onTouchEvent(MotionEvent event) {
 
         // Detect click using x y z
         float xControll = event.getX();
@@ -414,5 +406,4 @@ public class MagicAttackMap extends View {
         }
         return super.onTouchEvent(event);
     }
-    */
 }

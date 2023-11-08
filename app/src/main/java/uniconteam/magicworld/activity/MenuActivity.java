@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 import uniconteam.magicworld.attack.BackElement;
+import uniconteam.magicworld.engine.MwConsortium2;
 
 public class MenuActivity extends AppCompatActivity {
     // All objects
@@ -42,41 +43,12 @@ public class MenuActivity extends AppCompatActivity {
     public static TimerTask timerTask;
     public static Timer _timerTask = new Timer();
 
-    public static TimerTask timerTaskThr1;
-    public static Timer _timerTaskThr1 = new Timer();
-    public static View animObjDataThr1; // View for mwClick
-    public static float animFloats1Thr1; // Floats for mwClick 1-3 \/
-    public static float animFloats2Thr1;
-    public static float animFloats3Thr1;
-    public static ObjectAnimator animDataXThr1 = new ObjectAnimator(); // Animator for mwClick ScaleX, ScaleY
-    public static ObjectAnimator animDataYThr1 = new ObjectAnimator();
-    public static Boolean animRuleThr1 = true; // Bool for allowing or denying mwClick
-
-    public static TimerTask timerTaskThr2;
-    public static Timer _timerTaskThr2 = new Timer();
-    public static View animObjDataThr2; // View for mwClick
-    public static float animFloats1Thr2; // Floats for mwClick 1-3 \/
-    public static float animFloats2Thr2;
-    public static float animFloats3Thr2;
-    public static ObjectAnimator animDataXThr2 = new ObjectAnimator(); // Animator for mwClick ScaleX, ScaleY
-    public static ObjectAnimator animDataYThr2 = new ObjectAnimator();
-    public static Boolean animRuleThr2 = true; // Bool for allowing or denying mwClick
-
-    public static TimerTask timerTaskThr3;
-    public static Timer _timerTaskThr3 = new Timer();
-    public static View animObjDataThr3; // View for mwClick
-    public static float animFloats1Thr3; // Floats for mwClick 1-3 \/
-    public static float animFloats2Thr3;
-    public static float animFloats3Thr3;
-    public static ObjectAnimator animDataXThr3 = new ObjectAnimator(); // Animator for mwClick ScaleX, ScaleY
-    public static ObjectAnimator animDataYThr3 = new ObjectAnimator();
-    public static Boolean animRuleThr3 = true; // Bool for allowing or denying mwClick
     public static String mwActivity;
 
     public LinearLayout versionTab;
     public LinearLayout compTab;
     
-    MwConsortium mwConsortium = new MwConsortium();
+    MwConsortium2 m2 = new MwConsortium2();
     
     String fistOpen;
     
@@ -221,8 +193,7 @@ public class MenuActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         runOnUiThread(() -> {
-                                    mwConsortium.mwClick();
-                                    mwConsortium.mwThreads(logoImg, logoObjX, logoObjY, 0.9f, 1.1f, 1.0f);
+                                    m2.mwClick(logoImg, logoObjX, logoObjY, 0.9f, 1.1f, 1.0f, _timerTask, timerTask);
                                 });
                     }
                 };
@@ -231,8 +202,7 @@ public class MenuActivity extends AppCompatActivity {
 
         playButton.setOnClickListener(
                 view -> {
-                    mwConsortium.mwThreads(playButton, playButtonObjX, playButtonObjY, 1.1f, 0.9f, 1.0f);
-                    mwConsortium.mwClick();
+                    m2.mwClick(playButton, playButtonObjX, playButtonObjY, 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
 
                     timerTask =
                                 new TimerTask() {
@@ -249,8 +219,7 @@ public class MenuActivity extends AppCompatActivity {
                 });
         magicAttackButton.setOnClickListener(
                 view -> {
-                    mwConsortium.mwThreads(magicAttackButton, magicAttackButtonObjX, magicAttackButtonObjY, 1.1f, 0.9f, 1.0f);
-                    mwConsortium.mwClick();
+                    m2.mwClick(magicAttackButton, magicAttackButtonObjX, magicAttackButtonObjY, 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
 
                     MagicHero.heroX = 500;
                     MagicHero.heroY = 1000;

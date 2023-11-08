@@ -24,17 +24,17 @@ public class Inventory {
         // ItemTab1    
         if (itemList.contains(HomeActivity.itemTab1d)) {
                 int iconResourceId = itemIconMap.get(HomeActivity.itemTab1d);
-                HomeActivity.itemId1.setImageResource(iconResourceId);
+                HomeActivity.binding.mwItemId1.setImageResource(iconResourceId);
         }
         // ItemTab2
         if (itemList.contains(HomeActivity.itemTab2d)) {
                 int iconResourceId = itemIconMap.get(HomeActivity.itemTab2d);
-                HomeActivity.itemId2.setImageResource(iconResourceId);
+                HomeActivity.binding.mwItemId2.setImageResource(iconResourceId);
         }
         // ItemTab3
         if (itemList.contains(HomeActivity.itemTab3d)) {
                 int iconResourceId = itemIconMap.get(HomeActivity.itemTab3d);
-                HomeActivity.itemId3.setImageResource(iconResourceId);
+                HomeActivity.binding.mwItemId3.setImageResource(iconResourceId);
         } 
     }
 }

@@ -17,144 +17,24 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.Timer;
 import java.util.TimerTask;
+import uniconteam.magicworld.databinding.HomeBinding;
+import uniconteam.magicworld.engine.MwConsortium2;
 
 public class HomeActivity extends AppCompatActivity {
     
-    // all objects
-    public LinearLayout closeBoxLinear;
-	public LinearLayout jewelryBoxLinear;
-	public TextView jewelryBoxCoinCount;
-    public static int jewelryBoxCoinData;
-	public TextView jewelryBoxLevelCount;
-    public static int jewelryBoxLevelData;
-	public LinearLayout gemBoxLinear;
-	public TextView gemBoxCount;
-    public static int gemBoxData;
-	public LinearLayout itemBoxLinear;
-	public static LinearLayout itemTab1;
-	public static LinearLayout itemTab2;
-	public static LinearLayout itemTab3;
-    public static ImageView itemId1;
-    public static ImageView itemId2;
-    public static ImageView itemId3;
-    public static ImageView blockTab1;
-    public static ImageView blockTab2;
-    public static ImageView blockTab3;
-    public static ImageView blockTab4;
-    public static ImageView blockTab5;
-	public static ImageView blockTab6; // Comments about this objects in «// All objects id»
-    public static ImageView blockTab7;
-    public static ImageView blockTab8;
-    public static ImageView blockTab9;
-    public static ImageView blockTab10;
-	public static ImageView blockTab11;
-    public static ImageView blockTab12;
-    public static ImageView blockTab13;
-    public static ImageView blockTab14;
-    public static ImageView blockTab15;
-	public static ImageView blockTab16;
-    public static ImageView blockTab17;
-    public static ImageView blockTab18;
-    public static ImageView blockTab19;
-    public static ImageView blockTab20;
-    public static TextView tutorialBoxText;
-    public static LinearLayout tutorialBoxLinear;
-    public ImageView tutorialBoxIcon;
     public static TimerTask timerTask;
     public static Timer _timerTask = new Timer();
-    ObjectAnimator block1objX = new ObjectAnimator(); // Animators \/
-    ObjectAnimator block1objY = new ObjectAnimator();
-	ObjectAnimator block2objX = new ObjectAnimator();
-	ObjectAnimator block2objY = new ObjectAnimator();
-	ObjectAnimator block3objX = new ObjectAnimator();
-	ObjectAnimator block3objY = new ObjectAnimator();
-	ObjectAnimator block4objX = new ObjectAnimator();
-	ObjectAnimator block4objY = new ObjectAnimator();
-	ObjectAnimator block5objX = new ObjectAnimator();
-	ObjectAnimator block5objY = new ObjectAnimator();
-	ObjectAnimator block6objX = new ObjectAnimator();
-	ObjectAnimator block6objY = new ObjectAnimator();
-	ObjectAnimator block7objX = new ObjectAnimator();
-	ObjectAnimator block7objY = new ObjectAnimator();
-    ObjectAnimator block8objX = new ObjectAnimator();
-	ObjectAnimator block8objY = new ObjectAnimator();
-	ObjectAnimator block9objX = new ObjectAnimator();
-	ObjectAnimator block9objY = new ObjectAnimator();
-	ObjectAnimator block10objX = new ObjectAnimator();
-	ObjectAnimator block10objY = new ObjectAnimator();
-	ObjectAnimator block11objX = new ObjectAnimator();
-	ObjectAnimator block11objY = new ObjectAnimator();
-	ObjectAnimator block12objX = new ObjectAnimator();
-	ObjectAnimator block12objY = new ObjectAnimator();
-	ObjectAnimator block13objX = new ObjectAnimator();
-	ObjectAnimator block13objY = new ObjectAnimator();
-	ObjectAnimator block14objX = new ObjectAnimator();
-	ObjectAnimator block14objY = new ObjectAnimator();
-	ObjectAnimator block15objX = new ObjectAnimator();
-	ObjectAnimator block15objY = new ObjectAnimator();
-	ObjectAnimator block16objX = new ObjectAnimator();
-	ObjectAnimator block16objY = new ObjectAnimator();
-    ObjectAnimator block17objX = new ObjectAnimator();
-	ObjectAnimator block17objY = new ObjectAnimator();
-	ObjectAnimator block18objX = new ObjectAnimator();
-	ObjectAnimator block18objY = new ObjectAnimator();
-	ObjectAnimator block19objX = new ObjectAnimator();
-	ObjectAnimator block19objY = new ObjectAnimator();
-	ObjectAnimator block20objX = new ObjectAnimator();
-	ObjectAnimator block20objY = new ObjectAnimator();
-	ObjectAnimator itemTab1objX = new ObjectAnimator();
-	ObjectAnimator itemTab1objY = new ObjectAnimator();
-	ObjectAnimator itemTab2objX = new ObjectAnimator();
-	ObjectAnimator itemTab2objY = new ObjectAnimator();
-	ObjectAnimator itemTab3objX = new ObjectAnimator();
-	ObjectAnimator itemTab3objY = new ObjectAnimator();
-    ObjectAnimator jewelryBoxObjX = new ObjectAnimator();
-	ObjectAnimator jewelryBoxObjY = new ObjectAnimator();
-    ObjectAnimator gemBoxObjX = new ObjectAnimator();
-	ObjectAnimator gemBoxObjY = new ObjectAnimator();
-    public static ObjectAnimator tutorialBoxObjX = new ObjectAnimator();
-    public static ObjectAnimator tutorialBoxObjY = new ObjectAnimator();
-    public static ObjectAnimator tutorialBoxAlpha = new ObjectAnimator();
-    ObjectAnimator closeBoxObjX = new ObjectAnimator();
-    ObjectAnimator closeBoxObjY = new ObjectAnimator();
-    ObjectAnimator shopBoxObjX = new ObjectAnimator();
-    ObjectAnimator shopBoxObjY = new ObjectAnimator();
     public static String itemSelected;
     public static int tutorialLevel;
-    LinearLayout shopTab;
     
-    public static TimerTask timerTaskThr1;
-	public static Timer _timerTaskThr1  = new Timer();
-    public static View animObjDataThr1; // View for mwClick
-    public static float animFloats1Thr1; // Floats for mwClick 1-3 \/
-    public static float animFloats2Thr1;
-    public static float animFloats3Thr1;
-    public static ObjectAnimator animDataXThr1 = new ObjectAnimator(); // Animator for mwClick ScaleX, ScaleY
-    public static ObjectAnimator animDataYThr1 = new ObjectAnimator();
-    public static Boolean animRuleThr1 = true; // Bool for allowing or denying mwClick
-    public static ImageView animImageDataThr1;
+    public ObjectAnimator[] objectX = new ObjectAnimator[12];
+    public ObjectAnimator[] objectY = new ObjectAnimator[12];
     
-    public static TimerTask timerTaskThr2;
-	public static Timer _timerTaskThr2  = new Timer();
-    public static View animObjDataThr2; // View for mwClick
-    public static float animFloats1Thr2; // Floats for mwClick 1-3 \/
-    public static float animFloats2Thr2;
-    public static float animFloats3Thr2;
-    public static ObjectAnimator animDataXThr2 = new ObjectAnimator(); // Animator for mwClick ScaleX, ScaleY
-    public static ObjectAnimator animDataYThr2 = new ObjectAnimator();
-    public static Boolean animRuleThr2 = true; // Bool for allowing or denying mwClick
-    public static ImageView animImageDataThr2;
+    public static int jewelryBoxCoinData;
+    public static int jewelryBoxLevelData;
+    public static int gemBoxData;
     
-    public static TimerTask timerTaskThr3;
-	public static Timer _timerTaskThr3  = new Timer();
-    public static View animObjDataThr3; // View for mwClick
-    public static float animFloats1Thr3; // Floats for mwClick 1-3 \/
-    public static float animFloats2Thr3;
-    public static float animFloats3Thr3;
-    public static ObjectAnimator animDataXThr3 = new ObjectAnimator(); // Animator for mwClick ScaleX, ScaleY
-    public static ObjectAnimator animDataYThr3 = new ObjectAnimator();
-    public static Boolean animRuleThr3 = true; // Bool for allowing or denying mwClick
-    public static ImageView animImageDataThr3;
+    public static HomeBinding binding;
     
     // Data of inventory cells
     public static String itemTab1d;
@@ -168,19 +48,26 @@ public class HomeActivity extends AppCompatActivity {
     public static int gardenHouseLevel;
     public static int workshopLevel;
     
-    MwConsortium mwConsortium = new MwConsortium(); // MwConsortium - MW engine - initialize
     HouseMenu houseMenu = new HouseMenu(); // MwHouseMenu - menu for houses
     public UpgradeMenu upgMenu = new UpgradeMenu();
     ShopMenu shopMenu = new ShopMenu();
     Houses houses = new Houses();
     Inventory inventory = new Inventory();
     Tutorial tutorial = new Tutorial();
-
+    
+    MwConsortium2 m2 = new MwConsortium2();
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home);
+        binding = HomeBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         initialize(savedInstanceState);
+        
+        for(int i = 0; i<=12; i++){
+            objectX = new ObjectAnimator[i];
+            objectY = new ObjectAnimator[i];
+        }
     }
 
     @Override
@@ -206,9 +93,9 @@ public class HomeActivity extends AppCompatActivity {
         // Inventory display
         inventory.dataInventory();
         
-        jewelryBoxCoinCount.setText(Integer.toString(jewelryBoxCoinData));
-        jewelryBoxLevelCount.setText(Integer.toString(jewelryBoxLevelData));
-        gemBoxCount.setText(Integer.toString(gemBoxData));
+        binding.mwJewelryBoxCoinCount.setText(Integer.toString(jewelryBoxCoinData));
+        binding.mwJewelryBoxLevelCount.setText(Integer.toString(jewelryBoxLevelData));
+        binding.mwGemBoxCount.setText(Integer.toString(gemBoxData));
 
         timerTask =
                 new TimerTask() {
@@ -216,11 +103,11 @@ public class HomeActivity extends AppCompatActivity {
                     public void run() {
                         runOnUiThread(
                                 () -> {
-                                    jewelryBoxCoinCount.setText(
+                                    binding.mwJewelryBoxCoinCount.setText(
                                             Integer.toString(jewelryBoxCoinData));
-                                    jewelryBoxLevelCount.setText(
+                                    binding.mwJewelryBoxLevelCount.setText(
                                             Integer.toString(jewelryBoxLevelData));
-                                    gemBoxCount.setText(Integer.toString(gemBoxData));
+                                    binding.mwGemBoxCount.setText(Integer.toString(gemBoxData));
                                 });
                     }
                 };
@@ -235,24 +122,24 @@ public class HomeActivity extends AppCompatActivity {
         // Which cell of inventory selected
         itemSelected = playData.getString("itemSelected", "");
         if (itemSelected.equals("1")) {
-            itemTab3.setBackgroundResource(R.drawable.mw_anybox_layout);
-            itemTab1.setBackgroundResource(R.drawable.mw_selectedbox_layout);
-            itemTab2.setBackgroundResource(R.drawable.mw_anybox_layout);
+            binding.mwItemTab3.setBackgroundResource(R.drawable.mw_anybox_layout);
+            binding.mwItemTab1.setBackgroundResource(R.drawable.mw_selectedbox_layout);
+            binding.mwItemTab2.setBackgroundResource(R.drawable.mw_anybox_layout);
         } else {
             if (itemSelected.equals("2")) {
-                itemTab3.setBackgroundResource(R.drawable.mw_anybox_layout);
-                itemTab2.setBackgroundResource(R.drawable.mw_selectedbox_layout);
-                itemTab1.setBackgroundResource(R.drawable.mw_anybox_layout);
+                binding.mwItemTab3.setBackgroundResource(R.drawable.mw_anybox_layout);
+                binding.mwItemTab2.setBackgroundResource(R.drawable.mw_selectedbox_layout);
+                binding.mwItemTab1.setBackgroundResource(R.drawable.mw_anybox_layout);
             } else {
                 if (itemSelected.equals("3")) {
-                    itemTab1.setBackgroundResource(R.drawable.mw_anybox_layout);
-                    itemTab3.setBackgroundResource(R.drawable.mw_selectedbox_layout);
-                    itemTab2.setBackgroundResource(R.drawable.mw_anybox_layout);
+                    binding.mwItemTab1.setBackgroundResource(R.drawable.mw_anybox_layout);
+                    binding.mwItemTab3.setBackgroundResource(R.drawable.mw_selectedbox_layout);
+                    binding.mwItemTab2.setBackgroundResource(R.drawable.mw_anybox_layout);
                 } else {
                     itemSelected = "1";
-                    itemTab3.setBackgroundResource(R.drawable.mw_anybox_layout);
-                    itemTab1.setBackgroundResource(R.drawable.mw_selectedbox_layout);
-                    itemTab2.setBackgroundResource(R.drawable.mw_anybox_layout);
+                    binding.mwItemTab3.setBackgroundResource(R.drawable.mw_anybox_layout);
+                    binding.mwItemTab1.setBackgroundResource(R.drawable.mw_selectedbox_layout);
+                    binding.mwItemTab2.setBackgroundResource(R.drawable.mw_anybox_layout);
                 }
             }
         }
@@ -319,44 +206,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void initialize(Bundle savedInstanceState) {
-        // All objects id
-        gemBoxCount = findViewById(R.id.mwGemBoxCount); // TextView cup count
-        jewelryBoxLinear = findViewById(R.id.mwJewelryBoxLinear);
-        jewelryBoxCoinCount = findViewById(R.id.mwJewelryBoxCoinCount);
-        jewelryBoxLevelCount = findViewById(R.id.mwJewelryBoxLevelCount);
-        gemBoxLinear = findViewById(R.id.mwGemBoxLinear); // LinearLayout with cups
-        itemBoxLinear = findViewById(R.id.mwItemBoxLinear); // LinearLayout with item tabs
-        itemTab1 = findViewById(R.id.mwItemTab1); // LinearLayout item tab 1-3 \/
-        itemTab2 = findViewById(R.id.mwItemTab2);
-        itemTab3 = findViewById(R.id.mwItemTab3);
-        blockTab1 = findViewById(R.id.mwBlockTab1); // ImageView block tab 1-20 \/
-        blockTab2 = findViewById(R.id.mwBlockTab2);
-        blockTab3 = findViewById(R.id.mwBlockTab3);
-        blockTab4 = findViewById(R.id.mwBlockTab4);
-        blockTab5 = findViewById(R.id.mwBlockTab5);
-        blockTab6 = findViewById(R.id.mwBlockTab6);
-        blockTab7 = findViewById(R.id.mwBlockTab7);
-        blockTab8 = findViewById(R.id.mwBlockTab8);
-        blockTab9 = findViewById(R.id.mwBlockTab9);
-        blockTab10 = findViewById(R.id.mwBlockTab10);
-        blockTab11 = findViewById(R.id.mwBlockTab11);
-        blockTab12 = findViewById(R.id.mwBlockTab12);
-        blockTab13 = findViewById(R.id.mwBlockTab13);
-        blockTab14 = findViewById(R.id.mwBlockTab14);
-        blockTab15 = findViewById(R.id.mwBlockTab15);
-        blockTab16 = findViewById(R.id.mwBlockTab16);
-        blockTab17 = findViewById(R.id.mwBlockTab17);
-        blockTab18 = findViewById(R.id.mwBlockTab18);
-        blockTab19 = findViewById(R.id.mwBlockTab19);
-        blockTab20 = findViewById(R.id.mwBlockTab20);
-        itemId1 = findViewById(R.id.mwItemId1); // ImageView item tab 1-3 \/
-        itemId2 = findViewById(R.id.mwItemId2);
-        itemId3 = findViewById(R.id.mwItemId3);
-        tutorialBoxLinear = findViewById(R.id.mwTutorialBoxLinear); // Tutorial box
-        tutorialBoxText = findViewById(R.id.mwTutorialBoxText); // Tutorial text
-        tutorialBoxIcon = findViewById(R.id.mwTutorialBoxIcon); // Tutorial icon
-        closeBoxLinear = findViewById(R.id.mwCloseBoxLinear); // Close icon
-        shopTab = findViewById(R.id.mwShopTab);
         
         MenuActivity.mwActivity = "mwHome";
 
@@ -367,41 +216,41 @@ public class HomeActivity extends AppCompatActivity {
         
         // Shadows
         if (Build.VERSION.SDK_INT >= 21) {
-            closeBoxLinear.setElevation(8f);
+            binding.mwCloseBoxLinear.setElevation(8f);
         }
         if (Build.VERSION.SDK_INT >= 21) {
-            jewelryBoxLinear.setElevation(8f);
+            binding.mwJewelryBoxLinear.setElevation(8f);
         }
         if (Build.VERSION.SDK_INT >= 21) {
-            tutorialBoxLinear.setElevation(8f);
+            binding.mwTutorialBoxLinear.setElevation(8f);
         }
         if (Build.VERSION.SDK_INT >= 21) {
-            gemBoxLinear.setElevation(8f);
+            binding.mwGemBoxLinear.setElevation(8f);
         }
         if (Build.VERSION.SDK_INT >= 21) {
-            itemBoxLinear.setElevation(8f);
+            binding.mwItemBoxLinear.setElevation(8f);
         }
         if (Build.VERSION.SDK_INT >= 21) {
-            itemTab1.setElevation(8f);
+            binding.mwItemTab1.setElevation(8f);
         }
         if (Build.VERSION.SDK_INT >= 21) {
-            itemTab2.setElevation(8f);
+            binding.mwItemTab2.setElevation(8f);
         }
         if (Build.VERSION.SDK_INT >= 21) {
-            itemTab3.setElevation(8f);
+            binding.mwItemTab3.setElevation(8f);
         }
         if (Build.VERSION.SDK_INT >= 21) {
-            shopTab.setElevation(8f);
+            binding.mwShopTab.setElevation(8f);
         }
 
         // Fonts
-        jewelryBoxCoinCount.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
-        jewelryBoxLevelCount.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
-        gemBoxCount.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
-        tutorialBoxText.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
+        binding.mwJewelryBoxCoinCount.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
+        binding.mwJewelryBoxLevelCount.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
+        binding.mwGemBoxCount.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
+        binding.mwTutorialBoxText.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
 
         // Onclick  functions
-        closeBoxLinear.setOnClickListener(
+        binding.mwCloseBoxLinear.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -409,32 +258,30 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 });
 
-        jewelryBoxLinear.setOnClickListener(
+        binding.mwJewelryBoxLinear.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mwConsortium.mwClick();
-                        mwConsortium.mwThreads(jewelryBoxLinear, jewelryBoxObjX, jewelryBoxObjY, 1.1f, 0.9f, 1.0f);
+                        m2.mwClick(binding.mwJewelryBoxLinear, objectX[1], objectY[1], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
                     }
                 });
-        gemBoxLinear.setOnClickListener(
+        binding.mwGemBoxLinear.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View viww) {
-                        mwConsortium.mwClick();
-                        mwConsortium.mwThreads(gemBoxLinear, gemBoxObjX, gemBoxObjY, 1.1f, 0.9f, 1.0f);
+                        m2.mwClick(binding.mwGemBoxLinear, objectX[2], objectY[2], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
                     }
                 });
-        tutorialBoxLinear.setOnClickListener(
+        binding.mwTutorialBoxLinear.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         tutorialLevel += 1;
                         tutorial.tutorialData();
-                        mwConsortium.mwClick();
-                        mwConsortium.mwThreads(tutorialBoxLinear, tutorialBoxObjX, tutorialBoxObjY, 1.1f, 0.9f, 1.0f);
+                        m2.mwClick(binding.mwTutorialBoxLinear, objectX[3], objectY[3], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
                     }
                 });
+        /*
         // Blocks
         blockTab1.setOnClickListener(
                 new View.OnClickListener() {
@@ -723,6 +570,7 @@ public class HomeActivity extends AppCompatActivity {
                         mwConsortium.mwClick();
                         mwConsortium.mwThreads(itemTab3, itemTab3objX, itemTab3objY, 1.1f, 0.9f, 1.0f);
                     }
-                });
+                }); 
+        */
     }
 }

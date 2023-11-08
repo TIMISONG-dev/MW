@@ -67,7 +67,6 @@ public class HouseMenu {
         
         Houses houses = new Houses();
         Inventory inventory = new Inventory();
-        MwConsortium mwConsortium = new MwConsortium();
         HomeActivity home = new HomeActivity();
         
         String houseLevelText = "LvL " + HomeActivity.coinHouseLevel;
@@ -109,9 +108,9 @@ public class HouseMenu {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mwConsortium.mwThreads(
-                                houseTab1, houseTab1objX, houseTab1objY, 1.1f, 0.9f, 1.0f);
-                        mwConsortium.mwClick();
+                       // mwConsortium.mwThreads(
+                           //     houseTab1, houseTab1objX, houseTab1objY, 1.1f, 0.9f, 1.0f);
+                    //    mwConsortium.mwClick();
                         // ClickEngine (beta) for 1 level of coinhouse
                         if (HomeActivity.coinHouseLevel == 1) {
                             if (clickCount <= 14) {
@@ -131,8 +130,8 @@ public class HouseMenu {
         houseTab2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                mwConsortium.mwThreads(houseTab2, houseTab2objX, houseTab2objY, 1.1f, 0.9f, 1.0f);
-                mwConsortium.mwClick();
+                // mwConsortium.mwThreads(houseTab2, houseTab2objX, houseTab2objY, 1.1f, 0.9f, 1.0f);
+                // mwConsortium.mwClick();
                     
                     for(int i = 1; i <= 20; i++){
                         if(HomeActivity.blocksTab[i].equals("Workshop")){

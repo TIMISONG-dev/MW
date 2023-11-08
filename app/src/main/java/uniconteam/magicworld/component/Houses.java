@@ -7,10 +7,14 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import uniconteam.magicworld.databinding.HomeBinding;
 
 public class Houses {
+    
+    
 
     public void dataHouses() {
+        
         // List of houses
         Map<String, Integer> itemIconMap = new HashMap<>();
         itemIconMap.put("CoinHouse", R.drawable.magicworld_house_coinhouse);
@@ -20,26 +24,26 @@ public class Houses {
         itemIconMap.put("", R.drawable.magicworld_block_grass);
 
         List<ImageView> blockImageViews = List.of(
-                HomeActivity.blockTab1,
-                HomeActivity.blockTab2,
-                HomeActivity.blockTab3,
-                HomeActivity.blockTab4,
-                HomeActivity.blockTab5,
-                HomeActivity.blockTab6,
-                HomeActivity.blockTab7,
-                HomeActivity.blockTab8,
-                HomeActivity.blockTab9,
-                HomeActivity.blockTab10,
-                HomeActivity.blockTab11,
-                HomeActivity.blockTab12,
-                HomeActivity.blockTab13,
-                HomeActivity.blockTab14,
-                HomeActivity.blockTab15,
-                HomeActivity.blockTab16,
-                HomeActivity.blockTab17,
-                HomeActivity.blockTab18,
-                HomeActivity.blockTab19,
-                HomeActivity.blockTab20
+                HomeActivity.binding.mwBlockTab1,
+                HomeActivity.binding.mwBlockTab2,
+                HomeActivity.binding.mwBlockTab3,
+                HomeActivity.binding.mwBlockTab4,
+                HomeActivity.binding.mwBlockTab5,
+                HomeActivity.binding.mwBlockTab6,
+                HomeActivity.binding.mwBlockTab7,
+                HomeActivity.binding.mwBlockTab8,
+                HomeActivity.binding.mwBlockTab9,
+                HomeActivity.binding.mwBlockTab10,
+                HomeActivity.binding.mwBlockTab11,
+                HomeActivity.binding.mwBlockTab12,
+                HomeActivity.binding.mwBlockTab13,
+                HomeActivity.binding.mwBlockTab14,
+                HomeActivity.binding.mwBlockTab15,
+                HomeActivity.binding.mwBlockTab16,
+                HomeActivity.binding.mwBlockTab17,
+                HomeActivity.binding.mwBlockTab18,
+                HomeActivity.binding.mwBlockTab19,
+                HomeActivity.binding.mwBlockTab20
         );
 
         for (int i = 1; i <= 20; i++) {

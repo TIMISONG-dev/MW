@@ -36,4 +36,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.android.material:material:1.6.1'
+    implementation 'com.google.dagger:dagger-android:2.48.1'
+    implementation 'com.google.dagger:dagger-android-support:2.48.1' // if you use the support libraries
+    annotationProcessor 'com.google.dagger:dagger-android-processor:2.48.1'
 }

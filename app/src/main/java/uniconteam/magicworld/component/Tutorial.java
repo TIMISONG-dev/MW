@@ -7,8 +7,6 @@ import uniconteam.magicworld.HomeActivity;
 
 public class Tutorial extends AppCompatActivity{
     
-    MwConsortium mwConsortium = new MwConsortium();
-    
     TimerTask timerTask;
     Timer _timerTask = new Timer();
     
@@ -33,7 +31,7 @@ public class Tutorial extends AppCompatActivity{
         _timerTask.scheduleAtFixedRate(timerTask, 250, 250); */
         }
         if(HomeActivity.tutorialLevel == 2){
-            HomeActivity.tutorialBoxText.setText("In your item you have coinhouse — put house on block");
+            HomeActivity.binding.mwTutorialBoxText.setText("In your item you have coinhouse — put house on block");
         }
     }
 }
