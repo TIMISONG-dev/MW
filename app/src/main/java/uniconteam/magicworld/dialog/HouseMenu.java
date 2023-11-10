@@ -1,4 +1,4 @@
-package uniconteam.magicworld;
+package uniconteam.magicworld.dialog;
 
 import android.animation.ObjectAnimator;
 import android.app.Activity;
@@ -13,141 +13,122 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import uniconteam.magicworld.HomeActivity;
+import java.util.Timer;
+import java.util.TimerTask;
+import uniconteam.magicworld.R;
+import uniconteam.magicworld.activity.HomeActivity;
+import uniconteam.magicworld.component.Houses;
+import uniconteam.magicworld.component.Inventory;
+import uniconteam.magicworld.databinding.HousemenuBinding;
+import uniconteam.magicworld.engine.MwConsortium;
 
 public class HouseMenu {
     
-    LinearLayout houseTab1;
-    LinearLayout houseTab2;
-    LinearLayout houseTab3;
-    HorizontalScrollView scrollTabs;
-    ImageView closeIcon;
-    ImageView houseIcon1;
-    ImageView houseIcon2;
-    ImageView houseIcon3;
     public TextView menuHint;
     public TextView houseLevel;
-    TextView houseFunc1;
     
     int clickCount = 0;
+    
+    HousemenuBinding binding;
+    MwConsortium mwc = new MwConsortium();
+    
+    TimerTask timerTask;
+    Timer _timerTask = new Timer();
+    
+    ObjectAnimator[] objX = new ObjectAnimator[3];
+    ObjectAnimator[] objY = new ObjectAnimator[3];
         
     public void showDialog(Activity activity, String msg){
         
+        for(int i = 0; i < 3; i++){
+            objX[i] = new ObjectAnimator();
+            objY[i] = new ObjectAnimator();
+        }
+        
         final Dialog dialog = new Dialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.housemenu);
+        binding = HousemenuBinding.inflate(dialog.getLayoutInflater());
+        dialog.setContentView(binding.getRoot());
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         TextView text = (TextView) dialog.findViewById(R.id.mwHouseId);
         text.setText(msg);
 
         dialog.show();
-        
-        houseTab1 = dialog.findViewById(R.id.mwHouseTab1);
-        houseTab2 = dialog.findViewById(R.id.mwHouseTab2);
-        houseTab3 = dialog.findViewById(R.id.mwHouseTab3);
-        closeIcon = dialog.findViewById(R.id.mwCloseIcon);
-        scrollTabs = dialog.findViewById(R.id.mwScrollTabs);
-        menuHint = dialog.findViewById(R.id.mwMenuHint);
-        houseLevel = dialog.findViewById(R.id.mwHouseLevel);
-        houseIcon1 = dialog.findViewById(R.id.mwHouseIcon1);
-        houseIcon2 = dialog.findViewById(R.id.mwHouseIcon2);
-        houseIcon3 = dialog.findViewById(R.id.mwHouseIcon3);
-        houseFunc1 = dialog.findViewById(R.id.mwHouseFunc1);
-        
-        if(Build.VERSION.SDK_INT >= 21) { houseTab1.setElevation(8f); }
-        if(Build.VERSION.SDK_INT >= 21) { houseTab2.setElevation(8f); }
-        if(Build.VERSION.SDK_INT >= 21) { houseTab3.setElevation(8f); }
-        scrollTabs.setHorizontalScrollBarEnabled(false);
-        
-        ObjectAnimator houseTab1objX = new ObjectAnimator();
-        ObjectAnimator houseTab1objY = new ObjectAnimator();
-        ObjectAnimator houseTab2objX = new ObjectAnimator();
-        ObjectAnimator houseTab2objY = new ObjectAnimator();
+
+        binding.mwHouseTab1.setElevation(8f);
+        binding.mwHouseTab2.setElevation(8f);
+        binding.mwHouseTab3.setElevation(8f);
+        binding.mwScrollTabs.setHorizontalScrollBarEnabled(false);
         
         Houses houses = new Houses();
         Inventory inventory = new Inventory();
         HomeActivity home = new HomeActivity();
         
         String houseLevelText = "LvL " + HomeActivity.coinHouseLevel;
-        houseLevel.setText(houseLevelText);
+        binding.mwHouseLevel.setText(houseLevelText);
         
         // Functions of houses
         if(msg.equals("CoinHouse")){
-            houseIcon1.setImageResource(R.drawable.magicworld_opt_coinhouse_getcoin);
-            houseIcon2.setImageResource(R.drawable.magicworld_opt_coinhouse_getupgrade);
-            houseIcon3.setImageResource(R.drawable.magicworld_opt_coinhouse_getdestroy);
-            houseFunc1.setText("Get coins");
+            binding.mwHouseIcon1.setImageResource(R.drawable.magicworld_opt_coinhouse_getcoin);
+            binding.mwHouseIcon2.setImageResource(R.drawable.magicworld_opt_coinhouse_getupgrade);
+            binding.mwHouseIcon3.setImageResource(R.drawable.magicworld_opt_coinhouse_getdestroy);
+            binding.mwHouseFunc1.setText("Get coins");
         }
         if(msg.equals("GardenHouse")){
-            houseIcon1.setImageResource(R.drawable.magicworld_opt_garden_getfunction);
-            houseIcon2.setImageResource(R.drawable.magicworld_opt_garden_getupgrade);
-            houseIcon3.setImageResource(R.drawable.magicworld_opt_garden_getdestroy);
-            houseFunc1.setText("Come in");
+            binding.mwHouseIcon1.setImageResource(R.drawable.magicworld_opt_garden_getfunction);
+            binding.mwHouseIcon2.setImageResource(R.drawable.magicworld_opt_garden_getupgrade);
+            binding.mwHouseIcon3.setImageResource(R.drawable.magicworld_opt_garden_getdestroy);
+            binding.mwHouseFunc1.setText("Come in");
         }
         if(msg.equals("Workshop")){
-            houseIcon1.setImageResource(R.drawable.magicworld_opt_workshop_getfunction);
-            houseIcon2.setImageResource(R.drawable.magicworld_opt_workshop_getupgrade);
-            houseIcon3.setImageResource(R.drawable.magicworld_opt_workshop_getdestroy);
-            houseFunc1.setText("New Work");
+            binding.mwHouseIcon1.setImageResource(R.drawable.magicworld_opt_workshop_getfunction);
+            binding.mwHouseIcon2.setImageResource(R.drawable.magicworld_opt_workshop_getupgrade);
+            binding.mwHouseIcon3.setImageResource(R.drawable.magicworld_opt_workshop_getdestroy);
+            binding.mwHouseFunc1.setText("New Work");
         }
         if(msg.equals("Mine")){
-            houseIcon1.setImageResource(R.drawable.magicworld_opt_mine_getfunction);
-            houseIcon2.setImageResource(R.drawable.magicworld_opt_mine_getupgrade);
-            houseIcon3.setImageResource(R.drawable.magicworld_opt_mine_getdestroy);
-            houseFunc1.setText("Let's go");
+            binding.mwHouseIcon1.setImageResource(R.drawable.magicworld_opt_mine_getfunction);
+            binding.mwHouseIcon2.setImageResource(R.drawable.magicworld_opt_mine_getupgrade);
+            binding.mwHouseIcon3.setImageResource(R.drawable.magicworld_opt_mine_getdestroy);
+            binding.mwHouseFunc1.setText("Let's go");
         }
         
-        closeIcon.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                dialog.dismiss();
-            }
-        });
-        houseTab1.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                       // mwConsortium.mwThreads(
-                           //     houseTab1, houseTab1objX, houseTab1objY, 1.1f, 0.9f, 1.0f);
-                    //    mwConsortium.mwClick();
-                        // ClickEngine (beta) for 1 level of coinhouse
-                        if (HomeActivity.coinHouseLevel == 1) {
-                            if (clickCount <= 14) {
-                                HomeActivity.jewelryBoxCoinData++;
-                            } else {
-                                if (clickCount <= 20) {
-                                    HomeActivity.jewelryBoxCoinData =
-                                            HomeActivity.jewelryBoxCoinData + 12;
-                                } else {
-                                    clickCount = 0;
-                                }
-                            }
-                        }
-                        clickCount++;
-                    }
-                });
-        houseTab2.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                // mwConsortium.mwThreads(houseTab2, houseTab2objX, houseTab2objY, 1.1f, 0.9f, 1.0f);
-                // mwConsortium.mwClick();
-                    
-                    for(int i = 1; i <= 20; i++){
-                        if(HomeActivity.blocksTab[i].equals("Workshop")){
-                            if(i == 20){
-                                home.upgMenu.showUpgradeMenu(activity);
-                            }
+        binding.mwCloseIcon.setOnClickListener(view -> dialog.dismiss());
+        binding.mwHouseTab1.setOnClickListener(view -> {
+                     mwc.mwClick(binding.mwHouseTab1, objX[1], objY[1], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
+                    // ClickEngine (beta) for 1 level of coinhouse
+                    if (HomeActivity.coinHouseLevel == 1) {
+                        if (clickCount <= 14) {
+                            HomeActivity.jewelryBoxCoinData++;
                         } else {
-                            if(i == 20){
-                                Toast toast = Toast.makeText(activity, "you haven't workshop", Toast.LENGTH_SHORT);
-                                toast.show();
+                            if (clickCount <= 20) {
+                                HomeActivity.jewelryBoxCoinData =
+                                        HomeActivity.jewelryBoxCoinData + 12;
+                            } else {
+                                clickCount = 0;
                             }
                         }
                     }
-            }    
+                    clickCount++;
+                });
+        binding.mwHouseTab2.setOnClickListener(view -> {
+                mwc.mwClick(binding.mwHouseTab2, objX[2], objY[2], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
+
+                for(int i = 1; i <= 20; i++){
+                    if(HomeActivity.blocksTab[i].equals("Workshop")){
+                        if(i == 20){
+                            home.upgMenu.showUpgradeMenu(activity);
+                        }
+                    } else {
+                        if(i == 20){
+                            Toast toast = Toast.makeText(activity, "you haven't workshop", Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                    }
+                }
         });
-        houseTab3.setOnClickListener(new View.OnClickListener(){
+        binding.mwHouseTab3.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
                 for(int i = 1; i <= 20; i++){

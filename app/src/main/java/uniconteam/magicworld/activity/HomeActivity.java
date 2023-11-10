@@ -1,4 +1,4 @@
-package uniconteam.magicworld;
+package uniconteam.magicworld.activity;
 
 import android.animation.ObjectAnimator;
 import android.app.Activity;
@@ -17,18 +17,26 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import kotlin.jvm.Throws;
+import uniconteam.magicworld.R;
+import uniconteam.magicworld.component.Houses;
+import uniconteam.magicworld.component.Inventory;
+import uniconteam.magicworld.component.Tutorial;
 import uniconteam.magicworld.databinding.HomeBinding;
-import uniconteam.magicworld.engine.MwConsortium2;
+import uniconteam.magicworld.dialog.HouseMenu;
+import uniconteam.magicworld.dialog.ShopMenu;
+import uniconteam.magicworld.dialog.UpgradeMenu;
+import uniconteam.magicworld.engine.MwConsortium;
 
 public class HomeActivity extends AppCompatActivity {
-    
     public static TimerTask timerTask;
     public static Timer _timerTask = new Timer();
     public static String itemSelected;
     public static int tutorialLevel;
     
-    public ObjectAnimator[] objectX = new ObjectAnimator[12];
-    public ObjectAnimator[] objectY = new ObjectAnimator[12];
+    public ObjectAnimator[] objectX = new ObjectAnimator[28];
+    public ObjectAnimator[] objectY = new ObjectAnimator[28];
     
     public static int jewelryBoxCoinData;
     public static int jewelryBoxLevelData;
@@ -42,7 +50,7 @@ public class HomeActivity extends AppCompatActivity {
     public static String itemTab3d;
     
     // Data for 20 blocks
-    public static String[] blocksTab = new String[21];
+    public static String[] blocksTab = new String[27];
     
     public static int coinHouseLevel;
     public static int gardenHouseLevel;
@@ -55,7 +63,7 @@ public class HomeActivity extends AppCompatActivity {
     Inventory inventory = new Inventory();
     Tutorial tutorial = new Tutorial();
     
-    MwConsortium2 m2 = new MwConsortium2();
+    MwConsortium mwc = new MwConsortium();
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +71,10 @@ public class HomeActivity extends AppCompatActivity {
         binding = HomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         initialize(savedInstanceState);
-        
-        for(int i = 0; i<=12; i++){
-            objectX = new ObjectAnimator[i];
-            objectY = new ObjectAnimator[i];
+
+        for(int i = 0; i < 28; i++){
+            objectX[i] = new ObjectAnimator();
+            objectY[i] = new ObjectAnimator();
         }
     }
 
@@ -121,27 +129,22 @@ public class HomeActivity extends AppCompatActivity {
         
         // Which cell of inventory selected
         itemSelected = playData.getString("itemSelected", "");
-        if (itemSelected.equals("1")) {
-            binding.mwItemTab3.setBackgroundResource(R.drawable.mw_anybox_layout);
-            binding.mwItemTab1.setBackgroundResource(R.drawable.mw_selectedbox_layout);
-            binding.mwItemTab2.setBackgroundResource(R.drawable.mw_anybox_layout);
-        } else {
-            if (itemSelected.equals("2")) {
+        switch(itemSelected) {
+            case "1":
+                binding.mwItemTab3.setBackgroundResource(R.drawable.mw_anybox_layout);
+                binding.mwItemTab1.setBackgroundResource(R.drawable.mw_selectedbox_layout);
+                binding.mwItemTab2.setBackgroundResource(R.drawable.mw_anybox_layout);
+                break;
+            case "2":
                 binding.mwItemTab3.setBackgroundResource(R.drawable.mw_anybox_layout);
                 binding.mwItemTab2.setBackgroundResource(R.drawable.mw_selectedbox_layout);
                 binding.mwItemTab1.setBackgroundResource(R.drawable.mw_anybox_layout);
-            } else {
-                if (itemSelected.equals("3")) {
-                    binding.mwItemTab1.setBackgroundResource(R.drawable.mw_anybox_layout);
-                    binding.mwItemTab3.setBackgroundResource(R.drawable.mw_selectedbox_layout);
-                    binding.mwItemTab2.setBackgroundResource(R.drawable.mw_anybox_layout);
-                } else {
-                    itemSelected = "1";
-                    binding.mwItemTab3.setBackgroundResource(R.drawable.mw_anybox_layout);
-                    binding.mwItemTab1.setBackgroundResource(R.drawable.mw_selectedbox_layout);
-                    binding.mwItemTab2.setBackgroundResource(R.drawable.mw_anybox_layout);
-                }
-            }
+                break;
+            case "3":
+                binding.mwItemTab1.setBackgroundResource(R.drawable.mw_anybox_layout);
+                binding.mwItemTab3.setBackgroundResource(R.drawable.mw_selectedbox_layout);
+                binding.mwItemTab2.setBackgroundResource(R.drawable.mw_anybox_layout);
+                break;
         }
         
         // Tutorial of MW
@@ -162,15 +165,15 @@ public class HomeActivity extends AppCompatActivity {
         // Save data
         SharedPreferences playData = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         SharedPreferences.Editor editData = playData.edit();
-        editData.putString("itemSelected", itemSelected.toString());
-        if(itemTab1d == ""){
-            editData.putString("itemTab1d", itemTab1d.toString());
+        editData.putString("itemSelected", itemSelected);
+        if(itemTab1d.isEmpty()){
+            editData.putString("itemTab1d", itemTab1d);
         }
-        if(itemTab2d == ""){
-            editData.putString("itemTab2d", itemTab2d.toString());
+        if(itemTab2d.isEmpty()){
+            editData.putString("itemTab2d", itemTab2d);
         }
-        if(itemTab3d == ""){
-            editData.putString("itemTab3d", itemTab3d.toString());
+        if(itemTab3d.isEmpty()){
+            editData.putString("itemTab3d", itemTab3d);
         }
         for (int i = 1; i <= 20; i++) {
             String blocks = "blockTab" + i + "d";
@@ -250,273 +253,231 @@ public class HomeActivity extends AppCompatActivity {
         binding.mwTutorialBoxText.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/magicworld_google_sans_regular.ttf"), Typeface.NORMAL);
 
         // Onclick  functions
-        binding.mwCloseBoxLinear.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                            finish();
-                    }
-                });
+        binding.mwCloseBoxLinear.setOnClickListener(view -> finish());
 
         binding.mwJewelryBoxLinear.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        m2.mwClick(binding.mwJewelryBoxLinear, objectX[1], objectY[1], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
-                    }
-                });
+                view -> mwc.mwClick(binding.mwJewelryBoxLinear, objectX[1], objectY[1], 1.1f, 0.9f, 1.0f, _timerTask, timerTask));
         binding.mwGemBoxLinear.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View viww) {
-                        m2.mwClick(binding.mwGemBoxLinear, objectX[2], objectY[2], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
-                    }
-                });
+                view -> mwc.mwClick(binding.mwGemBoxLinear, objectX[2], objectY[2], 1.1f, 0.9f, 1.0f, _timerTask, timerTask));
         binding.mwTutorialBoxLinear.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        tutorialLevel += 1;
-                        tutorial.tutorialData();
-                        m2.mwClick(binding.mwTutorialBoxLinear, objectX[3], objectY[3], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
-                    }
+                view -> {
+                    tutorialLevel += 1;
+                    tutorial.tutorialData();
+                    mwc.mwClick(binding.mwTutorialBoxLinear, objectX[3], objectY[3], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
                 });
-        /*
+        
         // Blocks
-        blockTab1.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        mwConsortium.mwClick();
-                        mwConsortium.mwThreads(blockTab1, block1objX, block1objY, 1.1f, 0.9f, 1.0f);
+        binding.mwBlockTab1.setOnClickListener(
+            view -> {
+                        mwc.mwClick(binding.mwBlockTab1, objectX[4], objectY[4], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
                         if (blocksTab[1] != "") {
                             houseMenu.showDialog(HomeActivity.this, blocksTab[1]);
                         }
                         setUpHouse(1);
-                    }
-                });
-        blockTab2.setOnClickListener(
+            });
+        binding.mwBlockTab2.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mwConsortium.mwClick();
-                        mwConsortium.mwThreads(blockTab2, block2objX, block2objY, 1.1f, 0.9f, 1.0f);
+                        mwc.mwClick(view, objectX[5], objectY[5], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
                         if (blocksTab[2] != "") {
                                 houseMenu.showDialog(HomeActivity.this,blocksTab[2]);
                         }
                         setUpHouse(2);
                     }
                 });
-        blockTab3.setOnClickListener(
+        binding.mwBlockTab3.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mwConsortium.mwClick();
-                        mwConsortium.mwThreads(blockTab3, block3objX, block3objY, 1.1f, 0.9f, 1.0f);
+                        mwc.mwClick(binding.mwBlockTab3, objectX[6], objectY[6], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
                         if (blocksTab[3] != "") {
                                 houseMenu.showDialog(HomeActivity.this,blocksTab[3]);
                         }
                         setUpHouse(3);
                     }
                 });
-        blockTab4.setOnClickListener(
+        binding.mwBlockTab4.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mwConsortium.mwClick();
-                        mwConsortium.mwThreads(blockTab4, block4objX, block4objY, 1.1f, 0.9f, 1.0f);
+                        mwc.mwClick(binding.mwBlockTab4, objectX[7], objectY[7], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
                         if (blocksTab[4] != "") {
                                 houseMenu.showDialog(HomeActivity.this,blocksTab[4]);
                         }
                         setUpHouse(4);
                     }
                 });
-        blockTab5.setOnClickListener(
+        binding.mwBlockTab5.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mwConsortium.mwClick();
-                        mwConsortium.mwThreads(blockTab5, block5objX, block5objY, 1.1f, 0.9f, 1.0f);
+                        mwc.mwClick(binding.mwBlockTab5, objectX[8], objectY[8], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
                         if (blocksTab[5] != "") {
                                 houseMenu.showDialog(HomeActivity.this,blocksTab[5]);
                         }
                         setUpHouse(5);
                     }
                 });
-        blockTab6.setOnClickListener(
+        binding.mwBlockTab6.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mwConsortium.mwClick();
-                        mwConsortium.mwThreads(blockTab6, block6objX, block6objY, 1.1f, 0.9f, 1.0f);
+                        mwc.mwClick(binding.mwBlockTab6, objectX[9], objectY[9], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
                         if (blocksTab[6] != "") {
                                 houseMenu.showDialog(HomeActivity.this,blocksTab[6]);
                         }
                         setUpHouse(6);
                     }
                 });
-        blockTab7.setOnClickListener(
+        binding.mwBlockTab7.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mwConsortium.mwClick();
-                        mwConsortium.mwThreads(blockTab7, block7objX, block7objY, 1.1f, 0.9f, 1.0f);
+                        mwc.mwClick(binding.mwBlockTab7, objectX[10], objectY[10], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
                         if (blocksTab[7] != "") {
                                 houseMenu.showDialog(HomeActivity.this,blocksTab[7]);
                         }
                         setUpHouse(7);
                     }
                 });
-        blockTab8.setOnClickListener(
+        binding.mwBlockTab8.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mwConsortium.mwClick();
-                        mwConsortium.mwThreads(blockTab8, block8objX, block8objY, 1.1f, 0.9f, 1.0f);
+                        mwc.mwClick(binding.mwBlockTab8, objectX[11], objectY[11], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
                         if (blocksTab[8] != "") {
                                 houseMenu.showDialog(HomeActivity.this,blocksTab[8]);
                         }
                         setUpHouse(8);
                     }
                 });
-        blockTab9.setOnClickListener(
+        binding.mwBlockTab9.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mwConsortium.mwClick();
-                        mwConsortium.mwThreads(blockTab9, block9objX, block9objY, 1.1f, 0.9f, 1.0f);
+                        mwc.mwClick(binding.mwBlockTab9, objectX[12], objectY[12], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
                         if (blocksTab[9] != "") {
                                 houseMenu.showDialog(HomeActivity.this,blocksTab[9]);
                         }
                         setUpHouse(9);
                     }
                 });
-        blockTab10.setOnClickListener(
+        binding.mwBlockTab10.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mwConsortium.mwClick();
-                        mwConsortium.mwThreads(blockTab10, block10objX, block10objY, 1.1f, 0.9f, 1.0f);
+                        mwc.mwClick(binding.mwBlockTab10, objectX[13], objectY[13], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
                         if (blocksTab[10] != "") {
                                 houseMenu.showDialog(HomeActivity.this,blocksTab[10]);
                         }
                         setUpHouse(10);
                     }
                 });
-        blockTab11.setOnClickListener(
+        binding.mwBlockTab11.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mwConsortium.mwClick();
-                        mwConsortium.mwThreads(blockTab11, block11objX, block11objY, 1.1f, 0.9f, 1.0f);
+                        mwc.mwClick(binding.mwBlockTab11, objectX[14], objectY[14], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
                         if (blocksTab[11] != "") {
                                 houseMenu.showDialog(HomeActivity.this,blocksTab[11]);
                         }
                         setUpHouse(11);
                     }
                 });
-        blockTab12.setOnClickListener(
+        binding.mwBlockTab12.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mwConsortium.mwClick();
-                        mwConsortium.mwThreads(blockTab12, block12objX, block12objY, 1.1f, 0.9f, 1.0f);
+                        mwc.mwClick(binding.mwBlockTab12, objectX[15], objectY[15], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
                         if (blocksTab[12] != "") {
                                 houseMenu.showDialog(HomeActivity.this,blocksTab[12]);
                         }
                         setUpHouse(12);
                     }
                 });
-        blockTab13.setOnClickListener(
+        binding.mwBlockTab13.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mwConsortium.mwClick();
-                        mwConsortium.mwThreads(blockTab13, block13objX, block13objY, 1.1f, 0.9f, 1.0f);
+                        mwc.mwClick(binding.mwBlockTab13, objectX[16], objectY[16], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
                         if (blocksTab[13] != "") {
                                 houseMenu.showDialog(HomeActivity.this,blocksTab[13]);
                         }
                         setUpHouse(13);
                     }
                 });
-        blockTab14.setOnClickListener(
+        binding.mwBlockTab14.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mwConsortium.mwClick();
-                        mwConsortium.mwThreads(blockTab14, block14objX, block14objY, 1.1f, 0.9f, 1.0f);
+                        mwc.mwClick(binding.mwBlockTab14, objectX[17], objectY[17], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
                         if (blocksTab[14] != "") {
                                 houseMenu.showDialog(HomeActivity.this,blocksTab[14]);
                         }
                         setUpHouse(14);
                     }
                 });
-        blockTab15.setOnClickListener(
+        binding.mwBlockTab15.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mwConsortium.mwClick();
-                        mwConsortium.mwThreads(blockTab15, block15objX, block15objY, 1.1f, 0.9f, 1.0f);
+                        mwc.mwClick(binding.mwBlockTab15, objectX[18], objectY[18], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
                         if (blocksTab[15] != "") {
                                 houseMenu.showDialog(HomeActivity.this,blocksTab[15]);
                         }
                         setUpHouse(15);
                     }
                 });
-        blockTab16.setOnClickListener(
+        binding.mwBlockTab16.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mwConsortium.mwClick();
-                        mwConsortium.mwThreads(blockTab16, block16objX, block16objY, 1.1f, 0.9f, 1.0f);
+                        mwc.mwClick(binding.mwBlockTab16, objectX[19], objectY[19], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
                         if (blocksTab[16] != "") {
                                 houseMenu.showDialog(HomeActivity.this,blocksTab[16]);
                         }
                         setUpHouse(16);
                     }
                 });
-        blockTab17.setOnClickListener(
+        binding.mwBlockTab17.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mwConsortium.mwClick();
-                        mwConsortium.mwThreads(blockTab17, block17objX, block17objY, 1.1f, 0.9f, 1.0f);
+                        mwc.mwClick(binding.mwBlockTab17, objectX[20], objectY[20], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
                         if (blocksTab[17] != "") {
                                 houseMenu.showDialog(HomeActivity.this,blocksTab[17]);
                         }
                         setUpHouse(17);
                     }
                 });
-        blockTab18.setOnClickListener(
+        binding.mwBlockTab18.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mwConsortium.mwClick();
-                        mwConsortium.mwThreads(blockTab18, block18objX, block18objY, 1.1f, 0.9f, 1.0f);
+                        mwc.mwClick(binding.mwBlockTab18, objectX[21], objectY[21], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
                         if (blocksTab[18] != "") {
                                 houseMenu.showDialog(HomeActivity.this,blocksTab[18]);
                         }
                         setUpHouse(18);
                     }
                 });
-        blockTab19.setOnClickListener(
+        binding.mwBlockTab19.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mwConsortium.mwClick();
-                        mwConsortium.mwThreads(blockTab19, block19objX, block19objY, 1.1f, 0.9f, 1.0f);
+                        mwc.mwClick(binding.mwBlockTab19, objectX[22], objectY[22], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
                         if (blocksTab[19] != "") {
                                 houseMenu.showDialog(HomeActivity.this,blocksTab[19]);
                         }
                         setUpHouse(19);
                     }
                 });
-        blockTab20.setOnClickListener(
+        binding.mwBlockTab20.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mwConsortium.mwClick();
-                        mwConsortium.mwThreads(blockTab20, block20objX, block20objY, 1.1f, 0.9f, 1.0f);
+                        mwc.mwClick(binding.mwBlockTab20, objectX[23], objectY[23], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
                         if (blocksTab[20] != "") {
                                 houseMenu.showDialog(HomeActivity.this,blocksTab[20]);
                         }
@@ -524,53 +485,48 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 });
         // Shop
-        shopTab.setOnClickListener(
+        binding.mwShopTab.setOnClickListener(
             new View.OnClickListener(){
                 @Override
                 public void onClick(View view){
-                    mwConsortium.mwClick();
-                    mwConsortium.mwThreads(shopTab, shopBoxObjX, shopBoxObjY, 1.1f, 0.9f, 1.0f);
+                    mwc.mwClick(binding.mwShopTab, objectX[24], objectY[24], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
                     shopMenu.showShopMenu(HomeActivity.this, jewelryBoxCoinData, jewelryBoxLevelData);
                 }
             }
         );
         // Items
-        itemTab1.setOnClickListener(
+        binding.mwItemTab1.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        itemTab2.setBackgroundResource(R.drawable.mw_anybox_layout);
-                        itemTab1.setBackgroundResource(R.drawable.mw_selectedbox_layout);
-                        itemTab3.setBackgroundResource(R.drawable.mw_anybox_layout);
+                        binding.mwItemTab2.setBackgroundResource(R.drawable.mw_anybox_layout);
+                        binding.mwItemTab1.setBackgroundResource(R.drawable.mw_selectedbox_layout);
+                        binding.mwItemTab3.setBackgroundResource(R.drawable.mw_anybox_layout);
                         itemSelected = "1";
-                        mwConsortium.mwClick();
-                        mwConsortium.mwThreads(itemTab1, itemTab1objX, itemTab1objY, 1.1f, 0.9f, 1.0f);
+                        mwc.mwClick(binding.mwItemTab1, objectX[25], objectY[25], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
                     }
                 });
-        itemTab2.setOnClickListener(
+        binding.mwItemTab2.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        itemTab1.setBackgroundResource(R.drawable.mw_anybox_layout);
-                        itemTab2.setBackgroundResource(R.drawable.mw_selectedbox_layout);
-                        itemTab3.setBackgroundResource(R.drawable.mw_anybox_layout);
+                        binding.mwItemTab1.setBackgroundResource(R.drawable.mw_anybox_layout);
+                        binding.mwItemTab2.setBackgroundResource(R.drawable.mw_selectedbox_layout);
+                        binding.mwItemTab3.setBackgroundResource(R.drawable.mw_anybox_layout);
                         itemSelected = "2";
-                        mwConsortium.mwClick();
-                        mwConsortium.mwThreads(itemTab2, itemTab2objX, itemTab2objY, 1.1f, 0.9f, 1.0f);
+                        mwc.mwClick(binding.mwItemTab2, objectX[26], objectY[26], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
                     }
                 });
-        itemTab3.setOnClickListener(
+        binding.mwItemTab3.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        itemTab1.setBackgroundResource(R.drawable.mw_anybox_layout);
-                        itemTab3.setBackgroundResource(R.drawable.mw_selectedbox_layout);
-                        itemTab2.setBackgroundResource(R.drawable.mw_anybox_layout);
+                        binding.mwItemTab1.setBackgroundResource(R.drawable.mw_anybox_layout);
+                        binding.mwItemTab3.setBackgroundResource(R.drawable.mw_selectedbox_layout);
+                        binding.mwItemTab2.setBackgroundResource(R.drawable.mw_anybox_layout);
                         itemSelected = "3";
-                        mwConsortium.mwClick();
-                        mwConsortium.mwThreads(itemTab3, itemTab3objX, itemTab3objY, 1.1f, 0.9f, 1.0f);
+                        mwc.mwClick(binding.mwItemTab3, objectX[27], objectY[27], 1.1f, 0.9f, 1.0f, _timerTask, timerTask);
                     }
-                }); 
-        */
+                });
     }
 }

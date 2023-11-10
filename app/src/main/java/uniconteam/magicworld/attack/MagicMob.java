@@ -1,4 +1,4 @@
-package uniconteam.magicworld;
+package uniconteam.magicworld.attack;
 
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.Timer;
